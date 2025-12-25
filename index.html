@@ -4,10 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EvoluSer - Presentación Interactiva</title>
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800;900&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Tilt.js para efecto 3D en tarjetas -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
+    <!-- html2pdf.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
     <script>
@@ -26,44 +31,23 @@
                         body: ['Open Sans', 'sans-serif'],
                     },
                     animation: {
+                        'blob': 'blob 7s infinite',
+                        'float': 'float 6s ease-in-out infinite',
                         'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        blob: {
+                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-15px)' },
+                        }
                     }
                 }
-            }
-        }
-
-        // --- LÓGICA DE BOTONES (MOVIDA AL HEAD PARA SEGURIDAD) ---
-        function switchTab(tabName) {
-            console.log("Cambiando a pestaña:", tabName);
-            const cartaView = document.getElementById('view-carta');
-            const brochureView = document.getElementById('view-brochure');
-            const btnCarta = document.getElementById('btn-carta');
-            const btnBrochure = document.getElementById('btn-brochure');
-
-            if (!cartaView || !brochureView) return; // Protección contra errores
-
-            if (tabName === 'carta') {
-                // Mostrar Carta
-                cartaView.style.display = 'block';
-                brochureView.style.display = 'none';
-                
-                // Estilos Botones
-                btnCarta.classList.add('bg-brandBlue', 'text-white', 'shadow-lg');
-                btnCarta.classList.remove('text-gray-500', 'hover:bg-gray-100');
-                
-                btnBrochure.classList.remove('bg-brandBlue', 'text-white', 'shadow-lg');
-                btnBrochure.classList.add('text-gray-500', 'hover:bg-gray-100');
-            } else {
-                // Mostrar Brochure
-                cartaView.style.display = 'none';
-                brochureView.style.display = 'block';
-                
-                // Estilos Botones
-                btnBrochure.classList.add('bg-brandBlue', 'text-white', 'shadow-lg');
-                btnBrochure.classList.remove('text-gray-500', 'hover:bg-gray-100');
-                
-                btnCarta.classList.remove('bg-brandBlue', 'text-white', 'shadow-lg');
-                btnCarta.classList.add('text-gray-500', 'hover:bg-gray-100');
             }
         }
     </script>
@@ -75,11 +59,6 @@
             overflow-x: hidden;
         }
 
-        /* Regla de seguridad para ocultar elementos */
-        .hidden-force {
-            display: none !important;
-        }
-
         /* Particles Canvas Background */
         #particles-canvas {
             position: fixed;
@@ -87,7 +66,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: 0; /* Fondo al fondo */
+            z-index: -1;
             background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
         }
 
@@ -99,7 +78,7 @@
             box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
         }
         
-        /* Contenedor del Logo */
+        /* Contenedor del Logo Tipográfico */
         .logo-card {
             background: rgba(255, 255, 255, 0.98);
             border-radius: 1rem;
@@ -107,7 +86,7 @@
             border: 1px solid rgba(255, 255, 255, 0.8);
             transition: transform 0.3s ease;
             display: inline-block;
-            padding: 1.5rem;
+            padding: 1.5rem 3rem;
             min-width: 250px;
         }
         .logo-card:hover {
@@ -124,41 +103,77 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* ESTILOS PDF */
+        /* ESTILOS ESPECÍFICOS PARA PDF GENERADO */
         .pdf-container {
             font-family: 'Open Sans', sans-serif !important;
             background: #ffffff !important;
             color: #000000 !important;
             padding: 40px !important;
-            width: 800px !important;
+            width: 800px !important; /* Ancho fijo para A4 */
             margin: 0 auto !important;
             position: absolute;
-            left: -9999px;
+            left: -9999px; /* Oculto de la vista pero renderizable */
             top: 0;
         }
-        .pdf-header { text-align: center; border-bottom: 2px solid #005691; padding-bottom: 20px; margin-bottom: 30px; }
-        .pdf-footer { margin-top: 50px; border-top: 1px solid #ddd; padding-top: 15px; text-align: center; font-size: 10px; color: #666; }
-        .pdf-grid { display: flex; flex-wrap: wrap; gap: 20px; }
-        .pdf-card { flex: 1 1 30%; border: 1px solid #ddd; padding: 15px; border-radius: 8px; background: #f9f9f9; }
+        .pdf-header {
+            text-align: center;
+            border-bottom: 2px solid #005691;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+        .pdf-footer {
+            margin-top: 50px;
+            border-top: 1px solid #ddd;
+            padding-top: 15px;
+            text-align: center;
+            font-size: 10px;
+            color: #666;
+        }
+        .pdf-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .pdf-card {
+            flex: 1 1 30%; /* 3 columnas */
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 8px;
+            background: #f9f9f9;
+        }
+        
     </style>
 </head>
-<body class="text-gray-700 antialiased min-h-screen flex flex-col relative" id="document-body">
+<body class="text-gray-700 antialiased min-h-screen flex flex-col" id="document-body">
 
+    <!-- Dynamic Particles Background -->
     <canvas id="particles-canvas"></canvas>
 
-    <header class="pt-16 pb-32 relative overflow-hidden z-10">
-        <div class="absolute top-10 left-10 w-96 h-96 bg-brandBlue rounded-full mix-blend-screen filter blur-[100px] opacity-20 animate-pulse-slow pointer-events-none"></div>
-        <div class="absolute bottom-10 right-10 w-80 h-80 bg-brandGreen rounded-full mix-blend-screen filter blur-[100px] opacity-20 animate-pulse-slow pointer-events-none" style="animation-delay: 1s;"></div>
+    <!-- Header Section -->
+    <header class="pt-16 pb-32 relative overflow-hidden">
+        <!-- Decoraciones de luz -->
+        <div class="absolute top-10 left-10 w-96 h-96 bg-brandBlue rounded-full mix-blend-screen filter blur-[100px] opacity-20 animate-pulse-slow"></div>
+        <div class="absolute bottom-10 right-10 w-80 h-80 bg-brandGreen rounded-full mix-blend-screen filter blur-[100px] opacity-20 animate-pulse-slow" style="animation-delay: 1s;"></div>
         
-        <div class="container mx-auto px-6 text-center relative z-20">
+        <div class="container mx-auto px-6 text-center relative z-10">
+            
+            <!-- TARJETA DE LOGO TIPOGRÁFICO (Sin Imagen) -->
             <div class="mb-10 animate-float">
                 <div class="logo-card">
                     <div class="flex flex-col items-center justify-center">
-                        <img src="logo-nuevo.png" alt="EvoluSer Logo" class="h-auto object-contain" style="max-height: 120px; max-width: 100%;">
+                        <!-- Icono decorativo sutil -->
+                        <i class="fas fa-leaf text-brandGreen text-2xl mb-2 opacity-80"></i>
+                        <!-- Nombre de la marca -->
+                        <h1 class="text-4xl md:text-5xl font-black text-brandBlue tracking-tight" style="font-family: 'Montserrat', sans-serif;">
+                            Evolu<span class="text-brandGreen">Ser</span>
+                        </h1>
+                        <!-- Slogan interno -->
+                        <p class="text-xs uppercase tracking-[0.3em] text-gray-400 mt-1 font-semibold">Consultores</p>
                     </div>
                 </div>
             </div>
 
+            <!-- Título Principal -->
             <h1 class="text-5xl md:text-7xl font-extrabold mb-4 tracking-tight drop-shadow-2xl text-white bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-300">
                 Evolución Integral
             </h1>
@@ -167,20 +182,24 @@
         </div>
     </header>
 
-    <main class="container mx-auto px-4 -mt-20 relative z-30 mb-12 flex-grow">
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 -mt-20 relative z-20 mb-12 flex-grow">
         
-        <div class="glass-card rounded-full shadow-2xl p-2 flex justify-center max-w-lg mx-auto mb-10 no-print transform transition-all hover:scale-[1.01] relative z-50">
-            <button onclick="switchTab('carta')" id="btn-carta" class="cursor-pointer flex-1 py-3 px-6 rounded-full text-sm font-bold uppercase tracking-wider transition-all duration-300 bg-brandBlue text-white shadow-lg">
+        <!-- Navigation Buttons -->
+        <div class="glass-card rounded-full shadow-2xl p-2 flex justify-center max-w-lg mx-auto mb-10 no-print transform transition-all hover:scale-[1.01]">
+            <button onclick="switchTab('carta')" id="btn-carta" class="flex-1 py-3 px-6 rounded-full text-sm font-bold uppercase tracking-wider transition-all duration-500 bg-brandBlue text-white shadow-lg ring-4 ring-brandBlue/30">
                 <i class="fas fa-file-alt mr-2"></i> Carta Formal
             </button>
-            <button onclick="switchTab('brochure')" id="btn-brochure" class="cursor-pointer flex-1 py-3 px-6 rounded-full text-sm font-bold uppercase tracking-wider transition-all duration-300 text-gray-500 hover:bg-gray-100">
+            <button onclick="switchTab('brochure')" id="btn-brochure" class="flex-1 py-3 px-6 rounded-full text-sm font-bold uppercase tracking-wider transition-all duration-500 text-gray-500 hover:bg-gray-100 hover:text-brandBlue">
                 <i class="fas fa-th-large mr-2"></i> Servicios
             </button>
         </div>
 
-        <div class="glass-card rounded-3xl shadow-2xl p-8 md:p-14 min-h-[600px] relative overflow-hidden transition-all duration-500 z-40" id="main-content-area">
+        <!-- Content Area Wrapper -->
+        <div class="glass-card rounded-3xl shadow-2xl p-8 md:p-14 min-h-[600px] relative overflow-hidden transition-all duration-500" id="main-content-area">
             
-            <div id="view-carta" class="max-w-4xl mx-auto stagger-1" style="display: block;">
+            <!-- VISTA 1: CARTA -->
+            <div id="view-carta" class="max-w-4xl mx-auto stagger-1">
                 <div class="flex justify-between items-end border-b-2 border-gray-100 pb-6 mb-8">
                     <div>
                         <span class="bg-gradient-to-r from-brandBlue to-brandBlueLight text-white text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-wider shadow-md">Propuesta Corporativa</span>
@@ -203,6 +222,7 @@
                         Les presento a <strong>EvoluSer</strong>, no solo como proveedores, sino como sus aliados estratégicos. Entendemos que una empresa exitosa del siglo XXI debe cumplir tres requisitos innegociables: ser <span class="text-brandBlue font-semibold">Humana</span>, <span class="text-gray-800 font-semibold">Segura</span> y <span class="text-brandGreen font-semibold">Sostenible</span>.
                     </p>
 
+                    <!-- Feature Box -->
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-5 my-10 not-prose">
                         <div class="bg-white/80 p-5 rounded-xl border border-blue-100 shadow-sm hover:shadow-md transition-shadow">
                             <i class="fas fa-users text-brandBlue text-2xl mb-3"></i>
@@ -238,7 +258,8 @@
                 </div>
             </div>
 
-            <div id="view-brochure" class="max-w-4xl mx-auto" style="display: none;">
+            <!-- VISTA 2: BROCHURE -->
+            <div id="view-brochure" class="hidden">
                 <div class="text-center mb-12 stagger-1">
                     <span class="text-brandGreen font-bold tracking-widest uppercase text-xs bg-green-50 px-3 py-1 rounded-full">Nuestro Portafolio</span>
                     <h2 class="text-4xl font-heading font-bold text-gray-800 mb-4 mt-4">Soluciones Integrales</h2>
@@ -247,5 +268,322 @@
 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 px-2">
                     
+                    <!-- Card 1: Humano -->
                     <div class="stagger-1 h-full" data-tilt data-tilt-max="5" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.2">
-                        <div class="bg-white/90 rounded-2xl p-8 shadow-lg hover:
+                        <div class="bg-white/90 rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all h-full border-t-4 border-brandBlue group flex flex-col">
+                            <div class="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center mb-6 text-brandBlue group-hover:bg-brandBlue group-hover:text-white transition-colors duration-300 shadow-sm">
+                                <i class="fas fa-users text-2xl"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold text-gray-800 mb-2">EvoluSer <span class="text-brandBlue">HUMANO</span></h3>
+                            <p class="text-xs text-gray-400 font-bold uppercase tracking-wider mb-6">Gestión del Talento</p>
+                            <ul class="space-y-3 text-sm text-gray-600 flex-grow">
+                                <li class="flex items-start"><i class="fas fa-check text-brandGreen mt-1 mr-2 text-xs"></i> Reclutamiento y Selección</li>
+                                <li class="flex items-start"><i class="fas fa-check text-brandGreen mt-1 mr-2 text-xs"></i> Clima y Cultura</li>
+                                <li class="flex items-start"><i class="fas fa-check text-brandGreen mt-1 mr-2 text-xs"></i> Soft Skills</li>
+                                <li class="flex items-start"><i class="fas fa-check text-brandGreen mt-1 mr-2 text-xs"></i> Evaluaciones</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Card 2: Seguro -->
+                    <div class="stagger-2 h-full" data-tilt data-tilt-max="5" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.2">
+                        <div class="bg-white/90 rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all h-full border-t-4 border-gray-600 group flex flex-col">
+                            <div class="w-16 h-16 bg-gray-50 rounded-2xl flex items-center justify-center mb-6 text-gray-600 group-hover:bg-gray-600 group-hover:text-white transition-colors duration-300 shadow-sm">
+                                <i class="fas fa-shield-alt text-2xl"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold text-gray-800 mb-2">EvoluSer <span class="text-gray-600">SEGURO</span></h3>
+                            <p class="text-xs text-gray-400 font-bold uppercase tracking-wider mb-6">Seguridad y Salud</p>
+                            <ul class="space-y-3 text-sm text-gray-600 flex-grow">
+                                <li class="flex items-start"><i class="fas fa-check text-brandGreen mt-1 mr-2 text-xs"></i> ISO 45001 y Normativas</li>
+                                <li class="flex items-start"><i class="fas fa-check text-brandGreen mt-1 mr-2 text-xs"></i> Auditorías de Riesgos</li>
+                                <li class="flex items-start"><i class="fas fa-check text-brandGreen mt-1 mr-2 text-xs"></i> Vigilancia de Salud</li>
+                                <li class="flex items-start"><i class="fas fa-check text-brandGreen mt-1 mr-2 text-xs"></i> Capacitaciones</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Card 3: Sostenible -->
+                    <div class="stagger-3 h-full" data-tilt data-tilt-max="5" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.2">
+                        <div class="bg-white/90 rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all h-full border-t-4 border-brandGreen group flex flex-col">
+                            <div class="w-16 h-16 bg-green-50 rounded-2xl flex items-center justify-center mb-6 text-brandGreen group-hover:bg-brandGreen group-hover:text-white transition-colors duration-300 shadow-sm">
+                                <i class="fas fa-leaf text-2xl"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold text-gray-800 mb-2">EvoluSer <span class="text-brandGreen">SOSTENIBLE</span></h3>
+                            <p class="text-xs text-gray-400 font-bold uppercase tracking-wider mb-6">Medio Ambiente</p>
+                            <ul class="space-y-3 text-sm text-gray-600 flex-grow">
+                                <li class="flex items-start"><i class="fas fa-check text-brandBlue mt-1 mr-2 text-xs"></i> Planes de Manejo Ambiental</li>
+                                <li class="flex items-start"><i class="fas fa-check text-brandBlue mt-1 mr-2 text-xs"></i> Certificaciones Verdes</li>
+                                <li class="flex items-start"><i class="fas fa-check text-brandBlue mt-1 mr-2 text-xs"></i> Eficiencia Energética</li>
+                                <li class="flex items-start"><i class="fas fa-check text-brandBlue mt-1 mr-2 text-xs"></i> Cultura Ambiental</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Call to Action -->
+                <div class="mt-16 text-center stagger-3 pb-4">
+                    <a href="https://wa.me/593983900050" target="_blank" class="inline-flex items-center gap-3 bg-gradient-to-r from-brandGreen to-green-600 text-white font-bold py-4 px-10 rounded-full transition-all transform hover:scale-105 shadow-xl hover:shadow-green-500/30 group">
+                        <span>Agendar Diagnóstico</span>
+                        <i class="fas fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer Elegante -->
+    <footer class="bg-white/90 border-t border-gray-200 mt-auto backdrop-blur-sm">
+        <div class="container mx-auto px-6 py-10">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-center text-center md:text-left">
+                <!-- Columna Contacto -->
+                <div class="space-y-3">
+                    <h5 class="font-bold text-gray-800 uppercase text-xs tracking-wider mb-4">Contacto Directo</h5>
+                    <a href="tel:+593996408009" class="block text-gray-600 hover:text-brandBlue transition-colors"><i class="fas fa-phone-alt w-6 text-brandGreen"></i> +593 99 640 8009</a>
+                    <a href="https://wa.me/593983900050" class="block text-gray-600 hover:text-brandBlue transition-colors"><i class="fab fa-whatsapp w-6 text-brandGreen"></i> +593 98 390 0050</a>
+                    <a href="mailto:evoluserec@gmail.com" class="block text-gray-600 hover:text-brandBlue transition-colors"><i class="fas fa-envelope w-6 text-brandGreen"></i> evoluserec@gmail.com</a>
+                </div>
+
+                <!-- Columna Info -->
+                <div class="text-center">
+                   <p class="text-sm text-gray-400">© 2024 EvoluSer Consultores</p>
+                   <p class="text-xs text-gray-300 mt-1">Quito, Ecuador</p>
+                </div>
+
+                <!-- Columna Acciones -->
+                <div class="text-center md:text-right no-print">
+                    <button onclick="downloadPDF()" id="btn-download" class="group bg-slate-800 hover:bg-slate-900 text-white text-xs font-bold py-3 px-6 rounded-xl transition-all shadow-lg flex items-center justify-center md:ml-auto gap-2">
+                        <i class="fas fa-file-pdf group-hover:scale-110 transition-transform"></i> DESCARGAR PDF
+                    </button>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Particles Script -->
+    <script>
+        const canvas = document.getElementById('particles-canvas');
+        const ctx = canvas.getContext('2d');
+        let width, height;
+        let particles = [];
+        const particleCount = 60;
+        const connectionDistance = 150;
+
+        function resize() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        }
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.vx = (Math.random() - 0.5) * 0.5;
+                this.vy = (Math.random() - 0.5) * 0.5;
+                this.size = Math.random() * 2 + 1;
+            }
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+                if (this.x < 0 || this.x > width) this.vx *= -1;
+                if (this.y < 0 || this.y > height) this.vy *= -1;
+            }
+            draw() {
+                ctx.fillStyle = 'rgba(255, 255, 255, 0.3)';
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function initParticles() {
+            particles = [];
+            for (let i = 0; i < particleCount; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, width, height);
+            
+            // Draw connections
+            ctx.lineWidth = 0.5;
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < connectionDistance) {
+                        const opacity = 1 - (distance / connectionDistance);
+                        ctx.strokeStyle = `rgba(255, 255, 255, ${opacity * 0.15})`;
+                        ctx.beginPath();
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+
+            // Draw and update particles
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+
+            requestAnimationFrame(animateParticles);
+        }
+
+        window.addEventListener('resize', resize);
+        resize();
+        initParticles();
+        animateParticles();
+    </script>
+
+    <!-- Main Logic -->
+    <script>
+        // Set Current Date
+        const dateOptions = { year: 'numeric', month: 'long', day: 'numeric' };
+        document.getElementById('currentDate').textContent = new Date().toLocaleDateString('es-ES', dateOptions);
+
+        let currentTab = 'carta';
+
+        // Tab Switching Logic
+        function switchTab(tabName) {
+            currentTab = tabName;
+            const cartaView = document.getElementById('view-carta');
+            const brochureView = document.getElementById('view-brochure');
+            const btnCarta = document.getElementById('btn-carta');
+            const btnBrochure = document.getElementById('btn-brochure');
+
+            if (tabName === 'carta') {
+                cartaView.classList.remove('hidden');
+                brochureView.classList.add('hidden');
+                
+                // Styles
+                btnCarta.classList.add('bg-brandBlue', 'text-white', 'shadow-lg', 'ring-4', 'ring-brandBlue/30');
+                btnCarta.classList.remove('text-gray-500', 'hover:bg-gray-100');
+                btnBrochure.classList.remove('bg-brandBlue', 'text-white', 'shadow-lg', 'ring-4', 'ring-brandBlue/30');
+                btnBrochure.classList.add('text-gray-500', 'hover:bg-gray-100');
+            } else {
+                cartaView.classList.add('hidden');
+                brochureView.classList.remove('hidden');
+                
+                // Styles
+                btnBrochure.classList.add('bg-brandBlue', 'text-white', 'shadow-lg', 'ring-4', 'ring-brandBlue/30');
+                btnBrochure.classList.remove('text-gray-500', 'hover:bg-gray-100');
+                btnCarta.classList.remove('bg-brandBlue', 'text-white', 'shadow-lg', 'ring-4', 'ring-brandBlue/30');
+                btnCarta.classList.add('text-gray-500', 'hover:bg-gray-100');
+            }
+        }
+        
+        // Inicializar Vanilla Tilt
+        if (typeof VanillaTilt !== 'undefined') {
+            VanillaTilt.init(document.querySelectorAll("[data-tilt]"), { max: 15, speed: 400 });
+        }
+
+        // --- FUNCIÓN DE DESCARGA PDF CORREGIDA Y ROBUSTA ---
+        function downloadPDF() {
+            const btn = document.getElementById('btn-download');
+            const originalContent = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generando...';
+            btn.disabled = true;
+
+            // 1. Crear contenedor temporal para el PDF (fuera de la vista pero renderizable)
+            const clone = document.createElement('div');
+            clone.className = 'pdf-container';
+            
+            // 2. Cabecera limpia TIPOGRÁFICA (Solo Texto, sin imágenes)
+            const headerHTML = `
+                <div class="pdf-header">
+                    <h1 style="color: #005691; font-size: 36px; margin: 0; font-weight: 800; font-family: Montserrat, sans-serif;">Evolu<span style="color: #7AB800;">Ser</span></h1>
+                    <p style="color: #666; letter-spacing: 2px; font-size: 10px; text-transform: uppercase; margin-top: 5px;">Potenciar el ser, proteger la vida</p>
+                </div>
+            `;
+
+            // 3. Contenido
+            // Clonamos el contenido de la pestaña activa
+            const activeId = currentTab === 'carta' ? 'view-carta' : 'view-brochure';
+            const originalNode = document.getElementById(activeId);
+            const contentClone = originalNode.cloneNode(true);
+            
+            // Limpiamos clases de animación que pueden causar "blancos"
+            contentClone.classList.remove('hidden', 'stagger-1', 'stagger-2', 'stagger-3');
+            contentClone.style.display = 'block';
+            contentClone.style.opacity = '1';
+            contentClone.style.transform = 'none';
+
+            // Si es brochure, transformamos el Grid CSS a Flexbox simple para PDF
+            if (currentTab === 'brochure') {
+                const grid = contentClone.querySelector('.grid');
+                if (grid) {
+                    grid.className = 'pdf-grid'; // Usa clase definida en style
+                    // Limpiar estilos complejos de las tarjetas
+                    const cards = grid.querySelectorAll('div');
+                    cards.forEach(card => {
+                        // Quitamos clases de Tailwind que puedan conflictos
+                        card.className = 'pdf-card';
+                        // Aseguramos que los iconos se vean (color oscuro)
+                        const icons = card.querySelectorAll('i');
+                        icons.forEach(i => i.style.color = '#005691');
+                        // Textos oscuros
+                        const texts = card.querySelectorAll('h3, p, li');
+                        texts.forEach(t => t.style.color = '#333');
+                    });
+                    // Ocultar botón de llamada a la acción en PDF
+                    const cta = contentClone.querySelector('.mt-16');
+                    if(cta) cta.style.display = 'none';
+                }
+            } else {
+                // Ajustes para Carta (Texto negro)
+                contentClone.style.color = '#000';
+                const headings = contentClone.querySelectorAll('h2, h4, p');
+                headings.forEach(h => h.style.color = '#000');
+                const icons = contentClone.querySelectorAll('i');
+                icons.forEach(i => i.style.color = '#005691');
+            }
+
+            // 4. Footer
+            const footerHTML = `
+                <div class="pdf-footer">
+                    <p><strong>EvoluSer Consultores</strong> | Quito, Ecuador</p>
+                    <p>+593 99 640 8009 | +593 98 390 0050 | evoluserec@gmail.com</p>
+                </div>
+            `;
+
+            clone.innerHTML = headerHTML;
+            clone.appendChild(contentClone);
+            clone.innerHTML += footerHTML;
+
+            // 5. Configuración PDF
+            const opt = {
+                margin:       10,
+                filename:     `EvoluSer_Presentacion_${currentTab}.pdf`,
+                image:        { type: 'jpeg', quality: 0.98 },
+                html2canvas:  { 
+                    scale: 2, 
+                    useCORS: true, 
+                    logging: false,
+                    backgroundColor: '#ffffff' // Fondo blanco forzado
+                },
+                jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            };
+
+            // 6. Generar - AÑADIMOS CLONE AL DOM PARA QUE SE VEA DURANTE GENERACIÓN
+            document.body.appendChild(clone);
+
+            html2pdf().from(clone).set(opt).save().then(() => {
+                document.body.removeChild(clone); // Limpiar después de descargar
+                btn.innerHTML = originalContent;
+                btn.disabled = false;
+            }).catch(err => {
+                console.error(err);
+                if(document.body.contains(clone)) document.body.removeChild(clone);
+                alert("Hubo un error al generar el PDF. Por favor intente imprimir desde el navegador (Ctrl+P).");
+                btn.innerHTML = originalContent;
+                btn.disabled = false;
+            });
+        }
+    </script>
+</body>
+</html>
