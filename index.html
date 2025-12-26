@@ -76,6 +76,7 @@
             <div class="mb-10 animate-float">
                 <div class="logo-card">
                     <div class="flex flex-col items-center justify-center">
+                        <!-- IMAGEN ESTABLECIDA COMO logo.png PARA GITHUB -->
                         <img src="logo.png" alt="EvoluSer Logo" class="h-auto object-contain" style="max-height: 120px; max-width: 100%;">
                     </div>
                 </div>
@@ -151,6 +152,24 @@
                     <h2 class="text-4xl font-heading font-bold text-gray-800 mb-4 mt-4">Soluciones Integrales</h2>
                     <p class="text-lg text-gray-500 max-w-2xl mx-auto">Tecnología, normativa y humanidad unidas.</p>
                 </div>
+
+                <!-- SECCIÓN VIDEO -->
+                <div class="max-w-4xl mx-auto mb-16 stagger-2 video-section">
+                    <div class="bg-white p-2 rounded-2xl shadow-xl border border-gray-100 relative group">
+                        <!-- Efecto de brillo detrás del video -->
+                        <div class="absolute -inset-1 bg-gradient-to-r from-brandBlue to-brandGreen rounded-2xl blur opacity-25 group-hover:opacity-40 transition duration-1000"></div>
+                        
+                        <div class="relative rounded-xl overflow-hidden bg-black">
+                            <!-- VIDEO TAG -->
+                            <video controls class="w-full h-auto" style="max-height: 450px; object-fit: cover;">
+                                <source src="video1.mp4" type="video/mp4">
+                                Tu navegador no soporta la etiqueta de video.
+                            </video>
+                        </div>
+                    </div>
+                    <p class="text-center text-xs text-gray-400 mt-3 italic">Descubre nuestra filosofía en acción</p>
+                </div>
+
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 px-2">
                     <div class="stagger-1 h-full">
                         <div class="h-full" data-tilt data-tilt-max="5" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.2">
@@ -276,10 +295,14 @@
             const btn = document.getElementById('btn-download'); const originalContent = btn.innerHTML;
             btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generando...'; btn.disabled = true;
             const clone = document.createElement('div'); clone.className = 'pdf-container';
+            // Usamos un encabezado de texto robusto para el PDF
             const headerHTML = `<div class="pdf-header"><h1 style="color: #005691; font-size: 36px; margin: 0; font-weight: 800; font-family: Montserrat, sans-serif;">Evolu<span style="color: #7AB800;">Ser</span></h1><p style="color: #666; letter-spacing: 2px; font-size: 10px; text-transform: uppercase; margin-top: 5px;">Potenciar el ser, proteger la vida</p></div>`;
             const activeId = currentTab === 'carta' ? 'view-carta' : 'view-brochure'; const originalNode = document.getElementById(activeId); const contentClone = originalNode.cloneNode(true);
             contentClone.classList.remove('hidden', 'stagger-1', 'stagger-2', 'stagger-3'); contentClone.style.display = 'block'; contentClone.style.opacity = '1'; contentClone.style.transform = 'none';
             if (currentTab === 'brochure') {
+                // Removemos la sección de video para el PDF porque no se puede reproducir
+                const videoSec = contentClone.querySelector('.video-section'); if(videoSec) videoSec.style.display = 'none';
+                
                 const grid = contentClone.querySelector('.grid'); if (grid) { grid.className = 'pdf-grid'; const cards = grid.querySelectorAll('div'); cards.forEach(card => { card.className = 'pdf-card'; const icons = card.querySelectorAll('i'); icons.forEach(i => i.style.color = '#005691'); const texts = card.querySelectorAll('h3, p, li'); texts.forEach(t => t.style.color = '#333'); }); const cta = contentClone.querySelector('.mt-16'); if(cta) cta.style.display = 'none'; }
             } else { contentClone.style.color = '#000'; const headings = contentClone.querySelectorAll('h2, h4, p'); headings.forEach(h => h.style.color = '#000'); const icons = contentClone.querySelectorAll('i'); icons.forEach(i => i.style.color = '#005691'); }
             const footerHTML = `<div class="pdf-footer"><p><strong>EvoluSer Consultores</strong> | Quito, Ecuador</p><p>+593 99 640 8009 | +593 98 390 0050 | evoluserec@gmail.com</p></div>`;
