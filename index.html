@@ -34,32 +34,11 @@
     </script>
 
     <style>
-        body {
-            font-family: 'Open Sans', sans-serif;
-            background-color: #f0f4f8;
-            overflow-x: hidden;
-        }
-
-        /* Particles Canvas Background */
-        #particles-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-        }
-
-        /* Efecto Glassmorphism */
-        .glass-card {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
-        }
+        body { font-family: 'Open Sans', sans-serif; background-color: #f0f4f8; overflow-x: hidden; }
+        #particles-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); }
+        .glass-card { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.3); box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15); }
         
-        /* Contenedor del Logo */
+        /* LOGO CARD */
         .logo-card {
             background: rgba(255, 255, 255, 0.98);
             border-radius: 1rem;
@@ -70,32 +49,16 @@
             padding: 1.5rem;
             min-width: 250px;
         }
-        .logo-card:hover {
-            transform: translateY(-5px);
-        }
+        .logo-card:hover { transform: translateY(-5px); }
 
         /* Animations */
         .stagger-1 { animation: slideIn 0.6s ease-out both; animation-delay: 0.1s; }
         .stagger-2 { animation: slideIn 0.6s ease-out both; animation-delay: 0.2s; }
         .stagger-3 { animation: slideIn 0.6s ease-out both; animation-delay: 0.3s; }
+        @keyframes slideIn { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* ESTILOS PDF */
-        .pdf-container {
-            font-family: 'Open Sans', sans-serif !important;
-            background: #ffffff !important;
-            color: #000000 !important;
-            padding: 40px !important;
-            width: 800px !important;
-            margin: 0 auto !important;
-            position: absolute;
-            left: -9999px;
-            top: 0;
-        }
+        /* PDF Styles */
+        .pdf-container { font-family: 'Open Sans', sans-serif !important; background: #ffffff !important; color: #000000 !important; padding: 40px !important; width: 800px !important; margin: 0 auto !important; position: absolute; left: -9999px; top: 0; }
         .pdf-header { text-align: center; border-bottom: 2px solid #005691; padding-bottom: 20px; margin-bottom: 30px; }
         .pdf-footer { margin-top: 50px; border-top: 1px solid #ddd; padding-top: 15px; text-align: center; font-size: 10px; color: #666; }
         .pdf-grid { display: flex; flex-wrap: wrap; gap: 20px; }
@@ -103,7 +66,6 @@
     </style>
 </head>
 <body class="text-gray-700 antialiased min-h-screen flex flex-col relative" id="document-body">
-
     <canvas id="particles-canvas"></canvas>
 
     <header class="pt-16 pb-32 relative overflow-hidden z-10">
@@ -111,14 +73,10 @@
         <div class="absolute bottom-10 right-10 w-80 h-80 bg-brandGreen rounded-full mix-blend-screen filter blur-[100px] opacity-20 animate-pulse-slow pointer-events-none" style="animation-delay: 1s;"></div>
         
         <div class="container mx-auto px-6 text-center relative z-20">
-            
             <div class="mb-10 animate-float">
                 <div class="logo-card">
                     <div class="flex flex-col items-center justify-center">
-                        <img src="logo-nuevo.png" 
-                             alt="EvoluSer Logo" 
-                             class="h-auto object-contain" 
-                             style="max-height: 120px; max-width: 100%;">
+                        <img src="logo.png" alt="EvoluSer Logo" class="h-auto object-contain" style="max-height: 120px; max-width: 100%;">
                     </div>
                 </div>
             </div>
@@ -132,7 +90,6 @@
     </header>
 
     <main class="container mx-auto px-4 -mt-20 relative z-30 mb-12 flex-grow">
-        
         <div class="glass-card rounded-full shadow-2xl p-2 flex justify-center max-w-lg mx-auto mb-10 no-print transform transition-all hover:scale-[1.01] relative z-50">
             <button onclick="switchTab('carta')" id="btn-carta" class="flex-1 py-3 px-6 rounded-full text-sm font-bold uppercase tracking-wider transition-all duration-500 bg-brandBlue text-white shadow-lg ring-4 ring-brandBlue/30 cursor-pointer">
                 <i class="fas fa-file-alt mr-2"></i> Carta Formal
@@ -146,27 +103,18 @@
             
             <div id="view-carta" class="max-w-4xl mx-auto stagger-1">
                 <div class="flex justify-between items-end border-b-2 border-gray-100 pb-6 mb-8">
-                    <div>
-                        <span class="bg-gradient-to-r from-brandBlue to-brandBlueLight text-white text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-wider shadow-md">Propuesta Corporativa</span>
-                    </div>
+                    <div><span class="bg-gradient-to-r from-brandBlue to-brandBlueLight text-white text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-wider shadow-md">Propuesta Corporativa</span></div>
                     <div class="text-right">
                         <p class="text-brandBlue font-bold text-sm">QUITO, ECUADOR</p>
                         <p class="text-gray-500 text-xs" id="currentDate"></p>
                     </div>
                 </div>
-
                 <div class="prose prose-lg text-gray-600 mx-auto leading-relaxed text-justify">
                     <h2 class="text-3xl font-heading font-bold text-gray-800 mb-2 text-left">Estimados Clientes,</h2>
                     <p class="text-xl text-brandBlue font-light mb-8 text-left">Presentamos una nueva forma de entender el crecimiento empresarial.</p>
-
-                    <p class="mb-6">
-                        En un entorno empresarial cada vez más exigente, el crecimiento real solo ocurre cuando cuidamos lo más importante: <strong>las personas y el entorno que habitan</strong>.
-                    </p>
-
-                    <p class="mb-6">
-                        Les presento a <strong>EvoluSer</strong>, no solo como proveedores, sino como sus aliados estratégicos. Entendemos que una empresa exitosa del siglo XXI debe cumplir tres requisitos innegociables: ser <span class="text-brandBlue font-semibold">Humana</span>, <span class="text-gray-800 font-semibold">Segura</span> y <span class="text-brandGreen font-semibold">Sostenible</span>.
-                    </p>
-
+                    <p class="mb-6">En un entorno empresarial cada vez más exigente, el crecimiento real solo ocurre cuando cuidamos lo más importante: <strong>las personas y el entorno que habitan</strong>.</p>
+                    <p class="mb-6">Les presento a <strong>EvoluSer</strong>, no solo como proveedores, sino como sus aliados estratégicos. Entendemos que una empresa exitosa del siglo XXI debe cumplir tres requisitos innegociables: ser <span class="text-brandBlue font-semibold">Humana</span>, <span class="text-gray-800 font-semibold">Segura</span> y <span class="text-brandGreen font-semibold">Sostenible</span>.</p>
+                    
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-5 my-10 not-prose">
                         <div class="bg-white/80 p-5 rounded-xl border border-blue-100 shadow-sm hover:shadow-md transition-shadow">
                             <i class="fas fa-users text-brandBlue text-2xl mb-3"></i>
@@ -184,15 +132,10 @@
                             <p class="text-xs text-gray-500 mt-1">Ventaja competitiva.</p>
                         </div>
                     </div>
-
-                    <p class="mb-8">
-                        Me gustaría conversar brevemente para conocer sus desafíos actuales y explorar cómo podemos apoyar su evolución corporativa.
-                    </p>
-
+                    
+                    <p class="mb-8">Me gustaría conversar brevemente para conocer sus desafíos actuales y explorar cómo podemos apoyar su evolución corporativa.</p>
                     <div class="mt-12 flex items-center gap-5 border-t border-gray-100 pt-8 not-prose">
-                        <div class="w-16 h-16 bg-gradient-to-br from-brandBlue to-brandBlueLight rounded-full flex items-center justify-center text-white shadow-lg text-2xl">
-                            <i class="fas fa-pen-nib"></i>
-                        </div>
+                        <div class="w-16 h-16 bg-gradient-to-br from-brandBlue to-brandBlueLight rounded-full flex items-center justify-center text-white shadow-lg text-2xl"><i class="fas fa-pen-nib"></i></div>
                         <div>
                             <p class="font-heading font-bold text-xl text-gray-900">Equipo Directivo</p>
                             <p class="text-brandBlue font-semibold">EvoluSer Consultores</p>
@@ -208,15 +151,11 @@
                     <h2 class="text-4xl font-heading font-bold text-gray-800 mb-4 mt-4">Soluciones Integrales</h2>
                     <p class="text-lg text-gray-500 max-w-2xl mx-auto">Tecnología, normativa y humanidad unidas.</p>
                 </div>
-
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 px-2">
-                    
                     <div class="stagger-1 h-full">
                         <div class="h-full" data-tilt data-tilt-max="5" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.2">
                             <div class="bg-white/90 rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all h-full border-t-4 border-brandBlue group flex flex-col">
-                                <div class="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center mb-6 text-brandBlue group-hover:bg-brandBlue group-hover:text-white transition-colors duration-300 shadow-sm">
-                                    <i class="fas fa-users text-2xl"></i>
-                                </div>
+                                <div class="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center mb-6 text-brandBlue group-hover:bg-brandBlue group-hover:text-white transition-colors duration-300 shadow-sm"><i class="fas fa-users text-2xl"></i></div>
                                 <h3 class="text-2xl font-bold text-gray-800 mb-2">EvoluSer <span class="text-brandBlue">HUMANO</span></h3>
                                 <p class="text-xs text-gray-400 font-bold uppercase tracking-wider mb-6">Gestión del Talento</p>
                                 <ul class="space-y-3 text-sm text-gray-600 flex-grow">
@@ -228,13 +167,10 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="stagger-2 h-full">
                         <div class="h-full" data-tilt data-tilt-max="5" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.2">
                             <div class="bg-white/90 rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all h-full border-t-4 border-gray-600 group flex flex-col">
-                                <div class="w-16 h-16 bg-gray-50 rounded-2xl flex items-center justify-center mb-6 text-gray-600 group-hover:bg-gray-600 group-hover:text-white transition-colors duration-300 shadow-sm">
-                                    <i class="fas fa-shield-alt text-2xl"></i>
-                                </div>
+                                <div class="w-16 h-16 bg-gray-50 rounded-2xl flex items-center justify-center mb-6 text-gray-600 group-hover:bg-gray-600 group-hover:text-white transition-colors duration-300 shadow-sm"><i class="fas fa-shield-alt text-2xl"></i></div>
                                 <h3 class="text-2xl font-bold text-gray-800 mb-2">EvoluSer <span class="text-gray-600">SEGURO</span></h3>
                                 <p class="text-xs text-gray-400 font-bold uppercase tracking-wider mb-6">Seguridad y Salud</p>
                                 <ul class="space-y-3 text-sm text-gray-600 flex-grow">
@@ -246,13 +182,10 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="stagger-3 h-full">
                         <div class="h-full" data-tilt data-tilt-max="5" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.2">
                             <div class="bg-white/90 rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all h-full border-t-4 border-brandGreen group flex flex-col">
-                                <div class="w-16 h-16 bg-green-50 rounded-2xl flex items-center justify-center mb-6 text-brandGreen group-hover:bg-brandGreen group-hover:text-white transition-colors duration-300 shadow-sm">
-                                    <i class="fas fa-leaf text-2xl"></i>
-                                </div>
+                                <div class="w-16 h-16 bg-green-50 rounded-2xl flex items-center justify-center mb-6 text-brandGreen group-hover:bg-brandGreen group-hover:text-white transition-colors duration-300 shadow-sm"><i class="fas fa-leaf text-2xl"></i></div>
                                 <h3 class="text-2xl font-bold text-gray-800 mb-2">EvoluSer <span class="text-brandGreen">SOSTENIBLE</span></h3>
                                 <p class="text-xs text-gray-400 font-bold uppercase tracking-wider mb-6">Medio Ambiente</p>
                                 <ul class="space-y-3 text-sm text-gray-600 flex-grow">
@@ -265,7 +198,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="mt-16 text-center stagger-3 pb-4">
                     <a href="https://wa.me/593983900050" target="_blank" class="inline-flex items-center gap-3 bg-gradient-to-r from-brandGreen to-green-600 text-white font-bold py-4 px-10 rounded-full transition-all transform hover:scale-105 shadow-xl hover:shadow-green-500/30 group">
                         <span>Agendar Diagnóstico</span>
@@ -273,7 +205,6 @@
                     </a>
                 </div>
             </div>
-
         </div>
     </main>
 
@@ -286,12 +217,10 @@
                     <a href="https://wa.me/593983900050" class="block text-gray-600 hover:text-brandBlue transition-colors"><i class="fab fa-whatsapp w-6 text-brandGreen"></i> +593 98 390 0050</a>
                     <a href="mailto:evoluserec@gmail.com" class="block text-gray-600 hover:text-brandBlue transition-colors"><i class="fas fa-envelope w-6 text-brandGreen"></i> evoluserec@gmail.com</a>
                 </div>
-
                 <div class="text-center">
                    <p class="text-sm text-gray-400">© 2024 EvoluSer Consultores</p>
                    <p class="text-xs text-gray-300 mt-1">Quito, Ecuador</p>
                 </div>
-
                 <div class="text-center md:text-right no-print">
                     <button onclick="downloadPDF()" id="btn-download" class="group bg-slate-800 hover:bg-slate-900 text-white text-xs font-bold py-3 px-6 rounded-xl transition-all shadow-lg flex items-center justify-center md:ml-auto gap-2">
                         <i class="fas fa-file-pdf group-hover:scale-110 transition-transform"></i> DESCARGAR PDF
@@ -309,209 +238,54 @@
             let particles = [];
             const particleCount = 60;
             const connectionDistance = 150;
-
-            function resize() {
-                width = canvas.width = window.innerWidth;
-                height = canvas.height = window.innerHeight;
-            }
-
+            function resize() { width = canvas.width = window.innerWidth; height = canvas.height = window.innerHeight; }
             class Particle {
-                constructor() {
-                    this.x = Math.random() * width;
-                    this.y = Math.random() * height;
-                    this.vx = (Math.random() - 0.5) * 0.5;
-                    this.vy = (Math.random() - 0.5) * 0.5;
-                    this.size = Math.random() * 2 + 1;
-                }
-                update() {
-                    this.x += this.vx;
-                    this.y += this.vy;
-                    if (this.x < 0 || this.x > width) this.vx *= -1;
-                    if (this.y < 0 || this.y > height) this.vy *= -1;
-                }
-                draw() {
-                    ctx.fillStyle = 'rgba(255, 255, 255, 0.3)';
-                    ctx.beginPath();
-                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                    ctx.fill();
-                }
+                constructor() { this.x = Math.random() * width; this.y = Math.random() * height; this.vx = (Math.random() - 0.5) * 0.5; this.vy = (Math.random() - 0.5) * 0.5; this.size = Math.random() * 2 + 1; }
+                update() { this.x += this.vx; this.y += this.vy; if (this.x < 0 || this.x > width) this.vx *= -1; if (this.y < 0 || this.y > height) this.vy *= -1; }
+                draw() { ctx.fillStyle = 'rgba(255, 255, 255, 0.3)'; ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill(); }
             }
-
-            function initParticles() {
-                particles = [];
-                for (let i = 0; i < particleCount; i++) {
-                    particles.push(new Particle());
-                }
-            }
-
-            function animateParticles() {
-                ctx.clearRect(0, 0, width, height);
-                ctx.lineWidth = 0.5;
-                for (let i = 0; i < particles.length; i++) {
-                    for (let j = i + 1; j < particles.length; j++) {
-                        const dx = particles[i].x - particles[j].x;
-                        const dy = particles[i].y - particles[j].y;
-                        const distance = Math.sqrt(dx * dx + dy * dy);
-
-                        if (distance < connectionDistance) {
-                            const opacity = 1 - (distance / connectionDistance);
-                            ctx.strokeStyle = `rgba(255, 255, 255, ${opacity * 0.15})`;
-                            ctx.beginPath();
-                            ctx.moveTo(particles[i].x, particles[i].y);
-                            ctx.lineTo(particles[j].x, particles[j].y);
-                            ctx.stroke();
-                        }
-                    }
-                }
-                particles.forEach(p => { p.update(); p.draw(); });
-                requestAnimationFrame(animateParticles);
-            }
-
-            window.addEventListener('resize', resize);
-            resize();
-            initParticles();
-            animateParticles();
+            function initParticles() { particles = []; for (let i = 0; i < particleCount; i++) { particles.push(new Particle()); } }
+            function animateParticles() { ctx.clearRect(0, 0, width, height); ctx.lineWidth = 0.5; for (let i = 0; i < particles.length; i++) { for (let j = i + 1; j < particles.length; j++) { const dx = particles[i].x - particles[j].x; const dy = particles[i].y - particles[j].y; const distance = Math.sqrt(dx * dx + dy * dy); if (distance < connectionDistance) { const opacity = 1 - (distance / connectionDistance); ctx.strokeStyle = `rgba(255, 255, 255, ${opacity * 0.15})`; ctx.beginPath(); ctx.moveTo(particles[i].x, particles[i].y); ctx.lineTo(particles[j].x, particles[j].y); ctx.stroke(); } } } particles.forEach(p => { p.update(); p.draw(); }); requestAnimationFrame(animateParticles); }
+            window.addEventListener('resize', resize); resize(); initParticles(); animateParticles();
         }
-    </script>
 
-    <script>
-        // Set Current Date
         const dateEl = document.getElementById('currentDate');
-        if (dateEl) {
-            const dateOptions = { year: 'numeric', month: 'long', day: 'numeric' };
-            dateEl.textContent = new Date().toLocaleDateString('es-ES', dateOptions);
-        }
-
+        if (dateEl) { dateEl.textContent = new Date().toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' }); }
         let currentTab = 'carta';
-
-        // Helper to restart CSS animations
-        function triggerAnimationReset(element) {
-            const animatedElements = element.querySelectorAll('.stagger-1, .stagger-2, .stagger-3');
-            animatedElements.forEach(el => {
-                el.style.animation = 'none';
-                el.offsetHeight; 
-                el.style.animation = null; 
-            });
-        }
-
-        // Tab Switching Logic
+        function triggerAnimationReset(element) { const animatedElements = element.querySelectorAll('.stagger-1, .stagger-2, .stagger-3'); animatedElements.forEach(el => { el.style.animation = 'none'; el.offsetHeight; el.style.animation = null; }); }
+        
         function switchTab(tabName) {
             currentTab = tabName;
             const cartaView = document.getElementById('view-carta');
             const brochureView = document.getElementById('view-brochure');
             const btnCarta = document.getElementById('btn-carta');
             const btnBrochure = document.getElementById('btn-brochure');
-
             if (tabName === 'carta') {
-                cartaView.classList.remove('hidden');
-                brochureView.classList.add('hidden');
-                triggerAnimationReset(cartaView); 
-                
-                // Styles
-                btnCarta.classList.add('bg-brandBlue', 'text-white', 'shadow-lg', 'ring-4', 'ring-brandBlue/30');
-                btnCarta.classList.remove('text-gray-500', 'hover:bg-gray-100');
-                btnBrochure.classList.remove('bg-brandBlue', 'text-white', 'shadow-lg', 'ring-4', 'ring-brandBlue/30');
-                btnBrochure.classList.add('text-gray-500', 'hover:bg-gray-100');
+                cartaView.classList.remove('hidden'); brochureView.classList.add('hidden'); triggerAnimationReset(cartaView);
+                btnCarta.classList.add('bg-brandBlue', 'text-white', 'shadow-lg', 'ring-4', 'ring-brandBlue/30'); btnCarta.classList.remove('text-gray-500', 'hover:bg-gray-100');
+                btnBrochure.classList.remove('bg-brandBlue', 'text-white', 'shadow-lg', 'ring-4', 'ring-brandBlue/30'); btnBrochure.classList.add('text-gray-500', 'hover:bg-gray-100');
             } else {
-                cartaView.classList.add('hidden');
-                brochureView.classList.remove('hidden');
-                triggerAnimationReset(brochureView);
-                
-                // Styles
-                btnBrochure.classList.add('bg-brandBlue', 'text-white', 'shadow-lg', 'ring-4', 'ring-brandBlue/30');
-                btnBrochure.classList.remove('text-gray-500', 'hover:bg-gray-100');
-                btnCarta.classList.remove('bg-brandBlue', 'text-white', 'shadow-lg', 'ring-4', 'ring-brandBlue/30');
-                btnCarta.classList.add('text-gray-500', 'hover:bg-gray-100');
+                cartaView.classList.add('hidden'); brochureView.classList.remove('hidden'); triggerAnimationReset(brochureView);
+                btnBrochure.classList.add('bg-brandBlue', 'text-white', 'shadow-lg', 'ring-4', 'ring-brandBlue/30'); btnBrochure.classList.remove('text-gray-500', 'hover:bg-gray-100');
+                btnCarta.classList.remove('bg-brandBlue', 'text-white', 'shadow-lg', 'ring-4', 'ring-brandBlue/30'); btnCarta.classList.add('text-gray-500', 'hover:bg-gray-100');
             }
         }
-        
-        // Inicializar Vanilla Tilt
-        if (typeof VanillaTilt !== 'undefined') {
-            VanillaTilt.init(document.querySelectorAll("[data-tilt]"), { max: 15, speed: 400 });
-        }
+        if (typeof VanillaTilt !== 'undefined') { VanillaTilt.init(document.querySelectorAll("[data-tilt]"), { max: 15, speed: 400 }); }
 
-        // --- FUNCIÓN DE DESCARGA PDF ---
         function downloadPDF() {
-            const btn = document.getElementById('btn-download');
-            const originalContent = btn.innerHTML;
-            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generando...';
-            btn.disabled = true;
-
-            const clone = document.createElement('div');
-            clone.className = 'pdf-container';
-            
-            // Header limpio (Solo Texto para PDF)
-            const headerHTML = `
-                <div class="pdf-header">
-                    <h1 style="color: #005691; font-size: 36px; margin: 0; font-weight: 800; font-family: Montserrat, sans-serif;">Evolu<span style="color: #7AB800;">Ser</span></h1>
-                    <p style="color: #666; letter-spacing: 2px; font-size: 10px; text-transform: uppercase; margin-top: 5px;">Potenciar el ser, proteger la vida</p>
-                </div>
-            `;
-
-            const activeId = currentTab === 'carta' ? 'view-carta' : 'view-brochure';
-            const originalNode = document.getElementById(activeId);
-            const contentClone = originalNode.cloneNode(true);
-            
-            contentClone.classList.remove('hidden', 'stagger-1', 'stagger-2', 'stagger-3');
-            contentClone.style.display = 'block';
-            contentClone.style.opacity = '1';
-            contentClone.style.transform = 'none';
-
+            const btn = document.getElementById('btn-download'); const originalContent = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generando...'; btn.disabled = true;
+            const clone = document.createElement('div'); clone.className = 'pdf-container';
+            const headerHTML = `<div class="pdf-header"><h1 style="color: #005691; font-size: 36px; margin: 0; font-weight: 800; font-family: Montserrat, sans-serif;">Evolu<span style="color: #7AB800;">Ser</span></h1><p style="color: #666; letter-spacing: 2px; font-size: 10px; text-transform: uppercase; margin-top: 5px;">Potenciar el ser, proteger la vida</p></div>`;
+            const activeId = currentTab === 'carta' ? 'view-carta' : 'view-brochure'; const originalNode = document.getElementById(activeId); const contentClone = originalNode.cloneNode(true);
+            contentClone.classList.remove('hidden', 'stagger-1', 'stagger-2', 'stagger-3'); contentClone.style.display = 'block'; contentClone.style.opacity = '1'; contentClone.style.transform = 'none';
             if (currentTab === 'brochure') {
-                const grid = contentClone.querySelector('.grid');
-                if (grid) {
-                    grid.className = 'pdf-grid';
-                    const cards = grid.querySelectorAll('div');
-                    cards.forEach(card => {
-                        card.className = 'pdf-card';
-                        const icons = card.querySelectorAll('i');
-                        icons.forEach(i => i.style.color = '#005691');
-                        const texts = card.querySelectorAll('h3, p, li');
-                        texts.forEach(t => t.style.color = '#333');
-                    });
-                    const cta = contentClone.querySelector('.mt-16');
-                    if(cta) cta.style.display = 'none';
-                }
-            } else {
-                contentClone.style.color = '#000';
-                const headings = contentClone.querySelectorAll('h2, h4, p');
-                headings.forEach(h => h.style.color = '#000');
-                const icons = contentClone.querySelectorAll('i');
-                icons.forEach(i => i.style.color = '#005691');
-            }
-
-            const footerHTML = `
-                <div class="pdf-footer">
-                    <p><strong>EvoluSer Consultores</strong> | Quito, Ecuador</p>
-                    <p>+593 99 640 8009 | +593 98 390 0050 | evoluserec@gmail.com</p>
-                </div>
-            `;
-
-            clone.innerHTML = headerHTML;
-            clone.appendChild(contentClone);
-            clone.innerHTML += footerHTML;
-
-            document.body.appendChild(clone);
-
-            const opt = {
-                margin: 10,
-                filename: `EvoluSer_Presentacion_${currentTab}.pdf`,
-                image: { type: 'jpeg', quality: 0.98 },
-                html2canvas: { scale: 2, useCORS: true, logging: false, backgroundColor: '#ffffff' },
-                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
-            };
-
-            html2pdf().from(clone).set(opt).save().then(() => {
-                document.body.removeChild(clone);
-                btn.innerHTML = originalContent;
-                btn.disabled = false;
-            }).catch(err => {
-                console.error(err);
-                if(document.body.contains(clone)) document.body.removeChild(clone);
-                alert("Hubo un error al generar el PDF. Por favor intente imprimir desde el navegador (Ctrl+P).");
-                btn.innerHTML = originalContent;
-                btn.disabled = false;
-            });
+                const grid = contentClone.querySelector('.grid'); if (grid) { grid.className = 'pdf-grid'; const cards = grid.querySelectorAll('div'); cards.forEach(card => { card.className = 'pdf-card'; const icons = card.querySelectorAll('i'); icons.forEach(i => i.style.color = '#005691'); const texts = card.querySelectorAll('h3, p, li'); texts.forEach(t => t.style.color = '#333'); }); const cta = contentClone.querySelector('.mt-16'); if(cta) cta.style.display = 'none'; }
+            } else { contentClone.style.color = '#000'; const headings = contentClone.querySelectorAll('h2, h4, p'); headings.forEach(h => h.style.color = '#000'); const icons = contentClone.querySelectorAll('i'); icons.forEach(i => i.style.color = '#005691'); }
+            const footerHTML = `<div class="pdf-footer"><p><strong>EvoluSer Consultores</strong> | Quito, Ecuador</p><p>+593 99 640 8009 | +593 98 390 0050 | evoluserec@gmail.com</p></div>`;
+            clone.innerHTML = headerHTML; clone.appendChild(contentClone); clone.innerHTML += footerHTML; document.body.appendChild(clone);
+            const opt = { margin: 10, filename: `EvoluSer_Presentacion_${currentTab}.pdf`, image: { type: 'jpeg', quality: 0.98 }, html2canvas: { scale: 2, useCORS: true, logging: false, backgroundColor: '#ffffff' }, jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' } };
+            html2pdf().from(clone).set(opt).save().then(() => { document.body.removeChild(clone); btn.innerHTML = originalContent; btn.disabled = false; }).catch(err => { console.error(err); if(document.body.contains(clone)) document.body.removeChild(clone); alert("Error al generar PDF."); btn.innerHTML = originalContent; btn.disabled = false; });
         }
     </script>
 </body>
