@@ -110,6 +110,26 @@
 
         #particles-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
         
+        /* ESTILOS DEL COHETE ERRANTE (Más visible) */
+        .wandering-rocket {
+            position: fixed;
+            z-index: 1; /* Delante del fondo, detrás del contenido principal */
+            font-size: 3rem; /* Tamaño mucho más visible */
+            pointer-events: none;
+            opacity: 0; /* Empieza invisible */
+            transition: transform linear, opacity 1s ease-in-out;
+            /* Brillo intenso para visibilidad */
+            filter: drop-shadow(0 0 20px rgba(122, 184, 0, 0.8));
+        }
+        
+        .wandering-rocket i {
+            /* Degradado de Marca */
+            background: linear-gradient(135deg, #005691 0%, #7AB800 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: block;
+        }
+
         .glass-card { 
             background: rgba(255, 255, 255, 0.9); 
             backdrop-filter: blur(20px); 
@@ -743,7 +763,57 @@
         // Inicializar el slogan animado
         document.addEventListener('DOMContentLoaded', () => {
             createNeonText("POTENCIAR EL SER, PROTEGER LA VIDA");
+            launchWanderingRocket(); // Iniciar la nave errante
         });
+
+        // --- LÓGICA DE COHETE ERRANTE (Expert Mode) ---
+        function launchWanderingRocket() {
+            // Crear el elemento cohete
+            const rocket = document.createElement('div');
+            rocket.className = 'wandering-rocket';
+            rocket.innerHTML = '<i class="fas fa-rocket"></i>';
+            document.body.appendChild(rocket);
+
+            // Función para generar una nueva trayectoria
+            function flyToNextPoint() {
+                // Posición de destino aleatoria dentro del viewport + margen
+                const startX = Math.random() * (window.innerWidth + 200) - 100;
+                const startY = Math.random() * (window.innerHeight + 200) - 100;
+                const endX = Math.random() * (window.innerWidth + 200) - 100;
+                const endY = Math.random() * (window.innerHeight + 200) - 100;
+
+                // Calcular ángulo de rotación para que el cohete apunte a donde va
+                const deltaX = endX - startX;
+                const deltaY = endY - startY;
+                const angle = Math.atan2(deltaY, deltaX) * 180 / Math.PI + 45; // +45 ajuste para icono fa-rocket
+
+                // Configurar inicio (si es la primera vez)
+                if (!rocket.style.transform) {
+                    rocket.style.left = `${startX}px`;
+                    rocket.style.top = `${startY}px`;
+                }
+
+                // Duración aleatoria (lenta para sutileza)
+                const duration = Math.random() * 15 + 15; // Entre 15 y 30 segundos
+
+                // Aplicar transición
+                rocket.style.transition = `top ${duration}s linear, left ${duration}s linear, transform ${duration}s linear, opacity 1s`;
+                
+                // Mover
+                // Pequeño delay para asegurar que el navegador registre la posición inicial
+                requestAnimationFrame(() => {
+                    rocket.style.opacity = '0.7'; // Más visible, no "imperceptible" si no se ve
+                    rocket.style.transform = `rotate(${angle}deg)`;
+                    rocket.style.left = `${endX}px`;
+                    rocket.style.top = `${endY}px`;
+                });
+
+                // Programar siguiente vuelo
+                setTimeout(flyToNextPoint, duration * 1000);
+            }
+
+            flyToNextPoint();
+        }
 
         // --- LÓGICA DE MODALES (Textos Profesionales - Sin repetir nombres) ---
         const serviceData = {
