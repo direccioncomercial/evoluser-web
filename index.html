@@ -239,7 +239,8 @@
             border-radius: 1.5rem;
             padding: 1.25rem;
             box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-            margin-bottom: 20px;
+            /* Aumentamos el margen inferior para separar del avatar */
+            margin-bottom: 2rem; 
             border-bottom-right-radius: 0; /* Tail location attempt */
             transition: all 0.3s ease-in-out;
         }
@@ -352,7 +353,7 @@
                                     <i class="fas fa-leaf text-brandGreen text-xl group-hover:text-white transition-colors icon-leaf"></i>
                                 </div>
                                 <h4 class="font-bold text-gray-800 text-sm">Sostenible</h4>
-                                <p class="text-[10px] text-gray-500 uppercase tracking-wide">Ambiente</p>
+                                <p class="text-[10px] text-gray-400 font-bold uppercase tracking-wide">Ambiente</p>
                                 <span class="text-[10px] text-brandGreen mt-2 opacity-0 group-hover:opacity-100 transition-opacity">Ver Director</span>
                             </div>
                         </div>
@@ -362,7 +363,7 @@
                                     <i class="fas fa-tractor text-amber-600 text-xl group-hover:text-white transition-colors icon-tractor"></i>
                                 </div>
                                 <h4 class="font-bold text-gray-800 text-sm">Agroindustrial</h4>
-                                <p class="text-[10px] text-gray-500 uppercase tracking-wide">Calidad</p>
+                                <p class="text-[10px] text-gray-400 font-bold uppercase tracking-wide">Calidad</p>
                                 <span class="text-[10px] text-amber-600 mt-2 opacity-0 group-hover:opacity-100 transition-opacity">Ver Directora</span>
                             </div>
                         </div>
@@ -495,7 +496,7 @@
     <!-- AVATAR FLOTANTE DE BIENVENIDA -->
     <div class="fixed bottom-6 right-6 z-[100] flex flex-col items-end pointer-events-none animate-pop-in">
         <!-- Burbuja de dialogo -->
-        <div id="avatar-bubble" class="chat-bubble mb-2 max-w-[280px] animate-float pointer-events-auto transform transition hover:scale-105 origin-bottom-right duration-300">
+        <div id="avatar-bubble" class="chat-bubble mb-8 max-w-[280px] animate-float pointer-events-auto transform transition hover:scale-105 origin-bottom-right duration-300">
             <!-- Contenido por Defecto -->
             <div id="bubble-content-default">
                 <h4 class="font-bold text-brandBlue text-sm mb-1">¡Hola, Evonauta! Soy Ev</h4>
@@ -682,7 +683,7 @@
                 subtitle: "Gestión del Talento",
                 leader: "Nury Echeverria",
                 role: "Directora de Talento Humano",
-                image: "imagen2.jpg",
+                image: "imagen2.png",
                 desc: "Creemos que el activo más valioso es la gente. Bajo una dirección experta, transformamos la cultura organizacional mediante estrategias integrales de bienestar, desarrollo de habilidades blandas y diagnósticos precisos que potencian el capital humano.",
                 list: ["Reclutamiento y Selección", "Clima y Cultura", "Soft Skills y Liderazgo", "Evaluaciones de Desempeño"]
             },
@@ -691,7 +692,7 @@
                 subtitle: "Seguridad y Salud Ocupacional",
                 leader: "Christian Ortega",
                 role: "Director Técnico SST",
-                image: "imagen3.jpg",
+                image: "imagen3.png",
                 desc: "La seguridad no es negociable. Lideramos un equipo técnico enfocado en blindar tus operaciones, asegurando el estricto cumplimiento normativo y protegiendo la integridad de cada colaborador en todos los niveles.",
                 list: ["Sistemas de Gestión ISO 45001", "Auditorías de Riesgos", "Vigilancia de Salud", "Capacitación Técnica"]
             },
@@ -700,7 +701,7 @@
                 subtitle: "Medio Ambiente",
                 leader: "Christian Ortega",
                 role: "Director de Sostenibilidad",
-                image: "imagen4.jpg",
+                image: "imagen4.png",
                 desc: "El futuro es verde. Integramos la visión ambiental directamente en tu estrategia de negocio, gestionando planes de manejo y certificaciones que no solo cumplen la ley, sino que te diferencian competitivamente en el mercado.",
                 list: ["Planes de Manejo Ambiental", "Certificaciones Verdes", "Eficiencia Energética", "Cultura Ambiental Corporativa"]
             },
@@ -709,7 +710,7 @@
                 subtitle: "Agroindustrial",
                 leader: "Lilian Eras",
                 role: "Directora Agroindustrial",
-                image: "imagen5.jpg",
+                image: "imagen5.png",
                 desc: "Calidad desde el origen. Aportamos una vasta experiencia técnica para optimizar procesos agroindustriales, garantizando la inocuidad alimentaria y el cumplimiento riguroso de buenas prácticas desde el campo hasta la mesa.",
                 list: ["Buenas Prácticas Agrícolas (BPA)", "Inocuidad Alimentaria", "Seguridad en Maquinaria", "Optimización de Procesos"]
             }
