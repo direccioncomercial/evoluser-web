@@ -90,11 +90,9 @@
             content: '';
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            /* Imagen de Unsplash: Skyline corporativo al amanecer */
             background-image: url('https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?q=80&w=2613&auto=format&fit=crop');
             background-size: cover;
             background-position: center bottom;
-            /* Animación Ken Burns (Zoom lento) */
             animation: kenBurns 60s infinite alternate ease-in-out;
         }
 
@@ -102,7 +100,6 @@
             content: '';
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            /* Capa oscura para que el texto resalte sobre la foto */
             background: linear-gradient(to bottom, rgba(15, 23, 42, 0.7) 0%, rgba(15, 23, 42, 0.4) 50%, rgba(15, 23, 42, 0.8) 100%);
         }
 
@@ -197,31 +194,38 @@
             box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
         }
 
-        /* --- ANIMACIONES NATURALES POR ICONO --- */
-        @keyframes human-pulse {
-            0% { transform: scale(1); }
-            15% { transform: scale(1.15); }
-            30% { transform: scale(1); }
-            45% { transform: scale(1.15); }
-            60% { transform: scale(1); }
-            100% { transform: scale(1); }
+        /* --- EFECTOS METÁLICOS REALISTAS --- */
+        .metal-icon {
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            filter: drop-shadow(2px 4px 3px rgba(0,0,0,0.3));
+            background-size: 200% 200%;
+            transition: all 0.3s ease;
         }
-        .group:hover .icon-human { animation: human-pulse 2s ease-in-out infinite; }
 
-        @keyframes shield-guard {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); filter: drop-shadow(0 0 5px rgba(0,0,0,0.2)); }
-            100% { transform: scale(1); }
-        }
-        .group:hover .icon-shield { animation: shield-guard 2.5s ease-in-out infinite; }
+        .metal-blue { background-image: linear-gradient(135deg, #003056 0%, #005691 25%, #4dabf7 50%, #005691 75%, #002040 100%); }
+        .metal-gray { background-image: linear-gradient(135deg, #2d3436 0%, #636e72 25%, #b2bec3 50%, #636e72 75%, #2d3436 100%); }
+        .metal-green { background-image: linear-gradient(135deg, #2f5d02 0%, #5c8d03 25%, #b2f243 50%, #5c8d03 75%, #204000 100%); }
+        .metal-amber { background-image: linear-gradient(135deg, #78350f 0%, #d97706 25%, #fbbf24 50%, #d97706 75%, #451a03 100%); }
 
-        @keyframes leaf-sway {
+        /* --- ANIMACIONES DE ICONOS --- */
+        
+        @keyframes leaf-wind {
             0% { transform: rotate(0deg) translateY(0); }
-            25% { transform: rotate(10deg) translateY(-2px); }
-            75% { transform: rotate(-10deg) translateY(-2px); }
+            25% { transform: rotate(15deg) translateY(2px); }
+            50% { transform: rotate(-10deg) translateY(0px); }
+            75% { transform: rotate(5deg) translateY(4px); }
             100% { transform: rotate(0deg) translateY(0); }
         }
-        .group:hover .icon-leaf { animation: leaf-sway 3s ease-in-out infinite; transform-origin: bottom center; }
+        .group:hover .animate-leaf, .metal-animate-leaf { animation: leaf-wind 2s ease-in-out infinite; transform-origin: top center; }
+
+        @keyframes group-hug {
+            0% { transform: scale(1); }
+            50% { transform: scale(0.9) skewX(-2deg); }
+            100% { transform: scale(1); }
+        }
+        .group:hover .animate-hug, .metal-animate-hug { animation: group-hug 1.5s ease-in-out infinite; }
 
         @keyframes tractor-move {
             0% { transform: translateX(0) rotate(0); }
@@ -230,33 +234,30 @@
             75% { transform: translateX(-1px) rotate(0); }
             100% { transform: translateX(0) rotate(0); }
         }
-        .group:hover .icon-tractor { animation: tractor-move 0.5s linear infinite; }
+        .group:hover .animate-tractor, .metal-animate-tractor { animation: tractor-move 0.5s linear infinite; }
 
-        /* Estilos de la burbuja de chat */
+        @keyframes shield-guard {
+            0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); }
+        }
+        .metal-animate-shield { animation: shield-guard 2s ease-in-out infinite; }
+
         .chat-bubble {
             position: relative;
             background: #ffffff;
             border-radius: 1.5rem;
             padding: 1.25rem;
             box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-            /* Aumentamos el margen inferior para separar del avatar */
             margin-bottom: 2rem; 
-            border-bottom-right-radius: 0; /* Tail location attempt */
+            border-bottom-right-radius: 0;
             transition: all 0.3s ease-in-out;
         }
         
         .chat-bubble::after {
             content: '';
             position: absolute;
-            bottom: -10px;
-            right: 20px;
-            width: 0;
-            height: 0;
-            border-left: 10px solid transparent;
-            border-right: 10px solid transparent;
-            border-top: 15px solid #ffffff;
+            bottom: -10px; right: 20px; width: 0; height: 0;
+            border-left: 10px solid transparent; border-right: 10px solid transparent; border-top: 15px solid #ffffff;
         }
-
     </style>
 </head>
 <body class="text-gray-700 antialiased min-h-screen flex flex-col relative" id="document-body">
@@ -271,7 +272,6 @@
 
     <!-- Header Section -->
     <header class="pt-16 pb-32 relative overflow-hidden z-10">
-        <!-- Luces ambientales muy sutiles -->
         <div class="absolute top-0 left-1/4 w-96 h-96 bg-brandBlue rounded-full mix-blend-screen filter blur-[150px] opacity-20 animate-pulse-slow pointer-events-none"></div>
         
         <div class="container mx-auto px-6 text-center relative z-20">
@@ -329,8 +329,8 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 my-6 not-prose">
                         <div class="interactive-card bg-white/80 p-4 rounded-xl border border-blue-100 cursor-pointer group" onclick="openModal('humano')">
                             <div class="flex flex-col items-center text-center">
-                                <div class="w-12 h-12 rounded-full bg-blue-50 flex items-center justify-center mb-3 group-hover:bg-brandBlue transition-colors">
-                                    <i class="fas fa-users text-brandBlue text-xl group-hover:text-white transition-colors icon-human"></i>
+                                <div class="w-20 h-20 flex items-center justify-center mb-3">
+                                    <i class="fas fa-users text-6xl metal-icon metal-blue animate-hug"></i>
                                 </div>
                                 <h4 class="font-bold text-gray-800 text-sm">Humano</h4>
                                 <p class="text-[10px] text-gray-500 uppercase tracking-wide">Talento</p>
@@ -339,8 +339,11 @@
                         </div>
                         <div class="interactive-card bg-white/80 p-4 rounded-xl border border-gray-200 cursor-pointer group" onclick="openModal('seguro')">
                             <div class="flex flex-col items-center text-center">
-                                <div class="w-12 h-12 rounded-full bg-gray-50 flex items-center justify-center mb-3 group-hover:bg-gray-600 transition-colors">
-                                    <i class="fas fa-shield-alt text-gray-600 text-xl group-hover:text-white transition-colors icon-shield"></i>
+                                <div class="w-20 h-20 flex items-center justify-center mb-3 relative">
+                                    <!-- Icono Original: Escudo -->
+                                    <i class="fas fa-shield-alt text-6xl metal-icon metal-gray absolute transition-all duration-500 group-hover:opacity-0 group-hover:scale-50"></i>
+                                    <!-- Icono Transformado: Persona con Escudo -->
+                                    <i class="fas fa-user-shield text-6xl metal-icon metal-gray absolute transition-all duration-500 opacity-0 scale-50 group-hover:opacity-100 group-hover:scale-110"></i>
                                 </div>
                                 <h4 class="font-bold text-gray-800 text-sm">S.S.O.</h4>
                                 <p class="text-[10px] text-gray-500 uppercase tracking-wide">Seguridad y Salud</p>
@@ -349,8 +352,8 @@
                         </div>
                         <div class="interactive-card bg-white/80 p-4 rounded-xl border border-green-100 cursor-pointer group" onclick="openModal('sostenible')">
                             <div class="flex flex-col items-center text-center">
-                                <div class="w-12 h-12 rounded-full bg-green-50 flex items-center justify-center mb-3 group-hover:bg-brandGreen transition-colors">
-                                    <i class="fas fa-leaf text-brandGreen text-xl group-hover:text-white transition-colors icon-leaf"></i>
+                                <div class="w-20 h-20 flex items-center justify-center mb-3">
+                                    <i class="fas fa-leaf text-6xl metal-icon metal-green animate-leaf"></i>
                                 </div>
                                 <h4 class="font-bold text-gray-800 text-sm">Sostenible</h4>
                                 <p class="text-[10px] text-gray-400 font-bold uppercase tracking-wide">Ambiente</p>
@@ -359,8 +362,8 @@
                         </div>
                         <div class="interactive-card bg-white/80 p-4 rounded-xl border border-amber-100 cursor-pointer group" onclick="openModal('agro')">
                             <div class="flex flex-col items-center text-center">
-                                <div class="w-12 h-12 rounded-full bg-amber-50 flex items-center justify-center mb-3 group-hover:bg-amber-600 transition-colors">
-                                    <i class="fas fa-tractor text-amber-600 text-xl group-hover:text-white transition-colors icon-tractor"></i>
+                                <div class="w-20 h-20 flex items-center justify-center mb-3">
+                                    <i class="fas fa-tractor text-6xl metal-icon metal-amber animate-tractor"></i>
                                 </div>
                                 <h4 class="font-bold text-gray-800 text-sm">Agroindustrial</h4>
                                 <p class="text-[10px] text-gray-400 font-bold uppercase tracking-wide">Calidad</p>
@@ -409,8 +412,8 @@
                     <div class="stagger-1 h-full">
                         <div class="h-full" data-tilt data-tilt-max="5" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.2">
                             <div class="bg-white/90 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all h-full border-t-4 border-brandBlue group flex flex-col">
-                                <div class="w-14 h-14 bg-blue-50 rounded-2xl flex items-center justify-center mb-6 text-brandBlue group-hover:bg-brandBlue group-hover:text-white transition-colors duration-300 shadow-sm">
-                                    <i class="fas fa-users text-2xl icon-human"></i>
+                                <div class="w-full flex justify-center mb-6">
+                                    <i class="fas fa-users text-6xl metal-icon metal-blue animate-hug"></i>
                                 </div>
                                 <h3 class="text-xl font-bold text-gray-800 mb-2">EvoluSer <span class="text-brandBlue">HUMANO</span></h3>
                                 <p class="text-[10px] text-gray-400 font-bold uppercase tracking-wider mb-6">Gestión del Talento</p>
@@ -428,8 +431,10 @@
                     <div class="stagger-2 h-full">
                         <div class="h-full" data-tilt data-tilt-max="5" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.2">
                             <div class="bg-white/90 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all h-full border-t-4 border-gray-600 group flex flex-col">
-                                <div class="w-14 h-14 bg-gray-50 rounded-2xl flex items-center justify-center mb-6 text-gray-600 group-hover:bg-gray-600 group-hover:text-white transition-colors duration-300 shadow-sm">
-                                    <i class="fas fa-shield-alt text-2xl icon-shield"></i>
+                                <div class="w-full flex justify-center mb-6 relative h-16">
+                                    <!-- Transformación en Hover -->
+                                    <i class="fas fa-shield-alt text-6xl metal-icon metal-gray absolute transition-all duration-500 group-hover:opacity-0 group-hover:scale-50"></i>
+                                    <i class="fas fa-user-shield text-6xl metal-icon metal-gray absolute transition-all duration-500 opacity-0 scale-50 group-hover:opacity-100 group-hover:scale-110"></i>
                                 </div>
                                 <h3 class="text-xl font-bold text-gray-800 mb-2">EvoluSer <span class="text-gray-600">S.S.O.</span></h3>
                                 <p class="text-[10px] text-gray-400 font-bold uppercase tracking-wider mb-6">Seguridad y Salud Ocupacional</p>
@@ -447,8 +452,8 @@
                     <div class="stagger-3 h-full">
                         <div class="h-full" data-tilt data-tilt-max="5" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.2">
                             <div class="bg-white/90 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all h-full border-t-4 border-brandGreen group flex flex-col">
-                                <div class="w-14 h-14 bg-green-50 rounded-2xl flex items-center justify-center mb-6 text-brandGreen group-hover:bg-brandGreen group-hover:text-white transition-colors duration-300 shadow-sm">
-                                    <i class="fas fa-leaf text-2xl icon-leaf"></i>
+                                <div class="w-full flex justify-center mb-6">
+                                    <i class="fas fa-leaf text-6xl metal-icon metal-green animate-leaf"></i>
                                 </div>
                                 <h3 class="text-xl font-bold text-gray-800 mb-2">EvoluSer <span class="text-brandGreen">SOSTENIBLE</span></h3>
                                 <p class="text-[10px] text-gray-400 font-bold uppercase tracking-wider mb-6">Medio Ambiente</p>
@@ -466,8 +471,8 @@
                     <div class="stagger-4 h-full">
                         <div class="h-full" data-tilt data-tilt-max="5" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.2">
                             <div class="bg-white/90 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all h-full border-t-4 border-brandAmber group flex flex-col">
-                                <div class="w-14 h-14 bg-amber-50 rounded-2xl flex items-center justify-center mb-6 text-amber-600 group-hover:bg-amber-600 group-hover:text-white transition-colors duration-300 shadow-sm">
-                                    <i class="fas fa-tractor text-2xl icon-tractor"></i>
+                                <div class="w-full flex justify-center mb-6">
+                                    <i class="fas fa-tractor text-6xl metal-icon metal-amber animate-tractor"></i>
                                 </div>
                                 <h3 class="text-xl font-bold text-gray-800 mb-2">EvoluSer <span class="text-amber-600">AGRO</span></h3>
                                 <p class="text-[10px] text-gray-400 font-bold uppercase tracking-wider mb-6">Agroindustrial</p>
@@ -494,19 +499,14 @@
     </main>
     
     <!-- AVATAR FLOTANTE DE BIENVENIDA -->
-    <!-- Contenedor principal con ID para JS -->
     <div id="avatar-container" class="fixed bottom-6 right-6 z-[100] flex flex-col items-end pointer-events-none animate-pop-in" style="touch-action: none;">
-        <!-- Burbuja de dialogo -->
         <div id="avatar-bubble" class="chat-bubble mb-8 max-w-[280px] animate-float pointer-events-auto transform transition hover:scale-105 origin-bottom-right duration-300">
-            <!-- Contenido por Defecto -->
             <div id="bubble-content-default">
                 <h4 class="font-bold text-brandBlue text-sm mb-1">¡Hola, Evonauta! Soy Ev</h4>
                 <p class="text-xs text-gray-600 leading-snug mb-2">
                     Bienvenido a la comunidad. Haz clic en mí para iniciar tu viaje.
                 </p>
             </div>
-            
-            <!-- Contenido Activo (Instrucciones + WhatsApp) -->
             <div id="bubble-content-active" class="hidden">
                  <h4 class="font-bold text-brandBlue text-sm mb-1">Guía Rápida</h4>
                  <p class="text-xs text-gray-600 leading-snug mb-3">
@@ -518,8 +518,6 @@
             </div>
         </div>
         
-        <!-- Imagen del Avatar (Clickeable y Arrastrable) -->
-        <!-- Quitamos onclick directo del HTML para manejarlo en JS y distinguir click vs drag -->
         <div id="avatar-wrapper" class="relative w-36 h-36 pointer-events-auto cursor-grab active:cursor-grabbing group animate-float-avatar">
             <img 
                 src="imagen6.png" 
@@ -527,7 +525,6 @@
                 class="w-full h-full object-contain filter drop-shadow-2xl transition-transform duration-300 group-hover:scale-110"
                 onerror="this.style.display='none'; document.getElementById('avatar-fallback').style.display='flex';"
             >
-            <!-- Fallback por si la imagen de Drive falla -->
             <div id="avatar-fallback" class="hidden w-full h-full bg-brandBlue rounded-full items-center justify-center text-white shadow-xl">
                 <i class="fas fa-robot text-4xl"></i>
             </div>
@@ -547,7 +544,10 @@
                     <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-6">
                         <div class="text-white">
                             <p class="text-sm font-bold uppercase tracking-wider opacity-80 mb-1" id="modal-subtitle">Departamento</p>
-                            <h3 class="text-3xl font-heading font-bold" id="modal-title">Titulo</h3>
+                            <!-- TÍTULO DINÁMICO CON ICONO METÁLICO -->
+                            <div id="modal-title-container" class="flex items-center gap-3">
+                                <h3 class="text-3xl font-heading font-bold" id="modal-title">Titulo</h3>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -688,7 +688,9 @@
                 role: "Directora de Talento Humano",
                 image: "imagen2.png",
                 desc: "Creemos que el activo más valioso es la gente. Bajo una dirección experta, transformamos la cultura organizacional mediante estrategias integrales de bienestar, desarrollo de habilidades blandas y diagnósticos precisos que potencian el capital humano.",
-                list: ["Reclutamiento y Selección", "Clima y Cultura", "Soft Skills y Liderazgo", "Evaluaciones de Desempeño"]
+                list: ["Reclutamiento y Selección", "Clima y Cultura", "Soft Skills y Liderazgo", "Evaluaciones de Desempeño"],
+                iconClass: "metal-blue",
+                animation: "metal-animate-hug"
             },
             seguro: {
                 title: "EvoluSer S.S.O.",
@@ -698,7 +700,9 @@
                 role: "Director Técnico SST",
                 image: "imagen3.png",
                 desc: "La seguridad no es negociable. Lideramos un equipo técnico enfocado en blindar tus operaciones, asegurando el estricto cumplimiento normativo y protegiendo la integridad de cada colaborador en todos los niveles.",
-                list: ["Sistemas de Gestión ISO 45001", "Auditorías de Riesgos", "Vigilancia de Salud", "Capacitación Técnica"]
+                list: ["Sistemas de Gestión ISO 45001", "Auditorías de Riesgos", "Vigilancia de Salud", "Capacitación Técnica"],
+                iconClass: "metal-gray",
+                animation: "metal-animate-shield"
             },
             sostenible: {
                 title: "EvoluSer SOSTENIBLE",
@@ -708,7 +712,9 @@
                 role: "Director de Sostenibilidad",
                 image: "imagen4.png",
                 desc: "El futuro es verde. Integramos la visión ambiental directamente en tu estrategia de negocio, gestionando planes de manejo y certificaciones que no solo cumplen la ley, sino que te diferencian competitivamente en el mercado.",
-                list: ["Planes de Manejo Ambiental", "Certificaciones Verdes", "Eficiencia Energética", "Cultura Ambiental Corporativa"]
+                list: ["Planes de Manejo Ambiental", "Certificaciones Verdes", "Eficiencia Energética", "Cultura Ambiental Corporativa"],
+                iconClass: "metal-green",
+                animation: "metal-animate-leaf"
             },
             agro: {
                 title: "EvoluSer AGRO",
@@ -718,7 +724,9 @@
                 role: "Directora Agroindustrial",
                 image: "imagen5.png",
                 desc: "Calidad desde el origen. Aportamos una vasta experiencia técnica para optimizar procesos agroindustriales, garantizando la inocuidad alimentaria y el cumplimiento riguroso de buenas prácticas desde el campo hasta la mesa.",
-                list: ["Buenas Prácticas Agrícolas (BPA)", "Inocuidad Alimentaria", "Seguridad en Maquinaria", "Optimización de Procesos"]
+                list: ["Buenas Prácticas Agrícolas (BPA)", "Inocuidad Alimentaria", "Seguridad en Maquinaria", "Optimización de Procesos"],
+                iconClass: "metal-amber",
+                animation: "metal-animate-tractor"
             }
         };
 
@@ -731,14 +739,16 @@
                 this.src = 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80'; 
             };
             
-            // TITULO CON ICONO
-            document.getElementById('modal-title').innerHTML = `<i class="${data.icon} mr-3 opacity-90"></i>${data.title}`;
+            // TITULO CON ICONO DINÁMICO (Metal Toy)
+            const iconHtml = `<i class="${data.icon} text-4xl mr-3 metal-icon ${data.iconClass} ${data.animation}"></i>`;
+            document.getElementById('modal-title').innerHTML = `${iconHtml}${data.title}`;
             
             const colorClass = type === 'humano' ? 'text-brandBlue' : type === 'seguro' ? 'text-gray-600' : type === 'sostenible' ? 'text-brandGreen' : 'text-brandAmber';
             document.getElementById('modal-title').className = `text-3xl font-heading font-bold ${colorClass} flex items-center`;
             
             document.getElementById('modal-subtitle').innerText = data.subtitle;
             document.getElementById('modal-leader').innerText = data.leader;
+            
             document.getElementById('modal-role').innerText = data.role;
             document.getElementById('modal-desc').innerText = data.desc;
             
@@ -769,11 +779,9 @@
             const contentActive = document.getElementById('bubble-content-active');
             
             if (contentDefault.classList.contains('hidden')) {
-                // Si está mostrando instrucciones, volver al saludo
                 contentDefault.classList.remove('hidden');
                 contentActive.classList.add('hidden');
             } else {
-                // Mostrar instrucciones y botón de WhatsApp
                 contentDefault.classList.add('hidden');
                 contentActive.classList.remove('hidden');
             }
@@ -786,39 +794,22 @@
         let hasMoved = false;
         let startX, startY;
 
-        // Escuchamos el inicio del arrastre en el wrapper del avatar (la imagen)
         avatarWrapper.addEventListener('mousedown', startDrag);
         avatarWrapper.addEventListener('touchstart', startDrag, {passive: false});
 
         function startDrag(e) {
-            // Prevenir comportamiento por defecto en touch para evitar scroll
-            if (e.type === 'touchstart') {
-               // e.preventDefault(); 
-            }
-            
-            // Obtener posición inicial del mouse/touch
             const clientX = e.type === 'mousedown' ? e.clientX : e.touches[0].clientX;
             const clientY = e.type === 'mousedown' ? e.clientY : e.touches[0].clientY;
-            
             startX = clientX;
             startY = clientY;
             isDragging = false; 
             hasMoved = false;
-
-            // Obtener la posición actual del contenedor
             const rect = avatarContainer.getBoundingClientRect();
-            
-            // Cambiar posicionamiento de bottom/right a left/top fijo
-            // Esto "congela" el elemento en su posición visual actual para poder moverlo
             avatarContainer.style.left = rect.left + 'px';
             avatarContainer.style.top = rect.top + 'px';
             avatarContainer.style.bottom = 'auto';
             avatarContainer.style.right = 'auto';
-            
-            // Eliminar clases de posicionamiento de Tailwind para evitar conflictos
             avatarContainer.classList.remove('bottom-6', 'right-6'); 
-            
-            // Escuchar movimiento y soltar en todo el documento
             document.addEventListener('mousemove', onDrag);
             document.addEventListener('mouseup', endDrag);
             document.addEventListener('touchmove', onDrag, {passive: false});
@@ -828,40 +819,28 @@
         function onDrag(e) {
             const clientX = e.type === 'mousemove' ? e.clientX : e.touches[0].clientX;
             const clientY = e.type === 'mousemove' ? e.clientY : e.touches[0].clientY;
-            
             const deltaX = clientX - startX;
             const deltaY = clientY - startY;
-            
-            // Umbral para considerar que se está arrastrando (evita clicks accidentales)
             if (!isDragging && (Math.abs(deltaX) > 5 || Math.abs(deltaY) > 5)) {
                 isDragging = true;
                 hasMoved = true;
             }
-            
             if (isDragging) {
-                e.preventDefault(); // Prevenir selección o scroll
-                
-                // Calcular nueva posición sumando el delta a la posición actual
+                e.preventDefault(); 
                 const currentLeft = parseFloat(avatarContainer.style.left);
                 const currentTop = parseFloat(avatarContainer.style.top);
-                
                 avatarContainer.style.left = (currentLeft + deltaX) + 'px';
                 avatarContainer.style.top = (currentTop + deltaY) + 'px';
-                
-                // Actualizar posición de inicio para el siguiente frame
                 startX = clientX;
                 startY = clientY;
             }
         }
 
         function endDrag(e) {
-            // Limpiar listeners
             document.removeEventListener('mousemove', onDrag);
             document.removeEventListener('mouseup', endDrag);
             document.removeEventListener('touchmove', onDrag);
             document.removeEventListener('touchend', endDrag);
-            
-            // Si NO se movió (fue un click rápido), ejecutar la acción de click
             if (!hasMoved) {
                 toggleAvatarMessage();
             }
