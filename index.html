@@ -30,11 +30,17 @@
                         'float': 'float 6s ease-in-out infinite',
                         'glow-entrance': 'glowEntrance 1.5s ease-out forwards',
                         'shimmer-text': 'shimmer 3s infinite linear',
+                        'pop-in': 'popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards',
+                        'float-avatar': 'floatAvatar 4s ease-in-out infinite',
                     },
                     keyframes: {
                         float: {
                             '0%, 100%': { transform: 'translateY(0)' },
                             '50%': { transform: 'translateY(-10px)' },
+                        },
+                        floatAvatar: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-8px)' },
                         },
                         glowEntrance: {
                             '0%': { opacity: 0, transform: 'scale(0.8) translateY(20px)', filter: 'brightness(0.5) blur(5px)' },
@@ -44,6 +50,10 @@
                         shimmer: {
                             '0%': { backgroundPosition: '-200% center' },
                             '100%': { backgroundPosition: '200% center' },
+                        },
+                        popIn: {
+                            '0%': { opacity: 0, transform: 'scale(0.5) translateY(50px)' },
+                            '100%': { opacity: 1, transform: 'scale(1) translateY(0)' },
                         }
                     }
                 }
@@ -222,6 +232,29 @@
         }
         .group:hover .icon-tractor { animation: tractor-move 0.5s linear infinite; }
 
+        /* Estilos de la burbuja de chat */
+        .chat-bubble {
+            position: relative;
+            background: #ffffff;
+            border-radius: 1.5rem;
+            padding: 1.25rem;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            margin-bottom: 20px;
+            border-bottom-right-radius: 0; /* Tail location attempt */
+        }
+        
+        .chat-bubble::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            right: 20px;
+            width: 0;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-top: 15px solid #ffffff;
+        }
+
     </style>
 </head>
 <body class="text-gray-700 antialiased min-h-screen flex flex-col relative" id="document-body">
@@ -244,7 +277,7 @@
                 <div class="logo-glow"></div>
                 <div class="logo-card animate-glow-entrance cursor-none">
                     <div class="flex flex-col items-center justify-center">
-                        <img src="logo.png" alt="EvoluSer Logo" class="h-auto object-contain" style="max-height: 130px; max-width: 100%;">
+                        <img src="logo.png" alt="EvoluSer Logo" class="h-auto object-contain" style="max-height: 130px; max-width: 100%;" onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?name=EvoluSer&background=005691&color=fff&size=128';">
                     </div>
                 </div>
             </div>
@@ -457,6 +490,31 @@
             </div>
         </div>
     </main>
+    
+    <!-- AVATAR FLOTANTE DE BIENVENIDA -->
+    <div class="fixed bottom-6 right-6 z-[100] flex flex-col items-end pointer-events-none animate-pop-in">
+        <!-- Burbuja de dialogo -->
+        <div class="chat-bubble mb-2 max-w-[280px] animate-float pointer-events-auto transform transition hover:scale-105 origin-bottom-right">
+            <h4 class="font-bold text-brandBlue text-sm mb-1">¡Hola, soy tu asistente!</h4>
+            <p class="text-xs text-gray-600 leading-snug">
+                Bienvenidos a <span class="font-bold text-gray-800">EvoluSer</span>. Estoy aquí para guiarte en tu evolución integral.
+            </p>
+        </div>
+        
+        <!-- Imagen del Avatar -->
+        <div class="relative w-36 h-36 pointer-events-auto cursor-pointer group animate-float-avatar">
+            <img 
+                src="imagen6.png" 
+                alt="Asistente EvoluSer" 
+                class="w-full h-full object-contain filter drop-shadow-2xl transition-transform duration-300 group-hover:scale-110"
+                onerror="this.style.display='none'; document.getElementById('avatar-fallback').style.display='flex';"
+            >
+            <!-- Fallback por si la imagen de Drive falla -->
+            <div id="avatar-fallback" class="hidden w-full h-full bg-brandBlue rounded-full items-center justify-center text-white shadow-xl">
+                <i class="fas fa-robot text-4xl"></i>
+            </div>
+        </div>
+    </div>
 
     <!-- MODAL DE DETALLE -->
     <div id="service-modal" class="fixed inset-0 z-[100] hidden items-center justify-center bg-black/70 backdrop-blur-sm p-4">
