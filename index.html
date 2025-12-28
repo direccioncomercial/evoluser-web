@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EvoluSer - Presentación Interactiva</title>
+    <title>EvoluSer - Comunidad de Evonautas</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800;900&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -241,6 +241,7 @@
             box-shadow: 0 10px 25px rgba(0,0,0,0.15);
             margin-bottom: 20px;
             border-bottom-right-radius: 0; /* Tail location attempt */
+            transition: all 0.3s ease-in-out;
         }
         
         .chat-bubble::after {
@@ -483,7 +484,7 @@
                 
                 <div class="mt-16 text-center stagger-3 pb-4">
                     <a href="https://wa.me/593983900050" target="_blank" class="inline-flex items-center gap-3 bg-gradient-to-r from-brandGreen to-green-600 text-white font-bold py-4 px-10 rounded-full transition-all transform hover:scale-105 shadow-xl hover:shadow-green-500/30 group cursor-none">
-                        <span>EVOLUCIONA contáctanos ahora!</span>
+                        <span>¡Sé un EVONAUTA! Evoluciona hoy</span>
                         <i class="fas fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
                     </a>
                 </div>
@@ -494,15 +495,29 @@
     <!-- AVATAR FLOTANTE DE BIENVENIDA -->
     <div class="fixed bottom-6 right-6 z-[100] flex flex-col items-end pointer-events-none animate-pop-in">
         <!-- Burbuja de dialogo -->
-        <div class="chat-bubble mb-2 max-w-[280px] animate-float pointer-events-auto transform transition hover:scale-105 origin-bottom-right">
-            <h4 class="font-bold text-brandBlue text-sm mb-1">¡Hola, soy tu asistente!</h4>
-            <p class="text-xs text-gray-600 leading-snug">
-                Bienvenidos a <span class="font-bold text-gray-800">EvoluSer</span>. Estoy aquí para guiarte en tu evolución integral.
-            </p>
+        <div id="avatar-bubble" class="chat-bubble mb-2 max-w-[280px] animate-float pointer-events-auto transform transition hover:scale-105 origin-bottom-right duration-300">
+            <!-- Contenido por Defecto -->
+            <div id="bubble-content-default">
+                <h4 class="font-bold text-brandBlue text-sm mb-1">¡Hola, Evonauta! Soy Ev</h4>
+                <p class="text-xs text-gray-600 leading-snug mb-2">
+                    Bienvenido a la comunidad. Haz clic en mí para iniciar tu viaje.
+                </p>
+            </div>
+            
+            <!-- Contenido Activo (Instrucciones + WhatsApp) -->
+            <div id="bubble-content-active" class="hidden">
+                 <h4 class="font-bold text-brandBlue text-sm mb-1">Guía Rápida</h4>
+                 <p class="text-xs text-gray-600 leading-snug mb-3">
+                    Explora nuestra <b>Propuesta</b> y <b>Servicios</b> en las pestañas superiores. Haz clic en cada tarjeta para ver detalles.
+                </p>
+                <a href="https://wa.me/593983900050" target="_blank" class="block w-full bg-green-500 hover:bg-green-600 text-white text-xs font-bold py-2 px-3 rounded-lg text-center transition-colors shadow-sm">
+                    <i class="fab fa-whatsapp mr-1"></i> Contactar por WhatsApp con un Evonauta
+                </a>
+            </div>
         </div>
         
-        <!-- Imagen del Avatar -->
-        <div class="relative w-36 h-36 pointer-events-auto cursor-pointer group animate-float-avatar">
+        <!-- Imagen del Avatar (Clickeable) -->
+        <div class="relative w-36 h-36 pointer-events-auto cursor-pointer group animate-float-avatar" onclick="toggleAvatarMessage()">
             <img 
                 src="imagen6.png" 
                 alt="Asistente EvoluSer" 
@@ -573,6 +588,7 @@
                 </div>
                 <div class="text-center">
                    <p class="text-sm text-gray-400">© 2024 EvoluSer Consultores</p>
+                   <p class="text-xs text-brandBlue font-bold mt-1 tracking-wider uppercase">Comunidad de Evonautas</p>
                    <p class="text-xs text-gray-300 mt-1">Quito, Ecuador</p>
                 </div>
                 <div class="text-center md:text-right"></div>
@@ -727,6 +743,22 @@
         document.getElementById('service-modal').addEventListener('click', function(e) {
             if (e.target === this) closeModal();
         });
+
+        // --- FUNCION PARA ALTERNAR MENSAJE DEL AVATAR ---
+        function toggleAvatarMessage() {
+            const contentDefault = document.getElementById('bubble-content-default');
+            const contentActive = document.getElementById('bubble-content-active');
+            
+            if (contentDefault.classList.contains('hidden')) {
+                // Si está mostrando instrucciones, volver al saludo
+                contentDefault.classList.remove('hidden');
+                contentActive.classList.add('hidden');
+            } else {
+                // Mostrar instrucciones y botón de WhatsApp
+                contentDefault.classList.add('hidden');
+                contentActive.classList.remove('hidden');
+            }
+        }
     </script>
 </body>
 </html>
