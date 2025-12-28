@@ -541,12 +541,13 @@
             <div class="grid grid-cols-1 md:grid-cols-2">
                 <div class="relative h-64 md:h-auto overflow-hidden bg-gray-100">
                     <img id="modal-image" src="" alt="Detalle Servicio" class="w-full h-full object-cover transition duration-700 hover:scale-110">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-6">
-                        <div class="text-white">
-                            <p class="text-sm font-bold uppercase tracking-wider opacity-80 mb-1" id="modal-subtitle">Departamento</p>
-                            <!-- TÍTULO DINÁMICO CON ICONO METÁLICO -->
+                    <!-- GRADIENTE OSCURO INTENSIFICADO PARA MEJOR LECTURA -->
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent flex items-end p-6">
+                        <div class="text-white w-full">
+                            <p class="text-sm font-bold uppercase tracking-wider opacity-90 mb-1 drop-shadow-md" id="modal-subtitle">Departamento</p>
+                            <!-- TÍTULO DINÁMICO (Siempre Blanco en la imagen) -->
                             <div id="modal-title-container" class="flex items-center gap-3">
-                                <h3 class="text-3xl font-heading font-bold" id="modal-title">Titulo</h3>
+                                <h3 class="text-3xl font-heading font-bold text-white drop-shadow-lg" id="modal-title">Titulo</h3>
                             </div>
                         </div>
                     </div>
@@ -736,8 +737,12 @@
             const iconHtml = `<i class="${data.icon} text-4xl mr-3 metal-icon ${data.iconClass} ${data.animation}"></i>`;
             document.getElementById('modal-title').innerHTML = `${iconHtml}${data.title}`;
             
+            // AHORA FORZAMOS EL COLOR BLANCO EN EL TÍTULO DEL MODAL (sobre la imagen) PARA QUE SE LEA
+            // Mantenemos el colorClass solo para los iconos de lista abajo si fuera necesario, pero el título principal es blanco.
             const colorClass = type === 'humano' ? 'text-brandBlue' : type === 'seguro' ? 'text-gray-600' : type === 'sostenible' ? 'text-brandGreen' : 'text-brandAmber';
-            document.getElementById('modal-title').className = `text-3xl font-heading font-bold ${colorClass} flex items-center`;
+            
+            // Aquí está el cambio clave: 'text-white' en lugar de 'colorClass'
+            document.getElementById('modal-title').className = `text-3xl font-heading font-bold text-white flex items-center drop-shadow-lg`;
             
             document.getElementById('modal-subtitle').innerText = data.subtitle;
             document.getElementById('modal-leader').innerText = data.leader;
