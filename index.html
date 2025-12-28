@@ -172,13 +172,56 @@
             transform: translate(-50%, -50%) scale(1.5);
         }
 
-        .shimmer-text-effect {
-            background: linear-gradient(to right, #94a3b8 20%, #ffffff 40%, #ffffff 60%, #94a3b8 80%);
-            background-size: 200% auto;
-            color: transparent;
-            -webkit-background-clip: text;
-            background-clip: text;
-            animation: shimmer 3s linear infinite;
+        /* --- ESTILO DE TEXTO EXCLUSIVO (Expert Design) --- */
+        .neon-3d-wrapper {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            text-transform: uppercase;
+            perspective: 1200px; /* Perspectiva profunda para el giro 3D */
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0.6em; /* Separación elegante entre palabras */
+        }
+        
+        .neon-word {
+            display: flex;
+            white-space: nowrap;
+        }
+
+        .neon-letter {
+            display: inline-block;
+            color: #ffffff; /* Blanco puro de inicio */
+            position: relative;
+            transform-style: preserve-3d; /* Clave para el giro 3D real */
+            /* Animación: 8s en total, el giro ocurre rápido, el resto es pausa */
+            animation: elegant-spin 8s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
+            text-shadow: 0 4px 10px rgba(0,0,0,0.5); /* Sombra elegante estática */
+        }
+
+        @keyframes elegant-spin {
+            0%, 85% {
+                transform: rotateY(0deg);
+                color: #ffffff;
+                text-shadow: 0 4px 10px rgba(0,0,0,0.5);
+            }
+            92% {
+                /* Punto medio del giro: Destello de "Exclusividad" */
+                color: #9bd81a; /* Verde luz marca */
+                text-shadow: 0 0 25px rgba(155, 216, 26, 0.8), 0 0 10px #ffffff;
+            }
+            100% {
+                transform: rotateY(360deg);
+                color: #ffffff;
+                text-shadow: 0 4px 10px rgba(0,0,0,0.5);
+            }
+        }
+
+        /* Hover sutil: si el usuario pasa el mouse, la letra brilla un poco */
+        .neon-letter:hover {
+            color: #e2e8f0;
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
+            transition: all 0.3s ease;
         }
 
         #service-modal { transition: opacity 0.3s ease, transform 0.3s ease; }
@@ -289,9 +332,11 @@
             </h1>
             <div class="h-1.5 w-32 bg-gradient-to-r from-brandBlue to-brandGreen mx-auto rounded-full mb-6 shadow-[0_0_20px_rgba(122,184,0,0.6)]"></div>
             
-            <p class="text-xl md:text-2xl font-light tracking-[0.2em] uppercase shimmer-text-effect font-heading font-semibold">
-                Potenciar el ser, proteger la vida
-            </p>
+            <!-- SLOGAN ANIMADO 3D NEON (Elegante 360) -->
+            <div id="slogan-container" class="neon-3d-wrapper text-xl md:text-3xl mt-8 mb-8 min-h-[60px] items-center">
+                <!-- Se llena con JS -->
+            </div>
+
         </div>
     </header>
 
@@ -671,6 +716,34 @@
             }
         }
         if (typeof VanillaTilt !== 'undefined') { VanillaTilt.init(document.querySelectorAll("[data-tilt]"), { max: 15, speed: 400 }); }
+
+        // --- LÓGICA DEL SLOGAN 3D NEON ---
+        function createNeonText(text) {
+            const container = document.getElementById('slogan-container');
+            const words = text.split(' ');
+            
+            words.forEach(word => {
+                const wordSpan = document.createElement('span');
+                wordSpan.className = 'neon-word';
+                
+                word.split('').forEach((char, index) => {
+                    const span = document.createElement('span');
+                    span.innerText = char;
+                    span.className = 'neon-letter';
+                    // Retraso escalonado para la animación "wave"
+                    span.style.animationDelay = `${index * 0.15}s`;
+                    wordSpan.appendChild(span);
+                });
+
+                // Espacio entre palabras (si no es la última)
+                container.appendChild(wordSpan);
+            });
+        }
+        
+        // Inicializar el slogan animado
+        document.addEventListener('DOMContentLoaded', () => {
+            createNeonText("POTENCIAR EL SER, PROTEGER LA VIDA");
+        });
 
         // --- LÓGICA DE MODALES (Textos Profesionales - Sin repetir nombres) ---
         const serviceData = {
