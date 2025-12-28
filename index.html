@@ -494,7 +494,8 @@
     </main>
     
     <!-- AVATAR FLOTANTE DE BIENVENIDA -->
-    <div class="fixed bottom-6 right-6 z-[100] flex flex-col items-end pointer-events-none animate-pop-in">
+    <!-- Contenedor principal con ID para JS -->
+    <div id="avatar-container" class="fixed bottom-6 right-6 z-[100] flex flex-col items-end pointer-events-none animate-pop-in" style="touch-action: none;">
         <!-- Burbuja de dialogo -->
         <div id="avatar-bubble" class="chat-bubble mb-8 max-w-[280px] animate-float pointer-events-auto transform transition hover:scale-105 origin-bottom-right duration-300">
             <!-- Contenido por Defecto -->
@@ -517,8 +518,9 @@
             </div>
         </div>
         
-        <!-- Imagen del Avatar (Clickeable) -->
-        <div class="relative w-36 h-36 pointer-events-auto cursor-pointer group animate-float-avatar" onclick="toggleAvatarMessage()">
+        <!-- Imagen del Avatar (Clickeable y Arrastrable) -->
+        <!-- Quitamos onclick directo del HTML para manejarlo en JS y distinguir click vs drag -->
+        <div id="avatar-wrapper" class="relative w-36 h-36 pointer-events-auto cursor-grab active:cursor-grabbing group animate-float-avatar">
             <img 
                 src="imagen6.png" 
                 alt="Asistente EvoluSer" 
@@ -680,6 +682,7 @@
         const serviceData = {
             humano: {
                 title: "EvoluSer HUMANO",
+                icon: "fas fa-users",
                 subtitle: "Gestión del Talento",
                 leader: "Nury Echeverria",
                 role: "Directora de Talento Humano",
@@ -689,6 +692,7 @@
             },
             seguro: {
                 title: "EvoluSer S.S.O.",
+                icon: "fas fa-shield-alt",
                 subtitle: "Seguridad y Salud Ocupacional",
                 leader: "Christian Ortega",
                 role: "Director Técnico SST",
@@ -698,6 +702,7 @@
             },
             sostenible: {
                 title: "EvoluSer SOSTENIBLE",
+                icon: "fas fa-leaf",
                 subtitle: "Medio Ambiente",
                 leader: "Christian Ortega",
                 role: "Director de Sostenibilidad",
@@ -707,6 +712,7 @@
             },
             agro: {
                 title: "EvoluSer AGRO",
+                icon: "fas fa-tractor",
                 subtitle: "Agroindustrial",
                 leader: "Lilian Eras",
                 role: "Directora Agroindustrial",
@@ -725,9 +731,11 @@
                 this.src = 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80'; 
             };
             
-            document.getElementById('modal-title').innerText = data.title;
+            // TITULO CON ICONO
+            document.getElementById('modal-title').innerHTML = `<i class="${data.icon} mr-3 opacity-90"></i>${data.title}`;
+            
             const colorClass = type === 'humano' ? 'text-brandBlue' : type === 'seguro' ? 'text-gray-600' : type === 'sostenible' ? 'text-brandGreen' : 'text-brandAmber';
-            document.getElementById('modal-title').className = `text-3xl font-heading font-bold ${colorClass}`;
+            document.getElementById('modal-title').className = `text-3xl font-heading font-bold ${colorClass} flex items-center`;
             
             document.getElementById('modal-subtitle').innerText = data.subtitle;
             document.getElementById('modal-leader').innerText = data.leader;
@@ -768,6 +776,94 @@
                 // Mostrar instrucciones y botón de WhatsApp
                 contentDefault.classList.add('hidden');
                 contentActive.classList.remove('hidden');
+            }
+        }
+
+        // --- LÓGICA DE ARRASTRAR (DRAG & DROP) DEL AVATAR ---
+        const avatarContainer = document.getElementById('avatar-container');
+        const avatarWrapper = document.getElementById('avatar-wrapper');
+        let isDragging = false;
+        let hasMoved = false;
+        let startX, startY;
+
+        // Escuchamos el inicio del arrastre en el wrapper del avatar (la imagen)
+        avatarWrapper.addEventListener('mousedown', startDrag);
+        avatarWrapper.addEventListener('touchstart', startDrag, {passive: false});
+
+        function startDrag(e) {
+            // Prevenir comportamiento por defecto en touch para evitar scroll
+            if (e.type === 'touchstart') {
+               // e.preventDefault(); 
+            }
+            
+            // Obtener posición inicial del mouse/touch
+            const clientX = e.type === 'mousedown' ? e.clientX : e.touches[0].clientX;
+            const clientY = e.type === 'mousedown' ? e.clientY : e.touches[0].clientY;
+            
+            startX = clientX;
+            startY = clientY;
+            isDragging = false; 
+            hasMoved = false;
+
+            // Obtener la posición actual del contenedor
+            const rect = avatarContainer.getBoundingClientRect();
+            
+            // Cambiar posicionamiento de bottom/right a left/top fijo
+            // Esto "congela" el elemento en su posición visual actual para poder moverlo
+            avatarContainer.style.left = rect.left + 'px';
+            avatarContainer.style.top = rect.top + 'px';
+            avatarContainer.style.bottom = 'auto';
+            avatarContainer.style.right = 'auto';
+            
+            // Eliminar clases de posicionamiento de Tailwind para evitar conflictos
+            avatarContainer.classList.remove('bottom-6', 'right-6'); 
+            
+            // Escuchar movimiento y soltar en todo el documento
+            document.addEventListener('mousemove', onDrag);
+            document.addEventListener('mouseup', endDrag);
+            document.addEventListener('touchmove', onDrag, {passive: false});
+            document.addEventListener('touchend', endDrag);
+        }
+
+        function onDrag(e) {
+            const clientX = e.type === 'mousemove' ? e.clientX : e.touches[0].clientX;
+            const clientY = e.type === 'mousemove' ? e.clientY : e.touches[0].clientY;
+            
+            const deltaX = clientX - startX;
+            const deltaY = clientY - startY;
+            
+            // Umbral para considerar que se está arrastrando (evita clicks accidentales)
+            if (!isDragging && (Math.abs(deltaX) > 5 || Math.abs(deltaY) > 5)) {
+                isDragging = true;
+                hasMoved = true;
+            }
+            
+            if (isDragging) {
+                e.preventDefault(); // Prevenir selección o scroll
+                
+                // Calcular nueva posición sumando el delta a la posición actual
+                const currentLeft = parseFloat(avatarContainer.style.left);
+                const currentTop = parseFloat(avatarContainer.style.top);
+                
+                avatarContainer.style.left = (currentLeft + deltaX) + 'px';
+                avatarContainer.style.top = (currentTop + deltaY) + 'px';
+                
+                // Actualizar posición de inicio para el siguiente frame
+                startX = clientX;
+                startY = clientY;
+            }
+        }
+
+        function endDrag(e) {
+            // Limpiar listeners
+            document.removeEventListener('mousemove', onDrag);
+            document.removeEventListener('mouseup', endDrag);
+            document.removeEventListener('touchmove', onDrag);
+            document.removeEventListener('touchend', endDrag);
+            
+            // Si NO se movió (fue un click rápido), ejecutar la acción de click
+            if (!hasMoved) {
+                toggleAvatarMessage();
             }
         }
     </script>
