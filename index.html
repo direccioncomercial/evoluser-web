@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EvoluSer - Comunidad de Evonautas</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800;900&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
     <!-- Versión 6.6.0 para soportar el icono X de Twitter -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
@@ -33,8 +33,8 @@
                         'shimmer-text': 'shimmer 3s infinite linear',
                         'pop-in': 'popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards',
                         'float-avatar': 'floatAvatar 4s ease-in-out infinite',
-                        // Animación de brillo cristal
-                        'shine-sweep': 'shineSweep 6s infinite',
+                        // Animación de brillo cristal refinada
+                        'crystal-shine': 'crystalShine 8s infinite',
                     },
                     keyframes: {
                         float: {
@@ -46,9 +46,8 @@
                             '50%': { transform: 'translateY(-8px)' },
                         },
                         glowEntrance: {
-                            '0%': { opacity: 0, transform: 'scale(0.8) translateY(20px)', filter: 'brightness(0.5) blur(5px)' },
-                            '50%': { opacity: 1, filter: 'brightness(1.5) blur(0px)' },
-                            '100%': { opacity: 1, transform: 'scale(1) translateY(0)', filter: 'brightness(1)' },
+                            '0%': { opacity: 0, transform: 'scale(0.9) translateY(20px)', filter: 'blur(10px)' },
+                            '100%': { opacity: 1, transform: 'scale(1) translateY(0)', filter: 'blur(0)' },
                         },
                         shimmer: {
                             '0%': { backgroundPosition: '-200% center' },
@@ -58,11 +57,11 @@
                             '0%': { opacity: 0, transform: 'scale(0.5) translateY(50px)' },
                             '100%': { opacity: 1, transform: 'scale(1) translateY(0)' },
                         },
-                        shineSweep: {
-                            '0%': { left: '-150%', opacity: '0' },
-                            '20%': { opacity: '1' },
-                            '40%': { left: '150%', opacity: '0' },
-                            '100%': { left: '150%', opacity: '0' } // Pausa larga
+                        crystalShine: {
+                            '0%, 40%': { left: '-150%', opacity: '0' },
+                            '50%': { opacity: '0.5' },
+                            '60%': { left: '150%', opacity: '0' },
+                            '100%': { left: '150%', opacity: '0' }
                         }
                     }
                 }
@@ -73,7 +72,7 @@
     <style>
         body { 
             font-family: 'Open Sans', sans-serif; 
-            background-color: #0f172a; 
+            background-color: #f0f4f8; /* Color de respaldo claro */
             overflow-x: hidden; 
             cursor: none; 
             min-height: 100vh;
@@ -84,13 +83,10 @@
             #custom-cursor { display: none; }
         }
 
-        /* --- FONDO REALISTA CINEMÁTICO --- */
+        /* --- FONDO ELEGANTE Y LUMINOSO --- */
         .cinematic-bg {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0; width: 100%; height: 100%;
             z-index: -2;
             overflow: hidden;
         }
@@ -99,22 +95,28 @@
             content: '';
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background-image: url('https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?q=80&w=2613&auto=format&fit=crop');
+            /* Fondo abstracto más limpio y profesional */
+            background-image: url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop');
             background-size: cover;
-            background-position: center bottom;
-            animation: kenBurns 60s infinite alternate ease-in-out;
+            background-position: center;
+            /* Animación suave de zoom */
+            animation: kenBurns 80s infinite alternate ease-in-out;
         }
 
         .cinematic-bg::after {
             content: '';
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(to bottom, rgba(15, 23, 42, 0.7) 0%, rgba(15, 23, 42, 0.4) 50%, rgba(15, 23, 42, 0.8) 100%);
+            /* Capa azul real translúcida en lugar de negro apagado */
+            background: linear-gradient(to bottom, 
+                rgba(255, 255, 255, 0.1) 0%, 
+                rgba(0, 86, 145, 0.2) 50%, 
+                rgba(15, 23, 42, 0.4) 100%);
         }
 
         @keyframes kenBurns {
             0% { transform: scale(1); }
-            100% { transform: scale(1.15); }
+            100% { transform: scale(1.1); }
         }
 
         #particles-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
@@ -122,77 +124,81 @@
         /* ESTILOS DEL COHETE ERRANTE (Más visible) */
         .wandering-rocket {
             position: fixed;
-            z-index: 1; /* Delante del fondo, detrás del contenido principal */
-            font-size: 3rem; /* Tamaño mucho más visible */
+            z-index: 1; 
+            font-size: 3rem; 
             pointer-events: none;
-            opacity: 0; /* Empieza invisible */
+            opacity: 0; 
             transition: transform linear, opacity 1s ease-in-out;
-            /* Brillo intenso para visibilidad */
-            filter: drop-shadow(0 0 20px rgba(122, 184, 0, 0.8));
+            filter: drop-shadow(0 0 15px rgba(122, 184, 0, 0.6));
         }
         
         .wandering-rocket i {
-            /* Degradado de Marca */
             background: linear-gradient(135deg, #005691 0%, #7AB800 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             display: block;
         }
 
-        /* --- CONTENEDOR PRINCIPAL: ELEGANCIA DELICADA --- */
+        /* --- CONTENEDOR PRINCIPAL: CRISTAL LUMINOSO --- */
         .glass-card { 
-            /* Fondo más translúcido y elegante */
-            background: rgba(255, 255, 255, 0.8); 
-            backdrop-filter: blur(25px); /* Más desenfoque */
-            -webkit-backdrop-filter: blur(25px);
-            border: 1px solid rgba(255, 255, 255, 0.5); /* Borde sutil */
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3); 
+            /* Blanco puro con alta transparencia para luminosidad */
+            background: rgba(255, 255, 255, 0.75); 
+            backdrop-filter: blur(30px); /* Blur intenso para suavidad */
+            -webkit-backdrop-filter: blur(30px);
+            border: 1px solid rgba(255, 255, 255, 0.8); /* Borde blanco nítido */
+            box-shadow: 
+                0 20px 50px rgba(0, 50, 100, 0.1),
+                0 0 0 1px rgba(255, 255, 255, 0.5) inset; /* Brillo interior */
         }
         
-        /* --- LOGO CRISTAL --- */
+        /* --- LOGO EFECTO CRISTAL --- */
         .logo-card {
-            background: rgba(255, 255, 255, 0.90);
-            border-radius: 1rem;
-            box-shadow: 0 10px 30px -5px rgba(255, 255, 255, 0.4);
-            border: 1px solid rgba(255, 255, 255, 0.8);
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 1.5rem; /* Bordes más redondeados */
+            box-shadow: 
+                0 15px 35px -5px rgba(0, 86, 145, 0.15),
+                0 0 20px rgba(255, 255, 255, 0.8) inset;
+            border: 1px solid rgba(255, 255, 255, 1);
             display: inline-block;
-            padding: 1.5rem;
-            min-width: 280px; /* Un poco más ancho para el logo grande */
+            padding: 2rem;
+            min-width: 300px;
             position: relative;
             z-index: 10;
-            overflow: hidden; /* Para el brillo */
+            overflow: hidden;
+            /* Efecto Prisma */
+            backdrop-filter: blur(10px);
         }
 
-        /* Efecto de brillo que pasa sobre el logo */
+        /* Brillo que pasa sobre el logo */
         .logo-card::after {
             content: '';
             position: absolute;
             top: 0;
             left: -150%;
-            width: 100%;
+            width: 150%;
             height: 100%;
             background: linear-gradient(
-                90deg,
-                transparent,
-                rgba(255, 255, 255, 0.8),
-                transparent
+                120deg,
+                transparent 20%,
+                rgba(255, 255, 255, 0.7) 40%,
+                rgba(255, 255, 255, 0.9) 50%,
+                rgba(255, 255, 255, 0.7) 60%,
+                transparent 80%
             );
-            transform: skewX(-20deg);
-            animation: shine-sweep 6s infinite;
+            transform: skewX(-25deg);
+            animation: crystal-shine 7s infinite;
             pointer-events: none;
         }
         
         .logo-glow {
             position: absolute;
-            top: 50%;
-            left: 50%;
+            top: 50%; left: 50%;
             transform: translate(-50%, -50%);
-            width: 140%;
-            height: 140%;
-            background: radial-gradient(circle, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0) 70%);
+            width: 160%; height: 160%;
+            background: radial-gradient(circle, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0) 60%);
             z-index: -1;
-            filter: blur(30px);
-            animation: pulse-slow 3s infinite;
+            filter: blur(40px);
+            animation: pulse-slow 4s infinite;
         }
 
         .stagger-1 { animation: slideIn 0.6s ease-out both; animation-delay: 0.1s; }
@@ -229,47 +235,30 @@
             font-family: 'Montserrat', sans-serif;
             font-weight: 800;
             text-transform: uppercase;
-            perspective: 1200px; /* Perspectiva profunda para el giro 3D */
+            perspective: 1200px; 
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
-            gap: 0.6em; /* Separación elegante entre palabras */
+            gap: 0.6em; 
         }
         
-        .neon-word {
-            display: flex;
-            white-space: nowrap;
-        }
+        .neon-word { display: flex; white-space: nowrap; }
 
         .neon-letter {
             display: inline-block;
-            color: #ffffff; /* Blanco puro de inicio */
+            color: #ffffff; 
             position: relative;
-            transform-style: preserve-3d; /* Clave para el giro 3D real */
-            /* Animación: 8s en total, el giro ocurre rápido, el resto es pausa */
+            transform-style: preserve-3d;
             animation: elegant-spin 8s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
-            text-shadow: 0 4px 10px rgba(0,0,0,0.5); /* Sombra elegante estática */
+            text-shadow: 0 4px 10px rgba(0,0,0,0.3); 
         }
 
         @keyframes elegant-spin {
-            0%, 85% {
-                transform: rotateY(0deg);
-                color: #ffffff;
-                text-shadow: 0 4px 10px rgba(0,0,0,0.5);
-            }
-            92% {
-                /* Punto medio del giro: Destello de "Exclusividad" */
-                color: #9bd81a; /* Verde luz marca */
-                text-shadow: 0 0 25px rgba(155, 216, 26, 0.8), 0 0 10px #ffffff;
-            }
-            100% {
-                transform: rotateY(360deg);
-                color: #ffffff;
-                text-shadow: 0 4px 10px rgba(0,0,0,0.5);
-            }
+            0%, 85% { transform: rotateY(0deg); color: #ffffff; text-shadow: 0 4px 10px rgba(0,0,0,0.3); }
+            92% { color: #9bd81a; text-shadow: 0 0 25px rgba(155, 216, 26, 0.8), 0 0 10px #ffffff; }
+            100% { transform: rotateY(360deg); color: #ffffff; text-shadow: 0 4px 10px rgba(0,0,0,0.3); }
         }
 
-        /* Hover sutil: si el usuario pasa el mouse, la letra brilla un poco */
         .neon-letter:hover {
             color: #e2e8f0;
             text-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
@@ -280,77 +269,41 @@
         #service-modal.hidden { opacity: 0; pointer-events: none; transform: scale(0.95); }
         #service-modal.flex { opacity: 1; pointer-events: auto; transform: scale(1); }
         
-        .interactive-card {
-            transition: all 0.3s ease;
-        }
+        .interactive-card { transition: all 0.3s ease; }
         .interactive-card:hover {
             transform: translateY(-5px);
             background: rgba(255,255,255, 1);
             box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
         }
 
-        /* --- EFECTOS METÁLICOS REALISTAS --- */
+        /* --- EFECTOS METÁLICOS --- */
         .metal-icon {
-            background-clip: text;
-            -webkit-background-clip: text;
-            color: transparent;
-            filter: drop-shadow(2px 4px 3px rgba(0,0,0,0.3));
-            background-size: 200% 200%;
-            transition: all 0.3s ease;
+            background-clip: text; -webkit-background-clip: text; color: transparent;
+            filter: drop-shadow(2px 4px 3px rgba(0,0,0,0.2));
+            background-size: 200% 200%; transition: all 0.3s ease;
         }
-
         .metal-blue { background-image: linear-gradient(135deg, #003056 0%, #005691 25%, #4dabf7 50%, #005691 75%, #002040 100%); }
         .metal-gray { background-image: linear-gradient(135deg, #2d3436 0%, #636e72 25%, #b2bec3 50%, #636e72 75%, #2d3436 100%); }
         .metal-green { background-image: linear-gradient(135deg, #2f5d02 0%, #5c8d03 25%, #b2f243 50%, #5c8d03 75%, #204000 100%); }
         .metal-amber { background-image: linear-gradient(135deg, #78350f 0%, #d97706 25%, #fbbf24 50%, #d97706 75%, #451a03 100%); }
 
         /* --- ANIMACIONES DE ICONOS --- */
-        
-        @keyframes leaf-wind {
-            0% { transform: rotate(0deg) translateY(0); }
-            25% { transform: rotate(15deg) translateY(2px); }
-            50% { transform: rotate(-10deg) translateY(0px); }
-            75% { transform: rotate(5deg) translateY(4px); }
-            100% { transform: rotate(0deg) translateY(0); }
-        }
+        @keyframes leaf-wind { 0% { transform: rotate(0deg) translateY(0); } 25% { transform: rotate(15deg) translateY(2px); } 50% { transform: rotate(-10deg) translateY(0px); } 75% { transform: rotate(5deg) translateY(4px); } 100% { transform: rotate(0deg) translateY(0); } }
         .group:hover .animate-leaf, .metal-animate-leaf { animation: leaf-wind 2s ease-in-out infinite; transform-origin: top center; }
-
-        @keyframes group-hug {
-            0% { transform: scale(1); }
-            50% { transform: scale(0.9) skewX(-2deg); }
-            100% { transform: scale(1); }
-        }
+        @keyframes group-hug { 0% { transform: scale(1); } 50% { transform: scale(0.9) skewX(-2deg); } 100% { transform: scale(1); } }
         .group:hover .animate-hug, .metal-animate-hug { animation: group-hug 1.5s ease-in-out infinite; }
-
-        @keyframes tractor-move {
-            0% { transform: translateX(0) rotate(0); }
-            25% { transform: translateX(-2px) rotate(-1deg); }
-            50% { transform: translateX(2px) rotate(1deg); }
-            75% { transform: translateX(-1px) rotate(0); }
-            100% { transform: translateX(0) rotate(0); }
-        }
+        @keyframes tractor-move { 0% { transform: translateX(0) rotate(0); } 25% { transform: translateX(-2px) rotate(-1deg); } 50% { transform: translateX(2px) rotate(1deg); } 75% { transform: translateX(-1px) rotate(0); } 100% { transform: translateX(0) rotate(0); } }
         .group:hover .animate-tractor, .metal-animate-tractor { animation: tractor-move 0.5s linear infinite; }
-
-        @keyframes shield-guard {
-            0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); }
-        }
+        @keyframes shield-guard { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
         .metal-animate-shield { animation: shield-guard 2s ease-in-out infinite; }
 
         .chat-bubble {
-            position: relative;
-            background: #ffffff;
-            border-radius: 1.5rem;
-            padding: 1.25rem;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-            margin-bottom: 2rem; 
-            border-bottom-right-radius: 0;
-            transition: all 0.3s ease-in-out;
+            position: relative; background: #ffffff; border-radius: 1.5rem; padding: 1.25rem;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15); margin-bottom: 2rem; 
+            border-bottom-right-radius: 0; transition: all 0.3s ease-in-out;
         }
-        
         .chat-bubble::after {
-            content: '';
-            position: absolute;
-            bottom: -10px; right: 20px; width: 0; height: 0;
+            content: ''; position: absolute; bottom: -10px; right: 20px; width: 0; height: 0;
             border-left: 10px solid transparent; border-right: 10px solid transparent; border-top: 15px solid #ffffff;
         }
     </style>
@@ -360,57 +313,57 @@
         <i class="fas fa-leaf text-brandGreen text-opacity-90 text-xl transform -rotate-45 drop-shadow-md"></i>
     </div>
 
-    <!-- FONDO REALISTA CINEMÁTICO -->
+    <!-- FONDO REALISTA CINEMÁTICO MEJORADO -->
     <div class="cinematic-bg"></div>
     <!-- PARTÍCULAS SUTILES ENCIMA -->
     <canvas id="particles-canvas"></canvas>
 
     <!-- Header Section -->
-    <header class="pt-16 pb-32 relative overflow-hidden z-10">
-        <div class="absolute top-0 left-1/4 w-96 h-96 bg-brandBlue rounded-full mix-blend-screen filter blur-[150px] opacity-20 animate-pulse-slow pointer-events-none"></div>
+    <header class="pt-20 pb-32 relative overflow-hidden z-10">
+        <!-- Luz ambiental detrás del logo -->
+        <div class="absolute top-10 left-1/2 transform -translate-x-1/2 w-[500px] h-[500px] bg-white rounded-full mix-blend-soft-light filter blur-[100px] opacity-30 pointer-events-none"></div>
         
         <div class="container mx-auto px-6 text-center relative z-20">
-            <div class="mb-12 relative inline-block">
+            <div class="mb-14 relative inline-block">
                 <div class="logo-glow"></div>
-                <!-- CLASE AÑADIDA PARA BRILLO -->
+                <!-- LOGO CON EFECTO CRISTAL Y TAMAÑO AUMENTADO -->
                 <div class="logo-card animate-glow-entrance cursor-none">
                     <div class="flex flex-col items-center justify-center">
-                        <!-- LOGO MÁS GRANDE (170px) -->
-                        <img src="http://evolucerec.gt.tc/wp-content/uploads/2026/01/logo-1-scaled.png" alt="EvoluSer Logo" class="h-auto object-contain" style="max-height: 170px; max-width: 100%;" onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?name=EvoluSer&background=005691&color=fff&size=128';">
+                        <img src="logo.png" alt="EvoluSer Logo" class="h-auto object-contain" style="max-height: 170px; max-width: 100%; filter: drop-shadow(0 5px 15px rgba(0,0,0,0.1));" onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?name=EvoluSer&background=005691&color=fff&size=128';">
                     </div>
                 </div>
             </div>
 
-            <!-- TÍTULO REDUCIDO UN POCO (4xl a 6xl) -->
-            <h1 class="text-4xl md:text-6xl font-extrabold mb-4 tracking-tight drop-shadow-2xl text-white bg-clip-text text-transparent bg-gradient-to-r from-white via-gray-200 to-gray-400">
+            <!-- TÍTULO MÁS ELEGANTE (Reducido ligeramente y con mejor espaciado) -->
+            <h1 class="text-4xl md:text-6xl font-extrabold mb-6 tracking-tight drop-shadow-2xl text-white bg-clip-text text-transparent bg-gradient-to-br from-white via-gray-100 to-gray-300">
                 Evolución Integral
             </h1>
-            <div class="h-1.5 w-32 bg-gradient-to-r from-brandBlue to-brandGreen mx-auto rounded-full mb-6 shadow-[0_0_20px_rgba(122,184,0,0.6)]"></div>
+            <div class="h-1.5 w-24 bg-gradient-to-r from-brandBlue to-brandGreen mx-auto rounded-full mb-8 shadow-[0_0_20px_rgba(122,184,0,0.8)]"></div>
             
             <!-- SLOGAN ANIMADO 3D NEON (Elegante 360) -->
-            <div id="slogan-container" class="neon-3d-wrapper text-xl md:text-3xl mt-8 mb-8 min-h-[60px] items-center">
+            <div id="slogan-container" class="neon-3d-wrapper text-lg md:text-2xl mt-4 mb-8 min-h-[50px] items-center tracking-widest">
                 <!-- Se llena con JS -->
             </div>
 
         </div>
     </header>
 
-    <main class="container mx-auto px-4 -mt-20 relative z-30 mb-12 flex-grow">
+    <main class="container mx-auto px-4 -mt-24 relative z-30 mb-12 flex-grow">
         <!-- Navegación -->
         <div class="glass-card rounded-full shadow-2xl p-2 flex justify-center max-w-lg mx-auto mb-10 transform transition-all hover:scale-[1.01] relative z-50">
             <button onclick="switchTab('carta')" id="btn-carta" class="flex-1 py-3 px-6 rounded-full text-sm font-bold uppercase tracking-wider transition-all duration-500 bg-brandBlue text-white shadow-lg ring-4 ring-brandBlue/30 cursor-none">
                 <i class="fas fa-file-alt mr-2"></i> Propuesta
             </button>
-            <button onclick="switchTab('brochure')" id="btn-brochure" class="flex-1 py-3 px-6 rounded-full text-sm font-bold uppercase tracking-wider transition-all duration-500 text-gray-500 hover:bg-gray-100 hover:text-brandBlue cursor-none">
+            <button onclick="switchTab('brochure')" id="btn-brochure" class="flex-1 py-3 px-6 rounded-full text-sm font-bold uppercase tracking-wider transition-all duration-500 text-gray-500 hover:bg-white/50 hover:text-brandBlue cursor-none">
                 <i class="fas fa-th-large mr-2"></i> Servicios
             </button>
         </div>
 
-        <div class="glass-card rounded-3xl shadow-2xl p-8 md:p-14 min-h-[600px] relative overflow-hidden transition-all duration-500 z-40 bg-white/80" id="main-content-area">
+        <div class="glass-card rounded-3xl shadow-2xl p-8 md:p-14 min-h-[600px] relative overflow-hidden transition-all duration-500 z-40" id="main-content-area">
             
             <!-- VISTA CARTA (PROPUESTA) -->
             <div id="view-carta" class="max-w-5xl mx-auto stagger-1">
-                <div class="flex justify-between items-end border-b-2 border-gray-100 pb-6 mb-8">
+                <div class="flex justify-between items-end border-b border-gray-200 pb-6 mb-8">
                     <div><span class="bg-gradient-to-r from-brandBlue to-brandBlueLight text-white text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-wider shadow-md">Propuesta Corporativa</span></div>
                     <div class="text-right">
                         <p class="text-brandBlue font-bold text-sm">QUITO, ECUADOR</p>
@@ -427,7 +380,7 @@
                     
                     <!-- GRID INTERACTIVO EN CARTA FORMAL -->
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 my-6 not-prose">
-                        <div class="interactive-card bg-white/80 p-4 rounded-xl border border-blue-100 cursor-pointer group" onclick="openModal('humano')">
+                        <div class="interactive-card bg-white/60 p-4 rounded-xl border border-blue-100 cursor-pointer group" onclick="openModal('humano')">
                             <div class="flex flex-col items-center text-center">
                                 <div class="w-20 h-20 flex items-center justify-center mb-3">
                                     <i class="fas fa-users text-6xl metal-icon metal-blue animate-hug"></i>
@@ -437,12 +390,10 @@
                                 <span class="text-[10px] text-brandBlue mt-2 opacity-0 group-hover:opacity-100 transition-opacity">Ver Directora</span>
                             </div>
                         </div>
-                        <div class="interactive-card bg-white/80 p-4 rounded-xl border border-gray-200 cursor-pointer group" onclick="openModal('seguro')">
+                        <div class="interactive-card bg-white/60 p-4 rounded-xl border border-gray-200 cursor-pointer group" onclick="openModal('seguro')">
                             <div class="flex flex-col items-center text-center">
                                 <div class="w-20 h-20 flex items-center justify-center mb-3 relative">
-                                    <!-- Icono Original: Escudo -->
                                     <i class="fas fa-shield-alt text-6xl metal-icon metal-gray absolute transition-all duration-500 group-hover:opacity-0 group-hover:scale-50"></i>
-                                    <!-- Icono Transformado: Persona con Escudo -->
                                     <i class="fas fa-user-shield text-6xl metal-icon metal-gray absolute transition-all duration-500 opacity-0 scale-50 group-hover:opacity-100 group-hover:scale-110"></i>
                                 </div>
                                 <h4 class="font-bold text-gray-800 text-sm">S.S.O.</h4>
@@ -450,7 +401,7 @@
                                 <span class="text-[10px] text-gray-600 mt-2 opacity-0 group-hover:opacity-100 transition-opacity">Ver Director</span>
                             </div>
                         </div>
-                        <div class="interactive-card bg-white/80 p-4 rounded-xl border border-green-100 cursor-pointer group" onclick="openModal('sostenible')">
+                        <div class="interactive-card bg-white/60 p-4 rounded-xl border border-green-100 cursor-pointer group" onclick="openModal('sostenible')">
                             <div class="flex flex-col items-center text-center">
                                 <div class="w-20 h-20 flex items-center justify-center mb-3">
                                     <i class="fas fa-leaf text-6xl metal-icon metal-green animate-leaf"></i>
@@ -460,7 +411,7 @@
                                 <span class="text-[10px] text-brandGreen mt-2 opacity-0 group-hover:opacity-100 transition-opacity">Ver Director</span>
                             </div>
                         </div>
-                        <div class="interactive-card bg-white/80 p-4 rounded-xl border border-amber-100 cursor-pointer group" onclick="openModal('agro')">
+                        <div class="interactive-card bg-white/60 p-4 rounded-xl border border-amber-100 cursor-pointer group" onclick="openModal('agro')">
                             <div class="flex flex-col items-center text-center">
                                 <div class="w-20 h-20 flex items-center justify-center mb-3">
                                     <i class="fas fa-tractor text-6xl metal-icon metal-amber animate-tractor"></i>
@@ -494,7 +445,7 @@
                     <p class="text-lg text-gray-500 max-w-2xl mx-auto">Tecnología, normativa y humanidad unidas.</p>
                 </div>
 
-                <!-- Video Section (9:16) -->
+                <!-- Video Section (9:16) con YouTube -->
                 <div class="max-w-sm mx-auto mb-16 stagger-2 video-section">
                     <div class="bg-white p-2 rounded-2xl shadow-xl border border-gray-100 relative group">
                         <div class="absolute -inset-1 bg-gradient-to-r from-brandBlue to-brandGreen rounded-2xl blur opacity-25 group-hover:opacity-40 transition duration-1000"></div>
@@ -519,7 +470,7 @@
                     <!-- Card 1: Humano -->
                     <div class="stagger-1 h-full">
                         <div class="h-full" data-tilt data-tilt-max="5" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.2">
-                            <div class="bg-white/90 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all h-full border-t-4 border-brandBlue group flex flex-col">
+                            <div class="bg-white/80 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all h-full border-t-4 border-brandBlue group flex flex-col">
                                 <div class="w-full flex justify-center mb-6">
                                     <i class="fas fa-users text-6xl metal-icon metal-blue animate-hug"></i>
                                 </div>
@@ -538,7 +489,7 @@
                     <!-- Card 2: PREVENCIÓN (S.S.O.) -->
                     <div class="stagger-2 h-full">
                         <div class="h-full" data-tilt data-tilt-max="5" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.2">
-                            <div class="bg-white/90 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all h-full border-t-4 border-gray-600 group flex flex-col">
+                            <div class="bg-white/80 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all h-full border-t-4 border-gray-600 group flex flex-col">
                                 <div class="w-full flex justify-center mb-6 relative h-16">
                                     <!-- Transformación en Hover -->
                                     <i class="fas fa-shield-alt text-6xl metal-icon metal-gray absolute transition-all duration-500 group-hover:opacity-0 group-hover:scale-50"></i>
@@ -559,7 +510,7 @@
                     <!-- Card 3: Sostenible -->
                     <div class="stagger-3 h-full">
                         <div class="h-full" data-tilt data-tilt-max="5" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.2">
-                            <div class="bg-white/90 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all h-full border-t-4 border-brandGreen group flex flex-col">
+                            <div class="bg-white/80 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all h-full border-t-4 border-brandGreen group flex flex-col">
                                 <div class="w-full flex justify-center mb-6">
                                     <i class="fas fa-leaf text-6xl metal-icon metal-green animate-leaf"></i>
                                 </div>
@@ -578,7 +529,7 @@
                     <!-- Card 4: Agroindustrial -->
                     <div class="stagger-4 h-full">
                         <div class="h-full" data-tilt data-tilt-max="5" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.2">
-                            <div class="bg-white/90 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all h-full border-t-4 border-brandAmber group flex flex-col">
+                            <div class="bg-white/80 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all h-full border-t-4 border-brandAmber group flex flex-col">
                                 <div class="w-full flex justify-center mb-6">
                                     <i class="fas fa-tractor text-6xl metal-icon metal-amber animate-tractor"></i>
                                 </div>
@@ -682,7 +633,7 @@
         </div>
     </div>
 
-    <footer class="bg-white/90 border-t border-gray-200 mt-auto backdrop-blur-sm relative z-30">
+    <footer class="bg-white/80 border-t border-gray-200 mt-auto backdrop-blur-sm relative z-30">
         <div class="container mx-auto px-6 py-10">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-center text-center md:text-left">
                 <div class="space-y-3">
@@ -915,7 +866,7 @@
                 subtitle: "EvoluSer Consultores",
                 leader: "Junta Directiva",
                 role: "Liderazgo Estratégico",
-                image: "imagen7.jpeg",
+                image: "imagen 7.jpeg",
                 desc: "Nuestro equipo directivo encarna la misión de potenciar el ser y proteger la vida. Guiamos a la organización con una visión integral, asegurando que cada paso que damos genere valor real para nuestros clientes y la sociedad.",
                 list: ["Dirección Estratégica", "Gestión de Calidad", "Innovación Corporativa", "Responsabilidad Social"],
                 iconClass: "metal-blue",
@@ -944,8 +895,9 @@
             if (type === 'equipo') {
                 // Usar object-contain para ver toda la foto sin recortes
                 modalImage.className = 'w-full h-full object-contain bg-gray-900 transition duration-700'; 
-                // Aplicar la animación espectacular de "Revelación Ejecutiva"
-                modalImage.style.animation = 'executiveReveal 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards';
+                // Aplicar la animación espectacular de "Revelación Ejecutiva" - RETIRADA A PETICIÓN
+                // modalImage.style.animation = 'executiveReveal 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards';
+                modalImage.style.animation = 'none'; // Sin animación
             }
             
             // TITULO CON ICONO DINÁMICO (Metal Toy)
