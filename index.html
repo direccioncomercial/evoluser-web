@@ -111,18 +111,20 @@
 
         #particles-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
         
-        /* ESTILOS DEL COHETE ERRANTE */
+        /* ESTILOS DEL COHETE ERRANTE (Más visible) */
         .wandering-rocket {
             position: fixed;
-            z-index: 1; 
-            font-size: 3rem; 
+            z-index: 1; /* Delante del fondo, detrás del contenido principal */
+            font-size: 3rem; /* Tamaño mucho más visible */
             pointer-events: none;
-            opacity: 0; 
+            opacity: 0; /* Empieza invisible */
             transition: transform linear, opacity 1s ease-in-out;
+            /* Brillo intenso para visibilidad */
             filter: drop-shadow(0 0 20px rgba(122, 184, 0, 0.8));
         }
         
         .wandering-rocket i {
+            /* Degradado de Marca */
             background: linear-gradient(135deg, #005691 0%, #7AB800 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -196,11 +198,11 @@
             font-family: 'Montserrat', sans-serif;
             font-weight: 800;
             text-transform: uppercase;
-            perspective: 1200px; 
+            perspective: 1200px; /* Perspectiva profunda para el giro 3D */
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
-            gap: 0.6em; 
+            gap: 0.6em; /* Separación elegante entre palabras */
         }
         
         .neon-word {
@@ -210,11 +212,12 @@
 
         .neon-letter {
             display: inline-block;
-            color: #ffffff; 
+            color: #ffffff; /* Blanco puro de inicio */
             position: relative;
-            transform-style: preserve-3d;
+            transform-style: preserve-3d; /* Clave para el giro 3D real */
+            /* Animación: 8s en total, el giro ocurre rápido, el resto es pausa */
             animation: elegant-spin 8s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
-            text-shadow: 0 4px 10px rgba(0,0,0,0.5); 
+            text-shadow: 0 4px 10px rgba(0,0,0,0.5); /* Sombra elegante estática */
         }
 
         @keyframes elegant-spin {
@@ -224,7 +227,8 @@
                 text-shadow: 0 4px 10px rgba(0,0,0,0.5);
             }
             92% {
-                color: #9bd81a; 
+                /* Punto medio del giro: Destello de "Exclusividad" */
+                color: #9bd81a; /* Verde luz marca */
                 text-shadow: 0 0 25px rgba(155, 216, 26, 0.8), 0 0 10px #ffffff;
             }
             100% {
@@ -234,6 +238,7 @@
             }
         }
 
+        /* Hover sutil: si el usuario pasa el mouse, la letra brilla un poco */
         .neon-letter:hover {
             color: #e2e8f0;
             text-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
@@ -269,6 +274,7 @@
         .metal-amber { background-image: linear-gradient(135deg, #78350f 0%, #d97706 25%, #fbbf24 50%, #d97706 75%, #451a03 100%); }
 
         /* --- ANIMACIONES DE ICONOS --- */
+        
         @keyframes leaf-wind {
             0% { transform: rotate(0deg) translateY(0); }
             25% { transform: rotate(15deg) translateY(2px); }
@@ -383,17 +389,64 @@
                     <p class="mb-6">En un entorno empresarial cada vez más exigente, el crecimiento real solo ocurre cuando cuidamos lo más importante: <strong>las personas y el entorno que habitan</strong>.</p>
                     <p class="mb-6">Les presento a <strong>EvoluSer</strong>, no solo como proveedores, sino como sus aliados estratégicos. Entendemos que una empresa exitosa del siglo XXI debe cumplir cuatro requisitos innegociables: ser <span class="text-brandBlue font-semibold">Humana</span>, garantizar la <span class="text-gray-800 font-semibold">Seguridad y Salud Ocupacional</span>, ser <span class="text-brandGreen font-semibold">Sostenible</span> y <span class="text-brandAmber font-semibold">Productiva</span>.</p>
                     
-                    <!-- FIRMA DE EQUIPO DIRECTIVO CON IMAGEN 7 (VISIBILIDAD MEJORADA) -->
-                    <div class="mt-12 flex items-center gap-6 border-t border-gray-100 pt-8 not-prose">
-                        <div class="w-32 h-32 relative rounded-full overflow-hidden shadow-xl border-4 border-white ring-1 ring-gray-200 flex-shrink-0 transition-transform hover:scale-105 duration-300">
-                            <!-- Corregido nombre a "imagen 7.jpeg" y aumentado tamaño -->
-                            <img src="imagen 7.jpeg" alt="Equipo Directivo" class="w-full h-full object-cover" onerror="this.style.display='none'; document.getElementById('fallback-icon').style.display='flex';">
-                            <div id="fallback-icon" class="absolute inset-0 bg-gradient-to-br from-brandBlue to-brandBlueLight hidden items-center justify-center text-white text-3xl"><i class="fas fa-pen-nib"></i></div>
+                    <p class="text-sm text-gray-500 italic mt-8 mb-4 text-center">Haga clic en cada área para conocer a nuestros directores:</p>
+                    
+                    <!-- GRID INTERACTIVO EN CARTA FORMAL -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 my-6 not-prose">
+                        <div class="interactive-card bg-white/80 p-4 rounded-xl border border-blue-100 cursor-pointer group" onclick="openModal('humano')">
+                            <div class="flex flex-col items-center text-center">
+                                <div class="w-20 h-20 flex items-center justify-center mb-3">
+                                    <i class="fas fa-users text-6xl metal-icon metal-blue animate-hug"></i>
+                                </div>
+                                <h4 class="font-bold text-gray-800 text-sm">Humano</h4>
+                                <p class="text-[10px] text-gray-500 uppercase tracking-wide">Talento</p>
+                                <span class="text-[10px] text-brandBlue mt-2 opacity-0 group-hover:opacity-100 transition-opacity">Ver Directora</span>
+                            </div>
+                        </div>
+                        <div class="interactive-card bg-white/80 p-4 rounded-xl border border-gray-200 cursor-pointer group" onclick="openModal('seguro')">
+                            <div class="flex flex-col items-center text-center">
+                                <div class="w-20 h-20 flex items-center justify-center mb-3 relative">
+                                    <!-- Icono Original: Escudo -->
+                                    <i class="fas fa-shield-alt text-6xl metal-icon metal-gray absolute transition-all duration-500 group-hover:opacity-0 group-hover:scale-50"></i>
+                                    <!-- Icono Transformado: Persona con Escudo -->
+                                    <i class="fas fa-user-shield text-6xl metal-icon metal-gray absolute transition-all duration-500 opacity-0 scale-50 group-hover:opacity-100 group-hover:scale-110"></i>
+                                </div>
+                                <h4 class="font-bold text-gray-800 text-sm">S.S.O.</h4>
+                                <p class="text-[10px] text-gray-500 uppercase tracking-wide">Seguridad y Salud</p>
+                                <span class="text-[10px] text-gray-600 mt-2 opacity-0 group-hover:opacity-100 transition-opacity">Ver Director</span>
+                            </div>
+                        </div>
+                        <div class="interactive-card bg-white/80 p-4 rounded-xl border border-green-100 cursor-pointer group" onclick="openModal('sostenible')">
+                            <div class="flex flex-col items-center text-center">
+                                <div class="w-20 h-20 flex items-center justify-center mb-3">
+                                    <i class="fas fa-leaf text-6xl metal-icon metal-green animate-leaf"></i>
+                                </div>
+                                <h4 class="font-bold text-gray-800 text-sm">Sostenible</h4>
+                                <p class="text-[10px] text-gray-400 font-bold uppercase tracking-wide">Ambiente</p>
+                                <span class="text-[10px] text-brandGreen mt-2 opacity-0 group-hover:opacity-100 transition-opacity">Ver Director</span>
+                            </div>
+                        </div>
+                        <div class="interactive-card bg-white/80 p-4 rounded-xl border border-amber-100 cursor-pointer group" onclick="openModal('agro')">
+                            <div class="flex flex-col items-center text-center">
+                                <div class="w-20 h-20 flex items-center justify-center mb-3">
+                                    <i class="fas fa-tractor text-6xl metal-icon metal-amber animate-tractor"></i>
+                                </div>
+                                <h4 class="font-bold text-gray-800 text-sm">Agroindustrial</h4>
+                                <p class="text-[10px] text-gray-400 font-bold uppercase tracking-wide">Calidad</p>
+                                <span class="text-[10px] text-amber-600 mt-2 opacity-0 group-hover:opacity-100 transition-opacity">Ver Directora</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-12 flex items-center gap-5 border-t border-gray-100 pt-8 not-prose">
+                        <!-- Icono ahora clicable para abrir el modal del Equipo Directivo -->
+                        <div onclick="openModal('equipo')" class="w-16 h-16 bg-gradient-to-br from-brandBlue to-brandBlueLight rounded-full flex items-center justify-center text-white shadow-lg text-2xl cursor-pointer transition-transform duration-300 hover:scale-110" title="Ver Equipo Directivo">
+                            <i class="fas fa-pen-nib"></i>
                         </div>
                         <div>
-                            <p class="font-heading font-bold text-2xl text-gray-900">Equipo Directivo</p>
-                            <p class="text-brandBlue font-semibold text-lg">EvoluSer Consultores</p>
-                            <a href="mailto:evoluserec@gmail.com" class="text-base text-gray-400 hover:text-brandBlue transition cursor-none">evoluserec@gmail.com</a>
+                            <p class="font-heading font-bold text-xl text-gray-900">Equipo Directivo</p>
+                            <p class="text-brandBlue font-semibold">EvoluSer Consultores</p>
+                            <a href="mailto:evoluserec@gmail.com" class="text-sm text-gray-400 hover:text-brandBlue transition cursor-none">evoluserec@gmail.com</a>
                         </div>
                     </div>
                 </div>
@@ -407,7 +460,7 @@
                     <p class="text-lg text-gray-500 max-w-2xl mx-auto">Tecnología, normativa y humanidad unidas.</p>
                 </div>
 
-                <!-- Video Section (9:16) con YouTube -->
+                <!-- Video Section (9:16) -->
                 <div class="max-w-sm mx-auto mb-16 stagger-2 video-section">
                     <div class="bg-white p-2 rounded-2xl shadow-xl border border-gray-100 relative group">
                         <div class="absolute -inset-1 bg-gradient-to-r from-brandBlue to-brandGreen rounded-2xl blur opacity-25 group-hover:opacity-40 transition duration-1000"></div>
@@ -488,7 +541,7 @@
                         </div>
                     </div>
 
-                    <!-- Card 4: Agroindustrial (CON INDUSTRIALIZACIÓN) -->
+                    <!-- Card 4: Agroindustrial -->
                     <div class="stagger-4 h-full">
                         <div class="h-full" data-tilt data-tilt-max="5" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.2">
                             <div class="bg-white/90 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all h-full border-t-4 border-brandAmber group flex flex-col">
@@ -617,7 +670,6 @@
                         <a href="https://www.facebook.com/share/14SRDeBzp77/" target="_blank" class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-blue-600 hover:text-white transition-all transform hover:scale-110 cursor-none" title="Facebook"><i class="fab fa-facebook-f"></i></a>
                         <a href="https://www.instagram.com/evoluserec?igsh=bXB6dWN5ejAxd2Yw" target="_blank" class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-pink-600 hover:text-white transition-all transform hover:scale-110 cursor-none" title="Instagram"><i class="fab fa-instagram"></i></a>
                         <a href="https://www.tiktok.com/@evoluserec?_r=1&_t=ZM-92aiiE2yhad" target="_blank" class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-black hover:text-white transition-all transform hover:scale-110 cursor-none" title="TikTok"><i class="fab fa-tiktok"></i></a>
-                        <!-- Icono de X (Twitter) Actualizado -->
                         <a href="https://x.com/evoluserec" target="_blank" class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-black hover:text-white transition-all transform hover:scale-110 cursor-none" title="X"><i class="fab fa-x-twitter"></i></a>
                     </div>
                     <p class="text-xs text-gray-500 italic">"Únete a la tripulación y navega hacia la Evolución. <br><span class="font-bold text-brandGreen">¡Sé un Evonauta!</span>"</p>
@@ -822,6 +874,18 @@
                 list: ["Buenas Prácticas Agrícolas (BPA)", "Inocuidad Alimentaria", "Industrialización de Producto", "Optimización de Procesos"],
                 iconClass: "metal-amber",
                 animation: "metal-animate-tractor"
+            },
+            equipo: {
+                title: "Equipo Directivo",
+                icon: "fas fa-pen-nib",
+                subtitle: "EvoluSer Consultores",
+                leader: "Junta Directiva",
+                role: "Liderazgo Estratégico",
+                image: "imagen7.jpeg",
+                desc: "Nuestro equipo directivo encarna la misión de potenciar el ser y proteger la vida. Guiamos a la organización con una visión integral, asegurando que cada paso que damos genere valor real para nuestros clientes y la sociedad.",
+                list: ["Dirección Estratégica", "Gestión de Calidad", "Innovación Corporativa", "Responsabilidad Social"],
+                iconClass: "metal-blue",
+                animation: "metal-animate-shield"
             }
         };
 
