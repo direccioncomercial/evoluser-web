@@ -6,7 +6,8 @@
     <title>EvoluSer - Comunidad de Evonautas</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800;900&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- ACTUALIZADO A VERSIÓN 6.6.0 PARA SOPORTAR EL ICONO DE X -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
 
     <script>
@@ -342,7 +343,7 @@
                 <div class="logo-glow"></div>
                 <div class="logo-card animate-glow-entrance cursor-none">
                     <div class="flex flex-col items-center justify-center">
-                        <img src="logo.png" alt="EvoluSer Logo" class="h-auto object-contain" style="max-height: 130px; max-width: 100%;" onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?name=EvoluSer&background=005691&color=fff&size=128';">
+                        <img src="http://evolucerec.gt.tc/wp-content/uploads/2026/01/logo-1-scaled.png" alt="EvoluSer Logo" class="h-auto object-contain" style="max-height: 130px; max-width: 100%;" onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?name=EvoluSer&background=005691&color=fff&size=128';">
                     </div>
                 </div>
             </div>
@@ -460,16 +461,11 @@
                 <div class="max-w-sm mx-auto mb-16 stagger-2 video-section">
                     <div class="bg-white p-2 rounded-2xl shadow-xl border border-gray-100 relative group">
                         <div class="absolute -inset-1 bg-gradient-to-r from-brandBlue to-brandGreen rounded-2xl blur opacity-25 group-hover:opacity-40 transition duration-1000"></div>
-                        <div class="relative rounded-xl overflow-hidden bg-black flex justify-center aspect-[9/16]">
-                            <iframe 
-                                class="w-full h-full"
-                                src="https://www.youtube.com/embed/VfmFZdAbAyQ?rel=0" 
-                                title="EvoluSer Video" 
-                                frameborder="0" 
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                                referrerpolicy="strict-origin-when-cross-origin" 
-                                allowfullscreen>
-                            </iframe>
+                        <div class="relative rounded-xl overflow-hidden bg-black flex justify-center">
+                            <video controls class="w-full h-auto" style="aspect-ratio: 9/16; max-height: 600px; object-fit: contain;">
+                                <source src="http://evolucerec.gt.tc/wp-content/uploads/2026/01/video1.mp4" type="video/mp4">
+                                Tu navegador no soporta la etiqueta de video.
+                            </video>
                         </div>
                     </div>
                     <p class="text-center text-xs text-gray-400 mt-3 italic">Descubre nuestra filosofía en acción</p>
@@ -590,7 +586,7 @@
         
         <div id="avatar-wrapper" class="relative w-36 h-36 pointer-events-auto cursor-grab active:cursor-grabbing group animate-float-avatar">
             <img 
-                src="imagen6.png" 
+                src="http://evolucerec.gt.tc/wp-content/uploads/2026/01/imagen6.png" 
                 alt="Asistente EvoluSer" 
                 class="w-full h-full object-contain filter drop-shadow-2xl transition-transform duration-300 group-hover:scale-110"
                 onerror="this.style.display='none'; document.getElementById('avatar-fallback').style.display='flex';"
@@ -666,6 +662,7 @@
                         <a href="https://www.facebook.com/share/14SRDeBzp77/" target="_blank" class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-blue-600 hover:text-white transition-all transform hover:scale-110 cursor-none" title="Facebook"><i class="fab fa-facebook-f"></i></a>
                         <a href="https://www.instagram.com/evoluserec?igsh=bXB6dWN5ejAxd2Yw" target="_blank" class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-pink-600 hover:text-white transition-all transform hover:scale-110 cursor-none" title="Instagram"><i class="fab fa-instagram"></i></a>
                         <a href="https://www.tiktok.com/@evoluserec?_r=1&_t=ZM-92aiiE2yhad" target="_blank" class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-black hover:text-white transition-all transform hover:scale-110 cursor-none" title="TikTok"><i class="fab fa-tiktok"></i></a>
+                        <a href="https://x.com/evoluserec" target="_blank" class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-black hover:text-white transition-all transform hover:scale-110 cursor-none" title="X"><i class="fab fa-x-twitter"></i></a>
                     </div>
                     <p class="text-xs text-gray-500 italic">"Únete a la tripulación y navega hacia la Evolución. <br><span class="font-bold text-brandGreen">¡Sé un Evonauta!</span>"</p>
                 </div>
@@ -828,7 +825,7 @@
                 subtitle: "Gestión del Talento",
                 leader: "Nury Echeverria",
                 role: "Directora de Talento Humano",
-                image: "imagen2.png",
+                image: "http://evolucerec.gt.tc/wp-content/uploads/2026/01/imagen2.png",
                 desc: "Creemos que el activo más valioso es la gente. Bajo una dirección experta, transformamos la cultura organizacional mediante estrategias integrales de bienestar, desarrollo de habilidades blandas y diagnósticos precisos que potencian el capital humano.",
                 list: ["Reclutamiento y Selección", "Clima y Cultura", "Soft Skills y Liderazgo", "Evaluaciones de Desempeño"],
                 iconClass: "metal-blue",
@@ -840,7 +837,7 @@
                 subtitle: "Seguridad y Salud Ocupacional",
                 leader: "Christian Ortega",
                 role: "Director Técnico SST",
-                image: "imagen3.png",
+                image: "http://evolucerec.gt.tc/wp-content/uploads/2026/01/imagen3.png",
                 desc: "La seguridad no es negociable. Lideramos un equipo técnico enfocado en blindar tus operaciones, asegurando el estricto cumplimiento normativo y protegiendo la integridad de cada colaborador en todos los niveles.",
                 list: ["Sistemas de Gestión ISO 45001", "Auditorías de Riesgos", "Vigilancia de Salud", "Capacitación Técnica"],
                 iconClass: "metal-gray",
@@ -852,7 +849,7 @@
                 subtitle: "Medio Ambiente",
                 leader: "Christian Ortega",
                 role: "Director de Sostenibilidad",
-                image: "imagen4.png",
+                image: "http://evolucerec.gt.tc/wp-content/uploads/2026/01/imagen4.png",
                 desc: "El futuro es verde. Integramos la visión ambiental directamente en tu estrategia de negocio, gestionando planes de manejo y certificaciones que no solo cumplen la ley, sino que te diferencian competitivamente en el mercado.",
                 list: ["Planes de Manejo Ambiental", "Certificaciones Verdes", "Eficiencia Energética", "Cultura Ambiental Corporativa"],
                 iconClass: "metal-green",
@@ -864,7 +861,7 @@
                 subtitle: "Agroindustrial",
                 leader: "Lilian Eras",
                 role: "Directora Agroindustrial",
-                image: "imagen5.png",
+                image: "http://evolucerec.gt.tc/wp-content/uploads/2026/01/imagen5.png",
                 desc: "Calidad desde el origen. Aportamos una vasta experiencia técnica para optimizar procesos agroindustriales, garantizando la inocuidad alimentaria y el cumplimiento riguroso de buenas prácticas desde el campo hasta la mesa, incluyendo la transformación del producto.",
                 list: ["Buenas Prácticas Agrícolas (BPA)", "Inocuidad Alimentaria", "Industrialización de Producto", "Optimización de Procesos"],
                 iconClass: "metal-amber",
