@@ -552,14 +552,15 @@
         </div>
     </main>
 
-    <!-- VENTANA DE CHAT CON IA (NUEVO) -->
+    <!-- VENTANA DE CHAT CON IA (NUEVO - LOGO INTEGRADO) -->
     <div id="ai-chat-window" class="fixed bottom-28 right-6 w-80 md:w-96 glass-card rounded-2xl flex flex-col transition-all duration-300 transform scale-0 origin-bottom-right z-[90] hidden" style="height: 450px;">
         <!-- Cabecera del Chat -->
         <div class="bg-gradient-to-r from-brandBlue to-brandGreen p-4 rounded-t-2xl flex justify-between items-center relative overflow-hidden">
             <div class="absolute inset-0 bg-white opacity-10 animate-pulse-slow"></div>
             <div class="flex items-center gap-3 z-10">
-                <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-brandBlue shadow-lg">
-                    <i class="fas fa-robot"></i>
+                <!-- LOGO DE LA MARCA EN LUGAR DEL ROBOT GENÉRICO -->
+                <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-lg overflow-hidden">
+                    <img src="logo.png" alt="Logo" class="w-full h-full object-contain p-1" onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?name=EvoluSer&background=005691&color=fff&size=128';">
                 </div>
                 <div>
                     <h4 class="text-white font-bold text-sm">Soy Ev (IA)</h4>
@@ -575,7 +576,7 @@
         <ul id="chat-box" class="flex-1 overflow-y-auto p-4 space-y-4 scrollbar-hide bg-white/60 backdrop-blur-sm">
             <li class="flex justify-start">
                 <div class="bg-white text-gray-700 p-3 rounded-2xl rounded-tl-none shadow-sm max-w-[85%] text-sm border border-gray-100">
-                    ¡Hola! Soy Ev. Conozco todo sobre nuestros servicios (Humano, SSO, Sostenible y Agro). ¿En qué te puedo asesorar hoy?
+                    ¡Hola! Soy Ev, la IA experta de EvoluSer. Conozco a fondo nuestros 4 pilares: Humano, SSO, Sostenible y Agro. ¿Qué necesitas saber?
                 </div>
             </li>
         </ul>
@@ -977,23 +978,20 @@
 
         // Contexto de EvoluSer para entrenar al bot
         const SYSTEM_PROMPT = `
-        Actúas como "Ev", el asistente virtual inteligente de EvoluSer (una consultora de alto nivel en Ecuador).
-        Tu tono es: Profesional, cercano, innovador ("Evonauta") y servicial. No uses emojis en exceso.
-        
-        INFORMACIÓN CLAVE DE EVOLUSER:
-        1. Misión: "Potenciar el ser, proteger la vida".
-        2. Servicios y Líderes (Directores):
-           - Humano (Talento Humano): Dirigido por Nury Echeverria. Servicios: Reclutamiento, Clima, Soft Skills, Evaluaciones.
-           - SSO (Seguridad y Salud): Dirigido por Christian Ortega. Servicios: Normativa ISO 45001, Auditorías, Salud Ocupacional.
-           - Sostenible (Ambiente): Dirigido por Christian Ortega. Servicios: Manejo ambiental, Certificaciones, Huella de carbono.
-           - Agro (Calidad Agroindustrial): Dirigido por Lilian Eras. Servicios: Buenas Prácticas (BPA), Inocuidad, Procesos.
-        3. Contacto: WhatsApp +593 98 390 0050, Correo: evoluserec@gmail.com, Tel: +593 99 640 8009.
-        4. Ubicación: Quito, Ecuador.
-        
-        INSTRUCCIONES DE RESPUESTA:
-        - Responde dudas sobre los servicios basándote en la lista anterior.
-        - Si preguntan precios, di que varían según el proyecto e invita amablemente a contactar por WhatsApp para una cotización.
-        - Sé breve (máximo 40-50 palabras por respuesta) para que quepa bien en el chat.
+        Eres "Ev", la IA oficial y experta de EvoluSer Consultores.
+        TU CONOCIMIENTO BASE (Úsalo para responder):
+        1. FILOSOFÍA: Nuestra misión es "Potenciar el ser, proteger la vida". Creemos que el crecimiento empresarial real ocurre cuidando a las personas y el entorno. Somos "Evonautas".
+        2. SERVICIOS Y DIRECTORES:
+           - EvoluSer HUMANO (Talento): Dirigido por Nury Echeverria. Servicios: Reclutamiento y Selección, Clima y Cultura Organizacional, Desarrollo de Soft Skills y Liderazgo, Evaluaciones de Desempeño.
+           - EvoluSer SSO (Seguridad): Dirigido por Christian Ortega (Director Técnico SST). Servicios: Sistemas ISO 45001, Auditorías de Riesgos, Vigilancia de Salud, Capacitaciones Técnicas, Normativa legal.
+           - EvoluSer SOSTENIBLE (Ambiente): Dirigido por Christian Ortega. Servicios: Planes de Manejo Ambiental, Certificaciones Verdes, Eficiencia Energética, Cultura Ambiental Corporativa.
+           - EvoluSer AGRO (Agroindustrial): Dirigido por Lilian Eras. Servicios: Buenas Prácticas Agrícolas (BPA), Inocuidad Alimentaria, Industrialización de Producto, Optimización de Procesos.
+        3. CONTACTO:
+           - WhatsApp: +593 98 390 0050 (Tu objetivo principal es que hagan clic aquí).
+           - Teléfono: +593 99 640 8009.
+           - Email: evoluserec@gmail.com.
+           - Ubicación: Quito, Ecuador.
+        4. ESTILO: Eres profesional pero cálida. Respuestas concisas (máx 50 palabras). Siempre intenta llevar al usuario a contactar por WhatsApp para una cotización personalizada. Si te preguntan algo fuera de estos temas, responde amablemente que solo eres experta en EvoluSer.
         `;
 
         function toggleChat() {
