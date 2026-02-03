@@ -65,11 +65,10 @@
             font-family: 'Open Sans', sans-serif; 
             background-color: #f0f4f8; 
             overflow-x: hidden; 
-            cursor: none; /* Cursor personalizado activado */
+            cursor: none; 
             min-height: 100vh;
         }
         
-        /* En móviles, restaurar cursor normal */
         @media (hover: none) {
             body { cursor: auto; }
             #custom-cursor { display: none; }
@@ -117,12 +116,6 @@
             z-index: -1; filter: blur(40px); animation: pulse-slow 4s infinite;
         }
 
-        .stagger-1 { animation: slideIn 0.6s ease-out both; animation-delay: 0.1s; }
-        .stagger-2 { animation: slideIn 0.6s ease-out both; animation-delay: 0.2s; }
-        .stagger-3 { animation: slideIn 0.6s ease-out both; animation-delay: 0.3s; }
-        .stagger-4 { animation: slideIn 0.6s ease-out both; animation-delay: 0.4s; }
-        @keyframes slideIn { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-
         #custom-cursor {
             position: fixed; top: 0; left: 0; width: 30px; height: 30px;
             pointer-events: none; z-index: 9999; transform: translate(-50%, -50%);
@@ -132,9 +125,6 @@
             content: ''; position: absolute; width: 40px; height: 40px;
             background: radial-gradient(circle, rgba(122, 184, 0, 0.4) 0%, transparent 70%);
             border-radius: 50%; z-index: -1;
-        }
-        a:hover ~ #custom-cursor, button:hover ~ #custom-cursor, .cursor-pointer:hover ~ #custom-cursor {
-            transform: translate(-50%, -50%) scale(1.5);
         }
 
         .neon-3d-wrapper {
@@ -153,22 +143,6 @@
             100% { transform: rotateY(360deg); color: #ffffff; text-shadow: 0 2px 15px rgba(0, 86, 145, 0.6); }
         }
 
-        .neon-letter:hover {
-            color: #005691;
-            text-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
-            transition: all 0.3s ease;
-        }
-
-        #service-modal { transition: opacity 0.3s ease, transform 0.3s ease; }
-        #service-modal.hidden { opacity: 0; pointer-events: none; transform: scale(0.95); }
-        #service-modal.flex { opacity: 1; pointer-events: auto; transform: scale(1); }
-        
-        .interactive-card { transition: all 0.3s ease; }
-        .interactive-card:hover {
-            transform: translateY(-5px); background: rgba(255,255,255, 1);
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
-        }
-
         .metal-icon {
             background-clip: text; -webkit-background-clip: text; color: transparent;
             filter: drop-shadow(2px 4px 3px rgba(0,0,0,0.2)); background-size: 200% 200%; transition: all 0.3s ease;
@@ -178,12 +152,6 @@
         .metal-green { background-image: linear-gradient(135deg, #2f5d02 0%, #5c8d03 25%, #b2f243 50%, #5c8d03 75%, #204000 100%); }
         .metal-amber { background-image: linear-gradient(135deg, #78350f 0%, #d97706 25%, #fbbf24 50%, #d97706 75%, #451a03 100%); }
 
-        .group:hover .animate-leaf, .metal-animate-leaf { animation: leaf-wind 2s ease-in-out infinite; transform-origin: top center; }
-        .group:hover .animate-hug, .metal-animate-hug { animation: group-hug 1.5s ease-in-out infinite; }
-        .group:hover .animate-tractor, .metal-animate-tractor { animation: tractor-move 0.5s linear infinite; }
-        .metal-animate-shield { animation: shield-guard 2s ease-in-out infinite; }
-
-        /* ESTILOS DEL CHAT */
         .chat-bubble {
             position: relative; background: #ffffff; border-radius: 1.5rem; padding: 1.25rem;
             box-shadow: 0 10px 25px rgba(0,0,0,0.15); margin-bottom: 2rem; 
@@ -197,7 +165,6 @@
         .scrollbar-hide::-webkit-scrollbar { display: none; }
         .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
 
-        /* COHETE ERRANTE */
         .wandering-rocket {
             position: fixed; z-index: 1; font-size: 3rem; pointer-events: none;
             opacity: 0; transition: transform linear, opacity 1s ease-in-out;
@@ -209,7 +176,7 @@
         }
     </style>
 </head>
-<body class="text-gray-700 antialiased min-h-screen flex flex-col relative" id="document-body">
+<body class="text-gray-700 antialiased min-h-screen flex flex-col relative">
     <div id="custom-cursor"><i class="fas fa-leaf text-brandGreen text-opacity-90 text-xl transform -rotate-45 drop-shadow-md"></i></div>
     <div class="cinematic-bg"></div>
     <canvas id="particles-canvas"></canvas>
@@ -219,121 +186,93 @@
         <div class="container mx-auto px-6 text-center relative z-20">
             <div class="mb-14 relative inline-block">
                 <div class="logo-glow"></div>
-                <div class="logo-card animate-glow-entrance cursor-none">
+                <div class="logo-card animate-glow-entrance">
                     <div class="flex flex-col items-center justify-center">
-                        <img src="logo.png" alt="EvoluSer Logo" class="h-auto object-contain" style="max-height: 170px; max-width: 100%; filter: drop-shadow(0 5px 15px rgba(0,0,0,0.1));" onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?name=EvoluSer&background=005691&color=fff&size=128';">
+                        <img src="logo.png" alt="EvoluSer Logo" class="h-auto object-contain" style="max-height: 170px; max-width: 100%;" onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?name=EvoluSer&background=005691&color=fff&size=128';">
                     </div>
                 </div>
             </div>
-            <h1 class="text-4xl md:text-6xl font-extrabold mb-6 tracking-tight drop-shadow-2xl text-white bg-clip-text text-transparent bg-gradient-to-br from-white via-gray-100 to-gray-300" style="text-shadow: 0 4px 20px rgba(0,0,0,0.2);">Evolución Integral</h1>
-            <div class="h-1.5 w-24 bg-gradient-to-r from-brandBlue to-brandGreen mx-auto rounded-full mb-8 shadow-[0_0_20px_rgba(122,184,0,0.8)]"></div>
+            <h1 class="text-4xl md:text-6xl font-extrabold mb-6 tracking-tight text-white drop-shadow-2xl">Evolución Integral</h1>
+            <div class="h-1.5 w-24 bg-gradient-to-r from-brandBlue to-brandGreen mx-auto rounded-full mb-8 shadow-lg"></div>
             <div id="slogan-container" class="neon-3d-wrapper text-lg md:text-2xl mt-4 mb-8 min-h-[50px] items-center tracking-widest"></div>
         </div>
     </header>
 
     <main class="container mx-auto px-4 -mt-24 relative z-30 mb-12 flex-grow">
-        <div class="glass-card rounded-full shadow-2xl p-2 flex justify-center max-w-lg mx-auto mb-10 transform transition-all hover:scale-[1.01] relative z-50">
-            <button onclick="switchTab('carta')" id="btn-carta" class="flex-1 py-3 px-6 rounded-full text-sm font-bold uppercase tracking-wider transition-all duration-500 bg-brandBlue text-white shadow-lg ring-4 ring-brandBlue/30 cursor-none"><i class="fas fa-file-alt mr-2"></i> Propuesta</button>
-            <button onclick="switchTab('brochure')" id="btn-brochure" class="flex-1 py-3 px-6 rounded-full text-sm font-bold uppercase tracking-wider transition-all duration-500 text-gray-500 hover:bg-white/50 hover:text-brandBlue cursor-none"><i class="fas fa-th-large mr-2"></i> Servicios</button>
+        <div class="glass-card rounded-full shadow-2xl p-2 flex justify-center max-w-lg mx-auto mb-10 transform transition-all hover:scale-[1.01]">
+            <button onclick="switchTab('carta')" id="btn-carta" class="flex-1 py-3 px-6 rounded-full text-sm font-bold uppercase tracking-wider transition-all duration-500 bg-brandBlue text-white shadow-lg ring-4 ring-brandBlue/30"><i class="fas fa-file-alt mr-2"></i> Propuesta</button>
+            <button onclick="switchTab('brochure')" id="btn-brochure" class="flex-1 py-3 px-6 rounded-full text-sm font-bold uppercase tracking-wider transition-all duration-500 text-gray-500 hover:bg-white/50 hover:text-brandBlue"><i class="fas fa-th-large mr-2"></i> Servicios</button>
         </div>
 
         <div class="glass-card rounded-3xl shadow-2xl p-8 md:p-14 min-h-[600px] relative overflow-hidden transition-all duration-500 z-40" id="main-content-area">
             
-            <div id="view-carta" class="max-w-5xl mx-auto stagger-1">
+            <div id="view-carta" class="max-w-5xl mx-auto">
                 <div class="flex justify-between items-end border-b border-gray-300 pb-6 mb-8">
                     <div><span class="bg-gradient-to-r from-brandBlue to-brandBlueLight text-white text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-wider shadow-md">Propuesta Corporativa</span></div>
                     <div class="text-right"><p class="text-brandBlue font-bold text-sm">QUITO, ECUADOR</p><p class="text-gray-500 text-xs" id="currentDate"></p></div>
                 </div>
                 <div class="prose prose-lg text-gray-600 mx-auto leading-relaxed text-justify">
-                    <h2 class="text-3xl font-heading font-bold text-gray-800 mb-2 text-left">Estimados Clientes,</h2>
-                    <p class="text-xl text-brandBlue font-light mb-8 text-left">Presentamos una nueva forma de entender el crecimiento empresarial.</p>
+                    <h2 class="text-3xl font-heading font-bold text-gray-800 mb-2">Estimados Clientes,</h2>
+                    <p class="text-xl text-brandBlue font-light mb-8">Presentamos una nueva forma de entender el crecimiento empresarial.</p>
                     <p class="mb-6">En un entorno empresarial cada vez más exigente, el crecimiento real solo ocurre cuando cuidamos lo más importante: <strong>las personas y el entorno que habitan</strong>.</p>
                     <p class="mb-6">Les presento a <strong>EvoluSer</strong>, no solo como proveedores, sino como sus aliados estratégicos. Entendemos que una empresa exitosa del siglo XXI debe cumplir cuatro requisitos innegociables: ser <span class="text-brandBlue font-semibold">Humana</span>, garantizar la <span class="text-gray-800 font-semibold">Seguridad y Salud Ocupacional</span>, ser <span class="text-brandGreen font-semibold">Sostenible</span> y <span class="text-brandAmber font-semibold">Productiva</span>.</p>
-                    <p class="text-sm text-gray-500 italic mt-8 mb-4 text-center">Haga clic en cada área para conocer a nuestros directores:</p>
                     
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 my-6 not-prose">
                         <div class="interactive-card bg-white/70 p-4 rounded-xl border border-blue-100 cursor-pointer group" onclick="openModal('humano')">
                             <div class="flex flex-col items-center text-center">
                                 <div class="w-20 h-20 flex items-center justify-center mb-3"><i class="fas fa-users text-6xl metal-icon metal-blue animate-hug"></i></div>
                                 <h4 class="font-bold text-gray-800 text-sm">Humano</h4>
-                                <p class="text-[10px] text-gray-500 uppercase tracking-wide">Talento</p>
-                                <span class="text-[10px] text-brandBlue mt-2 opacity-0 group-hover:opacity-100 transition-opacity">Ver Directora</span>
                             </div>
                         </div>
                         <div class="interactive-card bg-white/70 p-4 rounded-xl border border-gray-200 cursor-pointer group" onclick="openModal('seguro')">
                             <div class="flex flex-col items-center text-center">
-                                <div class="w-20 h-20 flex items-center justify-center mb-3 relative"><i class="fas fa-shield-alt text-6xl metal-icon metal-gray absolute transition-all duration-500 group-hover:opacity-0 group-hover:scale-50"></i><i class="fas fa-user-shield text-6xl metal-icon metal-gray absolute transition-all duration-500 opacity-0 scale-50 group-hover:opacity-100 group-hover:scale-110"></i></div>
+                                <div class="w-20 h-20 flex items-center justify-center mb-3"><i class="fas fa-shield-alt text-6xl metal-icon metal-gray"></i></div>
                                 <h4 class="font-bold text-gray-800 text-sm">S.S.O.</h4>
-                                <p class="text-[10px] text-gray-500 uppercase tracking-wide">Seguridad y Salud</p>
-                                <span class="text-[10px] text-gray-600 mt-2 opacity-0 group-hover:opacity-100 transition-opacity">Ver Director</span>
                             </div>
                         </div>
                         <div class="interactive-card bg-white/70 p-4 rounded-xl border border-green-100 cursor-pointer group" onclick="openModal('sostenible')">
                             <div class="flex flex-col items-center text-center">
                                 <div class="w-20 h-20 flex items-center justify-center mb-3"><i class="fas fa-leaf text-6xl metal-icon metal-green animate-leaf"></i></div>
                                 <h4 class="font-bold text-gray-800 text-sm">Sostenible</h4>
-                                <p class="text-[10px] text-gray-400 font-bold uppercase tracking-wide">Ambiente</p>
-                                <span class="text-[10px] text-brandGreen mt-2 opacity-0 group-hover:opacity-100 transition-opacity">Ver Director</span>
                             </div>
                         </div>
                         <div class="interactive-card bg-white/70 p-4 rounded-xl border border-amber-100 cursor-pointer group" onclick="openModal('agro')">
                             <div class="flex flex-col items-center text-center">
                                 <div class="w-20 h-20 flex items-center justify-center mb-3"><i class="fas fa-tractor text-6xl metal-icon metal-amber animate-tractor"></i></div>
                                 <h4 class="font-bold text-gray-800 text-sm">Agroindustrial</h4>
-                                <p class="text-[10px] text-gray-400 font-bold uppercase tracking-wide">Calidad</p>
-                                <span class="text-[10px] text-amber-600 mt-2 opacity-0 group-hover:opacity-100 transition-opacity">Ver Directora</span>
                             </div>
-                        </div>
-                    </div>
-                    
-                    <div class="mt-12 flex items-center gap-5 border-t border-gray-100 pt-8 not-prose">
-                        <div onclick="openModal('equipo')" class="w-16 h-16 bg-gradient-to-br from-brandBlue to-brandBlueLight rounded-full flex items-center justify-center text-white shadow-lg text-2xl cursor-pointer transition-transform duration-300 hover:scale-110" title="Ver Equipo Directivo"><i class="fas fa-pen-nib"></i></div>
-                        <div>
-                            <p class="font-heading font-bold text-xl text-gray-900">Equipo Directivo</p>
-                            <p class="text-brandBlue font-semibold">EvoluSer Consultores</p>
-                            <a href="mailto:evoluserec@gmail.com" class="text-sm text-gray-400 hover:text-brandBlue transition cursor-none">evoluserec@gmail.com</a>
                         </div>
                     </div>
                 </div>
             </div>
 
             <div id="view-brochure" class="hidden">
-                <div class="text-center mb-12 stagger-1">
+                <div class="text-center mb-12">
                     <span class="text-brandGreen font-bold tracking-widest uppercase text-xs bg-green-50 px-3 py-1 rounded-full">Nuestro Portafolio</span>
                     <h2 class="text-4xl font-heading font-bold text-gray-800 mb-4 mt-4">Soluciones Integrales</h2>
-                    <p class="text-lg text-gray-500 max-w-2xl mx-auto">Tecnología, normativa y humanidad unidas.</p>
-                </div>
-
-                <div class="max-w-sm mx-auto mb-16 stagger-2 video-section">
-                    <div class="bg-white p-2 rounded-2xl shadow-xl border border-gray-100 relative group">
-                        <div class="absolute -inset-1 bg-gradient-to-r from-brandBlue to-brandGreen rounded-2xl blur opacity-25 group-hover:opacity-40 transition duration-1000"></div>
-                        <div class="relative rounded-xl overflow-hidden bg-black flex justify-center aspect-[9/16]">
-                            <iframe 
-                                class="w-full h-full"
-                                src="https://www.youtube.com/embed/VfmFZdAbAyQ?rel=0" 
-                                title="EvoluSer Video" 
-                                frameborder="0" 
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                                referrerpolicy="strict-origin-when-cross-origin" 
-                                allowfullscreen>
-                            </iframe>
-                        </div>
-                    </div>
-                    <p class="text-center text-xs text-gray-400 mt-3 italic">Descubre nuestra filosofía en acción</p>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 px-2">
-                    <div class="stagger-1 h-full"><div class="bg-white/80 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all h-full border-t-4 border-brandBlue group flex flex-col"><div class="w-full flex justify-center mb-6"><i class="fas fa-users text-6xl metal-icon metal-blue animate-hug"></i></div><h3 class="text-xl font-bold text-gray-800 mb-2">EvoluSer <span class="text-brandBlue">HUMANO</span></h3><p class="text-[10px] text-gray-400 font-bold uppercase tracking-wider mb-6">Gestión del Talento</p><ul class="space-y-3 text-sm text-gray-600 flex-grow"><li class="flex items-start"><i class="fas fa-check text-brandGreen mt-1 mr-2 text-xs"></i> Reclutamiento</li><li class="flex items-start"><i class="fas fa-check text-brandGreen mt-1 mr-2 text-xs"></i> Clima y Cultura</li><li class="flex items-start"><i class="fas fa-check text-brandGreen mt-1 mr-2 text-xs"></i> Soft Skills</li><li class="flex items-start"><i class="fas fa-check text-brandGreen mt-1 mr-2 text-xs"></i> Evaluaciones</li></ul></div></div>
-                    <div class="stagger-2 h-full"><div class="bg-white/80 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all h-full border-t-4 border-gray-600 group flex flex-col"><div class="w-full flex justify-center mb-6 relative h-16"><i class="fas fa-shield-alt text-6xl metal-icon metal-gray absolute transition-all duration-500 group-hover:opacity-0 group-hover:scale-50"></i><i class="fas fa-user-shield text-6xl metal-icon metal-gray absolute transition-all duration-500 opacity-0 scale-50 group-hover:opacity-100 group-hover:scale-110"></i></div><h3 class="text-xl font-bold text-gray-800 mb-2">EvoluSer <span class="text-gray-600">S.S.O.</span></h3><p class="text-[10px] text-gray-400 font-bold uppercase tracking-wider mb-6">Seguridad y Salud Ocupacional</p><ul class="space-y-3 text-sm text-gray-600 flex-grow"><li class="flex items-start"><i class="fas fa-check text-brandGreen mt-1 mr-2 text-xs"></i> Normativa ISO</li><li class="flex items-start"><i class="fas fa-check text-brandGreen mt-1 mr-2 text-xs"></i> Auditorías</li><li class="flex items-start"><i class="fas fa-check text-brandGreen mt-1 mr-2 text-xs"></i> Salud Ocupacional</li><li class="flex items-start"><i class="fas fa-check text-brandGreen mt-1 mr-2 text-xs"></i> Capacitaciones</li></ul></div></div>
-                    <div class="stagger-3 h-full"><div class="bg-white/80 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all h-full border-t-4 border-brandGreen group flex flex-col"><div class="w-full flex justify-center mb-6"><i class="fas fa-leaf text-6xl metal-icon metal-green animate-leaf"></i></div><h3 class="text-xl font-bold text-gray-800 mb-2">EvoluSer <span class="text-brandGreen">SOSTENIBLE</span></h3><p class="text-[10px] text-gray-400 font-bold uppercase tracking-wider mb-6">Medio Ambiente</p><ul class="space-y-3 text-sm text-gray-600 flex-grow"><li class="flex items-start"><i class="fas fa-check text-brandBlue mt-1 mr-2 text-xs"></i> Manejo Ambiental</li><li class="flex items-start"><i class="fas fa-check text-brandBlue mt-1 mr-2 text-xs"></i> Certificaciones</li><li class="flex items-start"><i class="fas fa-check text-brandBlue mt-1 mr-2 text-xs"></i> Eficiencia</li><li class="flex items-start"><i class="fas fa-check text-brandBlue mt-1 mr-2 text-xs"></i> Cultura Verde</li></ul></div></div>
-                    <div class="stagger-4 h-full"><div class="bg-white/80 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all h-full border-t-4 border-brandAmber group flex flex-col"><div class="w-full flex justify-center mb-6"><i class="fas fa-tractor text-6xl metal-icon metal-amber animate-tractor"></i></div><h3 class="text-xl font-bold text-gray-800 mb-2">EvoluSer <span class="text-amber-600">AGRO</span></h3><p class="text-[10px] text-gray-400 font-bold uppercase tracking-wider mb-6">Agroindustrial</p><ul class="space-y-3 text-sm text-gray-600 flex-grow"><li class="flex items-start"><i class="fas fa-check text-brandBlue mt-1 mr-2 text-xs"></i> Buenas Prácticas (BPA)</li><li class="flex items-start"><i class="fas fa-check text-brandBlue mt-1 mr-2 text-xs"></i> Inocuidad Alimentaria</li><li class="flex items-start"><i class="fas fa-check text-brandBlue mt-1 mr-2 text-xs"></i> Industrialización de Producto</li><li class="flex items-start"><i class="fas fa-check text-brandBlue mt-1 mr-2 text-xs"></i> Optimización Procesos</li></ul></div></div>
-                </div>
-                
-                <div class="mt-16 text-center stagger-3 pb-4">
-                    <a href="https://wa.me/593983900050" target="_blank" class="inline-flex items-center gap-3 bg-gradient-to-r from-brandGreen to-green-600 text-white font-bold py-4 px-10 rounded-full transition-all transform hover:scale-105 shadow-xl hover:shadow-green-500/30 group cursor-none">
-                        <span>¡Sé un EVONAUTA! Evoluciona hoy</span>
-                        <i class="fas fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
-                    </a>
+                    <div class="bg-white/80 rounded-2xl p-6 shadow-lg h-full border-t-4 border-brandBlue flex flex-col items-center text-center">
+                        <i class="fas fa-users text-5xl mb-4 metal-icon metal-blue"></i>
+                        <h3 class="font-bold text-gray-800">HUMANO</h3>
+                        <p class="text-xs text-gray-500 mt-2">Gestión del Talento y Cultura</p>
+                    </div>
+                    <div class="bg-white/80 rounded-2xl p-6 shadow-lg h-full border-t-4 border-gray-600 flex flex-col items-center text-center">
+                        <i class="fas fa-user-shield text-5xl mb-4 metal-icon metal-gray"></i>
+                        <h3 class="font-bold text-gray-800">S.S.O.</h3>
+                        <p class="text-xs text-gray-500 mt-2">Seguridad y Salud Laboral</p>
+                    </div>
+                    <div class="bg-white/80 rounded-2xl p-6 shadow-lg h-full border-t-4 border-brandGreen flex flex-col items-center text-center">
+                        <i class="fas fa-leaf text-5xl mb-4 metal-icon metal-green"></i>
+                        <h3 class="font-bold text-gray-800">SOSTENIBLE</h3>
+                        <p class="text-xs text-gray-500 mt-2">Ambiente y Sostenibilidad</p>
+                    </div>
+                    <div class="bg-white/80 rounded-2xl p-6 shadow-lg h-full border-t-4 border-brandAmber flex flex-col items-center text-center">
+                        <i class="fas fa-tractor text-5xl mb-4 metal-icon metal-amber"></i>
+                        <h3 class="font-bold text-gray-800">AGRO</h3>
+                        <p class="text-xs text-gray-500 mt-2">Calidad Agroindustrial</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -349,280 +288,167 @@
                 </div>
                 <div><h4 class="text-white font-bold text-sm">Soy Ev (IA)</h4><p class="text-xs text-white/80">Tu copiloto Evonauta</p></div>
             </div>
-            <button onclick="toggleChat()" class="text-white hover:text-gray-200 z-10 transition-transform hover:rotate-90"><i class="fas fa-times text-xl"></i></button>
+            <button onclick="toggleChat()" class="text-white hover:text-gray-200 z-10"><i class="fas fa-times text-xl"></i></button>
         </div>
-        <ul id="chat-box" class="flex-1 overflow-y-auto p-4 space-y-4 scrollbar-hide bg-white/60 backdrop-blur-sm">
+        <ul id="chat-box" class="flex-1 overflow-y-auto p-4 space-y-4 scrollbar-hide bg-white/60">
             <li class="flex justify-start">
                 <div class="bg-white text-gray-700 p-3 rounded-2xl rounded-tl-none shadow-sm max-w-[85%] text-sm border border-gray-100">
-                    ¡Hola! 👋 Soy Ev, la IA experta de EvoluSer. <br>¿En qué puedo ayudarte hoy?
+                    ¡Hola! 👋 Soy Ev, la IA experta de EvoluSer. ¿En qué puedo ayudarte hoy?
                 </div>
             </li>
         </ul>
         <div class="p-3 bg-white/80 border-t border-gray-100 rounded-b-2xl">
-            <div class="flex items-center gap-2 bg-gray-50 rounded-full px-4 py-2 border border-gray-200 focus-within:border-brandBlue transition-colors">
+            <div class="flex items-center gap-2 bg-gray-50 rounded-full px-4 py-2 border border-gray-200">
                 <textarea id="chat-input" rows="1" class="flex-1 bg-transparent border-none outline-none text-sm resize-none text-gray-700" placeholder="Pregúntame algo..."></textarea>
-                <button id="send-btn" class="text-brandBlue hover:text-brandGreen transition-colors transform hover:scale-110"><i class="fas fa-paper-plane"></i></button>
+                <button id="send-btn" class="text-brandBlue hover:text-brandGreen"><i class="fas fa-paper-plane"></i></button>
             </div>
             <div class="text-[10px] text-center text-gray-400 mt-1">Potenciado por Grok xAI</div>
         </div>
     </div>
     
     <!-- AVATAR -->
-    <div id="avatar-container" class="fixed bottom-6 right-6 z-[100] flex flex-col items-end pointer-events-none animate-pop-in" style="touch-action: none;">
-        <div id="avatar-bubble" onclick="toggleChat()" class="chat-bubble mb-8 max-w-[280px] animate-float pointer-events-auto transform transition hover:scale-105 origin-bottom-right duration-300 cursor-pointer pointer-events-auto">
-            <div id="bubble-content-default"><h4 class="font-bold text-brandBlue text-sm mb-1">¡Hola, Evonauta! Soy Ev</h4><p class="text-xs text-gray-600 leading-snug mb-2">Haz clic para chatear con IA.</p></div>
+    <div id="avatar-container" class="fixed bottom-6 right-6 z-[100] flex flex-col items-end animate-pop-in">
+        <div id="avatar-bubble" onclick="toggleChat()" class="chat-bubble mb-8 max-w-[280px] animate-float cursor-pointer">
+            <h4 class="font-bold text-brandBlue text-sm mb-1">¡Hola, Evonauta! Soy Ev</h4>
+            <p class="text-xs text-gray-600">Haz clic para chatear conmigo.</p>
         </div>
-        <div id="avatar-wrapper" onclick="toggleChat()" class="relative w-36 h-36 pointer-events-auto cursor-pointer active:cursor-grabbing group animate-float-avatar pointer-events-auto">
+        <div id="avatar-wrapper" onclick="toggleChat()" class="relative w-36 h-36 cursor-pointer group animate-float-avatar">
             <img src="imagen6.png" alt="Asistente EvoluSer" class="w-full h-full object-contain filter drop-shadow-2xl transition-transform duration-300 group-hover:scale-110" onerror="this.style.display='none'; document.getElementById('avatar-fallback').style.display='flex';">
             <div id="avatar-fallback" class="hidden w-full h-full bg-brandBlue rounded-full items-center justify-center text-white shadow-xl"><i class="fas fa-robot text-4xl"></i></div>
         </div>
     </div>
 
-    <!-- MODAL -->
+    <!-- MODAL (Simplificado para el ejemplo) -->
     <div id="service-modal" class="fixed inset-0 z-[100] hidden items-center justify-center bg-black/70 backdrop-blur-sm p-4">
-        <div class="bg-white rounded-3xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto relative animate-float">
-            <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-800 z-10 bg-white rounded-full p-2 shadow-md transition cursor-none"><i class="fas fa-times text-xl"></i></button>
-            <div class="grid grid-cols-1 md:grid-cols-2">
-                <div class="relative h-64 md:h-auto overflow-hidden bg-gray-100">
-                    <img id="modal-image" src="" alt="Detalle Servicio" class="w-full h-full object-cover transition duration-700 hover:scale-110">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent flex items-end p-6">
-                        <div class="text-white w-full"><p class="text-sm font-bold uppercase tracking-wider opacity-90 mb-1 drop-shadow-md" id="modal-subtitle">Departamento</p><div id="modal-title-container" class="flex items-center gap-3"><h3 class="text-3xl font-heading font-bold text-white drop-shadow-lg" id="modal-title">Titulo</h3></div></div>
-                    </div>
-                </div>
-                <div class="p-8 md:p-12 flex flex-col justify-center">
-                    <div class="mb-6 border-l-4 border-brandBlue pl-4"><p class="text-xs text-gray-500 uppercase tracking-widest font-bold mb-1">Liderado por</p><h4 class="text-2xl font-bold text-gray-800" id="modal-leader">Nombre Lider</h4><p class="text-brandBlue text-sm font-semibold" id="modal-role">Director de Área</p></div>
-                    <div class="prose prose-sm text-gray-600 mb-8" id="modal-desc"></div>
-                    <h5 class="font-bold text-gray-800 mb-3 text-sm uppercase tracking-wide border-b pb-2">Servicios Clave</h5><ul class="space-y-2 text-sm text-gray-600 mb-8" id="modal-list"></ul>
-                    <button onclick="closeModal()" class="w-full bg-gray-100 hover:bg-gray-200 text-gray-800 font-bold py-3 rounded-xl transition cursor-none">Cerrar Perfil</button>
-                </div>
-            </div>
+        <div class="bg-white rounded-3xl shadow-2xl max-w-4xl w-full p-8 relative">
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-400"><i class="fas fa-times text-xl"></i></button>
+            <h3 id="modal-title" class="text-2xl font-bold mb-4">Título</h3>
+            <p id="modal-desc" class="text-gray-600">Descripción aquí...</p>
         </div>
     </div>
-
-    <!-- Footer -->
-    <footer class="bg-white/80 border-t border-gray-200 mt-auto backdrop-blur-sm relative z-30">
-        <div class="container mx-auto px-6 py-10">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-center text-center md:text-left">
-                <div class="space-y-3">
-                    <h5 class="font-bold text-gray-800 uppercase text-xs tracking-wider mb-4">Contacto Directo</h5>
-                    <a href="tel:+593996408009" class="block text-gray-600 hover:text-brandBlue transition-colors cursor-none"><i class="fas fa-phone-alt w-6 text-brandGreen"></i> +593 99 640 8009</a>
-                    <a href="https://wa.me/593983900050" class="block text-gray-600 hover:text-brandBlue transition-colors cursor-none"><i class="fab fa-whatsapp w-6 text-brandGreen"></i> +593 98 390 0050</a>
-                    <a href="mailto:evoluserec@gmail.com" class="block text-gray-600 hover:text-brandBlue transition-colors cursor-none"><i class="fas fa-envelope w-6 text-brandGreen"></i> evoluserec@gmail.com</a>
-                </div>
-                <div class="text-center">
-                   <p class="text-sm text-gray-400">© 2024 EvoluSer Consultores</p>
-                   <p class="text-xs text-brandBlue font-bold mt-1 tracking-wider uppercase">Comunidad de Evonautas</p>
-                   <p class="text-xs text-gray-300 mt-1">Quito, Ecuador</p>
-                </div>
-                <div class="text-center md:text-right">
-                    <h5 class="font-bold text-gray-800 uppercase text-xs tracking-wider mb-4">Conecta con la Misión</h5>
-                    <div class="flex justify-center md:justify-end space-x-4 mb-3">
-                        <a href="https://www.linkedin.com/in/evoluser-ecuador-4b5462382/" target="_blank" class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-brandBlue hover:text-white transition-all transform hover:scale-110 cursor-none" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="http://www.youtube.com/@EVOLUSEREC" target="_blank" class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-red-600 hover:text-white transition-all transform hover:scale-110 cursor-none" title="YouTube"><i class="fab fa-youtube"></i></a>
-                        <a href="https://www.facebook.com/share/14SRDeBzp77/" target="_blank" class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-blue-600 hover:text-white transition-all transform hover:scale-110 cursor-none" title="Facebook"><i class="fab fa-facebook-f"></i></a>
-                        <a href="https://www.instagram.com/evoluserec?igsh=bXB6dWN5ejAxd2Yw" target="_blank" class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-pink-600 hover:text-white transition-all transform hover:scale-110 cursor-none" title="Instagram"><i class="fab fa-instagram"></i></a>
-                        <a href="https://www.tiktok.com/@evoluserec?_r=1&_t=ZM-92aiiE2yhad" target="_blank" class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-black hover:text-white transition-all transform hover:scale-110 cursor-none" title="TikTok"><i class="fab fa-tiktok"></i></a>
-                        <a href="https://x.com/evoluserec" target="_blank" class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-black hover:text-white transition-all transform hover:scale-110 cursor-none" title="X"><i class="fab fa-x-twitter"></i></a>
-                    </div>
-                    <p class="text-xs text-gray-500 italic">"Únete a la tripulación y navega hacia la Evolución. <br><span class="font-bold text-brandGreen">¡Sé un Evonauta!</span>"</p>
-                </div>
-            </div>
-        </div>
-    </footer>
 
     <script>
         // --- CURSOR ---
         const cursor = document.getElementById('custom-cursor');
-        document.addEventListener('mousemove', (e) => { const x = e.clientX; const y = e.clientY; cursor.style.transform = `translate(${x}px, ${y}px)`; });
-        document.addEventListener('mouseenter', () => cursor.style.display = 'flex');
-        document.addEventListener('mouseleave', () => cursor.style.display = 'none');
+        document.addEventListener('mousemove', (e) => { cursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`; });
 
-        // --- PARTÍCULAS ---
-        const canvas = document.getElementById('particles-canvas');
-        if (canvas) {
-            const ctx = canvas.getContext('2d'); let width, height; let particles = []; const particleCount = 40;
-            function resize() { width = canvas.width = window.innerWidth; height = canvas.height = window.innerHeight; }
-            class Particle { constructor() { this.reset(); } reset() { this.x = Math.random() * width; this.y = Math.random() * height; this.vy = -(0.2 + Math.random() * 0.5); this.size = Math.random() * 2; this.alpha = Math.random() * 0.5; } update() { this.y += this.vy; if (this.y < 0) this.reset(); } draw() { ctx.fillStyle = `rgba(255, 255, 255, ${this.alpha})`; ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill(); } }
-            function initParticles() { particles = []; for(let i=0; i<particleCount; i++) particles.push(new Particle()); }
-            function animateParticles() { ctx.clearRect(0, 0, width, height); particles.forEach(p => { p.update(); p.draw(); }); requestAnimationFrame(animateParticles); }
-            window.addEventListener('resize', resize); resize(); initParticles(); animateParticles();
-        }
-
-        const dateEl = document.getElementById('currentDate');
-        if (dateEl) { dateEl.textContent = new Date().toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' }); }
-        
         // --- NAVEGACIÓN ---
         function switchTab(tabName) {
-            const cartaView = document.getElementById('view-carta');
-            const brochureView = document.getElementById('view-brochure');
-            const btnCarta = document.getElementById('btn-carta');
-            const btnBrochure = document.getElementById('btn-brochure');
-            if (tabName === 'carta') {
-                cartaView.classList.remove('hidden'); brochureView.classList.add('hidden');
-                btnCarta.classList.add('bg-brandBlue', 'text-white', 'shadow-lg', 'ring-4', 'ring-brandBlue/30'); btnCarta.classList.remove('text-gray-500', 'hover:bg-gray-100');
-                btnBrochure.classList.remove('bg-brandBlue', 'text-white', 'shadow-lg', 'ring-4', 'ring-brandBlue/30'); btnBrochure.classList.add('text-gray-500', 'hover:bg-gray-100');
-            } else {
-                cartaView.classList.add('hidden'); brochureView.classList.remove('hidden');
-                btnBrochure.classList.add('bg-brandBlue', 'text-white', 'shadow-lg', 'ring-4', 'ring-brandBlue/30'); btnBrochure.classList.remove('text-gray-500', 'hover:bg-gray-100');
-                btnCarta.classList.remove('bg-brandBlue', 'text-white', 'shadow-lg', 'ring-4', 'ring-brandBlue/30'); btnCarta.classList.add('text-gray-500', 'hover:bg-gray-100');
-            }
+            document.getElementById('view-carta').classList.toggle('hidden', tabName !== 'carta');
+            document.getElementById('view-brochure').classList.toggle('hidden', tabName !== 'brochure');
+            document.getElementById('btn-carta').className = tabName === 'carta' ? 'flex-1 py-3 px-6 rounded-full text-sm font-bold uppercase tracking-wider bg-brandBlue text-white shadow-lg' : 'flex-1 py-3 px-6 rounded-full text-sm font-bold uppercase tracking-wider text-gray-500 hover:bg-white/50';
+            document.getElementById('btn-brochure').className = tabName === 'brochure' ? 'flex-1 py-3 px-6 rounded-full text-sm font-bold uppercase tracking-wider bg-brandBlue text-white shadow-lg' : 'flex-1 py-3 px-6 rounded-full text-sm font-bold uppercase tracking-wider text-gray-500 hover:bg-white/50';
         }
-        if (typeof VanillaTilt !== 'undefined') { VanillaTilt.init(document.querySelectorAll("[data-tilt]"), { max: 15, speed: 400 }); }
 
         // --- SLOGAN ---
         function createNeonText(text) {
-            const container = document.getElementById('slogan-container'); const words = text.split(' ');
-            words.forEach(word => {
+            const container = document.getElementById('slogan-container');
+            text.split(' ').forEach(word => {
                 const wordSpan = document.createElement('span'); wordSpan.className = 'neon-word';
-                word.split('').forEach((char, index) => { const span = document.createElement('span'); span.innerText = char; span.className = 'neon-letter'; span.style.animationDelay = `${index * 0.15}s`; wordSpan.appendChild(span); });
+                word.split('').forEach((char, i) => { const span = document.createElement('span'); span.innerText = char; span.className = 'neon-letter'; span.style.animationDelay = `${i * 0.1}s`; wordSpan.appendChild(span); });
                 container.appendChild(wordSpan);
             });
         }
         document.addEventListener('DOMContentLoaded', () => { createNeonText("POTENCIAR EL SER, PROTEGER LA VIDA"); launchWanderingRocket(); });
 
-        function launchWanderingRocket() {
-            const rocket = document.createElement('div'); rocket.className = 'wandering-rocket'; rocket.innerHTML = '<i class="fas fa-rocket"></i>'; document.body.appendChild(rocket);
-            function flyToNextPoint() {
-                const startX = Math.random() * (window.innerWidth + 200) - 100; const startY = Math.random() * (window.innerHeight + 200) - 100;
-                const endX = Math.random() * (window.innerWidth + 200) - 100; const endY = Math.random() * (window.innerHeight + 200) - 100;
-                const deltaX = endX - startX; const deltaY = endY - startY; const angle = Math.atan2(deltaY, deltaX) * 180 / Math.PI + 45;
-                if (!rocket.style.transform) { rocket.style.left = `${startX}px`; rocket.style.top = `${startY}px`; }
-                const duration = Math.random() * 15 + 15; rocket.style.transition = `top ${duration}s linear, left ${duration}s linear, transform ${duration}s linear, opacity 1s`;
-                requestAnimationFrame(() => { rocket.style.opacity = '0.7'; rocket.style.transform = `rotate(${angle}deg)`; rocket.style.left = `${endX}px`; rocket.style.top = `${endY}px`; });
-                setTimeout(flyToNextPoint, duration * 1000);
-            }
-            flyToNextPoint();
-        }
-
-        const serviceData = {
-            humano: { title: "EvoluSer HUMANO", icon: "fas fa-users", subtitle: "Gestión del Talento", leader: "Nury Echeverria", role: "Directora de Talento Humano", image: "imagen2.png", desc: "Creemos que el activo más valioso es la gente. Bajo una dirección experta, transformamos la cultura organizacional mediante estrategias integrales de bienestar, desarrollo de habilidades blandas y diagnósticos precisos que potencian el capital humano.", list: ["Reclutamiento y Selección", "Clima y Cultura", "Soft Skills y Liderazgo", "Evaluaciones de Desempeño"], iconClass: "metal-blue" },
-            seguro: { title: "EvoluSer S.S.O.", icon: "fas fa-shield-alt", subtitle: "Seguridad y Salud Ocupacional", leader: "Christian Ortega", role: "Director Técnico SST", image: "imagen3.png", desc: "La seguridad no es negociable. Lideramos un equipo técnico enfocado en blindar tus operaciones, asegurando el estricto cumplimiento normativo y protegiendo la integridad de cada colaborador en todos los niveles.", list: ["Sistemas de Gestión ISO 45001", "Auditorías de Riesgos", "Vigilancia de Salud", "Capacitación Técnica"], iconClass: "metal-gray" },
-            sostenible: { title: "EvoluSer SOSTENIBLE", icon: "fas fa-leaf", subtitle: "Medio Ambiente", leader: "Christian Ortega", role: "Director de Sostenibilidad", image: "imagen4.png", desc: "El futuro es verde. Integramos la visión ambiental directamente en tu estrategia de negocio, gestionando planes de manejo y certificaciones que no solo cumplen la ley, sino que te diferencian competitivamente en el mercado.", list: ["Planes de Manejo Ambiental", "Certificaciones Verdes", "Eficiencia Energética", "Cultura Ambiental Corporativa"], iconClass: "metal-green" },
-            agro: { title: "EvoluSer AGRO", icon: "fas fa-tractor", subtitle: "Agroindustrial", leader: "Lilian Eras", role: "Directora Agroindustrial", image: "imagen5.png", desc: "Calidad desde el origen. Aportamos una vasta experiencia técnica para optimizar procesos agroindustriales, garantizando la inocuidad alimentaria y el cumplimiento riguroso de buenas prácticas desde el campo hasta la mesa, incluyendo la transformación del producto.", list: ["Buenas Prácticas Agrícolas (BPA)", "Inocuidad Alimentaria", "Industrialización de Producto", "Optimización de Procesos"], iconClass: "metal-amber" },
-            equipo: { title: "Equipo Directivo", icon: "fas fa-pen-nib", subtitle: "EvoluSer Consultores", leader: "Junta Directiva", role: "Liderazgo Estratégico", image: "imagen7.jpeg", desc: "Nuestro equipo directivo encarna la misión de potenciar el ser y proteger la vida. Guiamos a la organización con una visión integral, asegurando que cada paso que damos genere valor real para nuestros clientes y la sociedad.", list: ["Dirección Estratégica", "Gestión de Calidad", "Innovación Corporativa", "Responsabilidad Social"], iconClass: "metal-blue" }
-        };
-
-        function openModal(type) {
-            const data = serviceData[type];
-            if(!data) return;
-            document.getElementById('modal-image').src = data.image; document.getElementById('modal-image').onerror = function() { this.src = 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80'; };
-            document.getElementById('modal-title').innerHTML = `<i class="${data.icon} text-4xl mr-3 metal-icon ${data.iconClass}"></i>${data.title}`;
-            document.getElementById('modal-subtitle').innerText = data.subtitle; document.getElementById('modal-leader').innerText = data.leader; document.getElementById('modal-role').innerText = data.role; document.getElementById('modal-desc').innerText = data.desc;
-            const listEl = document.getElementById('modal-list'); listEl.innerHTML = ''; const colorClass = type === 'humano' ? 'text-brandBlue' : type === 'seguro' ? 'text-gray-600' : type === 'sostenible' ? 'text-brandGreen' : 'text-brandAmber';
-            data.list.forEach(item => { listEl.innerHTML += `<li class="flex items-center"><i class="fas fa-check-circle mr-2 ${colorClass}"></i> ${item}</li>`; });
-            const modal = document.getElementById('service-modal'); modal.classList.remove('hidden'); modal.classList.add('flex');
-        }
-        function closeModal() { const modal = document.getElementById('service-modal'); modal.classList.add('hidden'); modal.classList.remove('flex'); }
-        document.getElementById('service-modal').addEventListener('click', function(e) { if (e.target === this) closeModal(); });
-
-        // --- LÓGICA DEL CHATBOT ---
-        // CLAVE CAMUFLADA (SPLIT KEY)
-        const PARTE_A = "xai-lbSaJWSSPFg7VKQFaeZtWUN4Lx4upLr2ufD6w"; 
-        const PARTE_B = "0JeLMVBs7QcIaTF4Qz6Ki7GIDZQp8auW89aJ7QXqioO"; 
-        const API_KEY_FINAL = PARTE_A + PARTE_B;
-
+        // --- LÓGICA DEL CHATBOT CON GROK ---
         const chatWindow = document.getElementById('ai-chat-window');
         const chatBox = document.getElementById('chat-box');
         const chatInput = document.getElementById('chat-input');
         const sendBtn = document.getElementById('send-btn');
         const avatarBubble = document.getElementById('avatar-bubble');
-        let chatHistory = [];
+        
+        // El API Key se recomienda manejarlo vía variable de entorno en Render.
+        // Si no tienes un build tool, puedes pegarlo aquí temporalmente para pruebas.
+        const GROK_KEY = "TU_API_KEY_DE_GROK"; 
 
-        // Prompt de Sistema
-        const SYSTEM_PROMPT = `Eres Ev, la asistente virtual de EvoluSer. Tu tono es profesional, empático y experto ("Evonauta").
-        CONOCIMIENTOS:
-        - Humano: Nury Echeverria (Reclutamiento, Clima).
-        - SSO/Sostenible: Christian Ortega (Seguridad, Ambiente).
-        - Agro: Lilian Eras (Calidad, BPA).
-        - Contacto: WhatsApp +593 98 390 0050.
-        REGLA: Respuestas cortas y claras. Si saludan, sé entusiasta.`;
+        const SYSTEM_PROMPT = `Eres Ev, la asistente virtual de EvoluSer. 
+        Misión: Ayudar a los 'Evonautas' (clientes). 
+        Expertos: Humano (Nury Echeverria), SSO/Ambiente (Christian Ortega), Agro (Lilian Eras). 
+        Contacto: WhatsApp +593 98 390 0050. 
+        Estilo: Profesional, empático y directo. No menciones otras empresas.`;
 
         function toggleChat() {
-            if (chatWindow.classList.contains('hidden')) {
-                chatWindow.classList.remove('hidden'); setTimeout(() => chatWindow.classList.remove('scale-0'), 10); avatarBubble.classList.add('opacity-0');
-            } else {
-                chatWindow.classList.add('scale-0'); setTimeout(() => chatWindow.classList.add('hidden'), 300); avatarBubble.classList.remove('opacity-0');
-            }
+            const isHidden = chatWindow.classList.contains('hidden');
+            chatWindow.classList.toggle('hidden', !isHidden);
+            setTimeout(() => chatWindow.classList.toggle('scale-0', !isHidden), 10);
+            avatarBubble.classList.toggle('opacity-0', isHidden);
         }
 
-        const createMessage = (text, type) => {
-            const li = document.createElement("li"); li.className = type === "outgoing" ? "flex justify-end" : "flex justify-start";
-            const div = document.createElement("div"); div.className = type === "outgoing" ? "bg-brandBlue text-white p-3 rounded-2xl rounded-tr-none shadow-md max-w-[85%] text-sm" : "bg-white text-gray-700 p-3 rounded-2xl rounded-tl-none shadow-sm max-w-[85%] text-sm border border-gray-100";
-            div.innerHTML = text.replace(/\n/g, "<br>"); li.appendChild(div); chatBox.appendChild(li); chatBox.scrollTo(0, chatBox.scrollHeight); return div;
-        }
-
-        const generateResponse = async (userText) => {
-            const loadingDiv = createMessage('<i class="fas fa-circle-notch fa-spin text-brandBlue"></i> Conectando...', "incoming");
-
-            // Preparar historial para Grok (formato OpenAI)
-            let messages = [{ role: "system", content: SYSTEM_PROMPT }];
-            chatHistory.forEach(msg => messages.push(msg));
-            messages.push({ role: "user", content: userText });
+        async function generateResponse(userText) {
+            const loading = document.createElement("li");
+            loading.className = "flex justify-start";
+            loading.innerHTML = `<div class="bg-gray-100 p-3 rounded-2xl text-xs"><i class="fas fa-spinner fa-spin mr-2"></i>Ev está pensando...</div>`;
+            chatBox.appendChild(loading);
+            chatBox.scrollTo(0, chatBox.scrollHeight);
 
             try {
                 const response = await fetch("https://api.x.ai/v1/chat/completions", {
                     method: "POST",
-                    headers: { "Content-Type": "application/json", "Authorization": "Bearer " + API_KEY_FINAL },
-                    body: JSON.stringify({ model: "grok-beta", messages: messages, stream: false })
+                    headers: { 
+                        "Content-Type": "application/json", 
+                        "Authorization": `Bearer ${GROK_KEY}` 
+                    },
+                    body: JSON.stringify({
+                        model: "grok-beta",
+                        messages: [
+                            { role: "system", content: SYSTEM_PROMPT },
+                            { role: "user", content: userText }
+                        ]
+                    })
                 });
 
                 const json = await response.json();
-                if (!response.ok) throw new Error(json.error?.message || "Error en la API");
-
-                const apiResponse = json.choices[0].message.content;
-                chatHistory.push({ role: "user", content: userText });
-                chatHistory.push({ role: "assistant", content: apiResponse });
-                loadingDiv.innerHTML = apiResponse.replace(/\n/g, "<br>").replace(/\*\*(.*?)\*\*/g, '<b>$1</b>');
-
-            } catch (error) {
-                console.error("Error Grok:", error);
-                loadingDiv.innerHTML = "Lo siento, tuve un problema de conexión. ¿Intentamos de nuevo?";
-            }
-        };
-
-        const handleChat = () => {
-            const userText = chatInput.value.trim(); if (!userText) return;
-            createMessage(userText, "outgoing"); chatInput.value = ""; generateResponse(userText);
-        }
-
-        sendBtn.addEventListener("click", handleChat);
-        chatInput.addEventListener("keydown", (e) => { if(e.key === "Enter" && !e.shiftKey) { e.preventDefault(); handleChat(); } });
-
-        // --- DRAG & DROP ---
-        const avatarWrapper = document.getElementById('avatar-wrapper');
-        const avatarContainer = document.getElementById('avatar-container');
-        let isDragging = false, hasMoved = false, startX, startY;
-
-        avatarContainer.addEventListener('mousedown', startDrag);
-        avatarContainer.addEventListener('touchstart', startDrag, {passive: false});
-
-        function startDrag(e) {
-            if (e.target.closest('#avatar-bubble')) return;
-            const clientX = e.type === 'mousedown' ? e.clientX : e.touches[0].clientX;
-            const clientY = e.type === 'mousedown' ? e.clientY : e.touches[0].clientY;
-            startX = clientX; startY = clientY; isDragging = false; hasMoved = false;
-            document.addEventListener('mousemove', onDrag); document.addEventListener('mouseup', endDrag);
-            document.addEventListener('touchmove', onDrag, {passive: false}); document.addEventListener('touchend', endDrag);
-        }
-
-        function onDrag(e) {
-            const clientX = e.type === 'mousemove' ? e.clientX : e.touches[0].clientX;
-            const clientY = e.type === 'mousemove' ? e.clientY : e.touches[0].clientY;
-            if (Math.abs(clientX - startX) > 10 || Math.abs(clientY - startY) > 10) {
-                isDragging = true; hasMoved = true; e.preventDefault();
-                const rect = avatarContainer.getBoundingClientRect();
-                avatarContainer.style.left = (rect.left + (clientX - startX)) + 'px';
-                avatarContainer.style.top = (rect.top + (clientY - startY)) + 'px';
-                startX = clientX; startY = clientY;
-                avatarContainer.classList.remove('bottom-6', 'right-6');
+                chatBox.removeChild(loading);
+                
+                const reply = json.choices[0].message.content;
+                appendMessage(reply, "incoming");
+            } catch (err) {
+                chatBox.removeChild(loading);
+                appendMessage("Lo siento, Ingenio, mi conexión con la central de Evonautas falló. ¿Intentamos de nuevo?", "incoming");
             }
         }
 
-        function endDrag(e) {
-            document.removeEventListener('mousemove', onDrag); document.removeEventListener('mouseup', endDrag);
-            document.removeEventListener('touchmove', onDrag); document.removeEventListener('touchend', endDrag);
-            if (!hasMoved && !e.target.closest('#avatar-bubble')) toggleChat();
+        function appendMessage(text, type) {
+            const li = document.createElement("li");
+            li.className = type === "outgoing" ? "flex justify-end" : "flex justify-start";
+            const div = document.createElement("div");
+            div.className = type === "outgoing" ? "bg-brandBlue text-white p-3 rounded-2xl rounded-tr-none shadow-md max-w-[85%] text-sm" : "bg-white text-gray-700 p-3 rounded-2xl rounded-tl-none shadow-sm max-w-[85%] text-sm border border-gray-100";
+            div.innerText = text;
+            li.appendChild(div);
+            chatBox.appendChild(li);
+            chatBox.scrollTo(0, chatBox.scrollHeight);
         }
+
+        function handleChat() {
+            const text = chatInput.value.trim();
+            if(!text) return;
+            appendMessage(text, "outgoing");
+            chatInput.value = "";
+            generateResponse(text);
+        }
+
+        sendBtn.onclick = handleChat;
+        chatInput.onkeydown = (e) => { if(e.key === "Enter") handleChat(); };
+
+        // --- ROCKET ---
+        function launchWanderingRocket() {
+            const rocket = document.createElement('div'); rocket.className = 'wandering-rocket'; rocket.innerHTML = '<i class="fas fa-rocket"></i>'; document.body.appendChild(rocket);
+            function fly() {
+                const x = Math.random() * window.innerWidth; const y = Math.random() * window.innerHeight;
+                rocket.style.opacity = '0.5'; rocket.style.left = `${x}px`; rocket.style.top = `${y}px`;
+                setTimeout(fly, 20000);
+            }
+            fly();
+        }
+
+        function openModal(type) { 
+            const titles = { humano: "EvoluSer Humano", seguro: "EvoluSer SSO", sostenible: "EvoluSer Sostenible", agro: "EvoluSer Agro" };
+            document.getElementById('modal-title').innerText = titles[type];
+            document.getElementById('service-modal').classList.remove('hidden');
+            document.getElementById('service-modal').classList.add('flex');
+        }
+        function closeModal() { document.getElementById('service-modal').classList.add('hidden'); }
     </script>
 </body>
 </html>
