@@ -210,16 +210,10 @@
     </style>
 </head>
 <body class="text-gray-700 antialiased min-h-screen flex flex-col relative" id="document-body">
-    <div id="custom-cursor">
-        <i class="fas fa-leaf text-brandGreen text-opacity-90 text-xl transform -rotate-45 drop-shadow-md"></i>
-    </div>
-
-    <!-- FONDO REALISTA CINEMÁTICO -->
+    <div id="custom-cursor"><i class="fas fa-leaf text-brandGreen text-opacity-90 text-xl transform -rotate-45 drop-shadow-md"></i></div>
     <div class="cinematic-bg"></div>
-    <!-- PARTÍCULAS SUTILES -->
     <canvas id="particles-canvas"></canvas>
 
-    <!-- Header Section -->
     <header class="pt-20 pb-32 relative overflow-hidden z-10">
         <div class="absolute top-10 left-1/2 transform -translate-x-1/2 w-[600px] h-[600px] bg-white rounded-full mix-blend-overlay filter blur-[120px] opacity-40 pointer-events-none"></div>
         <div class="container mx-auto px-6 text-center relative z-20">
@@ -231,51 +225,36 @@
                     </div>
                 </div>
             </div>
-            <h1 class="text-4xl md:text-6xl font-extrabold mb-6 tracking-tight drop-shadow-2xl text-white bg-clip-text text-transparent bg-gradient-to-br from-white via-gray-100 to-gray-300" style="text-shadow: 0 4px 20px rgba(0,0,0,0.2);">
-                Evolución Integral
-            </h1>
+            <h1 class="text-4xl md:text-6xl font-extrabold mb-6 tracking-tight drop-shadow-2xl text-white bg-clip-text text-transparent bg-gradient-to-br from-white via-gray-100 to-gray-300" style="text-shadow: 0 4px 20px rgba(0,0,0,0.2);">Evolución Integral</h1>
             <div class="h-1.5 w-24 bg-gradient-to-r from-brandBlue to-brandGreen mx-auto rounded-full mb-8 shadow-[0_0_20px_rgba(122,184,0,0.8)]"></div>
             <div id="slogan-container" class="neon-3d-wrapper text-lg md:text-2xl mt-4 mb-8 min-h-[50px] items-center tracking-widest"></div>
         </div>
     </header>
 
     <main class="container mx-auto px-4 -mt-24 relative z-30 mb-12 flex-grow">
-        <!-- Navegación -->
         <div class="glass-card rounded-full shadow-2xl p-2 flex justify-center max-w-lg mx-auto mb-10 transform transition-all hover:scale-[1.01] relative z-50">
-            <button onclick="switchTab('carta')" id="btn-carta" class="flex-1 py-3 px-6 rounded-full text-sm font-bold uppercase tracking-wider transition-all duration-500 bg-brandBlue text-white shadow-lg ring-4 ring-brandBlue/30 cursor-none">
-                <i class="fas fa-file-alt mr-2"></i> Propuesta
-            </button>
-            <button onclick="switchTab('brochure')" id="btn-brochure" class="flex-1 py-3 px-6 rounded-full text-sm font-bold uppercase tracking-wider transition-all duration-500 text-gray-500 hover:bg-white/50 hover:text-brandBlue cursor-none">
-                <i class="fas fa-th-large mr-2"></i> Servicios
-            </button>
+            <button onclick="switchTab('carta')" id="btn-carta" class="flex-1 py-3 px-6 rounded-full text-sm font-bold uppercase tracking-wider transition-all duration-500 bg-brandBlue text-white shadow-lg ring-4 ring-brandBlue/30 cursor-none"><i class="fas fa-file-alt mr-2"></i> Propuesta</button>
+            <button onclick="switchTab('brochure')" id="btn-brochure" class="flex-1 py-3 px-6 rounded-full text-sm font-bold uppercase tracking-wider transition-all duration-500 text-gray-500 hover:bg-white/50 hover:text-brandBlue cursor-none"><i class="fas fa-th-large mr-2"></i> Servicios</button>
         </div>
 
         <div class="glass-card rounded-3xl shadow-2xl p-8 md:p-14 min-h-[600px] relative overflow-hidden transition-all duration-500 z-40" id="main-content-area">
             
-            <!-- VISTA CARTA (PROPUESTA COMPLETA RESTAURADA) -->
             <div id="view-carta" class="max-w-5xl mx-auto stagger-1">
                 <div class="flex justify-between items-end border-b border-gray-300 pb-6 mb-8">
                     <div><span class="bg-gradient-to-r from-brandBlue to-brandBlueLight text-white text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-wider shadow-md">Propuesta Corporativa</span></div>
-                    <div class="text-right">
-                        <p class="text-brandBlue font-bold text-sm">QUITO, ECUADOR</p>
-                        <p class="text-gray-500 text-xs" id="currentDate"></p>
-                    </div>
+                    <div class="text-right"><p class="text-brandBlue font-bold text-sm">QUITO, ECUADOR</p><p class="text-gray-500 text-xs" id="currentDate"></p></div>
                 </div>
                 <div class="prose prose-lg text-gray-600 mx-auto leading-relaxed text-justify">
                     <h2 class="text-3xl font-heading font-bold text-gray-800 mb-2 text-left">Estimados Clientes,</h2>
                     <p class="text-xl text-brandBlue font-light mb-8 text-left">Presentamos una nueva forma de entender el crecimiento empresarial.</p>
                     <p class="mb-6">En un entorno empresarial cada vez más exigente, el crecimiento real solo ocurre cuando cuidamos lo más importante: <strong>las personas y el entorno que habitan</strong>.</p>
                     <p class="mb-6">Les presento a <strong>EvoluSer</strong>, no solo como proveedores, sino como sus aliados estratégicos. Entendemos que una empresa exitosa del siglo XXI debe cumplir cuatro requisitos innegociables: ser <span class="text-brandBlue font-semibold">Humana</span>, garantizar la <span class="text-gray-800 font-semibold">Seguridad y Salud Ocupacional</span>, ser <span class="text-brandGreen font-semibold">Sostenible</span> y <span class="text-brandAmber font-semibold">Productiva</span>.</p>
-                    
                     <p class="text-sm text-gray-500 italic mt-8 mb-4 text-center">Haga clic en cada área para conocer a nuestros directores:</p>
                     
-                    <!-- GRID INTERACTIVO EN CARTA FORMAL -->
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 my-6 not-prose">
                         <div class="interactive-card bg-white/70 p-4 rounded-xl border border-blue-100 cursor-pointer group" onclick="openModal('humano')">
                             <div class="flex flex-col items-center text-center">
-                                <div class="w-20 h-20 flex items-center justify-center mb-3">
-                                    <i class="fas fa-users text-6xl metal-icon metal-blue animate-hug"></i>
-                                </div>
+                                <div class="w-20 h-20 flex items-center justify-center mb-3"><i class="fas fa-users text-6xl metal-icon metal-blue animate-hug"></i></div>
                                 <h4 class="font-bold text-gray-800 text-sm">Humano</h4>
                                 <p class="text-[10px] text-gray-500 uppercase tracking-wide">Talento</p>
                                 <span class="text-[10px] text-brandBlue mt-2 opacity-0 group-hover:opacity-100 transition-opacity">Ver Directora</span>
@@ -283,10 +262,7 @@
                         </div>
                         <div class="interactive-card bg-white/70 p-4 rounded-xl border border-gray-200 cursor-pointer group" onclick="openModal('seguro')">
                             <div class="flex flex-col items-center text-center">
-                                <div class="w-20 h-20 flex items-center justify-center mb-3 relative">
-                                    <i class="fas fa-shield-alt text-6xl metal-icon metal-gray absolute transition-all duration-500 group-hover:opacity-0 group-hover:scale-50"></i>
-                                    <i class="fas fa-user-shield text-6xl metal-icon metal-gray absolute transition-all duration-500 opacity-0 scale-50 group-hover:opacity-100 group-hover:scale-110"></i>
-                                </div>
+                                <div class="w-20 h-20 flex items-center justify-center mb-3 relative"><i class="fas fa-shield-alt text-6xl metal-icon metal-gray absolute transition-all duration-500 group-hover:opacity-0 group-hover:scale-50"></i><i class="fas fa-user-shield text-6xl metal-icon metal-gray absolute transition-all duration-500 opacity-0 scale-50 group-hover:opacity-100 group-hover:scale-110"></i></div>
                                 <h4 class="font-bold text-gray-800 text-sm">S.S.O.</h4>
                                 <p class="text-[10px] text-gray-500 uppercase tracking-wide">Seguridad y Salud</p>
                                 <span class="text-[10px] text-gray-600 mt-2 opacity-0 group-hover:opacity-100 transition-opacity">Ver Director</span>
@@ -294,9 +270,7 @@
                         </div>
                         <div class="interactive-card bg-white/70 p-4 rounded-xl border border-green-100 cursor-pointer group" onclick="openModal('sostenible')">
                             <div class="flex flex-col items-center text-center">
-                                <div class="w-20 h-20 flex items-center justify-center mb-3">
-                                    <i class="fas fa-leaf text-6xl metal-icon metal-green animate-leaf"></i>
-                                </div>
+                                <div class="w-20 h-20 flex items-center justify-center mb-3"><i class="fas fa-leaf text-6xl metal-icon metal-green animate-leaf"></i></div>
                                 <h4 class="font-bold text-gray-800 text-sm">Sostenible</h4>
                                 <p class="text-[10px] text-gray-400 font-bold uppercase tracking-wide">Ambiente</p>
                                 <span class="text-[10px] text-brandGreen mt-2 opacity-0 group-hover:opacity-100 transition-opacity">Ver Director</span>
@@ -304,9 +278,7 @@
                         </div>
                         <div class="interactive-card bg-white/70 p-4 rounded-xl border border-amber-100 cursor-pointer group" onclick="openModal('agro')">
                             <div class="flex flex-col items-center text-center">
-                                <div class="w-20 h-20 flex items-center justify-center mb-3">
-                                    <i class="fas fa-tractor text-6xl metal-icon metal-amber animate-tractor"></i>
-                                </div>
+                                <div class="w-20 h-20 flex items-center justify-center mb-3"><i class="fas fa-tractor text-6xl metal-icon metal-amber animate-tractor"></i></div>
                                 <h4 class="font-bold text-gray-800 text-sm">Agroindustrial</h4>
                                 <p class="text-[10px] text-gray-400 font-bold uppercase tracking-wide">Calidad</p>
                                 <span class="text-[10px] text-amber-600 mt-2 opacity-0 group-hover:opacity-100 transition-opacity">Ver Directora</span>
@@ -315,9 +287,7 @@
                     </div>
                     
                     <div class="mt-12 flex items-center gap-5 border-t border-gray-100 pt-8 not-prose">
-                        <div onclick="openModal('equipo')" class="w-16 h-16 bg-gradient-to-br from-brandBlue to-brandBlueLight rounded-full flex items-center justify-center text-white shadow-lg text-2xl cursor-pointer transition-transform duration-300 hover:scale-110" title="Ver Equipo Directivo">
-                            <i class="fas fa-pen-nib"></i>
-                        </div>
+                        <div onclick="openModal('equipo')" class="w-16 h-16 bg-gradient-to-br from-brandBlue to-brandBlueLight rounded-full flex items-center justify-center text-white shadow-lg text-2xl cursor-pointer transition-transform duration-300 hover:scale-110" title="Ver Equipo Directivo"><i class="fas fa-pen-nib"></i></div>
                         <div>
                             <p class="font-heading font-bold text-xl text-gray-900">Equipo Directivo</p>
                             <p class="text-brandBlue font-semibold">EvoluSer Consultores</p>
@@ -327,7 +297,6 @@
                 </div>
             </div>
 
-            <!-- VISTA BROCHURE (SERVICIOS COMPLETA RESTAURADA) -->
             <div id="view-brochure" class="hidden">
                 <div class="text-center mb-12 stagger-1">
                     <span class="text-brandGreen font-bold tracking-widest uppercase text-xs bg-green-50 px-3 py-1 rounded-full">Nuestro Portafolio</span>
@@ -335,7 +304,6 @@
                     <p class="text-lg text-gray-500 max-w-2xl mx-auto">Tecnología, normativa y humanidad unidas.</p>
                 </div>
 
-                <!-- Video Section -->
                 <div class="max-w-sm mx-auto mb-16 stagger-2 video-section">
                     <div class="bg-white p-2 rounded-2xl shadow-xl border border-gray-100 relative group">
                         <div class="absolute -inset-1 bg-gradient-to-r from-brandBlue to-brandGreen rounded-2xl blur opacity-25 group-hover:opacity-40 transition duration-1000"></div>
@@ -354,86 +322,11 @@
                     <p class="text-center text-xs text-gray-400 mt-3 italic">Descubre nuestra filosofía en acción</p>
                 </div>
 
-                <!-- GRID SERVICIOS -->
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 px-2">
-                    
-                    <!-- Card 1: Humano -->
-                    <div class="stagger-1 h-full">
-                        <div class="h-full" data-tilt data-tilt-max="5" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.2">
-                            <div class="bg-white/80 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all h-full border-t-4 border-brandBlue group flex flex-col">
-                                <div class="w-full flex justify-center mb-6">
-                                    <i class="fas fa-users text-6xl metal-icon metal-blue animate-hug"></i>
-                                </div>
-                                <h3 class="text-xl font-bold text-gray-800 mb-2">EvoluSer <span class="text-brandBlue">HUMANO</span></h3>
-                                <p class="text-[10px] text-gray-400 font-bold uppercase tracking-wider mb-6">Gestión del Talento</p>
-                                <ul class="space-y-3 text-sm text-gray-600 flex-grow">
-                                    <li class="flex items-start"><i class="fas fa-check text-brandGreen mt-1 mr-2 text-xs"></i> Reclutamiento</li>
-                                    <li class="flex items-start"><i class="fas fa-check text-brandGreen mt-1 mr-2 text-xs"></i> Clima y Cultura</li>
-                                    <li class="flex items-start"><i class="fas fa-check text-brandGreen mt-1 mr-2 text-xs"></i> Soft Skills</li>
-                                    <li class="flex items-start"><i class="fas fa-check text-brandGreen mt-1 mr-2 text-xs"></i> Evaluaciones</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Card 2: PREVENCIÓN (S.S.O.) -->
-                    <div class="stagger-2 h-full">
-                        <div class="h-full" data-tilt data-tilt-max="5" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.2">
-                            <div class="bg-white/80 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all h-full border-t-4 border-gray-600 group flex flex-col">
-                                <div class="w-full flex justify-center mb-6 relative h-16">
-                                    <i class="fas fa-shield-alt text-6xl metal-icon metal-gray absolute transition-all duration-500 group-hover:opacity-0 group-hover:scale-50"></i>
-                                    <i class="fas fa-user-shield text-6xl metal-icon metal-gray absolute transition-all duration-500 opacity-0 scale-50 group-hover:opacity-100 group-hover:scale-110"></i>
-                                </div>
-                                <h3 class="text-xl font-bold text-gray-800 mb-2">EvoluSer <span class="text-gray-600">S.S.O.</span></h3>
-                                <p class="text-[10px] text-gray-400 font-bold uppercase tracking-wider mb-6">Seguridad y Salud Ocupacional</p>
-                                <ul class="space-y-3 text-sm text-gray-600 flex-grow">
-                                    <li class="flex items-start"><i class="fas fa-check text-brandGreen mt-1 mr-2 text-xs"></i> Normativa ISO</li>
-                                    <li class="flex items-start"><i class="fas fa-check text-brandGreen mt-1 mr-2 text-xs"></i> Auditorías</li>
-                                    <li class="flex items-start"><i class="fas fa-check text-brandGreen mt-1 mr-2 text-xs"></i> Salud Ocupacional</li>
-                                    <li class="flex items-start"><i class="fas fa-check text-brandGreen mt-1 mr-2 text-xs"></i> Capacitaciones</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Card 3: Sostenible -->
-                    <div class="stagger-3 h-full">
-                        <div class="h-full" data-tilt data-tilt-max="5" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.2">
-                            <div class="bg-white/80 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all h-full border-t-4 border-brandGreen group flex flex-col">
-                                <div class="w-full flex justify-center mb-6">
-                                    <i class="fas fa-leaf text-6xl metal-icon metal-green animate-leaf"></i>
-                                </div>
-                                <h3 class="text-xl font-bold text-gray-800 mb-2">EvoluSer <span class="text-brandGreen">SOSTENIBLE</span></h3>
-                                <p class="text-[10px] text-gray-400 font-bold uppercase tracking-wider mb-6">Medio Ambiente</p>
-                                <ul class="space-y-3 text-sm text-gray-600 flex-grow">
-                                    <li class="flex items-start"><i class="fas fa-check text-brandBlue mt-1 mr-2 text-xs"></i> Manejo Ambiental</li>
-                                    <li class="flex items-start"><i class="fas fa-check text-brandBlue mt-1 mr-2 text-xs"></i> Certificaciones</li>
-                                    <li class="flex items-start"><i class="fas fa-check text-brandBlue mt-1 mr-2 text-xs"></i> Eficiencia</li>
-                                    <li class="flex items-start"><i class="fas fa-check text-brandBlue mt-1 mr-2 text-xs"></i> Cultura Verde</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Card 4: Agroindustrial -->
-                    <div class="stagger-4 h-full">
-                        <div class="h-full" data-tilt data-tilt-max="5" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.2">
-                            <div class="bg-white/80 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all h-full border-t-4 border-brandAmber group flex flex-col">
-                                <div class="w-full flex justify-center mb-6">
-                                    <i class="fas fa-tractor text-6xl metal-icon metal-amber animate-tractor"></i>
-                                </div>
-                                <h3 class="text-xl font-bold text-gray-800 mb-2">EvoluSer <span class="text-amber-600">AGRO</span></h3>
-                                <p class="text-[10px] text-gray-400 font-bold uppercase tracking-wider mb-6">Agroindustrial</p>
-                                <ul class="space-y-3 text-sm text-gray-600 flex-grow">
-                                    <li class="flex items-start"><i class="fas fa-check text-brandBlue mt-1 mr-2 text-xs"></i> Buenas Prácticas (BPA)</li>
-                                    <li class="flex items-start"><i class="fas fa-check text-brandBlue mt-1 mr-2 text-xs"></i> Inocuidad Alimentaria</li>
-                                    <li class="flex items-start"><i class="fas fa-check text-brandBlue mt-1 mr-2 text-xs"></i> Industrialización de Producto</li>
-                                    <li class="flex items-start"><i class="fas fa-check text-brandBlue mt-1 mr-2 text-xs"></i> Optimización Procesos</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
+                    <div class="stagger-1 h-full"><div class="bg-white/80 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all h-full border-t-4 border-brandBlue group flex flex-col"><div class="w-full flex justify-center mb-6"><i class="fas fa-users text-6xl metal-icon metal-blue animate-hug"></i></div><h3 class="text-xl font-bold text-gray-800 mb-2">EvoluSer <span class="text-brandBlue">HUMANO</span></h3><p class="text-[10px] text-gray-400 font-bold uppercase tracking-wider mb-6">Gestión del Talento</p><ul class="space-y-3 text-sm text-gray-600 flex-grow"><li class="flex items-start"><i class="fas fa-check text-brandGreen mt-1 mr-2 text-xs"></i> Reclutamiento</li><li class="flex items-start"><i class="fas fa-check text-brandGreen mt-1 mr-2 text-xs"></i> Clima y Cultura</li><li class="flex items-start"><i class="fas fa-check text-brandGreen mt-1 mr-2 text-xs"></i> Soft Skills</li><li class="flex items-start"><i class="fas fa-check text-brandGreen mt-1 mr-2 text-xs"></i> Evaluaciones</li></ul></div></div>
+                    <div class="stagger-2 h-full"><div class="bg-white/80 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all h-full border-t-4 border-gray-600 group flex flex-col"><div class="w-full flex justify-center mb-6 relative h-16"><i class="fas fa-shield-alt text-6xl metal-icon metal-gray absolute transition-all duration-500 group-hover:opacity-0 group-hover:scale-50"></i><i class="fas fa-user-shield text-6xl metal-icon metal-gray absolute transition-all duration-500 opacity-0 scale-50 group-hover:opacity-100 group-hover:scale-110"></i></div><h3 class="text-xl font-bold text-gray-800 mb-2">EvoluSer <span class="text-gray-600">S.S.O.</span></h3><p class="text-[10px] text-gray-400 font-bold uppercase tracking-wider mb-6">Seguridad y Salud Ocupacional</p><ul class="space-y-3 text-sm text-gray-600 flex-grow"><li class="flex items-start"><i class="fas fa-check text-brandGreen mt-1 mr-2 text-xs"></i> Normativa ISO</li><li class="flex items-start"><i class="fas fa-check text-brandGreen mt-1 mr-2 text-xs"></i> Auditorías</li><li class="flex items-start"><i class="fas fa-check text-brandGreen mt-1 mr-2 text-xs"></i> Salud Ocupacional</li><li class="flex items-start"><i class="fas fa-check text-brandGreen mt-1 mr-2 text-xs"></i> Capacitaciones</li></ul></div></div>
+                    <div class="stagger-3 h-full"><div class="bg-white/80 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all h-full border-t-4 border-brandGreen group flex flex-col"><div class="w-full flex justify-center mb-6"><i class="fas fa-leaf text-6xl metal-icon metal-green animate-leaf"></i></div><h3 class="text-xl font-bold text-gray-800 mb-2">EvoluSer <span class="text-brandGreen">SOSTENIBLE</span></h3><p class="text-[10px] text-gray-400 font-bold uppercase tracking-wider mb-6">Medio Ambiente</p><ul class="space-y-3 text-sm text-gray-600 flex-grow"><li class="flex items-start"><i class="fas fa-check text-brandBlue mt-1 mr-2 text-xs"></i> Manejo Ambiental</li><li class="flex items-start"><i class="fas fa-check text-brandBlue mt-1 mr-2 text-xs"></i> Certificaciones</li><li class="flex items-start"><i class="fas fa-check text-brandBlue mt-1 mr-2 text-xs"></i> Eficiencia</li><li class="flex items-start"><i class="fas fa-check text-brandBlue mt-1 mr-2 text-xs"></i> Cultura Verde</li></ul></div></div>
+                    <div class="stagger-4 h-full"><div class="bg-white/80 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all h-full border-t-4 border-brandAmber group flex flex-col"><div class="w-full flex justify-center mb-6"><i class="fas fa-tractor text-6xl metal-icon metal-amber animate-tractor"></i></div><h3 class="text-xl font-bold text-gray-800 mb-2">EvoluSer <span class="text-amber-600">AGRO</span></h3><p class="text-[10px] text-gray-400 font-bold uppercase tracking-wider mb-6">Agroindustrial</p><ul class="space-y-3 text-sm text-gray-600 flex-grow"><li class="flex items-start"><i class="fas fa-check text-brandBlue mt-1 mr-2 text-xs"></i> Buenas Prácticas (BPA)</li><li class="flex items-start"><i class="fas fa-check text-brandBlue mt-1 mr-2 text-xs"></i> Inocuidad Alimentaria</li><li class="flex items-start"><i class="fas fa-check text-brandBlue mt-1 mr-2 text-xs"></i> Industrialización de Producto</li><li class="flex items-start"><i class="fas fa-check text-brandBlue mt-1 mr-2 text-xs"></i> Optimización Procesos</li></ul></div></div>
                 </div>
                 
                 <div class="mt-16 text-center stagger-3 pb-4">
@@ -446,113 +339,67 @@
         </div>
     </main>
 
-    <!-- VENTANA DE CHAT CON IA -->
+    <!-- VENTANA CHAT -->
     <div id="ai-chat-window" class="fixed bottom-28 right-6 w-80 md:w-96 glass-card rounded-2xl flex flex-col transition-all duration-300 transform scale-0 origin-bottom-right z-[90] hidden" style="height: 450px;">
-        <!-- Cabecera del Chat -->
         <div class="bg-gradient-to-r from-brandBlue to-brandGreen p-4 rounded-t-2xl flex justify-between items-center relative overflow-hidden">
             <div class="absolute inset-0 bg-white opacity-10 animate-pulse-slow"></div>
             <div class="flex items-center gap-3 z-10">
                 <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-lg overflow-hidden">
                     <img src="logo.png" alt="Logo" class="w-full h-full object-contain p-1" onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?name=EvoluSer&background=005691&color=fff&size=128';">
                 </div>
-                <div>
-                    <h4 class="text-white font-bold text-sm">Soy Ev (IA)</h4>
-                    <p class="text-xs text-white/80">Tu copiloto Evonauta</p>
-                </div>
+                <div><h4 class="text-white font-bold text-sm">Soy Ev (IA)</h4><p class="text-xs text-white/80">Tu copiloto Evonauta</p></div>
             </div>
-            <button onclick="toggleChat()" class="text-white hover:text-gray-200 z-10 transition-transform hover:rotate-90">
-                <i class="fas fa-times text-xl"></i>
-            </button>
+            <button onclick="toggleChat()" class="text-white hover:text-gray-200 z-10 transition-transform hover:rotate-90"><i class="fas fa-times text-xl"></i></button>
         </div>
-
-        <!-- Área de Mensajes -->
         <ul id="chat-box" class="flex-1 overflow-y-auto p-4 space-y-4 scrollbar-hide bg-white/60 backdrop-blur-sm">
             <li class="flex justify-start">
                 <div class="bg-white text-gray-700 p-3 rounded-2xl rounded-tl-none shadow-sm max-w-[85%] text-sm border border-gray-100">
-                    ¡Hola! 👋 Soy Ev, la IA experta de EvoluSer. <br>¿Quieres saber más sobre nuestros servicios?
+                    ¡Hola! 👋 Soy Ev, la IA experta de EvoluSer. <br>¿En qué puedo ayudarte hoy?
                 </div>
             </li>
         </ul>
-
-        <!-- Input de Texto -->
         <div class="p-3 bg-white/80 border-t border-gray-100 rounded-b-2xl">
             <div class="flex items-center gap-2 bg-gray-50 rounded-full px-4 py-2 border border-gray-200 focus-within:border-brandBlue transition-colors">
                 <textarea id="chat-input" rows="1" class="flex-1 bg-transparent border-none outline-none text-sm resize-none text-gray-700" placeholder="Pregúntame algo..."></textarea>
-                <button id="send-btn" class="text-brandBlue hover:text-brandGreen transition-colors transform hover:scale-110">
-                    <i class="fas fa-paper-plane"></i>
-                </button>
+                <button id="send-btn" class="text-brandBlue hover:text-brandGreen transition-colors transform hover:scale-110"><i class="fas fa-paper-plane"></i></button>
             </div>
-            <div class="text-[10px] text-center text-gray-400 mt-1">Potenciado por Google Gemini</div>
+            <div class="text-[10px] text-center text-gray-400 mt-1">Potenciado por Grok xAI</div>
         </div>
     </div>
     
-    <!-- AVATAR FLOTANTE DE BIENVENIDA -->
+    <!-- AVATAR -->
     <div id="avatar-container" class="fixed bottom-6 right-6 z-[100] flex flex-col items-end pointer-events-none animate-pop-in" style="touch-action: none;">
-        <div id="avatar-bubble" onclick="toggleChat()" class="chat-bubble mb-8 max-w-[280px] animate-float pointer-events-auto transform transition hover:scale-105 origin-bottom-right duration-300 cursor-pointer">
-            <div id="bubble-content-default">
-                <h4 class="font-bold text-brandBlue text-sm mb-1">¡Hola, Evonauta! Soy Ev</h4>
-                <p class="text-xs text-gray-600 leading-snug mb-2">
-                    Haz clic para chatear con IA.
-                </p>
-            </div>
+        <div id="avatar-bubble" onclick="toggleChat()" class="chat-bubble mb-8 max-w-[280px] animate-float pointer-events-auto transform transition hover:scale-105 origin-bottom-right duration-300 cursor-pointer pointer-events-auto">
+            <div id="bubble-content-default"><h4 class="font-bold text-brandBlue text-sm mb-1">¡Hola, Evonauta! Soy Ev</h4><p class="text-xs text-gray-600 leading-snug mb-2">Haz clic para chatear con IA.</p></div>
         </div>
-        
-        <div id="avatar-wrapper" onclick="toggleChat()" class="relative w-36 h-36 pointer-events-auto cursor-pointer active:cursor-grabbing group animate-float-avatar">
-            <img 
-                src="imagen6.png" 
-                alt="Asistente EvoluSer" 
-                class="w-full h-full object-contain filter drop-shadow-2xl transition-transform duration-300 group-hover:scale-110"
-                onerror="this.style.display='none'; document.getElementById('avatar-fallback').style.display='flex';"
-            >
-            <div id="avatar-fallback" class="hidden w-full h-full bg-brandBlue rounded-full items-center justify-center text-white shadow-xl">
-                <i class="fas fa-robot text-4xl"></i>
-            </div>
+        <div id="avatar-wrapper" onclick="toggleChat()" class="relative w-36 h-36 pointer-events-auto cursor-pointer active:cursor-grabbing group animate-float-avatar pointer-events-auto">
+            <img src="imagen6.png" alt="Asistente EvoluSer" class="w-full h-full object-contain filter drop-shadow-2xl transition-transform duration-300 group-hover:scale-110" onerror="this.style.display='none'; document.getElementById('avatar-fallback').style.display='flex';">
+            <div id="avatar-fallback" class="hidden w-full h-full bg-brandBlue rounded-full items-center justify-center text-white shadow-xl"><i class="fas fa-robot text-4xl"></i></div>
         </div>
     </div>
 
-    <!-- MODAL DE DETALLE -->
+    <!-- MODAL -->
     <div id="service-modal" class="fixed inset-0 z-[100] hidden items-center justify-center bg-black/70 backdrop-blur-sm p-4">
         <div class="bg-white rounded-3xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto relative animate-float">
-            <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-800 z-10 bg-white rounded-full p-2 shadow-md transition cursor-none">
-                <i class="fas fa-times text-xl"></i>
-            </button>
-
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-800 z-10 bg-white rounded-full p-2 shadow-md transition cursor-none"><i class="fas fa-times text-xl"></i></button>
             <div class="grid grid-cols-1 md:grid-cols-2">
                 <div class="relative h-64 md:h-auto overflow-hidden bg-gray-100">
                     <img id="modal-image" src="" alt="Detalle Servicio" class="w-full h-full object-cover transition duration-700 hover:scale-110">
-                    <!-- GRADIENTE OSCURO INTENSIFICADO PARA MEJOR LECTURA -->
                     <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent flex items-end p-6">
-                        <div class="text-white w-full">
-                            <p class="text-sm font-bold uppercase tracking-wider opacity-90 mb-1 drop-shadow-md" id="modal-subtitle">Departamento</p>
-                            <!-- TÍTULO DINÁMICO (Siempre Blanco en la imagen) -->
-                            <div id="modal-title-container" class="flex items-center gap-3">
-                                <h3 class="text-3xl font-heading font-bold text-white drop-shadow-lg" id="modal-title">Titulo</h3>
-                            </div>
-                        </div>
+                        <div class="text-white w-full"><p class="text-sm font-bold uppercase tracking-wider opacity-90 mb-1 drop-shadow-md" id="modal-subtitle">Departamento</p><div id="modal-title-container" class="flex items-center gap-3"><h3 class="text-3xl font-heading font-bold text-white drop-shadow-lg" id="modal-title">Titulo</h3></div></div>
                     </div>
                 </div>
-
                 <div class="p-8 md:p-12 flex flex-col justify-center">
-                    <!-- SECCIÓN LÍDER SIMPLIFICADA (SIN CIRCULO DE IMAGEN) -->
-                    <div class="mb-6 border-l-4 border-brandBlue pl-4">
-                        <p class="text-xs text-gray-500 uppercase tracking-widest font-bold mb-1">Liderado por</p>
-                        <h4 class="text-2xl font-bold text-gray-800" id="modal-leader">Nombre Lider</h4>
-                        <p class="text-brandBlue text-sm font-semibold" id="modal-role">Director de Área</p>
-                    </div>
-
+                    <div class="mb-6 border-l-4 border-brandBlue pl-4"><p class="text-xs text-gray-500 uppercase tracking-widest font-bold mb-1">Liderado por</p><h4 class="text-2xl font-bold text-gray-800" id="modal-leader">Nombre Lider</h4><p class="text-brandBlue text-sm font-semibold" id="modal-role">Director de Área</p></div>
                     <div class="prose prose-sm text-gray-600 mb-8" id="modal-desc"></div>
-
-                    <h5 class="font-bold text-gray-800 mb-3 text-sm uppercase tracking-wide border-b pb-2">Servicios Clave</h5>
-                    <ul class="space-y-2 text-sm text-gray-600 mb-8" id="modal-list"></ul>
-
-                    <button onclick="closeModal()" class="w-full bg-gray-100 hover:bg-gray-200 text-gray-800 font-bold py-3 rounded-xl transition cursor-none">
-                        Cerrar Perfil
-                    </button>
+                    <h5 class="font-bold text-gray-800 mb-3 text-sm uppercase tracking-wide border-b pb-2">Servicios Clave</h5><ul class="space-y-2 text-sm text-gray-600 mb-8" id="modal-list"></ul>
+                    <button onclick="closeModal()" class="w-full bg-gray-100 hover:bg-gray-200 text-gray-800 font-bold py-3 rounded-xl transition cursor-none">Cerrar Perfil</button>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- Footer -->
     <footer class="bg-white/80 border-t border-gray-200 mt-auto backdrop-blur-sm relative z-30">
         <div class="container mx-auto px-6 py-10">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-center text-center md:text-left">
@@ -584,47 +431,20 @@
     </footer>
 
     <script>
-        // --- CONFIGURACIÓN GENERAL ---
+        // --- CURSOR ---
         const cursor = document.getElementById('custom-cursor');
-        document.addEventListener('mousemove', (e) => { 
-            const x = e.clientX; const y = e.clientY;
-            cursor.style.transform = `translate(${x}px, ${y}px)`;
-        });
+        document.addEventListener('mousemove', (e) => { const x = e.clientX; const y = e.clientY; cursor.style.transform = `translate(${x}px, ${y}px)`; });
         document.addEventListener('mouseenter', () => cursor.style.display = 'flex');
         document.addEventListener('mouseleave', () => cursor.style.display = 'none');
 
-        // Partículas Sutiles
+        // --- PARTÍCULAS ---
         const canvas = document.getElementById('particles-canvas');
         if (canvas) {
-            const ctx = canvas.getContext('2d');
-            let width, height;
-            let particles = [];
-            const particleCount = 40;
-
+            const ctx = canvas.getContext('2d'); let width, height; let particles = []; const particleCount = 40;
             function resize() { width = canvas.width = window.innerWidth; height = canvas.height = window.innerHeight; }
-            class Particle {
-                constructor() { this.reset(); }
-                reset() {
-                    this.x = Math.random() * width; 
-                    this.y = Math.random() * height; 
-                    this.vy = -(0.2 + Math.random() * 0.5); 
-                    this.size = Math.random() * 2; 
-                    this.alpha = Math.random() * 0.5;
-                }
-                update() { this.y += this.vy; if (this.y < 0) this.reset(); }
-                draw() { 
-                    ctx.fillStyle = `rgba(255, 255, 255, ${this.alpha})`; 
-                    ctx.beginPath(); 
-                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); 
-                    ctx.fill(); 
-                }
-            }
+            class Particle { constructor() { this.reset(); } reset() { this.x = Math.random() * width; this.y = Math.random() * height; this.vy = -(0.2 + Math.random() * 0.5); this.size = Math.random() * 2; this.alpha = Math.random() * 0.5; } update() { this.y += this.vy; if (this.y < 0) this.reset(); } draw() { ctx.fillStyle = `rgba(255, 255, 255, ${this.alpha})`; ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill(); } }
             function initParticles() { particles = []; for(let i=0; i<particleCount; i++) particles.push(new Particle()); }
-            function animateParticles() { 
-                ctx.clearRect(0, 0, width, height); 
-                particles.forEach(p => { p.update(); p.draw(); }); 
-                requestAnimationFrame(animateParticles); 
-            }
+            function animateParticles() { ctx.clearRect(0, 0, width, height); particles.forEach(p => { p.update(); p.draw(); }); requestAnimationFrame(animateParticles); }
             window.addEventListener('resize', resize); resize(); initParticles(); animateParticles();
         }
 
@@ -651,58 +471,29 @@
 
         // --- SLOGAN ---
         function createNeonText(text) {
-            const container = document.getElementById('slogan-container');
-            const words = text.split(' ');
+            const container = document.getElementById('slogan-container'); const words = text.split(' ');
             words.forEach(word => {
-                const wordSpan = document.createElement('span');
-                wordSpan.className = 'neon-word';
-                word.split('').forEach((char, index) => {
-                    const span = document.createElement('span');
-                    span.innerText = char;
-                    span.className = 'neon-letter';
-                    span.style.animationDelay = `${index * 0.15}s`;
-                    wordSpan.appendChild(span);
-                });
+                const wordSpan = document.createElement('span'); wordSpan.className = 'neon-word';
+                word.split('').forEach((char, index) => { const span = document.createElement('span'); span.innerText = char; span.className = 'neon-letter'; span.style.animationDelay = `${index * 0.15}s`; wordSpan.appendChild(span); });
                 container.appendChild(wordSpan);
             });
         }
-        document.addEventListener('DOMContentLoaded', () => {
-            createNeonText("POTENCIAR EL SER, PROTEGER LA VIDA");
-            launchWanderingRocket(); 
-        });
+        document.addEventListener('DOMContentLoaded', () => { createNeonText("POTENCIAR EL SER, PROTEGER LA VIDA"); launchWanderingRocket(); });
 
-        // --- COHETE ---
         function launchWanderingRocket() {
-            const rocket = document.createElement('div');
-            rocket.className = 'wandering-rocket';
-            rocket.innerHTML = '<i class="fas fa-rocket"></i>';
-            document.body.appendChild(rocket);
+            const rocket = document.createElement('div'); rocket.className = 'wandering-rocket'; rocket.innerHTML = '<i class="fas fa-rocket"></i>'; document.body.appendChild(rocket);
             function flyToNextPoint() {
-                const startX = Math.random() * (window.innerWidth + 200) - 100;
-                const startY = Math.random() * (window.innerHeight + 200) - 100;
-                const endX = Math.random() * (window.innerWidth + 200) - 100;
-                const endY = Math.random() * (window.innerHeight + 200) - 100;
-                const deltaX = endX - startX;
-                const deltaY = endY - startY;
-                const angle = Math.atan2(deltaY, deltaX) * 180 / Math.PI + 45;
-                if (!rocket.style.transform) {
-                    rocket.style.left = `${startX}px`;
-                    rocket.style.top = `${startY}px`;
-                }
-                const duration = Math.random() * 15 + 15;
-                rocket.style.transition = `top ${duration}s linear, left ${duration}s linear, transform ${duration}s linear, opacity 1s`;
-                requestAnimationFrame(() => {
-                    rocket.style.opacity = '0.7'; 
-                    rocket.style.transform = `rotate(${angle}deg)`;
-                    rocket.style.left = `${endX}px`;
-                    rocket.style.top = `${endY}px`;
-                });
+                const startX = Math.random() * (window.innerWidth + 200) - 100; const startY = Math.random() * (window.innerHeight + 200) - 100;
+                const endX = Math.random() * (window.innerWidth + 200) - 100; const endY = Math.random() * (window.innerHeight + 200) - 100;
+                const deltaX = endX - startX; const deltaY = endY - startY; const angle = Math.atan2(deltaY, deltaX) * 180 / Math.PI + 45;
+                if (!rocket.style.transform) { rocket.style.left = `${startX}px`; rocket.style.top = `${startY}px`; }
+                const duration = Math.random() * 15 + 15; rocket.style.transition = `top ${duration}s linear, left ${duration}s linear, transform ${duration}s linear, opacity 1s`;
+                requestAnimationFrame(() => { rocket.style.opacity = '0.7'; rocket.style.transform = `rotate(${angle}deg)`; rocket.style.left = `${endX}px`; rocket.style.top = `${endY}px`; });
                 setTimeout(flyToNextPoint, duration * 1000);
             }
             flyToNextPoint();
         }
 
-        // --- MODALES ---
         const serviceData = {
             humano: { title: "EvoluSer HUMANO", icon: "fas fa-users", subtitle: "Gestión del Talento", leader: "Nury Echeverria", role: "Directora de Talento Humano", image: "imagen2.png", desc: "Creemos que el activo más valioso es la gente. Bajo una dirección experta, transformamos la cultura organizacional mediante estrategias integrales de bienestar, desarrollo de habilidades blandas y diagnósticos precisos que potencian el capital humano.", list: ["Reclutamiento y Selección", "Clima y Cultura", "Soft Skills y Liderazgo", "Evaluaciones de Desempeño"], iconClass: "metal-blue" },
             seguro: { title: "EvoluSer S.S.O.", icon: "fas fa-shield-alt", subtitle: "Seguridad y Salud Ocupacional", leader: "Christian Ortega", role: "Director Técnico SST", image: "imagen3.png", desc: "La seguridad no es negociable. Lideramos un equipo técnico enfocado en blindar tus operaciones, asegurando el estricto cumplimiento normativo y protegiendo la integridad de cada colaborador en todos los niveles.", list: ["Sistemas de Gestión ISO 45001", "Auditorías de Riesgos", "Vigilancia de Salud", "Capacitación Técnica"], iconClass: "metal-gray" },
@@ -714,174 +505,111 @@
         function openModal(type) {
             const data = serviceData[type];
             if(!data) return;
-            document.getElementById('modal-image').src = data.image;
-            document.getElementById('modal-image').onerror = function() { this.src = 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80'; };
+            document.getElementById('modal-image').src = data.image; document.getElementById('modal-image').onerror = function() { this.src = 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80'; };
             document.getElementById('modal-title').innerHTML = `<i class="${data.icon} text-4xl mr-3 metal-icon ${data.iconClass}"></i>${data.title}`;
-            document.getElementById('modal-subtitle').innerText = data.subtitle;
-            document.getElementById('modal-leader').innerText = data.leader;
-            document.getElementById('modal-role').innerText = data.role;
-            document.getElementById('modal-desc').innerText = data.desc;
-            const listEl = document.getElementById('modal-list');
-            listEl.innerHTML = '';
-            const colorClass = type === 'humano' ? 'text-brandBlue' : type === 'seguro' ? 'text-gray-600' : type === 'sostenible' ? 'text-brandGreen' : 'text-brandAmber';
-            data.list.forEach(item => {
-                listEl.innerHTML += `<li class="flex items-center"><i class="fas fa-check-circle mr-2 ${colorClass}"></i> ${item}</li>`;
-            });
-            const modal = document.getElementById('service-modal');
-            modal.classList.remove('hidden'); modal.classList.add('flex');
+            document.getElementById('modal-subtitle').innerText = data.subtitle; document.getElementById('modal-leader').innerText = data.leader; document.getElementById('modal-role').innerText = data.role; document.getElementById('modal-desc').innerText = data.desc;
+            const listEl = document.getElementById('modal-list'); listEl.innerHTML = ''; const colorClass = type === 'humano' ? 'text-brandBlue' : type === 'seguro' ? 'text-gray-600' : type === 'sostenible' ? 'text-brandGreen' : 'text-brandAmber';
+            data.list.forEach(item => { listEl.innerHTML += `<li class="flex items-center"><i class="fas fa-check-circle mr-2 ${colorClass}"></i> ${item}</li>`; });
+            const modal = document.getElementById('service-modal'); modal.classList.remove('hidden'); modal.classList.add('flex');
         }
-
-        function closeModal() {
-            const modal = document.getElementById('service-modal');
-            modal.classList.add('hidden'); modal.classList.remove('flex');
-        }
-        document.getElementById('service-modal').addEventListener('click', function(e) {
-            if (e.target === this) closeModal();
-        });
+        function closeModal() { const modal = document.getElementById('service-modal'); modal.classList.add('hidden'); modal.classList.remove('flex'); }
+        document.getElementById('service-modal').addEventListener('click', function(e) { if (e.target === this) closeModal(); });
 
         // --- LÓGICA DEL CHATBOT ---
         // CLAVE CAMUFLADA (SPLIT KEY)
-        const PARTE_A = "AIzaSyBueKyQ6rH7EJhk"; 
-        const PARTE_B = "-VK4XfTAOP87ilz2lIk"; 
-        const GEMINI_API_KEY = PARTE_A + PARTE_B;
+        const PARTE_A = "xai-lbSaJWSSPFg7VKQFaeZtWUN4Lx4upLr2ufD6w"; 
+        const PARTE_B = "0JeLMVBs7QcIaTF4Qz6Ki7GIDZQp8auW89aJ7QXqioO"; 
+        const API_KEY_FINAL = PARTE_A + PARTE_B;
 
         const chatWindow = document.getElementById('ai-chat-window');
         const chatBox = document.getElementById('chat-box');
         const chatInput = document.getElementById('chat-input');
         const sendBtn = document.getElementById('send-btn');
         const avatarBubble = document.getElementById('avatar-bubble');
-        
         let chatHistory = [];
 
-        // Prompt de Sistema INYECTADO
-        const SYSTEM_PROMPT = `Actúas como "Ev", la asistente virtual experta de EvoluSer Consultores (Ecuador).
-        TU PERSONALIDAD: Amable, entusiasta ("Evonauta") y profesional. Siempre saludas con energía.
-        TU CONOCIMIENTO:
-        1. Servicios:
-           - HUMANO (Talento): Selección, Clima Laboral, Soft Skills. (Dir: Nury Echeverria).
-           - SSO (Seguridad): Normativa ISO, Auditorías, Salud. (Dir: Christian Ortega).
-           - SOSTENIBLE (Ambiente): Licencias, Huella de Carbono. (Dir: Christian Ortega).
-           - AGRO (Calidad): BPA, Inocuidad, Procesos. (Dir: Lilian Eras).
-        2. Contacto: WhatsApp +593 98 390 0050.
-        TUS REGLAS:
-        - Si te dicen "Hola" o "Buenas": Responde: "¡Hola, Evonauta! 🚀 Bienvenido a la evolución. Soy Ev. ¿Te gustaría mejorar el Talento Humano, la Seguridad, el Ambiente o tus Procesos Agroindustriales?".
-        - Si preguntan precios: Di que dependen del proyecto e invita al WhatsApp.
-        - Respuestas cortas (máx 50 palabras).`;
+        // Prompt de Sistema
+        const SYSTEM_PROMPT = `Eres Ev, la asistente virtual de EvoluSer. Tu tono es profesional, empático y experto ("Evonauta").
+        CONOCIMIENTOS:
+        - Humano: Nury Echeverria (Reclutamiento, Clima).
+        - SSO/Sostenible: Christian Ortega (Seguridad, Ambiente).
+        - Agro: Lilian Eras (Calidad, BPA).
+        - Contacto: WhatsApp +593 98 390 0050.
+        REGLA: Respuestas cortas y claras. Si saludan, sé entusiasta.`;
 
         function toggleChat() {
             if (chatWindow.classList.contains('hidden')) {
-                chatWindow.classList.remove('hidden');
-                setTimeout(() => chatWindow.classList.remove('scale-0'), 10);
-                avatarBubble.classList.add('opacity-0');
+                chatWindow.classList.remove('hidden'); setTimeout(() => chatWindow.classList.remove('scale-0'), 10); avatarBubble.classList.add('opacity-0');
             } else {
-                chatWindow.classList.add('scale-0');
-                setTimeout(() => chatWindow.classList.add('hidden'), 300);
-                avatarBubble.classList.remove('opacity-0');
+                chatWindow.classList.add('scale-0'); setTimeout(() => chatWindow.classList.add('hidden'), 300); avatarBubble.classList.remove('opacity-0');
             }
         }
 
         const createMessage = (text, type) => {
-            const li = document.createElement("li");
-            li.className = type === "outgoing" ? "flex justify-end" : "flex justify-start";
-            const div = document.createElement("div");
-            div.className = type === "outgoing" ? 
-                "bg-brandBlue text-white p-3 rounded-2xl rounded-tr-none shadow-md max-w-[85%] text-sm" : 
-                "bg-white text-gray-700 p-3 rounded-2xl rounded-tl-none shadow-sm max-w-[85%] text-sm border border-gray-100";
-            div.innerHTML = text.replace(/\n/g, "<br>");
-            li.appendChild(div);
-            chatBox.appendChild(li);
-            chatBox.scrollTo(0, chatBox.scrollHeight);
-            return div;
+            const li = document.createElement("li"); li.className = type === "outgoing" ? "flex justify-end" : "flex justify-start";
+            const div = document.createElement("div"); div.className = type === "outgoing" ? "bg-brandBlue text-white p-3 rounded-2xl rounded-tr-none shadow-md max-w-[85%] text-sm" : "bg-white text-gray-700 p-3 rounded-2xl rounded-tl-none shadow-sm max-w-[85%] text-sm border border-gray-100";
+            div.innerHTML = text.replace(/\n/g, "<br>"); li.appendChild(div); chatBox.appendChild(li); chatBox.scrollTo(0, chatBox.scrollHeight); return div;
         }
 
         const generateResponse = async (userText) => {
-            const loadingDiv = createMessage('<i class="fas fa-circle-notch fa-spin text-brandBlue"></i> ...', "incoming");
-            
-            // Construimos el historial para la API
-            let currentHistory = [...chatHistory];
-            if (currentHistory.length === 0) {
-                // Inyectamos el Prompt de Sistema de forma oculta en el primer mensaje
-                currentHistory.push({ role: "user", parts: [{ text: SYSTEM_PROMPT + "\n\nUsuario dice: " + userText }] });
-            } else {
-                currentHistory.push({ role: "user", parts: [{ text: userText }] });
-            }
+            const loadingDiv = createMessage('<i class="fas fa-circle-notch fa-spin text-brandBlue"></i> Conectando...', "incoming");
+
+            // Preparar historial para Grok (formato OpenAI)
+            let messages = [{ role: "system", content: SYSTEM_PROMPT }];
+            chatHistory.forEach(msg => messages.push(msg));
+            messages.push({ role: "user", content: userText });
 
             try {
-                // Usamos el modelo estándar
-                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`, {
+                const response = await fetch("https://api.x.ai/v1/chat/completions", {
                     method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ contents: currentHistory })
+                    headers: { "Content-Type": "application/json", "Authorization": "Bearer " + API_KEY_FINAL },
+                    body: JSON.stringify({ model: "grok-beta", messages: messages, stream: false })
                 });
-                
-                const data = await response.json();
 
-                if (!response.ok) {
-                    throw new Error(`Error ${response.status}: ${data.error?.message || response.statusText}`);
-                }
+                const json = await response.json();
+                if (!response.ok) throw new Error(json.error?.message || "Error en la API");
 
-                if (!data.candidates || data.candidates.length === 0) {
-                    throw new Error("Sin respuesta de la IA.");
-                }
-
-                const apiResponse = data.candidates[0].content.parts[0].text;
-                
-                // Actualizamos historial
-                chatHistory.push({ role: "user", parts: [{ text: userText }] });
-                chatHistory.push({ role: "model", parts: [{ text: apiResponse }] });
-                
+                const apiResponse = json.choices[0].message.content;
+                chatHistory.push({ role: "user", content: userText });
+                chatHistory.push({ role: "assistant", content: apiResponse });
                 loadingDiv.innerHTML = apiResponse.replace(/\n/g, "<br>").replace(/\*\*(.*?)\*\*/g, '<b>$1</b>');
-            
+
             } catch (error) {
-                loadingDiv.innerHTML = `<span class="text-red-500 font-bold">Error:</span> ${error.message}`;
-                console.error(error);
-                // Si falla, no guardamos en historial para poder reintentar
+                console.error("Error Grok:", error);
+                loadingDiv.innerHTML = "Lo siento, tuve un problema de conexión. ¿Intentamos de nuevo?";
             }
         };
 
         const handleChat = () => {
-            const userText = chatInput.value.trim();
-            if (!userText) return;
-            createMessage(userText, "outgoing");
-            chatInput.value = "";
-            generateResponse(userText);
+            const userText = chatInput.value.trim(); if (!userText) return;
+            createMessage(userText, "outgoing"); chatInput.value = ""; generateResponse(userText);
         }
 
         sendBtn.addEventListener("click", handleChat);
-        chatInput.addEventListener("keydown", (e) => {
-            if(e.key === "Enter" && !e.shiftKey) { e.preventDefault(); handleChat(); }
-        });
+        chatInput.addEventListener("keydown", (e) => { if(e.key === "Enter" && !e.shiftKey) { e.preventDefault(); handleChat(); } });
 
-        // --- DRAG & DROP MEJORADO ---
+        // --- DRAG & DROP ---
         const avatarWrapper = document.getElementById('avatar-wrapper');
         const avatarContainer = document.getElementById('avatar-container');
         let isDragging = false, hasMoved = false, startX, startY;
 
-        // Añadir manejador al contenedor para asegurar captura
         avatarContainer.addEventListener('mousedown', startDrag);
         avatarContainer.addEventListener('touchstart', startDrag, {passive: false});
 
         function startDrag(e) {
-            // Evitar conflicto si se clica la burbuja
             if (e.target.closest('#avatar-bubble')) return;
-
             const clientX = e.type === 'mousedown' ? e.clientX : e.touches[0].clientX;
             const clientY = e.type === 'mousedown' ? e.clientY : e.touches[0].clientY;
-            startX = clientX; startY = clientY;
-            isDragging = false; hasMoved = false;
-            document.addEventListener('mousemove', onDrag);
-            document.addEventListener('mouseup', endDrag);
-            document.addEventListener('touchmove', onDrag, {passive: false});
-            document.addEventListener('touchend', endDrag);
+            startX = clientX; startY = clientY; isDragging = false; hasMoved = false;
+            document.addEventListener('mousemove', onDrag); document.addEventListener('mouseup', endDrag);
+            document.addEventListener('touchmove', onDrag, {passive: false}); document.addEventListener('touchend', endDrag);
         }
 
         function onDrag(e) {
             const clientX = e.type === 'mousemove' ? e.clientX : e.touches[0].clientX;
             const clientY = e.type === 'mousemove' ? e.clientY : e.touches[0].clientY;
-            // Tolerancia de 10px para diferenciar clic de arrastre
             if (Math.abs(clientX - startX) > 10 || Math.abs(clientY - startY) > 10) {
-                isDragging = true; hasMoved = true;
-                e.preventDefault();
+                isDragging = true; hasMoved = true; e.preventDefault();
                 const rect = avatarContainer.getBoundingClientRect();
                 avatarContainer.style.left = (rect.left + (clientX - startX)) + 'px';
                 avatarContainer.style.top = (rect.top + (clientY - startY)) + 'px';
@@ -891,14 +619,9 @@
         }
 
         function endDrag(e) {
-            document.removeEventListener('mousemove', onDrag);
-            document.removeEventListener('mouseup', endDrag);
-            document.removeEventListener('touchmove', onDrag);
-            document.removeEventListener('touchend', endDrag);
-            // Si no se movió (fue un clic), abrir chat.
-            if (!hasMoved && !e.target.closest('#avatar-bubble')) {
-                 toggleChat();
-            }
+            document.removeEventListener('mousemove', onDrag); document.removeEventListener('mouseup', endDrag);
+            document.removeEventListener('touchmove', onDrag); document.removeEventListener('touchend', endDrag);
+            if (!hasMoved && !e.target.closest('#avatar-bubble')) toggleChat();
         }
     </script>
 </body>
