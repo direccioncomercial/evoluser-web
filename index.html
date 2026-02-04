@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EvoluSer - Comunidad de Evonautas</title>
+    <!-- Metadatos importantes para móviles -->
     <meta name="theme-color" content="#005691">
     
     <!-- Librerías Externas -->
@@ -13,6 +14,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
 
     <script>
+        // Configuración de Colores y Animaciones
         tailwind.config = {
             theme: {
                 extend: {
@@ -52,7 +54,11 @@
                         'leaf-wind': { '0%, 100%': { transform: 'rotate(0deg)' }, '25%': { transform: 'rotate(15deg)' }, '50%': { transform: 'rotate(-10deg)' }, '75%': { transform: 'rotate(5deg)' } },
                         'group-hug': { '0%, 100%': { transform: 'scale(1)' }, '50%': { transform: 'scale(0.9)' } },
                         'tractor-move': { '0%': { transform: 'rotate(0deg)' }, '25%': { transform: 'rotate(-2deg)' }, '75%': { transform: 'rotate(2deg)' }, '100%': { transform: 'rotate(0deg)' } },
-                        'shield-guard': { '0%, 100%': { transform: 'scale(1)' }, '50%': { transform: 'scale(1.1)' } }
+                        'shield-guard': { '0%, 100%': { transform: 'scale(1)' }, '50%': { transform: 'scale(1.1)' } },
+                        'propulsion': { 
+                            '0%': { transform: 'scale(0.9) translateY(-2px)', opacity: '0.8' }, 
+                            '100%': { transform: 'scale(1.1) translateY(2px)', opacity: '1' } 
+                        }
                     }
                 }
             }
@@ -118,10 +124,12 @@
         .metal-gray { background-image: linear-gradient(135deg, #2d3436 0%, #636e72 25%, #b2bec3 50%, #636e72 75%, #2d3436 100%); }
         .metal-green { background-image: linear-gradient(135deg, #2f5d02 0%, #5c8d03 25%, #b2f243 50%, #5c8d03 75%, #204000 100%); }
         .metal-amber { background-image: linear-gradient(135deg, #78350f 0%, #d97706 25%, #fbbf24 50%, #d97706 75%, #451a03 100%); }
+        
+        /* Animaciones en Hover Restauradas */
         .group:hover .animate-leaf, .metal-animate-leaf { animation: leaf-wind 2s ease-in-out infinite; transform-origin: top center; }
-        .group:hover .animate-hug, .metal-animate-hug { animation: group-hug 1.5s ease-in-out infinite; }
-        .group:hover .animate-tractor, .metal-animate-tractor { animation: tractor-move 0.5s linear infinite; }
-        .metal-animate-shield { animation: shield-guard 2s ease-in-out infinite; }
+        .group:hover .animate-hug, .metal-animate-hug { animation: hug 1.5s ease-in-out infinite; }
+        .group:hover .animate-tractor, .metal-animate-tractor { animation: tractor 0.5s linear infinite; }
+        .metal-animate-shield { animation: shield 2s ease-in-out infinite; }
 
         .chat-bubble { position: relative; background: #ffffff; border-radius: 1.5rem; padding: 1.25rem; box-shadow: 0 10px 25px rgba(0,0,0,0.15); margin-bottom: 2rem; border-bottom-right-radius: 0; transition: all 0.3s ease-in-out; }
         .chat-bubble::after { content: ''; position: absolute; bottom: -10px; right: 20px; width: 0; height: 0; border-left: 10px solid transparent; border-right: 10px solid transparent; border-top: 15px solid #ffffff; }
@@ -131,8 +139,8 @@
         /* --- COHETE NASA SÓLIDO (VISIBILIDAD PERFECTA) --- */
         .wandering-rocket {
             position: fixed;
-            /* Z-index bajo para volar DETRÁS del texto (20-30) pero delante del fondo (-2) */
-            z-index: 1; 
+            /* Z-index 5: Detrás del texto (30) pero delante del fondo (-2) */
+            z-index: 5; 
             width: 120px; 
             height: 120px;
             pointer-events: none;
@@ -196,33 +204,33 @@
                     <p class="text-sm text-gray-500 italic mt-8 mb-4 text-center">Haga clic en cada área para conocer a nuestros directores:</p>
                     
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 my-6 not-prose">
-                        <div class="interactive-card bg-white/70 p-4 rounded-xl border border-blue-100 cursor-pointer group" onclick="openModal('humano')">
+                        <div class="interactive-card bg-white/70 p-4 rounded-xl border border-blue-100 cursor-pointer group hover:-translate-y-2 transition duration-300" onclick="openModal('humano')">
                             <div class="flex flex-col items-center text-center">
-                                <div class="w-20 h-20 flex items-center justify-center mb-3"><i class="fas fa-users text-6xl metal-icon metal-blue animate-hug"></i></div>
+                                <div class="w-20 h-20 flex items-center justify-center mb-3"><i class="fas fa-users text-6xl metal-icon metal-blue group-hover:animate-hug"></i></div>
                                 <h4 class="font-bold text-gray-800 text-sm">Humano</h4>
                                 <p class="text-[10px] text-gray-500 uppercase tracking-wide">Talento</p>
                                 <span class="text-[10px] text-brandBlue mt-2 opacity-0 group-hover:opacity-100 transition-opacity">Ver Directora</span>
                             </div>
                         </div>
-                        <div class="interactive-card bg-white/70 p-4 rounded-xl border border-gray-200 cursor-pointer group" onclick="openModal('seguro')">
+                        <div class="interactive-card bg-white/70 p-4 rounded-xl border border-gray-200 cursor-pointer group hover:-translate-y-2 transition duration-300" onclick="openModal('seguro')">
                             <div class="flex flex-col items-center text-center">
                                 <div class="w-20 h-20 flex items-center justify-center mb-3 relative"><i class="fas fa-shield-alt text-6xl metal-icon metal-gray absolute transition-all duration-500 group-hover:opacity-0 group-hover:scale-50"></i><i class="fas fa-user-shield text-6xl metal-icon metal-gray absolute transition-all duration-500 opacity-0 scale-50 group-hover:opacity-100 group-hover:scale-110"></i></div>
                                 <h4 class="font-bold text-gray-800 text-sm">S.S.O.</h4>
-                                <p class="text-[10px] text-gray-500 uppercase tracking-wide">Seguridad</p>
+                                <p class="text-[10px] text-gray-500 uppercase tracking-wide">Seguridad y Salud</p>
                                 <span class="text-[10px] text-gray-600 mt-2 opacity-0 group-hover:opacity-100 transition-opacity">Ver Director</span>
                             </div>
                         </div>
-                        <div class="interactive-card bg-white/70 p-4 rounded-xl border border-green-100 cursor-pointer group" onclick="openModal('sostenible')">
+                        <div class="interactive-card bg-white/70 p-4 rounded-xl border border-green-100 cursor-pointer group hover:-translate-y-2 transition duration-300" onclick="openModal('sostenible')">
                             <div class="flex flex-col items-center text-center">
-                                <div class="w-20 h-20 flex items-center justify-center mb-3"><i class="fas fa-leaf text-6xl metal-icon metal-green animate-leaf"></i></div>
+                                <div class="w-20 h-20 flex items-center justify-center mb-3"><i class="fas fa-leaf text-6xl metal-icon metal-green group-hover:animate-leaf-wind"></i></div>
                                 <h4 class="font-bold text-gray-800 text-sm">Sostenible</h4>
                                 <p class="text-[10px] text-gray-400 font-bold uppercase tracking-wide">Ambiente</p>
                                 <span class="text-[10px] text-brandGreen mt-2 opacity-0 group-hover:opacity-100 transition-opacity">Ver Director</span>
                             </div>
                         </div>
-                        <div class="interactive-card bg-white/70 p-4 rounded-xl border border-amber-100 cursor-pointer group" onclick="openModal('agro')">
+                        <div class="interactive-card bg-white/70 p-4 rounded-xl border border-amber-100 cursor-pointer group hover:-translate-y-2 transition duration-300" onclick="openModal('agro')">
                             <div class="flex flex-col items-center text-center">
-                                <div class="w-20 h-20 flex items-center justify-center mb-3"><i class="fas fa-tractor text-6xl metal-icon metal-amber animate-tractor"></i></div>
+                                <div class="w-20 h-20 flex items-center justify-center mb-3"><i class="fas fa-tractor text-6xl metal-icon metal-amber group-hover:animate-tractor-move"></i></div>
                                 <h4 class="font-bold text-gray-800 text-sm">Agroindustrial</h4>
                                 <p class="text-[10px] text-gray-400 font-bold uppercase tracking-wide">Calidad</p>
                                 <span class="text-[10px] text-amber-600 mt-2 opacity-0 group-hover:opacity-100 transition-opacity">Ver Directora</span>
@@ -249,25 +257,17 @@
                     <div class="bg-white p-2 rounded-2xl shadow-xl border border-gray-100 relative group">
                         <div class="absolute -inset-1 bg-gradient-to-r from-brandBlue to-brandGreen rounded-2xl blur opacity-25 group-hover:opacity-40 transition duration-1000"></div>
                         <div class="relative rounded-xl overflow-hidden bg-black flex justify-center aspect-[9/16]">
-                            <iframe 
-                                class="w-full h-full"
-                                src="https://www.youtube.com/embed/VfmFZdAbAyQ?rel=0" 
-                                title="EvoluSer Video" 
-                                frameborder="0" 
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                                referrerpolicy="strict-origin-when-cross-origin" 
-                                allowfullscreen>
-                            </iframe>
+                            <iframe class="w-full h-full" src="https://www.youtube.com/embed/VfmFZdAbAyQ?rel=0" frameborder="0" allowfullscreen></iframe>
                         </div>
                     </div>
                     <p class="text-center text-xs text-gray-400 mt-3 italic">Descubre nuestra filosofía en acción</p>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 px-2">
-                    <div class="stagger-1 h-full"><div class="bg-white/80 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all h-full border-t-4 border-brandBlue group flex flex-col"><div class="w-full flex justify-center mb-6"><i class="fas fa-users text-6xl metal-icon metal-blue animate-hug"></i></div><h3 class="text-xl font-bold text-gray-800 mb-2">EvoluSer <span class="text-brandBlue">HUMANO</span></h3><p class="text-[10px] text-gray-400 font-bold uppercase tracking-wider mb-6">Gestión del Talento</p><ul class="space-y-3 text-sm text-gray-600 flex-grow"><li class="flex items-start"><i class="fas fa-check text-brandGreen mt-1 mr-2 text-xs"></i> Reclutamiento</li><li class="flex items-start"><i class="fas fa-check text-brandGreen mt-1 mr-2 text-xs"></i> Clima y Cultura</li><li class="flex items-start"><i class="fas fa-check text-brandGreen mt-1 mr-2 text-xs"></i> Soft Skills</li><li class="flex items-start"><i class="fas fa-check text-brandGreen mt-1 mr-2 text-xs"></i> Evaluaciones</li></ul></div></div>
-                    <div class="stagger-2 h-full"><div class="bg-white/80 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all h-full border-t-4 border-gray-600 group flex flex-col"><div class="w-full flex justify-center mb-6 relative h-16"><i class="fas fa-shield-alt text-6xl metal-icon metal-gray absolute transition-all duration-500 group-hover:opacity-0 group-hover:scale-50"></i><i class="fas fa-user-shield text-6xl metal-icon metal-gray absolute transition-all duration-500 opacity-0 scale-50 group-hover:opacity-100 group-hover:scale-110"></i></div><h3 class="text-xl font-bold text-gray-800 mb-2">EvoluSer <span class="text-gray-600">S.S.O.</span></h3><p class="text-[10px] text-gray-400 font-bold uppercase tracking-wider mb-6">Seguridad y Salud Ocupacional</p><ul class="space-y-3 text-sm text-gray-600 flex-grow"><li class="flex items-start"><i class="fas fa-check text-brandGreen mt-1 mr-2 text-xs"></i> Normativa ISO</li><li class="flex items-start"><i class="fas fa-check text-brandGreen mt-1 mr-2 text-xs"></i> Auditorías</li><li class="flex items-start"><i class="fas fa-check text-brandGreen mt-1 mr-2 text-xs"></i> Salud Ocupacional</li><li class="flex items-start"><i class="fas fa-check text-brandGreen mt-1 mr-2 text-xs"></i> Capacitaciones</li></ul></div></div>
-                    <div class="stagger-3 h-full"><div class="bg-white/80 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all h-full border-t-4 border-brandGreen group flex flex-col"><div class="w-full flex justify-center mb-6"><i class="fas fa-leaf text-6xl metal-icon metal-green animate-leaf"></i></div><h3 class="text-xl font-bold text-gray-800 mb-2">EvoluSer <span class="text-brandGreen">SOSTENIBLE</span></h3><p class="text-[10px] text-gray-400 font-bold uppercase tracking-wider mb-6">Medio Ambiente</p><ul class="space-y-3 text-sm text-gray-600 flex-grow"><li class="flex items-start"><i class="fas fa-check text-brandBlue mt-1 mr-2 text-xs"></i> Manejo Ambiental</li><li class="flex items-start"><i class="fas fa-check text-brandBlue mt-1 mr-2 text-xs"></i> Certificaciones</li><li class="flex items-start"><i class="fas fa-check text-brandBlue mt-1 mr-2 text-xs"></i> Eficiencia</li><li class="flex items-start"><i class="fas fa-check text-brandBlue mt-1 mr-2 text-xs"></i> Cultura Verde</li></ul></div></div>
-                    <div class="stagger-4 h-full"><div class="bg-white/80 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all h-full border-t-4 border-brandAmber group flex flex-col"><div class="w-full flex justify-center mb-6"><i class="fas fa-tractor text-6xl metal-icon metal-amber animate-tractor"></i></div><h3 class="text-xl font-bold text-gray-800 mb-2">EvoluSer <span class="text-amber-600">AGRO</span></h3><p class="text-[10px] text-gray-400 font-bold uppercase tracking-wider mb-6">Agroindustrial</p><ul class="space-y-3 text-sm text-gray-600 flex-grow"><li class="flex items-start"><i class="fas fa-check text-brandBlue mt-1 mr-2 text-xs"></i> Buenas Prácticas (BPA)</li><li class="flex items-start"><i class="fas fa-check text-brandBlue mt-1 mr-2 text-xs"></i> Inocuidad Alimentaria</li><li class="flex items-start"><i class="fas fa-check text-brandBlue mt-1 mr-2 text-xs"></i> Industrialización de Producto</li><li class="flex items-start"><i class="fas fa-check text-brandBlue mt-1 mr-2 text-xs"></i> Optimización Procesos</li></ul></div></div>
+                    <div class="stagger-1 h-full"><div class="bg-white/80 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all h-full border-t-4 border-brandBlue group flex flex-col cursor-pointer" onclick="openModal('humano')"><div class="w-full flex justify-center mb-6"><i class="fas fa-users text-6xl metal-icon metal-blue group-hover:animate-hug"></i></div><h3 class="text-xl font-bold text-gray-800 mb-2">EvoluSer <span class="text-brandBlue">HUMANO</span></h3><p class="text-[10px] text-gray-400 font-bold uppercase tracking-wider mb-6">Gestión del Talento</p><ul class="space-y-3 text-sm text-gray-600 flex-grow"><li class="flex items-start"><i class="fas fa-check text-brandGreen mt-1 mr-2 text-xs"></i> Reclutamiento</li><li class="flex items-start"><i class="fas fa-check text-brandGreen mt-1 mr-2 text-xs"></i> Clima y Cultura</li><li class="flex items-start"><i class="fas fa-check text-brandGreen mt-1 mr-2 text-xs"></i> Soft Skills</li><li class="flex items-start"><i class="fas fa-check text-brandGreen mt-1 mr-2 text-xs"></i> Evaluaciones</li></ul></div></div>
+                    <div class="stagger-2 h-full"><div class="bg-white/80 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all h-full border-t-4 border-gray-600 group flex flex-col cursor-pointer" onclick="openModal('seguro')"><div class="w-full flex justify-center mb-6 relative h-16"><i class="fas fa-shield-alt text-6xl metal-icon metal-gray absolute transition-all duration-500 group-hover:opacity-0 group-hover:scale-50"></i><i class="fas fa-user-shield text-6xl metal-icon metal-gray absolute transition-all duration-500 opacity-0 scale-50 group-hover:opacity-100 group-hover:scale-110"></i></div><h3 class="text-xl font-bold text-gray-800 mb-2">EvoluSer <span class="text-gray-600">S.S.O.</span></h3><p class="text-[10px] text-gray-400 font-bold uppercase tracking-wider mb-6">Seguridad y Salud Ocupacional</p><ul class="space-y-3 text-sm text-gray-600 flex-grow"><li class="flex items-start"><i class="fas fa-check text-brandGreen mt-1 mr-2 text-xs"></i> Normativa ISO</li><li class="flex items-start"><i class="fas fa-check text-brandGreen mt-1 mr-2 text-xs"></i> Auditorías</li><li class="flex items-start"><i class="fas fa-check text-brandGreen mt-1 mr-2 text-xs"></i> Salud Ocupacional</li><li class="flex items-start"><i class="fas fa-check text-brandGreen mt-1 mr-2 text-xs"></i> Capacitaciones</li></ul></div></div>
+                    <div class="stagger-3 h-full"><div class="bg-white/80 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all h-full border-t-4 border-brandGreen group flex flex-col cursor-pointer" onclick="openModal('sostenible')"><div class="w-full flex justify-center mb-6"><i class="fas fa-leaf text-6xl metal-icon metal-green group-hover:animate-leaf-wind"></i></div><h3 class="text-xl font-bold text-gray-800 mb-2">EvoluSer <span class="text-brandGreen">SOSTENIBLE</span></h3><p class="text-[10px] text-gray-400 font-bold uppercase tracking-wider mb-6">Medio Ambiente</p><ul class="space-y-3 text-sm text-gray-600 flex-grow"><li class="flex items-start"><i class="fas fa-check text-brandBlue mt-1 mr-2 text-xs"></i> Manejo Ambiental</li><li class="flex items-start"><i class="fas fa-check text-brandBlue mt-1 mr-2 text-xs"></i> Certificaciones</li><li class="flex items-start"><i class="fas fa-check text-brandBlue mt-1 mr-2 text-xs"></i> Eficiencia</li><li class="flex items-start"><i class="fas fa-check text-brandBlue mt-1 mr-2 text-xs"></i> Cultura Verde</li></ul></div></div>
+                    <div class="stagger-4 h-full"><div class="bg-white/80 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all h-full border-t-4 border-brandAmber group flex flex-col cursor-pointer" onclick="openModal('agro')"><div class="w-full flex justify-center mb-6"><i class="fas fa-tractor text-6xl metal-icon metal-amber group-hover:animate-tractor-move"></i></div><h3 class="text-xl font-bold text-gray-800 mb-2">EvoluSer <span class="text-amber-600">AGRO</span></h3><p class="text-[10px] text-gray-400 font-bold uppercase tracking-wider mb-6">Agroindustrial</p><ul class="space-y-3 text-sm text-gray-600 flex-grow"><li class="flex items-start"><i class="fas fa-check text-brandBlue mt-1 mr-2 text-xs"></i> Buenas Prácticas (BPA)</li><li class="flex items-start"><i class="fas fa-check text-brandBlue mt-1 mr-2 text-xs"></i> Inocuidad Alimentaria</li><li class="flex items-start"><i class="fas fa-check text-brandBlue mt-1 mr-2 text-xs"></i> Industrialización de Producto</li><li class="flex items-start"><i class="fas fa-check text-brandBlue mt-1 mr-2 text-xs"></i> Optimización Procesos</li></ul></div></div>
                 </div>
 
                 <div class="mt-16 text-center stagger-3 pb-4">
@@ -565,6 +565,22 @@
             `;
             document.body.appendChild(rocket);
             
+            // Generador de Humo (Posicionado en la cola)
+            setInterval(() => {
+                const rect = rocket.getBoundingClientRect();
+                const smoke = document.createElement('div');
+                smoke.className = 'rocket-smoke';
+                
+                const centerX = rect.left + rect.width/2;
+                const centerY = rect.top + rect.height/2;
+                
+                smoke.style.left = `${centerX}px`;
+                smoke.style.top = `${centerY}px`;
+                
+                document.body.appendChild(smoke);
+                setTimeout(() => smoke.remove(), 2000);
+            }, 120);
+
             function flyToNextPoint() {
                 const margin = 80;
                 const startX = Math.random() * (window.innerWidth - margin*2) + margin;
