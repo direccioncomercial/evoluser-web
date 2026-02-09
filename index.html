@@ -43,7 +43,6 @@
                         'tractor': 'tractor-move 0.5s linear infinite',
                         'shield': 'shield-guard 2s ease-in-out infinite',
                         'propulsion': 'propulsion 0.1s infinite alternate',
-                        'impact-entry': 'impactEntry 1.8s cubic-bezier(0.23, 1, 0.32, 1) forwards',
                     },
                     keyframes: {
                         float: { '0%, 100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-10px)' } },
@@ -56,11 +55,6 @@
                         'group-hug': { '0%, 100%': { transform: 'scale(1)' }, '50%': { transform: 'scale(0.9)' } },
                         'tractor-move': { '0%': { transform: 'rotate(0deg)' }, '25%': { transform: 'rotate(-2deg)' }, '75%': { transform: 'rotate(2deg)' }, '100%': { transform: 'rotate(0deg)' } },
                         'shield-guard': { '0%, 100%': { transform: 'scale(1)' }, '50%': { transform: 'scale(1.1)' } },
-                        impactEntry: { 
-                            '0%': { opacity: 0, transform: 'scale(0.3) rotateX(-90deg) translateZ(500px)', filter: 'blur(20px)' },
-                            '60%': { opacity: 1, transform: 'scale(1.1) rotateX(20deg) translateZ(50px)', filter: 'blur(0)' },
-                            '100%': { opacity: 1, transform: 'scale(1) rotateX(0deg) translateZ(0)', filter: 'blur(0)' }
-                        },
                         'propulsion': { 
                             '0%': { transform: 'scale(0.9) translateY(-2px)', opacity: '0.8' }, 
                             '100%': { transform: 'scale(1.1) translateY(2px)', opacity: '1' } 
@@ -111,74 +105,10 @@
             position: relative;
             z-index: 10; 
         }
-
-        /* --- PLACA DE CRISTAL REALISTA 3D --- */
-        .logo-3d-plate {
-            perspective: 1500px;
-            display: inline-block;
-            position: relative;
-            z-index: 50;
-        }
-
-        .logo-card { 
-            background: rgba(255, 255, 255, 0.05); 
-            border-radius: 2.5rem; 
-            border-top: 2px solid rgba(255, 255, 255, 0.6);
-            border-left: 2px solid rgba(255, 255, 255, 0.4);
-            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
-            border-right: 2px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 
-                0 45px 100px -20px rgba(0, 50, 100, 0.4),
-                inset 0 0 30px rgba(255, 255, 255, 0.2),
-                0 0 80px rgba(0, 86, 145, 0.2); 
-            display: inline-block; 
-            padding: 3rem; 
-            min-width: 320px; 
-            position: relative; 
-            overflow: hidden; 
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
-            transform-style: preserve-3d;
-            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .logo-card:hover {
-            transform: rotateX(10deg) rotateY(10deg);
-            box-shadow: 
-                -20px 45px 100px -20px rgba(0, 50, 100, 0.5),
-                inset 0 0 50px rgba(255, 255, 255, 0.3);
-        }
-
-        .logo-card::after { 
-            content: ''; 
-            position: absolute; 
-            top: 0; 
-            left: -150%; 
-            width: 150%; 
-            height: 100%; 
-            background: linear-gradient(120deg, 
-                transparent 20%, 
-                rgba(255, 255, 255, 0.4) 40%, 
-                rgba(255, 255, 255, 0.8) 50%, 
-                rgba(255, 255, 255, 0.4) 60%, 
-                transparent 80%); 
-            transform: skewX(-35deg) translateZ(50px); 
-            animation: crystalShine 4s infinite; 
-            pointer-events: none; 
-        }
-
-        .logo-glow { 
-            position: absolute; 
-            top: 50%; 
-            left: 50%; 
-            transform: translate(-50%, -50%); 
-            width: 200%; 
-            height: 200%; 
-            background: radial-gradient(circle, rgba(255,255,255,0.4) 0%, rgba(0,86,145,0.1) 40%, rgba(255,255,255,0) 70%); 
-            z-index: -1; 
-            filter: blur(60px); 
-            animation: pulse-slow 5s infinite; 
-        }
+        
+        .logo-card { background: rgba(255, 255, 255, 0.95); border-radius: 1.5rem; box-shadow: 0 15px 35px -5px rgba(0, 86, 145, 0.15), 0 0 20px rgba(255, 255, 255, 0.8) inset; border: 1px solid rgba(255, 255, 255, 1); display: inline-block; padding: 2rem; min-width: 300px; position: relative; z-index: 10; overflow: hidden; backdrop-filter: blur(10px); }
+        .logo-card::after { content: ''; position: absolute; top: 0; left: -150%; width: 150%; height: 100%; background: linear-gradient(120deg, transparent 20%, rgba(255, 255, 255, 0.8) 40%, rgba(255, 255, 255, 1) 50%, rgba(255, 255, 255, 0.8) 60%, transparent 80%); transform: skewX(-25deg); animation: crystal-shine 6s infinite; pointer-events: none; }
+        .logo-glow { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 160%; height: 160%; background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 60%); z-index: -1; filter: blur(40px); animation: pulse-slow 4s infinite; }
 
         .stagger-1 { animation: slideIn 0.6s ease-out both; animation-delay: 0.1s; }
         .stagger-2 { animation: slideIn 0.6s ease-out both; animation-delay: 0.2s; }
@@ -222,22 +152,31 @@
         /* --- COHETE TOON 3D (SVG Vectorial) --- */
         .wandering-rocket {
             position: fixed;
+            /* Z-Index 1: Detrás del texto pero sobre el fondo */
             z-index: 1; 
             width: 140px; 
             height: 140px;
             pointer-events: none;
-            opacity: 0; 
+            opacity: 0; /* JS subirá a 1 */
             transition: left 1s linear, top 1s linear, transform 0.8s ease-in-out;
             display: flex; align-items: center; justify-content: center;
         }
 
+        .rocket-svg {
+            width: 100%; height: 100%;
+            /* Filtro de sombra suave para dar profundidad 3D sin manchar */
+            filter: drop-shadow(0 10px 10px rgba(0,0,0,0.3));
+        }
+
+        /* Humo (Puffs de Nube) */
         .rocket-smoke-puff {
             position: fixed; 
             width: 25px; height: 25px;
+            /* Blanco denso con transparencia en los bordes */
             background: radial-gradient(circle, rgba(255,255,255,0.9) 20%, rgba(255,255,255,0) 70%);
             border-radius: 50%; 
             pointer-events: none; 
-            z-index: 0; 
+            z-index: 0; /* Detrás del cohete */
             animation: cloudExpand 2s forwards ease-out;
             filter: blur(4px);
         }
@@ -255,18 +194,14 @@
     <header class="pt-20 pb-32 relative overflow-hidden z-10">
         <div class="absolute top-10 left-1/2 transform -translate-x-1/2 w-[600px] h-[600px] bg-white rounded-full mix-blend-overlay filter blur-[120px] opacity-40 pointer-events-none"></div>
         <div class="container mx-auto px-6 text-center relative z-20">
-            
-            <!-- CONTENEDOR DEL LOGO REDISEÑADO SEGÚN ESPECIFICACIÓN DE CRISTAL PREMIUM -->
-            <div class="mb-14 relative inline-block logo-3d-plate">
+            <div class="mb-14 relative inline-block">
                 <div class="logo-glow"></div>
-                <div class="logo-card animate-impact-entry cursor-none" data-tilt data-tilt-glare data-tilt-max-glare="0.3">
-                    <div class="flex flex-col items-center justify-center transform-gpu" style="transform: translateZ(30px);">
-                        <!-- NUEVO LOGO GENERADO: CRISTAL TRANSLÚCIDO, REFRACCIÓN REALISTA, CALIDAD 4K -->
-                        <img src="https://images.unsplash.com/photo-1614850523296-d8c1af93d400?q=80&w=2070&auto=format&fit=crop" alt="EvoluSer Glass Logo" class="h-auto object-contain" style="max-height: 200px; max-width: 100%; filter: drop-shadow(0 20px 40px rgba(0,0,0,0.4));" id="main-logo-img">
+                <div class="logo-card animate-glow-entrance cursor-none">
+                    <div class="flex flex-col items-center justify-center">
+                        <img src="logo.png" alt="EvoluSer Logo" class="h-auto object-contain" style="max-height: 170px; max-width: 100%; filter: drop-shadow(0 5px 15px rgba(0,0,0,0.1));" onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?name=EvoluSer&background=005691&color=fff&size=128';">
                     </div>
                 </div>
             </div>
-            
             <h1 class="text-4xl md:text-6xl font-extrabold mb-6 tracking-tight drop-shadow-2xl text-white bg-clip-text text-transparent bg-gradient-to-br from-white via-gray-100 to-gray-300" style="text-shadow: 0 4px 20px rgba(0,0,0,0.2);">Evolución Integral</h1>
             <div class="h-1.5 w-24 bg-gradient-to-r from-brandBlue to-brandGreen mx-auto rounded-full mb-8 shadow-[0_0_20px_rgba(122,184,0,0.8)]"></div>
             <div id="slogan-container" class="neon-3d-wrapper text-lg md:text-2xl mt-4 mb-8 min-h-[50px] items-center tracking-widest"></div>
@@ -403,7 +338,7 @@
             <div id="view-emprendedores" class="hidden max-w-4xl mx-auto">
                 <div class="text-center mb-8"><span class="text-brandGreen font-bold tracking-widest uppercase text-xs bg-green-50 px-3 py-1 rounded-full">Startups & Nuevos Negocios</span><h2 class="text-3xl font-heading font-bold text-gray-800 mb-2 mt-4">Tu Socio de Despegue</h2></div>
                 <div class="bg-white/90 p-8 rounded-3xl shadow-xl border border-gray-100 flex flex-col md:flex-row items-center gap-8">
-                    <div class="w-40 h-40 md:w-56 md:h-56 relative flex-shrink-0"><div class="absolute inset-0 bg-brandGreen/20 rounded-full animate-pulse-slow"></div><img src="https://ui-avatars.com/api/?name=Ev&background=7AB800&color=fff&size=256" alt="Ev Emprendedora" class="w-full h-full object-contain relative z-10 drop-shadow-2xl"></div>
+                    <div class="w-40 h-40 md:w-56 md:h-56 relative flex-shrink-0"><div class="absolute inset-0 bg-brandGreen/20 rounded-full animate-pulse-slow"></div><img src="imagen6.png" alt="Ev Emprendedora" class="w-full h-full object-contain relative z-10 drop-shadow-2xl"></div>
                     <div class="text-center md:text-left">
                         <h3 class="text-2xl font-bold text-brandBlue mb-2">¡Hola! Soy Ev, tu Mentora Virtual</h3>
                         <p class="text-gray-600 mb-6 leading-relaxed">Sé lo difícil que es empezar. Por eso, en EvoluSer hemos diseñado un programa especial para emprendedores como tú. Te ayudamos a formalizar tu idea, cumplir con los requisitos legales básicos y estructurar tu primer equipo de trabajo sin complicaciones.</p>
@@ -421,7 +356,7 @@
         <div class="bg-gradient-to-r from-brandBlue to-brandGreen p-4 rounded-t-2xl flex justify-between items-center relative overflow-hidden">
             <div class="absolute inset-0 bg-white opacity-10 animate-pulse-slow"></div>
             <div class="flex items-center gap-3 z-10">
-                <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-lg overflow-hidden"><img src="https://ui-avatars.com/api/?name=Ev&background=005691&color=fff" alt="Logo" class="w-full h-full object-contain p-1"></div>
+                <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-lg overflow-hidden"><img src="logo.png" alt="Logo" class="w-full h-full object-contain p-1" onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?name=EvoluSer&background=005691&color=fff&size=128';"></div>
                 <div><h4 class="text-white font-bold text-sm">Soy Ev (IA)</h4><p class="text-xs text-white/80">Tu copiloto Evonauta</p></div>
             </div>
             <button onclick="toggleChat()" class="text-white hover:text-gray-200 z-10 transition-transform hover:rotate-90"><i class="fas fa-times text-xl"></i></button>
@@ -440,5 +375,463 @@
     
     <!-- AVATAR -->
     <div id="avatar-container" class="fixed bottom-6 right-6 z-[100] flex flex-col items-end pointer-events-none animate-pop-in" style="touch-action: none;">
-        <div id="avatar-bubble" onclick="toggleChat()" class="chat-bubble mb-8 max-w-[280px] animate-float pointer-events-auto transform transition hover:scale-105 origin-bottom-right duration-300 cursor-pointer"><div id="bubble-content-default"><h4 class="font-bold text-brandBlue text-sm mb-1">¡Hola, Evonauta! Soy Ev</h4><p class="text-xs text-gray-600 leading-snug mb-2">Haz clic para chatear con IA.</p></div></div>
-        <div id="avatar-wrapper" onclick="toggleChat()" class="relative w-36 h-36 pointer-events-auto cursor-pointer active:cursor-grabbing group animate-float-avatar"><img src="
+        <div id="avatar-bubble" onclick="toggleChat()" class="chat-bubble mb-8 max-w-[280px] animate-float pointer-events-auto transform transition hover:scale-105 origin-bottom-right duration-300 cursor-pointer pointer-events-auto"><div id="bubble-content-default"><h4 class="font-bold text-brandBlue text-sm mb-1">¡Hola, Evonauta! Soy Ev</h4><p class="text-xs text-gray-600 leading-snug mb-2">Haz clic para chatear con IA.</p></div></div>
+        <div id="avatar-wrapper" onclick="toggleChat()" class="relative w-36 h-36 pointer-events-auto cursor-pointer active:cursor-grabbing group animate-float-avatar pointer-events-auto"><img src="imagen6.png" alt="Asistente" class="w-full h-full object-contain filter drop-shadow-2xl transition-transform duration-300 group-hover:scale-110" onerror="this.style.display='none'; document.getElementById('avatar-fallback').style.display='flex';"><div id="avatar-fallback" class="hidden w-full h-full bg-brandBlue rounded-full items-center justify-center text-white shadow-xl"><i class="fas fa-robot text-4xl"></i></div></div>
+    </div>
+
+    <!-- MODAL -->
+    <div id="service-modal" class="fixed inset-0 z-[100] hidden items-center justify-center bg-black/70 backdrop-blur-sm p-4">
+        <div class="bg-white rounded-3xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto relative animate-float">
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-800 z-10 bg-white rounded-full p-2 shadow-md transition cursor-none"><i class="fas fa-times text-xl"></i></button>
+            <div class="grid grid-cols-1 md:grid-cols-2">
+                <div class="relative h-64 md:h-auto overflow-hidden bg-gray-100"><img id="modal-image" src="" alt="Servicio" class="w-full h-full object-cover transition duration-700 hover:scale-110"><div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent flex items-end p-6"><div class="text-white w-full"><p class="text-sm font-bold uppercase tracking-wider opacity-90 mb-1 drop-shadow-md" id="modal-subtitle">Dpto</p><div id="modal-title-container" class="flex items-center gap-3"><h3 class="text-3xl font-heading font-bold text-white drop-shadow-lg" id="modal-title">Titulo</h3></div></div></div></div>
+                <div class="p-8 md:p-12 flex flex-col justify-center">
+                    <div class="mb-6 border-l-4 border-brandBlue pl-4"><p class="text-xs text-gray-500 uppercase tracking-widest font-bold mb-1">Liderado por</p><h4 class="text-2xl font-bold text-gray-800" id="modal-leader">Nombre</h4><p class="text-brandBlue text-sm font-semibold" id="modal-role">Rol</p></div>
+                    <div class="prose prose-sm text-gray-600 mb-8" id="modal-desc"></div>
+                    <h5 class="font-bold text-gray-800 mb-3 text-sm uppercase tracking-wide border-b pb-2">Servicios Clave</h5><ul class="space-y-2 text-sm text-gray-600 mb-8" id="modal-list"></ul>
+                    <button onclick="closeModal()" class="w-full bg-gray-100 hover:bg-gray-200 text-gray-800 font-bold py-3 rounded-xl transition cursor-none">Cerrar Perfil</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-white/80 border-t border-gray-200 mt-auto backdrop-blur-sm relative z-30">
+        <div class="container mx-auto px-6 py-10">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-center text-center md:text-left">
+                <div class="space-y-3">
+                    <h5 class="font-bold text-gray-800 uppercase text-xs tracking-wider mb-4">Contacto Directo</h5>
+                    <a href="tel:+593996408009" class="block text-gray-600 hover:text-brandBlue transition-colors cursor-none"><i class="fas fa-phone-alt w-6 text-brandGreen"></i> +593 99 640 8009</a>
+                    <a href="https://wa.me/593983900050" class="block text-gray-600 hover:text-brandBlue transition-colors cursor-none"><i class="fab fa-whatsapp w-6 text-brandGreen"></i> +593 98 390 0050</a>
+                    <a href="mailto:evoluserec@gmail.com" class="block text-gray-600 hover:text-brandBlue transition-colors cursor-none"><i class="fas fa-envelope w-6 text-brandGreen"></i> evoluserec@gmail.com</a>
+                </div>
+                <div class="text-center">
+                   <p class="text-sm text-gray-400">© 2024 EvoluSer Consultores</p>
+                   <p class="text-xs text-brandBlue font-bold mt-1 tracking-wider uppercase">Comunidad de Evonautas</p>
+                   <p class="text-xs text-gray-300 mt-1">Quito, Ecuador</p>
+                </div>
+                <div class="text-center md:text-right">
+                    <h5 class="font-bold text-gray-800 uppercase text-xs tracking-wider mb-4">Conecta con la Misión</h5>
+                    <div class="flex justify-center md:justify-end space-x-4 mb-3">
+                        <a href="https://www.linkedin.com/in/evoluser-ecuador-4b5462382/" target="_blank" class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-brandBlue hover:text-white transition-all transform hover:scale-110 cursor-none" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="http://www.youtube.com/@EVOLUSEREC" target="_blank" class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-red-600 hover:text-white transition-all transform hover:scale-110 cursor-none" title="YouTube"><i class="fab fa-youtube"></i></a>
+                        <a href="https://www.facebook.com/share/14SRDeBzp77/" target="_blank" class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-blue-600 hover:text-white transition-all transform hover:scale-110 cursor-none" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/evoluserec?igsh=bXB6dWN5ejAxd2Yw" target="_blank" class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-pink-600 hover:text-white transition-all transform hover:scale-110 cursor-none" title="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.tiktok.com/@evoluserec?_r=1&_t=ZM-92aiiE2yhad" target="_blank" class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-black hover:text-white transition-all transform hover:scale-110 cursor-none" title="TikTok"><i class="fab fa-tiktok"></i></a>
+                        <a href="https://x.com/evoluserec" target="_blank" class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-black hover:text-white transition-all transform hover:scale-110 cursor-none" title="X"><i class="fab fa-x-twitter"></i></a>
+                    </div>
+                    <p class="text-xs text-gray-500 italic">"Únete a la tripulación y navega hacia la Evolución. <br><span class="font-bold text-brandGreen">¡Sé un Evonauta!</span>"</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // --- CONSTANTES GLOBALES Y API KEY ---
+        // ⚠️ CLAVE CAMUFLADA
+        const PARTE_A = "xai-lbSaJWSSPFg7VKQFaeZtWUN4Lx4upLr2ufD6w"; 
+        const PARTE_B = "0JeLMVBs7QcIaTF4Qz6Ki7GIDZQp8auW89aJ7QXqioO"; 
+        const API_KEY_FINAL = PARTE_A + PARTE_B;
+
+        const SYSTEM_PROMPT = `Actúas como "Ev", la asistente virtual experta de EvoluSer Consultores (Ecuador).
+        TU PERSONALIDAD: Amable, entusiasta ("Evonauta") y profesional. Siempre saludas con energía.
+        TU CONOCIMIENTO:
+        1. Servicios:
+           - HUMANO (Talento): Selección, Clima Laboral, Soft Skills. (Dir: Nury Echeverria).
+           - SSO (Seguridad): Normativa ISO, Auditorías, Salud. (Dir: Christian Ortega).
+           - SOSTENIBLE (Ambiente): Licencias, Huella de Carbono. (Dir: Christian Ortega).
+           - AGRO (Calidad): BPA, Inocuidad, Procesos. (Dir: Lilian Eras).
+        2. Contacto: WhatsApp +593 98 390 0050.
+        TUS REGLAS:
+        - Si te dicen "Hola" o "Buenas": Responde: "¡Hola, Evonauta! 🚀 Bienvenido a la evolución. Soy Ev. ¿Te gustaría mejorar el Talento Humano, la Seguridad, el Ambiente o tus Procesos Agroindustriales?".
+        - Si preguntan precios: Di que dependen del proyecto e invita al WhatsApp.
+        - Respuestas cortas (máx 50 palabras).`;
+
+        let chatHistory = [];
+        let isDragging = false, hasMoved = false, startX, startY;
+
+        // --- INICIALIZACIÓN ---
+        document.addEventListener('DOMContentLoaded', () => {
+            createNeonText("POTENCIAR EL SER, PROTEGER LA VIDA");
+            launchWanderingRocket();
+            
+            // Asignar listeners después de que el DOM esté listo
+            const sendBtn = document.getElementById('send-btn');
+            const chatInput = document.getElementById('chat-input');
+            const avatarContainer = document.getElementById('avatar-container');
+            const serviceModal = document.getElementById('service-modal');
+
+            if(sendBtn) sendBtn.addEventListener("click", handleChat);
+            if(chatInput) chatInput.addEventListener("keydown", (e) => {
+                if(e.key === "Enter" && !e.shiftKey) { e.preventDefault(); handleChat(); }
+            });
+            
+            if(avatarContainer) {
+                avatarContainer.addEventListener('mousedown', startDrag);
+                avatarContainer.addEventListener('touchstart', startDrag, {passive: false});
+            }
+
+            if(serviceModal) {
+                serviceModal.addEventListener('click', function(e) {
+                    if (e.target === this) closeModal();
+                });
+            }
+
+            // Fecha actual
+            const dateEl = document.getElementById('currentDate');
+            if (dateEl) { dateEl.textContent = new Date().toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' }); }
+        });
+
+        // --- CURSOR ---
+        const cursor = document.getElementById('custom-cursor');
+        document.addEventListener('mousemove', (e) => { 
+            if(cursor) cursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`; 
+        });
+        document.addEventListener('mouseenter', () => { if(cursor) cursor.style.display = 'flex'; });
+        document.addEventListener('mouseleave', () => { if(cursor) cursor.style.display = 'none'; });
+
+        // --- PARTÍCULAS ---
+        const canvas = document.getElementById('particles-canvas');
+        if (canvas) {
+            const ctx = canvas.getContext('2d'); let width, height, particles = [];
+            function resize() { width = canvas.width = window.innerWidth; height = canvas.height = window.innerHeight; }
+            class Particle {
+                constructor() { this.reset(); }
+                reset() {
+                    this.x = Math.random() * width; 
+                    this.y = Math.random() * height; 
+                    this.vy = -(0.2 + Math.random() * 0.5); 
+                    this.size = Math.random() * 2; 
+                    this.alpha = Math.random() * 0.5;
+                }
+                update() { this.y += this.vy; if (this.y < 0) this.reset(); }
+                draw() { 
+                    ctx.fillStyle = `rgba(255, 255, 255, ${this.alpha})`; 
+                    ctx.beginPath(); 
+                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); 
+                    ctx.fill(); 
+                }
+            }
+            function initParticles() { particles = []; for(let i=0; i<40; i++) particles.push(new Particle()); }
+            function animateParticles() { ctx.clearRect(0, 0, width, height); particles.forEach(p => { p.update(); p.draw(); }); requestAnimationFrame(animateParticles); }
+            window.addEventListener('resize', resize); resize(); initParticles(); animateParticles();
+        }
+        
+        // --- NAVEGACIÓN ---
+        function switchTab(tabName) {
+            const views = ['view-carta', 'view-brochure', 'view-empresas', 'view-emprendedores'];
+            views.forEach(v => {
+                const el = document.getElementById(v);
+                if(el) el.classList.add('hidden');
+            });
+            
+            const selected = document.getElementById('view-' + tabName);
+            if(selected) {
+                selected.classList.remove('hidden');
+                // Reiniciar animaciones
+                const animatedElements = selected.querySelectorAll('.animate-pop-in, .stagger-1, .stagger-2, .stagger-3, .stagger-4');
+                animatedElements.forEach(el => {
+                    el.style.animation = 'none';
+                    el.offsetHeight; 
+                    el.style.animation = null; 
+                });
+            }
+
+            const btnCarta = document.getElementById('btn-carta');
+            const btnBrochure = document.getElementById('btn-brochure');
+            
+            if (tabName === 'carta' || tabName === 'empresas' || tabName === 'emprendedores') {
+                btnCarta.className = "flex-1 py-3 px-6 rounded-full text-sm font-bold uppercase tracking-wider transition-all duration-500 bg-brandBlue text-white shadow-lg ring-4 ring-brandBlue/30 cursor-none";
+                btnBrochure.className = "flex-1 py-3 px-6 rounded-full text-sm font-bold uppercase tracking-wider transition-all duration-500 text-gray-500 hover:bg-white/50 hover:text-brandBlue cursor-none";
+            } else {
+                btnBrochure.className = "flex-1 py-3 px-6 rounded-full text-sm font-bold uppercase tracking-wider transition-all duration-500 bg-brandBlue text-white shadow-lg ring-4 ring-brandBlue/30 cursor-none";
+                btnCarta.className = "flex-1 py-3 px-6 rounded-full text-sm font-bold uppercase tracking-wider transition-all duration-500 text-gray-500 hover:bg-white/50 hover:text-brandBlue cursor-none";
+            }
+        }
+
+        if (typeof VanillaTilt !== 'undefined') { VanillaTilt.init(document.querySelectorAll("[data-tilt]"), { max: 15, speed: 400 }); }
+
+        // --- SLOGAN ---
+        function createNeonText(text) {
+            const container = document.getElementById('slogan-container');
+            if(!container) return;
+            const words = text.split(' ');
+            words.forEach(word => {
+                const wordSpan = document.createElement('span');
+                wordSpan.className = 'neon-word';
+                word.split('').forEach((char, index) => {
+                    const span = document.createElement('span');
+                    span.innerText = char;
+                    span.className = 'neon-letter';
+                    span.style.animationDelay = `${index * 0.15}s`;
+                    wordSpan.appendChild(span);
+                });
+                container.appendChild(wordSpan);
+            });
+        }
+
+        // --- COHETE NASA TOON 3D (SVG VECTORIAL PURO) ---
+        function launchWanderingRocket() {
+            const rocket = document.createElement('div');
+            rocket.className = 'wandering-rocket';
+            
+            // SVG ÚNICO: Cohete Blanco Sólido + Fuego Tomate
+            // Al estar en el mismo SVG, la alineación es perfecta.
+            rocket.innerHTML = `
+                <div class="rocket-container" style="transform: rotate(45deg);">
+                    <svg viewBox="0 0 512 512" style="width: 100%; height: 100%; overflow: visible;">
+                        <defs>
+                            <!-- Degradado para cuerpo blanco/metálico (efecto 3D) -->
+                            <linearGradient id="bodyGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
+                                <stop offset="50%" style="stop-color:#f0f4f8;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#d1d5db;stop-opacity:1" />
+                            </linearGradient>
+                            
+                            <!-- Degradado para ventana (cristal) -->
+                            <linearGradient id="windowGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#38bdf8;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#0284c7;stop-opacity:1" />
+                            </linearGradient>
+
+                            <!-- Degradado para aletas (Verde/Azul Marca) -->
+                            <linearGradient id="finsGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" style="stop-color:#7AB800;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#005691;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+
+                        <g transform="translate(256, 256)">
+                            <!-- Cuerpo (Huevo/Cilindro) -->
+                            <ellipse cx="0" cy="-20" rx="70" ry="140" fill="url(#bodyGradient)" />
+                            
+                            <!-- Punta (Cono) -->
+                            <path d="M-55 -100 Q0 -220 55 -100" fill="url(#finsGradient)" />
+
+                            <!-- Aleta Izquierda -->
+                            <path d="M-60 40 Q-100 100 -60 110 L-40 80 Z" fill="url(#finsGradient)" />
+                            
+                            <!-- Aleta Derecha -->
+                            <path d="M60 40 Q100 100 60 110 L40 80 Z" fill="url(#finsGradient)" />
+                            
+                            <!-- Motor (Base) -->
+                            <rect x="-35" y="100" width="70" height="20" fill="#94a3b8" />
+
+                            <!-- Ventana Redonda con Borde -->
+                            <circle cx="0" cy="-50" r="35" fill="#1e293b" />
+                            <circle cx="0" cy="-50" r="25" fill="url(#windowGradient)" />
+                            <circle cx="10" cy="-60" r="8" fill="white" opacity="0.4" />
+                        </g>
+                    </svg>
+                </div>
+            `;
+            document.body.appendChild(rocket);
+            
+            // Generador de Humo Delicado (Nubes)
+            setInterval(() => {
+                const rect = rocket.getBoundingClientRect();
+                
+                // Generar nubes un poco más grandes y esponjosas
+                const smoke = document.createElement('div');
+                smoke.className = 'rocket-smoke-puff';
+                
+                // Posición ajustada a la cola
+                const centerX = rect.left + rect.width/2;
+                const centerY = rect.top + rect.height/2;
+                
+                smoke.style.left = `${centerX}px`;
+                smoke.style.top = `${centerY}px`;
+                
+                document.body.appendChild(smoke);
+                setTimeout(() => smoke.remove(), 2500); // Duran un poco más
+            }, 200);
+
+            function flyToNextPoint() {
+                const margin = 80;
+                const startX = Math.random() * (window.innerWidth - margin*2) + margin;
+                const startY = Math.random() * (window.innerHeight - margin*2) + margin;
+                const endX = Math.random() * (window.innerWidth - margin*2) + margin;
+                const endY = Math.random() * (window.innerHeight - margin*2) + margin;
+
+                const deltaX = endX - startX;
+                const deltaY = endY - startY;
+                // Ajuste de ángulo para SVG vertical (+90deg)
+                const angle = Math.atan2(deltaY, deltaX) * 180 / Math.PI + 90;
+
+                if (!rocket.style.left) {
+                    rocket.style.left = '50%';
+                    rocket.style.top = '50%';
+                }
+
+                const duration = Math.random() * 20 + 15; 
+                
+                rocket.style.transition = `left ${duration}s linear, top ${duration}s linear, transform 1.5s ease-in-out`; 
+                
+                requestAnimationFrame(() => {
+                    rocket.style.opacity = '0.9'; // Transparencia aplicada
+                    rocket.style.transform = `rotate(${angle}deg)`;
+                    rocket.style.left = `${endX}px`;
+                    rocket.style.top = `${endY}px`;
+                });
+                
+                setTimeout(flyToNextPoint, duration * 1000);
+            }
+            setTimeout(flyToNextPoint, 100);
+        }
+
+        // --- MODALES (Textos Profesionales - Sin repetir nombres) ---
+        const serviceData = {
+            humano: { title: "EvoluSer HUMANO", icon: "fas fa-users", subtitle: "Gestión del Talento", leader: "Nury Echeverria", role: "Directora de Talento Humano", image: "imagen2.png", desc: "Creemos que el activo más valioso es la gente. Bajo una dirección experta, transformamos la cultura organizacional mediante estrategias integrales de bienestar, desarrollo de habilidades blandas y diagnósticos precisos que potencian el capital humano.", list: ["Reclutamiento y Selección", "Clima y Cultura", "Soft Skills y Liderazgo", "Evaluaciones de Desempeño"], iconClass: "metal-blue", animation: "animate-hug" },
+            seguro: { title: "EvoluSer S.S.O.", icon: "fas fa-shield-alt", subtitle: "Seguridad y Salud Ocupacional", leader: "Christian Ortega", role: "Director Técnico SST", image: "imagen3.png", desc: "La seguridad no es negociable. Lideramos un equipo técnico enfocado en blindar tus operaciones, asegurando el estricto cumplimiento normativo y protegiendo la integridad de cada colaborador en todos los niveles.", list: ["Sistemas de Gestión ISO 45001", "Auditorías de Riesgos", "Vigilancia de Salud", "Capacitación Técnica"], iconClass: "metal-gray", animation: "animate-shield" },
+            sostenible: { title: "EvoluSer SOSTENIBLE", icon: "fas fa-leaf", subtitle: "Medio Ambiente", leader: "Christian Ortega", role: "Director de Sostenibilidad", image: "imagen4.png", desc: "El futuro es verde. Integramos la visión ambiental directamente en tu estrategia de negocio, gestionando planes de manejo y certificaciones que no solo cumplen la ley, sino que te diferencian competitivamente en el mercado.", list: ["Planes de Manejo Ambiental", "Certificaciones Verdes", "Eficiencia Energética", "Cultura Ambiental Corporativa"], iconClass: "metal-green", animation: "animate-leaf" },
+            agro: { title: "EvoluSer AGRO", icon: "fas fa-tractor", subtitle: "Agroindustrial", leader: "Lilian Eras", role: "Directora Agroindustrial", image: "imagen5.png", desc: "Calidad desde el origen. Aportamos una vasta experiencia técnica para optimizar procesos agroindustriales, garantizando la inocuidad alimentaria y el cumplimiento riguroso de buenas prácticas desde el campo hasta la mesa, incluyendo la transformación del producto.", list: ["Buenas Prácticas Agrícolas (BPA)", "Inocuidad Alimentaria", "Industrialización de Producto", "Optimización de Procesos"], iconClass: "metal-amber", animation: "animate-tractor" },
+            equipo: { title: "Equipo Directivo", icon: "fas fa-pen-nib", subtitle: "EvoluSer Consultores", leader: "Junta Directiva", role: "Liderazgo Estratégico", image: "imagen7.jpeg", desc: "Nuestro equipo directivo encarna la misión de potenciar el ser y proteger la vida. Guiamos a la organización con una visión integral, asegurando que cada paso que damos genere valor real para nuestros clientes y la sociedad.", list: ["Dirección Estratégica", "Gestión de Calidad", "Innovación Corporativa", "Responsabilidad Social"], iconClass: "metal-blue" }
+        };
+
+        function openModal(type) {
+            const data = serviceData[type];
+            if(!data) return;
+            document.getElementById('modal-image').src = data.image; 
+            document.getElementById('modal-image').onerror = function() { this.src = 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80'; };
+            document.getElementById('modal-title').innerHTML = `<i class="${data.icon} text-4xl mr-3 metal-icon ${data.iconClass}"></i>${data.title}`;
+            document.getElementById('modal-subtitle').innerText = data.subtitle; 
+            document.getElementById('modal-leader').innerText = data.leader; 
+            document.getElementById('modal-role').innerText = data.role; 
+            document.getElementById('modal-desc').innerText = data.desc;
+            
+            const listEl = document.getElementById('modal-list');
+            listEl.innerHTML = '';
+            const colorClass = type === 'humano' ? 'text-brandBlue' : type === 'seguro' ? 'text-gray-600' : type === 'sostenible' ? 'text-brandGreen' : 'text-brandAmber';
+            data.list.forEach(item => {
+                listEl.innerHTML += `<li class="flex items-center"><i class="fas fa-check-circle mr-2 ${colorClass}"></i> ${item}</li>`;
+            });
+
+            const modal = document.getElementById('service-modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('service-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        // --- CHATBOT ---
+        function toggleChat() {
+            const chatWindow = document.getElementById('ai-chat-window');
+            const avatarBubble = document.getElementById('avatar-bubble');
+            if (chatWindow.classList.contains('hidden')) {
+                chatWindow.classList.remove('hidden');
+                setTimeout(() => chatWindow.classList.remove('scale-0'), 10);
+                avatarBubble.classList.add('opacity-0');
+            } else {
+                chatWindow.classList.add('scale-0');
+                setTimeout(() => chatWindow.classList.add('hidden'), 300);
+                avatarBubble.classList.remove('opacity-0');
+            }
+        }
+
+        const createMessage = (text, type) => {
+            const chatBox = document.getElementById('chat-box');
+            const li = document.createElement("li");
+            li.className = type === "outgoing" ? "flex justify-end" : "flex justify-start";
+            const div = document.createElement("div");
+            div.className = type === "outgoing" ? 
+                "bg-brandBlue text-white p-3 rounded-2xl rounded-tr-none shadow-md max-w-[85%] text-sm" : 
+                "bg-white text-gray-700 p-3 rounded-2xl rounded-tl-none shadow-sm max-w-[85%] text-sm border border-gray-100";
+            div.innerHTML = text.replace(/\n/g, "<br>");
+            li.appendChild(div);
+            chatBox.appendChild(li);
+            chatBox.scrollTo(0, chatBox.scrollHeight);
+            return div;
+        }
+
+        const generateResponse = async (userText) => {
+            const loadingDiv = createMessage('<i class="fas fa-circle-notch fa-spin text-brandBlue"></i> Conectando...', "incoming");
+            
+            // Preparar historial
+            let messages = [{ role: "system", content: SYSTEM_PROMPT }];
+            chatHistory.forEach(msg => messages.push(msg));
+            messages.push({ role: "user", content: userText });
+
+            try {
+                const response = await fetch("https://api.x.ai/v1/chat/completions", {
+                    method: "POST",
+                    headers: { 
+                        "Content-Type": "application/json", 
+                        "Authorization": "Bearer " + API_KEY_FINAL 
+                    },
+                    body: JSON.stringify({ 
+                        model: "grok-beta", 
+                        messages: messages, 
+                        stream: false 
+                    })
+                });
+
+                const json = await response.json();
+                if (!response.ok) throw new Error(json.error?.message || "Error en la API");
+
+                const apiResponse = json.choices[0].message.content;
+                
+                chatHistory.push({ role: "user", content: userText });
+                chatHistory.push({ role: "assistant", content: apiResponse });
+                
+                loadingDiv.innerHTML = apiResponse.replace(/\n/g, "<br>").replace(/\*\*(.*?)\*\*/g, '<b>$1</b>');
+            
+            } catch (error) {
+                console.error("Error Grok:", error);
+                loadingDiv.innerHTML = "Lo siento, tuve un problema de conexión con mi cerebro Grok. ¿Intentamos de nuevo?";
+            }
+        };
+
+        const handleChat = () => {
+            const chatInput = document.getElementById('chat-input');
+            const userText = chatInput.value.trim();
+            if (!userText) return;
+            createMessage(userText, "outgoing");
+            chatInput.value = "";
+            generateResponse(userText);
+        }
+
+        // --- FUNCIONES DRAG & DROP ---
+        function startDrag(e) {
+            const avatarContainer = document.getElementById('avatar-container');
+            if (e.target.closest('#avatar-bubble')) return;
+            const clientX = e.type === 'mousedown' ? e.clientX : e.touches[0].clientX;
+            const clientY = e.type === 'mousedown' ? e.clientY : e.touches[0].clientY;
+            startX = clientX; startY = clientY;
+            isDragging = false; hasMoved = false;
+            document.addEventListener('mousemove', onDrag);
+            document.addEventListener('mouseup', endDrag);
+            document.addEventListener('touchmove', onDrag, {passive: false});
+            document.addEventListener('touchend', endDrag);
+        }
+
+        function onDrag(e) {
+            const avatarContainer = document.getElementById('avatar-container');
+            const clientX = e.type === 'mousemove' ? e.clientX : e.touches[0].clientX;
+            const clientY = e.type === 'mousemove' ? e.clientY : e.touches[0].clientY;
+            if (Math.abs(clientX - startX) > 10 || Math.abs(clientY - startY) > 10) {
+                isDragging = true; hasMoved = true;
+                e.preventDefault();
+                const rect = avatarContainer.getBoundingClientRect();
+                avatarContainer.style.left = (rect.left + (clientX - startX)) + 'px';
+                avatarContainer.style.top = (rect.top + (clientY - startY)) + 'px';
+                startX = clientX; startY = clientY;
+                avatarContainer.classList.remove('bottom-6', 'right-6');
+            }
+        }
+
+        function endDrag(e) {
+            document.removeEventListener('mousemove', onDrag);
+            document.removeEventListener('mouseup', endDrag);
+            document.removeEventListener('touchmove', onDrag);
+            document.removeEventListener('touchend', endDrag);
+            if (!hasMoved && !e.target.closest('#avatar-bubble')) {
+                 toggleChat();
+            }
+        }
+    </script>
+</body>
+</html>
