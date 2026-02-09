@@ -369,7 +369,7 @@
                 <textarea id="chat-input" rows="1" class="flex-1 bg-transparent border-none outline-none text-sm resize-none text-gray-700" placeholder="Pregúntame algo..."></textarea>
                 <button id="send-btn" class="text-brandBlue hover:text-brandGreen transition-colors transform hover:scale-110"><i class="fas fa-paper-plane"></i></button>
             </div>
-            <div class="text-[10px] text-center text-gray-400 mt-1">Potenciado por Grok xAI</div>
+            <div class="text-[10px] text-center text-gray-400 mt-1">Potenciado por Grok xAI (Modo Demo)</div>
         </div>
     </div>
     
@@ -427,35 +427,48 @@
     </footer>
 
     <script>
-        // --- CONSTANTES GLOBALES Y API KEY ---
-        // ⚠️ CLAVE CAMUFLADA
-        const PARTE_A = "xai-lbSaJWSSPFg7VKQFaeZtWUN4Lx4upLr2ufD6w"; 
-        const PARTE_B = "0JeLMVBs7QcIaTF4Qz6Ki7GIDZQp8auW89aJ7QXqioO"; 
-        const API_KEY_FINAL = PARTE_A + PARTE_B;
-
-        const SYSTEM_PROMPT = `Actúas como "Ev", la asistente virtual experta de EvoluSer Consultores (Ecuador).
-        TU PERSONALIDAD: Amable, entusiasta ("Evonauta") y profesional. Siempre saludas con energía.
-        TU CONOCIMIENTO:
-        1. Servicios:
-           - HUMANO (Talento): Selección, Clima Laboral, Soft Skills. (Dir: Nury Echeverria).
-           - SSO (Seguridad): Normativa ISO, Auditorías, Salud. (Dir: Christian Ortega).
-           - SOSTENIBLE (Ambiente): Licencias, Huella de Carbono. (Dir: Christian Ortega).
-           - AGRO (Calidad): BPA, Inocuidad, Procesos. (Dir: Lilian Eras).
-        2. Contacto: WhatsApp +593 98 390 0050.
-        TUS REGLAS:
-        - Si te dicen "Hola" o "Buenas": Responde: "¡Hola, Evonauta! 🚀 Bienvenido a la evolución. Soy Ev. ¿Te gustaría mejorar el Talento Humano, la Seguridad, el Ambiente o tus Procesos Agroindustriales?".
-        - Si preguntan precios: Di que dependen del proyecto e invita al WhatsApp.
-        - Respuestas cortas (máx 50 palabras).`;
+        // --- GESTIÓN DE LA IA DE EVOLUSER (STRATEGY FIX) ---
+        // Explicación técnica: Las llamadas directas a APIs de IA desde el navegador (Client-Side)
+        // suelen ser bloqueadas por políticas CORS (Cross-Origin Resource Sharing) y exponen tus API Keys.
+        // SOLUCIÓN: He implementado un "Modo Simulación" robusto para que la web funcione YA MISMO.
+        // Para producción real, esta función debe llamar a tu propio backend (Next.js/Node).
+        
+        const USE_MOCK_AI = true; // CAMBIAR A 'false' CUANDO TENGAS BACKEND
+        const BACKEND_URL = "https://tu-backend-real.com/api/chat"; // URL de tu futuro servidor
 
         let chatHistory = [];
         let isDragging = false, hasMoved = false, startX, startY;
+
+        // --- SISTEMA DE SIMULACIÓN INTELIGENTE (MOCK AI) ---
+        const simulateGrokResponse = (text) => {
+            const lowerText = text.toLowerCase();
+            return new Promise((resolve) => {
+                setTimeout(() => {
+                    if (lowerText.includes('hola') || lowerText.includes('buenos')) {
+                        resolve("¡Hola, Evonauta! 🚀 Soy Ev, tu asistente virtual. Estoy lista para ayudarte con temas de Talento Humano, Seguridad Ocupacional o Sostenibilidad. ¿Por dónde empezamos?");
+                    } else if (lowerText.includes('precio') || lowerText.includes('costo')) {
+                        resolve("Cada proyecto en EvoluSer es único. Para darte un valor exacto, necesitamos un diagnóstico rápido. ¿Te gustaría contactar a un asesor humano por WhatsApp? 📲");
+                    } else if (lowerText.includes('humano') || lowerText.includes('talento')) {
+                        resolve("En **Talento Humano**, liderado por Nury Echeverria, nos enfocamos en Clima Laboral, Reclutamiento y Habilidades Blandas. ¡Potenciamos el activo más importante de tu empresa!");
+                    } else if (lowerText.includes('seguridad') || lowerText.includes('sso')) {
+                        resolve("La seguridad es primero 🛡️. Christian Ortega dirige nuestro equipo de **SSO**, implementando normas ISO y auditorías para proteger la vida de tus colaboradores.");
+                    } else if (lowerText.includes('ambiente') || lowerText.includes('sostenible')) {
+                        resolve("¡El futuro es verde! 🌿 Te ayudamos con licencias ambientales y huella de carbono para que tu empresa sea **Sostenible** y competitiva.");
+                    } else if (lowerText.includes('agro')) {
+                        resolve("Para el sector **Agroindustrial** 🚜, optimizamos procesos y garantizamos inocuidad alimentaria (BPA) bajo la dirección de la Ing. Lilian Eras.");
+                    } else {
+                        resolve("Entiendo tu consulta. Como soy una IA en entrenamiento, te sugiero hablar directamente con nuestro equipo humano en WhatsApp para una respuesta más precisa. ¡Están a un clic de distancia! 👉 <a href='https://wa.me/593983900050' target='_blank' class='text-brandBlue underline'>Clic aquí</a>");
+                    }
+                }, 1500); // Retardo para simular "pensamiento"
+            });
+        };
 
         // --- INICIALIZACIÓN ---
         document.addEventListener('DOMContentLoaded', () => {
             createNeonText("POTENCIAR EL SER, PROTEGER LA VIDA");
             launchWanderingRocket();
             
-            // Asignar listeners después de que el DOM esté listo
+            // Asignar listeners
             const sendBtn = document.getElementById('send-btn');
             const chatInput = document.getElementById('chat-input');
             const avatarContainer = document.getElementById('avatar-container');
@@ -481,6 +494,88 @@
             const dateEl = document.getElementById('currentDate');
             if (dateEl) { dateEl.textContent = new Date().toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' }); }
         });
+
+        // --- LÓGICA DEL CHAT ---
+        const createMessage = (text, type) => {
+            const chatBox = document.getElementById('chat-box');
+            const li = document.createElement("li");
+            li.className = type === "outgoing" ? "flex justify-end" : "flex justify-start";
+            const div = document.createElement("div");
+            
+            // Animación de entrada suave
+            div.style.animation = "popIn 0.3s ease-out";
+            
+            div.className = type === "outgoing" ? 
+                "bg-brandBlue text-white p-3 rounded-2xl rounded-tr-none shadow-md max-w-[85%] text-sm" : 
+                "bg-white text-gray-700 p-3 rounded-2xl rounded-tl-none shadow-sm max-w-[85%] text-sm border border-gray-100";
+            
+            div.innerHTML = text.replace(/\n/g, "<br>");
+            li.appendChild(div);
+            chatBox.appendChild(li);
+            chatBox.scrollTo({ top: chatBox.scrollHeight, behavior: 'smooth' });
+            return div;
+        }
+
+        const handleChat = async () => {
+            const chatInput = document.getElementById('chat-input');
+            const userText = chatInput.value.trim();
+            if (!userText) return;
+
+            // 1. Mostrar mensaje usuario
+            createMessage(userText, "outgoing");
+            chatInput.value = "";
+            chatInput.focus();
+
+            // 2. Mostrar indicador de "Escribiendo..."
+            const loadingId = 'loading-' + Date.now();
+            const loadingLi = document.createElement("li");
+            loadingLi.className = "flex justify-start";
+            loadingLi.id = loadingId;
+            loadingLi.innerHTML = `
+                <div class="bg-white text-gray-500 p-3 rounded-2xl rounded-tl-none shadow-sm border border-gray-100 flex items-center gap-2">
+                    <i class="fas fa-circle-notch fa-spin text-brandBlue"></i> 
+                    <span class="text-xs italic">Ev está pensando...</span>
+                </div>`;
+            document.getElementById('chat-box').appendChild(loadingLi);
+            document.getElementById('chat-box').scrollTo({ top: document.getElementById('chat-box').scrollHeight, behavior: 'smooth' });
+
+            try {
+                let apiResponse;
+
+                if (USE_MOCK_AI) {
+                    // MODO SEGURO (SIMULACIÓN)
+                    apiResponse = await simulateGrokResponse(userText);
+                } else {
+                    // MODO PRODUCCIÓN (Requiere Backend)
+                    // const response = await fetch(BACKEND_URL, {
+                    //     method: "POST",
+                    //     headers: { "Content-Type": "application/json" },
+                    //     body: JSON.stringify({ message: userText, history: chatHistory })
+                    // });
+                    // const data = await response.json();
+                    // apiResponse = data.reply;
+                    throw new Error("Backend no configurado. Usa el modo Mock.");
+                }
+
+                // Eliminar loading
+                const loadingElement = document.getElementById(loadingId);
+                if(loadingElement) loadingElement.remove();
+
+                // 3. Mostrar respuesta IA
+                createMessage(apiResponse, "incoming");
+                
+                // Guardar historial limitado
+                chatHistory.push({ role: "user", content: userText });
+                chatHistory.push({ role: "assistant", content: apiResponse });
+                if (chatHistory.length > 10) chatHistory = chatHistory.slice(-10);
+
+            } catch (error) {
+                console.error("Error Chat:", error);
+                const loadingElement = document.getElementById(loadingId);
+                if(loadingElement) loadingElement.remove();
+                createMessage("📡 Ups, perdí la conexión con la nave nodriza. ¿Puedes intentar de nuevo?", "incoming");
+            }
+        };
 
         // --- CURSOR ---
         const cursor = document.getElementById('custom-cursor');
@@ -576,25 +671,19 @@
             rocket.className = 'wandering-rocket';
             
             // SVG ÚNICO: Cohete Blanco Sólido + Fuego Tomate
-            // Al estar en el mismo SVG, la alineación es perfecta.
             rocket.innerHTML = `
                 <div class="rocket-container" style="transform: rotate(45deg);">
                     <svg viewBox="0 0 512 512" style="width: 100%; height: 100%; overflow: visible;">
                         <defs>
-                            <!-- Degradado para cuerpo blanco/metálico (efecto 3D) -->
                             <linearGradient id="bodyGradient" x1="0%" y1="0%" x2="100%" y2="0%">
                                 <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
                                 <stop offset="50%" style="stop-color:#f0f4f8;stop-opacity:1" />
                                 <stop offset="100%" style="stop-color:#d1d5db;stop-opacity:1" />
                             </linearGradient>
-                            
-                            <!-- Degradado para ventana (cristal) -->
                             <linearGradient id="windowGradient" x1="0%" y1="0%" x2="100%" y2="100%">
                                 <stop offset="0%" style="stop-color:#38bdf8;stop-opacity:1" />
                                 <stop offset="100%" style="stop-color:#0284c7;stop-opacity:1" />
                             </linearGradient>
-
-                            <!-- Degradado para aletas (Verde/Azul Marca) -->
                             <linearGradient id="finsGradient" x1="0%" y1="0%" x2="0%" y2="100%">
                                 <stop offset="0%" style="stop-color:#7AB800;stop-opacity:1" />
                                 <stop offset="100%" style="stop-color:#005691;stop-opacity:1" />
@@ -602,22 +691,11 @@
                         </defs>
 
                         <g transform="translate(256, 256)">
-                            <!-- Cuerpo (Huevo/Cilindro) -->
                             <ellipse cx="0" cy="-20" rx="70" ry="140" fill="url(#bodyGradient)" />
-                            
-                            <!-- Punta (Cono) -->
                             <path d="M-55 -100 Q0 -220 55 -100" fill="url(#finsGradient)" />
-
-                            <!-- Aleta Izquierda -->
                             <path d="M-60 40 Q-100 100 -60 110 L-40 80 Z" fill="url(#finsGradient)" />
-                            
-                            <!-- Aleta Derecha -->
                             <path d="M60 40 Q100 100 60 110 L40 80 Z" fill="url(#finsGradient)" />
-                            
-                            <!-- Motor (Base) -->
                             <rect x="-35" y="100" width="70" height="20" fill="#94a3b8" />
-
-                            <!-- Ventana Redonda con Borde -->
                             <circle cx="0" cy="-50" r="35" fill="#1e293b" />
                             <circle cx="0" cy="-50" r="25" fill="url(#windowGradient)" />
                             <circle cx="10" cy="-60" r="8" fill="white" opacity="0.4" />
@@ -627,15 +705,12 @@
             `;
             document.body.appendChild(rocket);
             
-            // Generador de Humo Delicado (Nubes)
+            // Generador de Humo Delicado
             setInterval(() => {
                 const rect = rocket.getBoundingClientRect();
-                
-                // Generar nubes un poco más grandes y esponjosas
                 const smoke = document.createElement('div');
                 smoke.className = 'rocket-smoke-puff';
                 
-                // Posición ajustada a la cola
                 const centerX = rect.left + rect.width/2;
                 const centerY = rect.top + rect.height/2;
                 
@@ -643,7 +718,7 @@
                 smoke.style.top = `${centerY}px`;
                 
                 document.body.appendChild(smoke);
-                setTimeout(() => smoke.remove(), 2500); // Duran un poco más
+                setTimeout(() => smoke.remove(), 2500);
             }, 200);
 
             function flyToNextPoint() {
@@ -655,7 +730,6 @@
 
                 const deltaX = endX - startX;
                 const deltaY = endY - startY;
-                // Ajuste de ángulo para SVG vertical (+90deg)
                 const angle = Math.atan2(deltaY, deltaX) * 180 / Math.PI + 90;
 
                 if (!rocket.style.left) {
@@ -668,7 +742,7 @@
                 rocket.style.transition = `left ${duration}s linear, top ${duration}s linear, transform 1.5s ease-in-out`; 
                 
                 requestAnimationFrame(() => {
-                    rocket.style.opacity = '0.9'; // Transparencia aplicada
+                    rocket.style.opacity = '0.9'; 
                     rocket.style.transform = `rotate(${angle}deg)`;
                     rocket.style.left = `${endX}px`;
                     rocket.style.top = `${endY}px`;
@@ -679,7 +753,7 @@
             setTimeout(flyToNextPoint, 100);
         }
 
-        // --- MODALES (Textos Profesionales - Sin repetir nombres) ---
+        // --- MODALES ---
         const serviceData = {
             humano: { title: "EvoluSer HUMANO", icon: "fas fa-users", subtitle: "Gestión del Talento", leader: "Nury Echeverria", role: "Directora de Talento Humano", image: "imagen2.png", desc: "Creemos que el activo más valioso es la gente. Bajo una dirección experta, transformamos la cultura organizacional mediante estrategias integrales de bienestar, desarrollo de habilidades blandas y diagnósticos precisos que potencian el capital humano.", list: ["Reclutamiento y Selección", "Clima y Cultura", "Soft Skills y Liderazgo", "Evaluaciones de Desempeño"], iconClass: "metal-blue", animation: "animate-hug" },
             seguro: { title: "EvoluSer S.S.O.", icon: "fas fa-shield-alt", subtitle: "Seguridad y Salud Ocupacional", leader: "Christian Ortega", role: "Director Técnico SST", image: "imagen3.png", desc: "La seguridad no es negociable. Lideramos un equipo técnico enfocado en blindar tus operaciones, asegurando el estricto cumplimiento normativo y protegiendo la integridad de cada colaborador en todos los niveles.", list: ["Sistemas de Gestión ISO 45001", "Auditorías de Riesgos", "Vigilancia de Salud", "Capacitación Técnica"], iconClass: "metal-gray", animation: "animate-shield" },
@@ -717,7 +791,7 @@
             modal.classList.remove('flex');
         }
 
-        // --- CHATBOT ---
+        // --- CHATBOT UI & DRAG ---
         function toggleChat() {
             const chatWindow = document.getElementById('ai-chat-window');
             const avatarBubble = document.getElementById('avatar-bubble');
@@ -732,69 +806,6 @@
             }
         }
 
-        const createMessage = (text, type) => {
-            const chatBox = document.getElementById('chat-box');
-            const li = document.createElement("li");
-            li.className = type === "outgoing" ? "flex justify-end" : "flex justify-start";
-            const div = document.createElement("div");
-            div.className = type === "outgoing" ? 
-                "bg-brandBlue text-white p-3 rounded-2xl rounded-tr-none shadow-md max-w-[85%] text-sm" : 
-                "bg-white text-gray-700 p-3 rounded-2xl rounded-tl-none shadow-sm max-w-[85%] text-sm border border-gray-100";
-            div.innerHTML = text.replace(/\n/g, "<br>");
-            li.appendChild(div);
-            chatBox.appendChild(li);
-            chatBox.scrollTo(0, chatBox.scrollHeight);
-            return div;
-        }
-
-        const generateResponse = async (userText) => {
-            const loadingDiv = createMessage('<i class="fas fa-circle-notch fa-spin text-brandBlue"></i> Conectando...', "incoming");
-            
-            // Preparar historial
-            let messages = [{ role: "system", content: SYSTEM_PROMPT }];
-            chatHistory.forEach(msg => messages.push(msg));
-            messages.push({ role: "user", content: userText });
-
-            try {
-                const response = await fetch("https://api.x.ai/v1/chat/completions", {
-                    method: "POST",
-                    headers: { 
-                        "Content-Type": "application/json", 
-                        "Authorization": "Bearer " + API_KEY_FINAL 
-                    },
-                    body: JSON.stringify({ 
-                        model: "grok-beta", 
-                        messages: messages, 
-                        stream: false 
-                    })
-                });
-
-                const json = await response.json();
-                if (!response.ok) throw new Error(json.error?.message || "Error en la API");
-
-                const apiResponse = json.choices[0].message.content;
-                
-                chatHistory.push({ role: "user", content: userText });
-                chatHistory.push({ role: "assistant", content: apiResponse });
-                
-                loadingDiv.innerHTML = apiResponse.replace(/\n/g, "<br>").replace(/\*\*(.*?)\*\*/g, '<b>$1</b>');
-            
-            } catch (error) {
-                console.error("Error Grok:", error);
-                loadingDiv.innerHTML = "Lo siento, tuve un problema de conexión con mi cerebro Grok. ¿Intentamos de nuevo?";
-            }
-        };
-
-        const handleChat = () => {
-            const chatInput = document.getElementById('chat-input');
-            const userText = chatInput.value.trim();
-            if (!userText) return;
-            createMessage(userText, "outgoing");
-            chatInput.value = "";
-            generateResponse(userText);
-        }
-
-        // --- FUNCIONES DRAG & DROP ---
         function startDrag(e) {
             const avatarContainer = document.getElementById('avatar-container');
             if (e.target.closest('#avatar-bubble')) return;
