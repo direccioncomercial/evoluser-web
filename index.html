@@ -45,8 +45,14 @@
                         'metal-shine': 'metalShine 3s linear infinite',
                         'suspension': 'suspension 2s ease-in-out infinite',
                         'pen-write': 'penWrite 3s ease-in-out infinite',
+                        'float-elegant': 'floatElegant 6s ease-in-out infinite', // Más lento y majestuoso para el logo
                     },
                     keyframes: {
+                        // Levitación elegante con sombra dinámica (Para Logo y Iconos)
+                        floatElegant: {
+                            '0%, 100%': { transform: 'translateY(0px)', filter: 'drop-shadow(0 15px 15px rgba(0,50,100,0.1))' },
+                            '50%': { transform: 'translateY(-15px)', filter: 'drop-shadow(0 35px 25px rgba(0,50,100,0.15))' }
+                        },
                         // Flujo Metálico (Mueve el degradado)
                         metalShine: {
                             '0%': { backgroundPosition: '0% 50%' },
@@ -240,8 +246,9 @@
         <div class="absolute top-10 left-1/2 transform -translate-x-1/2 w-[600px] h-[600px] bg-white rounded-full mix-blend-overlay filter blur-[120px] opacity-40 pointer-events-none"></div>
         <div class="container mx-auto px-6 text-center relative z-20">
             <div class="mb-14 relative inline-block">
-                <div class="logo-glow"></div>
-                <div class="logo-card animate-glow-entrance cursor-none">
+                <!-- NUEVO: Efecto Levitación en el Logo -->
+                <div class="logo-glow animate-pulse-slow"></div>
+                <div class="logo-card animate-float-elegant interactive-card cursor-none">
                     <div class="flex flex-col items-center justify-center">
                         <img src="logo.png" alt="EvoluSer Logo" class="h-auto object-contain" style="max-height: 170px; max-width: 100%; filter: drop-shadow(0 5px 15px rgba(0,0,0,0.1));" onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?name=EvoluSer&background=005691&color=fff&size=128';">
                     </div>
@@ -394,9 +401,11 @@
                 </div>
 
                 <div class="mt-16 text-center stagger-3 pb-4">
-                    <a href="https://wa.me/593983900050" target="_blank" class="inline-flex items-center gap-3 bg-gradient-to-r from-brandGreen to-green-600 text-white font-bold py-4 px-10 rounded-full transition-all transform hover:scale-105 shadow-xl hover:shadow-green-500/30 group cursor-none mb-6">
-                        <span>¡Sé un EVONAUTA! Evoluciona hoy</span>
-                        <i class="fas fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                    <!-- NUEVO BOTÓN: MEJOR ANIMACIÓN (Hyper-Button) -->
+                    <a href="https://wa.me/593983900050" target="_blank" class="inline-flex items-center gap-3 bg-gradient-to-r from-brandGreen to-green-600 text-white font-bold py-4 px-10 rounded-full transition-all transform hover:scale-105 shadow-xl hover:shadow-green-500/30 group cursor-none mb-6 relative overflow-hidden animate-pulse-slow">
+                        <div class="absolute inset-0 bg-white/20 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 ease-in-out skew-x-12"></div> <!-- Shine effect -->
+                        <span class="relative z-10">¡Sé un EVONAUTA! Evoluciona hoy</span>
+                        <i class="fas fa-arrow-right group-hover:translate-x-2 transition-transform duration-300 relative z-10"></i>
                     </a>
                 </div>
             </div>
