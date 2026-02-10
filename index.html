@@ -369,7 +369,7 @@
                 <textarea id="chat-input" rows="1" class="flex-1 bg-transparent border-none outline-none text-sm resize-none text-gray-700" placeholder="Pregúntame algo..."></textarea>
                 <button id="send-btn" class="text-brandBlue hover:text-brandGreen transition-colors transform hover:scale-110"><i class="fas fa-paper-plane"></i></button>
             </div>
-            <div class="text-[10px] text-center text-gray-400 mt-1">Potenciado por Grok xAI (Modo Demo)</div>
+            <div class="text-[10px] text-center text-gray-400 mt-1">Potenciado por xAI (Seguro)</div>
         </div>
     </div>
     
@@ -427,39 +427,19 @@
     </footer>
 
     <script>
-        // --- GESTIÓN DE LA IA DE EVOLUSER (STRATEGY FIX) ---
-        // Explicación técnica: Las llamadas directas a APIs de IA desde el navegador (Client-Side)
-        // suelen ser bloqueadas por políticas CORS (Cross-Origin Resource Sharing) y exponen tus API Keys.
-        // SOLUCIÓN: He implementado un "Modo Simulación" robusto para que la web funcione YA MISMO.
-        // Para producción real, esta función debe llamar a tu propio backend (Next.js/Node).
-        
-        const USE_MOCK_AI = true; // CAMBIAR A 'false' CUANDO TENGAS BACKEND
-        const BACKEND_URL = "https://tu-backend-real.com/api/chat"; // URL de tu futuro servidor
+        // --- CONFIGURACIÓN DE IA (CONEXIÓN CLOUDFLARE) ---
+        const USE_MOCK_AI = false; // DESACTIVAR MODO SIMULACIÓN
+        const BACKEND_URL = "https://cerebro-evoluser.comercialregionaldireccion.workers.dev"; // TU URL REAL
 
         let chatHistory = [];
         let isDragging = false, hasMoved = false, startX, startY;
 
-        // --- SISTEMA DE SIMULACIÓN INTELIGENTE (MOCK AI) ---
+        // --- SISTEMA DE SIMULACIÓN (Respaldo en caso de error) ---
         const simulateGrokResponse = (text) => {
-            const lowerText = text.toLowerCase();
             return new Promise((resolve) => {
                 setTimeout(() => {
-                    if (lowerText.includes('hola') || lowerText.includes('buenos')) {
-                        resolve("¡Hola, Evonauta! 🚀 Soy Ev, tu asistente virtual. Estoy lista para ayudarte con temas de Talento Humano, Seguridad Ocupacional o Sostenibilidad. ¿Por dónde empezamos?");
-                    } else if (lowerText.includes('precio') || lowerText.includes('costo')) {
-                        resolve("Cada proyecto en EvoluSer es único. Para darte un valor exacto, necesitamos un diagnóstico rápido. ¿Te gustaría contactar a un asesor humano por WhatsApp? 📲");
-                    } else if (lowerText.includes('humano') || lowerText.includes('talento')) {
-                        resolve("En **Talento Humano**, liderado por Nury Echeverria, nos enfocamos en Clima Laboral, Reclutamiento y Habilidades Blandas. ¡Potenciamos el activo más importante de tu empresa!");
-                    } else if (lowerText.includes('seguridad') || lowerText.includes('sso')) {
-                        resolve("La seguridad es primero 🛡️. Christian Ortega dirige nuestro equipo de **SSO**, implementando normas ISO y auditorías para proteger la vida de tus colaboradores.");
-                    } else if (lowerText.includes('ambiente') || lowerText.includes('sostenible')) {
-                        resolve("¡El futuro es verde! 🌿 Te ayudamos con licencias ambientales y huella de carbono para que tu empresa sea **Sostenible** y competitiva.");
-                    } else if (lowerText.includes('agro')) {
-                        resolve("Para el sector **Agroindustrial** 🚜, optimizamos procesos y garantizamos inocuidad alimentaria (BPA) bajo la dirección de la Ing. Lilian Eras.");
-                    } else {
-                        resolve("Entiendo tu consulta. Como soy una IA en entrenamiento, te sugiero hablar directamente con nuestro equipo humano en WhatsApp para una respuesta más precisa. ¡Están a un clic de distancia! 👉 <a href='https://wa.me/593983900050' target='_blank' class='text-brandBlue underline'>Clic aquí</a>");
-                    }
-                }, 1500); // Retardo para simular "pensamiento"
+                    resolve("¡Hola! Soy Ev en modo de respaldo. Parece que hay un problema de conexión con mi cerebro principal. Por favor, verifica tu conexión o contacta a soporte.");
+                }, 1000);
             });
         };
 
@@ -468,7 +448,6 @@
             createNeonText("POTENCIAR EL SER, PROTEGER LA VIDA");
             launchWanderingRocket();
             
-            // Asignar listeners
             const sendBtn = document.getElementById('send-btn');
             const chatInput = document.getElementById('chat-input');
             const avatarContainer = document.getElementById('avatar-container');
@@ -490,7 +469,6 @@
                 });
             }
 
-            // Fecha actual
             const dateEl = document.getElementById('currentDate');
             if (dateEl) { dateEl.textContent = new Date().toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' }); }
         });
@@ -502,9 +480,7 @@
             li.className = type === "outgoing" ? "flex justify-end" : "flex justify-start";
             const div = document.createElement("div");
             
-            // Animación de entrada suave
             div.style.animation = "popIn 0.3s ease-out";
-            
             div.className = type === "outgoing" ? 
                 "bg-brandBlue text-white p-3 rounded-2xl rounded-tr-none shadow-md max-w-[85%] text-sm" : 
                 "bg-white text-gray-700 p-3 rounded-2xl rounded-tl-none shadow-sm max-w-[85%] text-sm border border-gray-100";
@@ -521,12 +497,11 @@
             const userText = chatInput.value.trim();
             if (!userText) return;
 
-            // 1. Mostrar mensaje usuario
             createMessage(userText, "outgoing");
             chatInput.value = "";
             chatInput.focus();
 
-            // 2. Mostrar indicador de "Escribiendo..."
+            // Indicador de "Escribiendo..."
             const loadingId = 'loading-' + Date.now();
             const loadingLi = document.createElement("li");
             loadingLi.className = "flex justify-start";
@@ -543,28 +518,30 @@
                 let apiResponse;
 
                 if (USE_MOCK_AI) {
-                    // MODO SEGURO (SIMULACIÓN)
                     apiResponse = await simulateGrokResponse(userText);
                 } else {
-                    // MODO PRODUCCIÓN (Requiere Backend)
-                    // const response = await fetch(BACKEND_URL, {
-                    //     method: "POST",
-                    //     headers: { "Content-Type": "application/json" },
-                    //     body: JSON.stringify({ message: userText, history: chatHistory })
-                    // });
-                    // const data = await response.json();
-                    // apiResponse = data.reply;
-                    throw new Error("Backend no configurado. Usa el modo Mock.");
+                    // LLAMADA REAL A TU WORKER
+                    const response = await fetch(BACKEND_URL, {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ message: userText, history: chatHistory })
+                    });
+                    
+                    if (!response.ok) {
+                        const errorData = await response.json();
+                        throw new Error(errorData.error || "Error en el servidor");
+                    }
+                    const data = await response.json();
+                    
+                    if (data.error) throw new Error(data.error);
+                    apiResponse = data.reply;
                 }
 
-                // Eliminar loading
                 const loadingElement = document.getElementById(loadingId);
                 if(loadingElement) loadingElement.remove();
 
-                // 3. Mostrar respuesta IA
                 createMessage(apiResponse, "incoming");
                 
-                // Guardar historial limitado
                 chatHistory.push({ role: "user", content: userText });
                 chatHistory.push({ role: "assistant", content: apiResponse });
                 if (chatHistory.length > 10) chatHistory = chatHistory.slice(-10);
@@ -573,11 +550,11 @@
                 console.error("Error Chat:", error);
                 const loadingElement = document.getElementById(loadingId);
                 if(loadingElement) loadingElement.remove();
-                createMessage("📡 Ups, perdí la conexión con la nave nodriza. ¿Puedes intentar de nuevo?", "incoming");
+                createMessage(`📡 Ups, tuve un problema: ${error.message}. Por favor intenta de nuevo.`, "incoming");
             }
         };
 
-        // --- CURSOR ---
+        // --- INTERFAZ EXTRA ---
         const cursor = document.getElementById('custom-cursor');
         document.addEventListener('mousemove', (e) => { 
             if(cursor) cursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`; 
@@ -612,7 +589,6 @@
             window.addEventListener('resize', resize); resize(); initParticles(); animateParticles();
         }
         
-        // --- NAVEGACIÓN ---
         function switchTab(tabName) {
             const views = ['view-carta', 'view-brochure', 'view-empresas', 'view-emprendedores'];
             views.forEach(v => {
@@ -623,7 +599,6 @@
             const selected = document.getElementById('view-' + tabName);
             if(selected) {
                 selected.classList.remove('hidden');
-                // Reiniciar animaciones
                 const animatedElements = selected.querySelectorAll('.animate-pop-in, .stagger-1, .stagger-2, .stagger-3, .stagger-4');
                 animatedElements.forEach(el => {
                     el.style.animation = 'none';
@@ -646,7 +621,6 @@
 
         if (typeof VanillaTilt !== 'undefined') { VanillaTilt.init(document.querySelectorAll("[data-tilt]"), { max: 15, speed: 400 }); }
 
-        // --- SLOGAN ---
         function createNeonText(text) {
             const container = document.getElementById('slogan-container');
             if(!container) return;
@@ -665,12 +639,10 @@
             });
         }
 
-        // --- COHETE NASA TOON 3D (SVG VECTORIAL PURO) ---
         function launchWanderingRocket() {
             const rocket = document.createElement('div');
             rocket.className = 'wandering-rocket';
             
-            // SVG ÚNICO: Cohete Blanco Sólido + Fuego Tomate
             rocket.innerHTML = `
                 <div class="rocket-container" style="transform: rotate(45deg);">
                     <svg viewBox="0 0 512 512" style="width: 100%; height: 100%; overflow: visible;">
@@ -689,7 +661,6 @@
                                 <stop offset="100%" style="stop-color:#005691;stop-opacity:1" />
                             </linearGradient>
                         </defs>
-
                         <g transform="translate(256, 256)">
                             <ellipse cx="0" cy="-20" rx="70" ry="140" fill="url(#bodyGradient)" />
                             <path d="M-55 -100 Q0 -220 55 -100" fill="url(#finsGradient)" />
@@ -705,7 +676,6 @@
             `;
             document.body.appendChild(rocket);
             
-            // Generador de Humo Delicado
             setInterval(() => {
                 const rect = rocket.getBoundingClientRect();
                 const smoke = document.createElement('div');
@@ -753,7 +723,6 @@
             setTimeout(flyToNextPoint, 100);
         }
 
-        // --- MODALES ---
         const serviceData = {
             humano: { title: "EvoluSer HUMANO", icon: "fas fa-users", subtitle: "Gestión del Talento", leader: "Nury Echeverria", role: "Directora de Talento Humano", image: "imagen2.png", desc: "Creemos que el activo más valioso es la gente. Bajo una dirección experta, transformamos la cultura organizacional mediante estrategias integrales de bienestar, desarrollo de habilidades blandas y diagnósticos precisos que potencian el capital humano.", list: ["Reclutamiento y Selección", "Clima y Cultura", "Soft Skills y Liderazgo", "Evaluaciones de Desempeño"], iconClass: "metal-blue", animation: "animate-hug" },
             seguro: { title: "EvoluSer S.S.O.", icon: "fas fa-shield-alt", subtitle: "Seguridad y Salud Ocupacional", leader: "Christian Ortega", role: "Director Técnico SST", image: "imagen3.png", desc: "La seguridad no es negociable. Lideramos un equipo técnico enfocado en blindar tus operaciones, asegurando el estricto cumplimiento normativo y protegiendo la integridad de cada colaborador en todos los niveles.", list: ["Sistemas de Gestión ISO 45001", "Auditorías de Riesgos", "Vigilancia de Salud", "Capacitación Técnica"], iconClass: "metal-gray", animation: "animate-shield" },
@@ -791,7 +760,6 @@
             modal.classList.remove('flex');
         }
 
-        // --- CHATBOT UI & DRAG ---
         function toggleChat() {
             const chatWindow = document.getElementById('ai-chat-window');
             const avatarBubble = document.getElementById('avatar-bubble');
