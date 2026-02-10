@@ -38,10 +38,10 @@
                         'pop-in': 'popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards',
                         'float-avatar': 'floatAvatar 4s ease-in-out infinite',
                         'crystal-shine': 'crystalShine 8s infinite',
-                        'leaf-wind': 'leaf-wind 2s ease-in-out infinite',
-                        'hug': 'group-hug 1.5s ease-in-out infinite',
-                        'tractor': 'tractor-move 0.5s linear infinite',
-                        'shield': 'shield-guard 2s ease-in-out infinite',
+                        'leaf-wind': 'leaf-wind 3s ease-in-out infinite',
+                        'hug': 'group-hug 2s ease-in-out infinite',
+                        'tractor': 'tractor-move 1s linear infinite',
+                        'shield': 'shield-guard 3s ease-in-out infinite',
                         'propulsion': 'propulsion 0.1s infinite alternate',
                     },
                     keyframes: {
@@ -51,10 +51,10 @@
                         shimmer: { '0%': { backgroundPosition: '-200% center' }, '100%': { backgroundPosition: '200% center' } },
                         popIn: { '0%': { opacity: 0, transform: 'scale(0.5) translateY(50px)' }, '100%': { opacity: 1, transform: 'scale(1) translateY(0)' } },
                         crystalShine: { '0%, 40%': { left: '-150%', opacity: '0' }, '50%': { opacity: '0.5' }, '60%': { left: '150%', opacity: '0' }, '100%': { left: '150%', opacity: '0' } },
-                        'leaf-wind': { '0%, 100%': { transform: 'rotate(0deg)' }, '25%': { transform: 'rotate(15deg)' }, '50%': { transform: 'rotate(-10deg)' }, '75%': { transform: 'rotate(5deg)' } },
-                        'group-hug': { '0%, 100%': { transform: 'scale(1)' }, '50%': { transform: 'scale(0.9)' } },
+                        'leaf-wind': { '0%, 100%': { transform: 'rotate(0deg)' }, '25%': { transform: 'rotate(10deg)' }, '75%': { transform: 'rotate(-5deg)' } },
+                        'group-hug': { '0%, 100%': { transform: 'scale(1)' }, '50%': { transform: 'scale(1.05)' } },
                         'tractor-move': { '0%': { transform: 'rotate(0deg)' }, '25%': { transform: 'rotate(-2deg)' }, '75%': { transform: 'rotate(2deg)' }, '100%': { transform: 'rotate(0deg)' } },
-                        'shield-guard': { '0%, 100%': { transform: 'scale(1)' }, '50%': { transform: 'scale(1.1)' } },
+                        'shield-guard': { '0%, 100%': { transform: 'scale(1)' }, '50%': { transform: 'scale(1.05) rotate(2deg)' } },
                         'propulsion': { 
                             '0%': { transform: 'scale(0.9) translateY(-2px)', opacity: '0.8' }, 
                             '100%': { transform: 'scale(1.1) translateY(2px)', opacity: '1' } 
@@ -132,17 +132,15 @@
         }
         .interactive-card:hover { transform: translateY(-5px); background: rgba(255,255,255, 1); box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1); }
         
-        .metal-icon { background-clip: text; -webkit-background-clip: text; color: transparent; filter: drop-shadow(2px 4px 3px rgba(0,0,0,0.2)); background-size: 200% 200%; transition: all 0.3s ease; }
-        .metal-blue { background-image: linear-gradient(135deg, #003056 0%, #005691 25%, #4dabf7 50%, #005691 75%, #002040 100%); }
-        .metal-gray { background-image: linear-gradient(135deg, #2d3436 0%, #636e72 25%, #b2bec3 50%, #636e72 75%, #2d3436 100%); }
-        .metal-green { background-image: linear-gradient(135deg, #2f5d02 0%, #5c8d03 25%, #b2f243 50%, #5c8d03 75%, #204000 100%); }
-        .metal-amber { background-image: linear-gradient(135deg, #78350f 0%, #d97706 25%, #fbbf24 50%, #d97706 75%, #451a03 100%); }
+        /* 3D Icon Styles */
+        .icon-3d { filter: drop-shadow(0 8px 6px rgba(0,0,0,0.15)); transition: transform 0.3s ease; }
+        .group:hover .icon-3d { transform: scale(1.1) translateY(-2px); }
         
         /* Animaciones en Hover */
-        .group:hover .animate-leaf { animation: leaf-wind 2s ease-in-out infinite; transform-origin: top center; }
-        .group:hover .animate-hug { animation: group-hug 1.5s ease-in-out infinite; }
-        .group:hover .animate-tractor { animation: tractor-move 0.5s linear infinite; }
-        .group:hover .animate-shield { animation: shield-guard 2s ease-in-out infinite; }
+        .group:hover .animate-leaf { animation: leaf-wind 3s ease-in-out infinite; transform-origin: center bottom; }
+        .group:hover .animate-hug { animation: hug 2s ease-in-out infinite; }
+        .group:hover .animate-tractor { animation: tractor 1s linear infinite; }
+        .group:hover .animate-shield { animation: shield 3s ease-in-out infinite; }
 
         .chat-bubble { position: relative; background: #ffffff; border-radius: 1.5rem; padding: 1.25rem; box-shadow: 0 10px 25px rgba(0,0,0,0.15); margin-bottom: 2rem; border-bottom-right-radius: 0; transition: all 0.3s ease-in-out; }
         .chat-bubble::after { content: ''; position: absolute; bottom: -10px; right: 20px; width: 0; height: 0; border-left: 10px solid transparent; border-right: 10px solid transparent; border-top: 15px solid #ffffff; }
@@ -233,7 +231,9 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 my-6 not-prose">
                         <div class="interactive-card bg-white/70 p-4 rounded-xl border border-blue-100 cursor-pointer group hover:-translate-y-2 transition duration-300" onclick="openModal('humano')" data-tilt data-tilt-max="15" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.5">
                             <div class="flex flex-col items-center text-center">
-                                <div class="w-20 h-20 flex items-center justify-center mb-3"><i class="fas fa-users text-6xl metal-icon metal-blue group-hover:animate-hug"></i></div>
+                                <div class="w-20 h-20 flex items-center justify-center mb-3">
+                                    <img src="https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/People/People%20hugging/3D/people_hugging_3d.png" alt="Humano" class="w-full h-full object-contain icon-3d group-hover:animate-hug">
+                                </div>
                                 <h4 class="font-bold text-gray-800 text-sm">Humano</h4>
                                 <p class="text-[10px] text-gray-500 uppercase tracking-wide">Talento</p>
                                 <span class="text-[10px] text-brandBlue mt-2 opacity-0 group-hover:opacity-100 transition-opacity">Ver Directora</span>
@@ -241,7 +241,9 @@
                         </div>
                         <div class="interactive-card bg-white/70 p-4 rounded-xl border border-gray-200 cursor-pointer group hover:-translate-y-2 transition duration-300" onclick="openModal('seguro')" data-tilt data-tilt-max="15" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.5">
                             <div class="flex flex-col items-center text-center">
-                                <div class="w-20 h-20 flex items-center justify-center mb-3 relative"><i class="fas fa-shield-alt text-6xl metal-icon metal-gray absolute transition-all duration-500 group-hover:opacity-0 group-hover:scale-50"></i><i class="fas fa-user-shield text-6xl metal-icon metal-gray group-hover:animate-shield"></i></div>
+                                <div class="w-20 h-20 flex items-center justify-center mb-3">
+                                    <img src="https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Objects/Shield/3D/shield_3d.png" alt="Seguro" class="w-full h-full object-contain icon-3d group-hover:animate-shield">
+                                </div>
                                 <h4 class="font-bold text-gray-800 text-sm">S.S.O.</h4>
                                 <p class="text-[10px] text-gray-500 uppercase tracking-wide">Seguridad y Salud</p>
                                 <span class="text-[10px] text-gray-600 mt-2 opacity-0 group-hover:opacity-100 transition-opacity">Ver Director</span>
@@ -249,7 +251,9 @@
                         </div>
                         <div class="interactive-card bg-white/70 p-4 rounded-xl border border-green-100 cursor-pointer group hover:-translate-y-2 transition duration-300" onclick="openModal('sostenible')" data-tilt data-tilt-max="15" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.5">
                             <div class="flex flex-col items-center text-center">
-                                <div class="w-20 h-20 flex items-center justify-center mb-3"><i class="fas fa-leaf text-6xl metal-icon metal-green group-hover:animate-leaf"></i></div>
+                                <div class="w-20 h-20 flex items-center justify-center mb-3">
+                                    <img src="https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Natural%20%26%20Animals/Leaf%20fluttering%20in%20wind/3D/leaf_fluttering_in_wind_3d.png" alt="Sostenible" class="w-full h-full object-contain icon-3d group-hover:animate-leaf">
+                                </div>
                                 <h4 class="font-bold text-gray-800 text-sm">Sostenible</h4>
                                 <p class="text-[10px] text-gray-400 font-bold uppercase tracking-wide">Ambiente</p>
                                 <span class="text-[10px] text-brandGreen mt-2 opacity-0 group-hover:opacity-100 transition-opacity">Ver Director</span>
@@ -257,7 +261,9 @@
                         </div>
                         <div class="interactive-card bg-white/70 p-4 rounded-xl border border-amber-100 cursor-pointer group hover:-translate-y-2 transition duration-300" onclick="openModal('agro')" data-tilt data-tilt-max="15" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.5">
                             <div class="flex flex-col items-center text-center">
-                                <div class="w-20 h-20 flex items-center justify-center mb-3"><i class="fas fa-tractor text-6xl metal-icon metal-amber group-hover:animate-tractor"></i></div>
+                                <div class="w-20 h-20 flex items-center justify-center mb-3">
+                                    <img src="https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Travel%20%26%20Places/Tractor/3D/tractor_3d.png" alt="Agro" class="w-full h-full object-contain icon-3d group-hover:animate-tractor">
+                                </div>
                                 <h4 class="font-bold text-gray-800 text-sm">Agroindustrial</h4>
                                 <p class="text-[10px] text-gray-400 font-bold uppercase tracking-wide">Calidad</p>
                                 <span class="text-[10px] text-amber-600 mt-2 opacity-0 group-hover:opacity-100 transition-opacity">Ver Directora</span>
@@ -266,7 +272,9 @@
                     </div>
                     
                     <div class="mt-12 flex items-center gap-5 border-t border-gray-100 pt-8 not-prose">
-                        <div onclick="openModal('equipo')" class="w-16 h-16 bg-gradient-to-br from-brandBlue to-brandBlueLight rounded-full flex items-center justify-center text-white shadow-lg text-2xl cursor-pointer transition-transform duration-300 hover:scale-110" title="Ver Equipo Directivo"><i class="fas fa-pen-nib"></i></div>
+                        <div onclick="openModal('equipo')" class="w-16 h-16 bg-gradient-to-br from-brandBlue to-brandBlueLight rounded-full flex items-center justify-center text-white shadow-lg text-2xl cursor-pointer transition-transform duration-300 hover:scale-110" title="Ver Equipo Directivo">
+                            <img src="https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Objects/Fountain%20pen/3D/fountain_pen_3d.png" class="w-10 h-10 object-contain drop-shadow-md">
+                        </div>
                         <div><p class="font-heading font-bold text-xl text-gray-900">Equipo Directivo</p><p class="text-brandBlue font-semibold">EvoluSer Consultores</p><a href="mailto:evoluserec@gmail.com" class="text-sm text-gray-400 hover:text-brandBlue transition cursor-none">evoluserec@gmail.com</a></div>
                     </div>
                 </div>
@@ -299,10 +307,26 @@
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 px-2">
-                    <div class="stagger-1 h-full"><div class="bg-white/80 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all h-full border-t-4 border-brandBlue group flex flex-col cursor-pointer" onclick="openModal('humano')" data-tilt data-tilt-max="10"><div class="w-full flex justify-center mb-6"><i class="fas fa-users text-6xl metal-icon metal-blue animate-hug"></i></div><h3 class="text-xl font-bold text-gray-800 mb-2">EvoluSer <span class="text-brandBlue">HUMANO</span></h3><p class="text-[10px] text-gray-400 font-bold uppercase tracking-wider mb-6">Gestión del Talento</p><ul class="space-y-3 text-sm text-gray-600 flex-grow"><li class="flex items-start"><i class="fas fa-check text-brandGreen mt-1 mr-2 text-xs"></i> Reclutamiento</li><li class="flex items-start"><i class="fas fa-check text-brandGreen mt-1 mr-2 text-xs"></i> Clima y Cultura</li><li class="flex items-start"><i class="fas fa-check text-brandGreen mt-1 mr-2 text-xs"></i> Soft Skills</li><li class="flex items-start"><i class="fas fa-check text-brandGreen mt-1 mr-2 text-xs"></i> Evaluaciones</li></ul></div></div>
-                    <div class="stagger-2 h-full"><div class="bg-white/80 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all h-full border-t-4 border-gray-600 group flex flex-col cursor-pointer" onclick="openModal('seguro')" data-tilt data-tilt-max="10"><div class="w-full flex justify-center mb-6 relative h-16"><i class="fas fa-shield-alt text-6xl metal-icon metal-gray absolute transition-all duration-500 group-hover:opacity-0 group-hover:scale-50"></i><i class="fas fa-user-shield text-6xl metal-icon metal-gray animate-shield"></i></div><h3 class="text-xl font-bold text-gray-800 mb-2">EvoluSer <span class="text-gray-600">S.S.O.</span></h3><p class="text-[10px] text-gray-400 font-bold uppercase tracking-wider mb-6">Seguridad y Salud Ocupacional</p><ul class="space-y-3 text-sm text-gray-600 flex-grow"><li class="flex items-start"><i class="fas fa-check text-brandGreen mt-1 mr-2 text-xs"></i> Normativa ISO</li><li class="flex items-start"><i class="fas fa-check text-brandGreen mt-1 mr-2 text-xs"></i> Auditorías</li><li class="flex items-start"><i class="fas fa-check text-brandGreen mt-1 mr-2 text-xs"></i> Salud Ocupacional</li><li class="flex items-start"><i class="fas fa-check text-brandGreen mt-1 mr-2 text-xs"></i> Capacitaciones</li></ul></div></div>
-                    <div class="stagger-3 h-full"><div class="bg-white/80 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all h-full border-t-4 border-brandGreen group flex flex-col cursor-pointer" onclick="openModal('sostenible')" data-tilt data-tilt-max="10"><div class="w-full flex justify-center mb-6"><i class="fas fa-leaf text-6xl metal-icon metal-green animate-leaf"></i></div><h3 class="text-xl font-bold text-gray-800 mb-2">EvoluSer <span class="text-brandGreen">SOSTENIBLE</span></h3><p class="text-[10px] text-gray-400 font-bold uppercase tracking-wider mb-6">Medio Ambiente</p><ul class="space-y-3 text-sm text-gray-600 flex-grow"><li class="flex items-start"><i class="fas fa-check text-brandBlue mt-1 mr-2 text-xs"></i> Manejo Ambiental</li><li class="flex items-start"><i class="fas fa-check text-brandBlue mt-1 mr-2 text-xs"></i> Certificaciones</li><li class="flex items-start"><i class="fas fa-check text-brandBlue mt-1 mr-2 text-xs"></i> Eficiencia</li><li class="flex items-start"><i class="fas fa-check text-brandBlue mt-1 mr-2 text-xs"></i> Cultura Verde</li></ul></div></div>
-                    <div class="stagger-4 h-full"><div class="bg-white/80 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all h-full border-t-4 border-brandAmber group flex flex-col cursor-pointer" onclick="openModal('agro')" data-tilt data-tilt-max="10"><div class="w-full flex justify-center mb-6"><i class="fas fa-tractor text-6xl metal-icon metal-amber animate-tractor"></i></div><h3 class="text-xl font-bold text-gray-800 mb-2">EvoluSer <span class="text-amber-600">AGRO</span></h3><p class="text-[10px] text-gray-400 font-bold uppercase tracking-wider mb-6">Agroindustrial</p><ul class="space-y-3 text-sm text-gray-600 flex-grow"><li class="flex items-start"><i class="fas fa-check text-brandBlue mt-1 mr-2 text-xs"></i> Buenas Prácticas (BPA)</li><li class="flex items-start"><i class="fas fa-check text-brandBlue mt-1 mr-2 text-xs"></i> Inocuidad Alimentaria</li><li class="flex items-start"><i class="fas fa-check text-brandBlue mt-1 mr-2 text-xs"></i> Industrialización de Producto</li><li class="flex items-start"><i class="fas fa-check text-brandBlue mt-1 mr-2 text-xs"></i> Optimización Procesos</li></ul></div></div>
+                    <div class="stagger-1 h-full"><div class="bg-white/80 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all h-full border-t-4 border-brandBlue group flex flex-col cursor-pointer" onclick="openModal('humano')" data-tilt data-tilt-max="10">
+                        <div class="w-full flex justify-center mb-6">
+                            <img src="https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/People/People%20hugging/3D/people_hugging_3d.png" class="w-20 h-20 object-contain icon-3d animate-hug">
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">EvoluSer <span class="text-brandBlue">HUMANO</span></h3><p class="text-[10px] text-gray-400 font-bold uppercase tracking-wider mb-6">Gestión del Talento</p><ul class="space-y-3 text-sm text-gray-600 flex-grow"><li class="flex items-start"><i class="fas fa-check text-brandGreen mt-1 mr-2 text-xs"></i> Reclutamiento</li><li class="flex items-start"><i class="fas fa-check text-brandGreen mt-1 mr-2 text-xs"></i> Clima y Cultura</li><li class="flex items-start"><i class="fas fa-check text-brandGreen mt-1 mr-2 text-xs"></i> Soft Skills</li><li class="flex items-start"><i class="fas fa-check text-brandGreen mt-1 mr-2 text-xs"></i> Evaluaciones</li></ul></div></div>
+                    <div class="stagger-2 h-full"><div class="bg-white/80 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all h-full border-t-4 border-gray-600 group flex flex-col cursor-pointer" onclick="openModal('seguro')" data-tilt data-tilt-max="10">
+                        <div class="w-full flex justify-center mb-6 relative h-16">
+                            <img src="https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Objects/Shield/3D/shield_3d.png" class="w-20 h-20 object-contain icon-3d animate-shield">
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">EvoluSer <span class="text-gray-600">S.S.O.</span></h3><p class="text-[10px] text-gray-400 font-bold uppercase tracking-wider mb-6">Seguridad y Salud Ocupacional</p><ul class="space-y-3 text-sm text-gray-600 flex-grow"><li class="flex items-start"><i class="fas fa-check text-brandGreen mt-1 mr-2 text-xs"></i> Normativa ISO</li><li class="flex items-start"><i class="fas fa-check text-brandGreen mt-1 mr-2 text-xs"></i> Auditorías</li><li class="flex items-start"><i class="fas fa-check text-brandGreen mt-1 mr-2 text-xs"></i> Salud Ocupacional</li><li class="flex items-start"><i class="fas fa-check text-brandGreen mt-1 mr-2 text-xs"></i> Capacitaciones</li></ul></div></div>
+                    <div class="stagger-3 h-full"><div class="bg-white/80 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all h-full border-t-4 border-brandGreen group flex flex-col cursor-pointer" onclick="openModal('sostenible')" data-tilt data-tilt-max="10">
+                        <div class="w-full flex justify-center mb-6">
+                            <img src="https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Natural%20%26%20Animals/Leaf%20fluttering%20in%20wind/3D/leaf_fluttering_in_wind_3d.png" class="w-20 h-20 object-contain icon-3d animate-leaf">
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">EvoluSer <span class="text-brandGreen">SOSTENIBLE</span></h3><p class="text-[10px] text-gray-400 font-bold uppercase tracking-wider mb-6">Medio Ambiente</p><ul class="space-y-3 text-sm text-gray-600 flex-grow"><li class="flex items-start"><i class="fas fa-check text-brandBlue mt-1 mr-2 text-xs"></i> Manejo Ambiental</li><li class="flex items-start"><i class="fas fa-check text-brandBlue mt-1 mr-2 text-xs"></i> Certificaciones</li><li class="flex items-start"><i class="fas fa-check text-brandBlue mt-1 mr-2 text-xs"></i> Eficiencia</li><li class="flex items-start"><i class="fas fa-check text-brandBlue mt-1 mr-2 text-xs"></i> Cultura Verde</li></ul></div></div>
+                    <div class="stagger-4 h-full"><div class="bg-white/80 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all h-full border-t-4 border-brandAmber group flex flex-col cursor-pointer" onclick="openModal('agro')" data-tilt data-tilt-max="10">
+                        <div class="w-full flex justify-center mb-6">
+                            <img src="https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Travel%20%26%20Places/Tractor/3D/tractor_3d.png" class="w-20 h-20 object-contain icon-3d animate-tractor">
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">EvoluSer <span class="text-amber-600">AGRO</span></h3><p class="text-[10px] text-gray-400 font-bold uppercase tracking-wider mb-6">Agroindustrial</p><ul class="space-y-3 text-sm text-gray-600 flex-grow"><li class="flex items-start"><i class="fas fa-check text-brandBlue mt-1 mr-2 text-xs"></i> Buenas Prácticas (BPA)</li><li class="flex items-start"><i class="fas fa-check text-brandBlue mt-1 mr-2 text-xs"></i> Inocuidad Alimentaria</li><li class="flex items-start"><i class="fas fa-check text-brandBlue mt-1 mr-2 text-xs"></i> Industrialización de Producto</li><li class="flex items-start"><i class="fas fa-check text-brandBlue mt-1 mr-2 text-xs"></i> Optimización Procesos</li></ul></div></div>
                 </div>
 
                 <div class="mt-16 text-center stagger-3 pb-4">
@@ -775,11 +799,11 @@
         }
 
         const serviceData = {
-            humano: { title: "EvoluSer HUMANO", icon: "fas fa-users", subtitle: "Gestión del Talento", leader: "Nury Echeverria", role: "Directora de Talento Humano", image: "imagen2.png", desc: "Creemos que el activo más valioso es la gente. Bajo una dirección experta, transformamos la cultura organizacional mediante estrategias integrales de bienestar, desarrollo de habilidades blandas y diagnósticos precisos que potencian el capital humano.", list: ["Reclutamiento y Selección", "Clima y Cultura", "Soft Skills y Liderazgo", "Evaluaciones de Desempeño"], iconClass: "metal-blue", animation: "animate-hug" },
-            seguro: { title: "EvoluSer S.S.O.", icon: "fas fa-shield-alt", subtitle: "Seguridad y Salud Ocupacional", leader: "Christian Ortega", role: "Director Técnico SST", image: "imagen3.png", desc: "La seguridad no es negociable. Lideramos un equipo técnico enfocado en blindar tus operaciones, asegurando el estricto cumplimiento normativo y protegiendo la integridad de cada colaborador en todos los niveles.", list: ["Sistemas de Gestión ISO 45001", "Auditorías de Riesgos", "Vigilancia de Salud", "Capacitación Técnica"], iconClass: "metal-gray", animation: "animate-shield" },
-            sostenible: { title: "EvoluSer SOSTENIBLE", icon: "fas fa-leaf", subtitle: "Medio Ambiente", leader: "Christian Ortega", role: "Director de Sostenibilidad", image: "imagen4.png", desc: "El futuro es verde. Integramos la visión ambiental directamente en tu estrategia de negocio, gestionando planes de manejo y certificaciones que no solo cumplen la ley, sino que te diferencian competitivamente en el mercado.", list: ["Planes de Manejo Ambiental", "Certificaciones Verdes", "Eficiencia Energética", "Cultura Ambiental Corporativa"], iconClass: "metal-green", animation: "animate-leaf" },
-            agro: { title: "EvoluSer AGRO", icon: "fas fa-tractor", subtitle: "Agroindustrial", leader: "Lilian Eras", role: "Directora Agroindustrial", image: "imagen5.png", desc: "Calidad desde el origen. Aportamos una vasta experiencia técnica para optimizar procesos agroindustriales, garantizando la inocuidad alimentaria y el cumplimiento riguroso de buenas prácticas desde el campo hasta la mesa, incluyendo la transformación del producto.", list: ["Buenas Prácticas Agrícolas (BPA)", "Inocuidad Alimentaria", "Industrialización de Producto", "Optimización de Procesos"], iconClass: "metal-amber", animation: "animate-tractor" },
-            equipo: { title: "Equipo Directivo", icon: "fas fa-pen-nib", subtitle: "EvoluSer Consultores", leader: "Junta Directiva", role: "Liderazgo Estratégico", image: "imagen7.jpeg", desc: "Nuestro equipo directivo encarna la misión de potenciar el ser y proteger la vida. Guiamos a la organización con una visión integral, asegurando que cada paso que damos genere valor real para nuestros clientes y la sociedad.", list: ["Dirección Estratégica", "Gestión de Calidad", "Innovación Corporativa", "Responsabilidad Social"], iconClass: "metal-blue" }
+            humano: { title: "EvoluSer HUMANO", iconUrl: "https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/People/People%20hugging/3D/people_hugging_3d.png", subtitle: "Gestión del Talento", leader: "Nury Echeverria", role: "Directora de Talento Humano", image: "imagen2.png", desc: "Creemos que el activo más valioso es la gente. Bajo una dirección experta, transformamos la cultura organizacional mediante estrategias integrales de bienestar, desarrollo de habilidades blandas y diagnósticos precisos que potencian el capital humano.", list: ["Reclutamiento y Selección", "Clima y Cultura", "Soft Skills y Liderazgo", "Evaluaciones de Desempeño"], iconClass: "metal-blue", animation: "animate-hug" },
+            seguro: { title: "EvoluSer S.S.O.", iconUrl: "https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Objects/Shield/3D/shield_3d.png", subtitle: "Seguridad y Salud Ocupacional", leader: "Christian Ortega", role: "Director Técnico SST", image: "imagen3.png", desc: "La seguridad no es negociable. Lideramos un equipo técnico enfocado en blindar tus operaciones, asegurando el estricto cumplimiento normativo y protegiendo la integridad de cada colaborador en todos los niveles.", list: ["Sistemas de Gestión ISO 45001", "Auditorías de Riesgos", "Vigilancia de Salud", "Capacitación Técnica"], iconClass: "metal-gray", animation: "animate-shield" },
+            sostenible: { title: "EvoluSer SOSTENIBLE", iconUrl: "https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Natural%20%26%20Animals/Leaf%20fluttering%20in%20wind/3D/leaf_fluttering_in_wind_3d.png", subtitle: "Medio Ambiente", leader: "Christian Ortega", role: "Director de Sostenibilidad", image: "imagen4.png", desc: "El futuro es verde. Integramos la visión ambiental directamente en tu estrategia de negocio, gestionando planes de manejo y certificaciones que no solo cumplen la ley, sino que te diferencian competitivamente en el mercado.", list: ["Planes de Manejo Ambiental", "Certificaciones Verdes", "Eficiencia Energética", "Cultura Ambiental Corporativa"], iconClass: "metal-green", animation: "animate-leaf" },
+            agro: { title: "EvoluSer AGRO", iconUrl: "https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Travel%20%26%20Places/Tractor/3D/tractor_3d.png", subtitle: "Agroindustrial", leader: "Lilian Eras", role: "Directora Agroindustrial", image: "imagen5.png", desc: "Calidad desde el origen. Aportamos una vasta experiencia técnica para optimizar procesos agroindustriales, garantizando la inocuidad alimentaria y el cumplimiento riguroso de buenas prácticas desde el campo hasta la mesa, incluyendo la transformación del producto.", list: ["Buenas Prácticas Agrícolas (BPA)", "Inocuidad Alimentaria", "Industrialización de Producto", "Optimización de Procesos"], iconClass: "metal-amber", animation: "animate-tractor" },
+            equipo: { title: "Equipo Directivo", iconUrl: "https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Objects/Fountain%20pen/3D/fountain_pen_3d.png", subtitle: "EvoluSer Consultores", leader: "Junta Directiva", role: "Liderazgo Estratégico", image: "imagen7.jpeg", desc: "Nuestro equipo directivo encarna la misión de potenciar el ser y proteger la vida. Guiamos a la organización con una visión integral, asegurando que cada paso que damos genere valor real para nuestros clientes y la sociedad.", list: ["Dirección Estratégica", "Gestión de Calidad", "Innovación Corporativa", "Responsabilidad Social"], iconClass: "metal-blue" }
         };
 
         function openModal(type) {
@@ -787,7 +811,13 @@
             if(!data) return;
             document.getElementById('modal-image').src = data.image; 
             document.getElementById('modal-image').onerror = function() { this.src = 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80'; };
-            document.getElementById('modal-title').innerHTML = `<i class="${data.icon} text-4xl mr-3 metal-icon ${data.iconClass}"></i>${data.title}`;
+            
+            // UPDATE: Usar Imagen 3D en el Modal
+            document.getElementById('modal-title').innerHTML = `
+                <img src="${data.iconUrl}" class="w-12 h-12 object-contain mr-3 drop-shadow-md inline-block align-middle">
+                ${data.title}
+            `;
+            
             document.getElementById('modal-subtitle').innerText = data.subtitle; 
             document.getElementById('modal-leader').innerText = data.leader; 
             document.getElementById('modal-role').innerText = data.role; 
