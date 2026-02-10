@@ -337,10 +337,35 @@
 
             <!-- VISTA BROCHURE -->
             <div id="view-brochure" class="hidden">
-                <div class="text-center mb-12 stagger-1">
+                <div class="text-center mb-10 stagger-1">
                     <span class="text-brandGreen font-bold tracking-widest uppercase text-xs bg-green-50 px-3 py-1 rounded-full">Nuestro Portafolio</span>
                     <h2 class="text-4xl font-heading font-bold text-gray-800 mb-4 mt-4">Soluciones Integrales</h2>
-                    <p class="text-lg text-gray-500 max-w-2xl mx-auto">Tecnología, normativa y humanidad unidas.</p>
+                    <p class="text-lg text-gray-500 max-w-2xl mx-auto">Selecciona tu etapa actual para ver soluciones a medida.</p>
+                </div>
+
+                <!-- SELECTOR DE ETAPA (SEGMENTATION HERO) -->
+                <div class="flex flex-col md:flex-row gap-6 justify-center mb-16 stagger-1 max-w-3xl mx-auto">
+                     <button onclick="switchTab('empresas')" class="flex-1 bg-white/90 p-6 rounded-2xl shadow-lg border-2 border-transparent hover:border-brandBlue transition-all group flex items-center gap-4 text-left hover:scale-[1.02]">
+                         <div class="w-14 h-14 rounded-full bg-blue-50 flex items-center justify-center flex-shrink-0">
+                             <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Objects/Office%20building.png" alt="Empresas" class="w-10 h-10 object-contain">
+                         </div>
+                         <div>
+                             <h4 class="font-bold text-gray-800 text-lg group-hover:text-brandBlue transition-colors">Para Empresas</h4>
+                             <p class="text-xs text-gray-500">Optimización, Normativa y Crecimiento Sostenible.</p>
+                         </div>
+                         <i class="fas fa-chevron-right ml-auto text-gray-300 group-hover:text-brandBlue"></i>
+                     </button>
+                     
+                     <button onclick="switchTab('emprendedores')" class="flex-1 bg-white/90 p-6 rounded-2xl shadow-lg border-2 border-transparent hover:border-brandGreen transition-all group flex items-center gap-4 text-left hover:scale-[1.02]">
+                         <div class="w-14 h-14 rounded-full bg-green-50 flex items-center justify-center flex-shrink-0">
+                             <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Travel%20and%20places/Rocket.png" alt="Emprendedores" class="w-10 h-10 object-contain">
+                         </div>
+                         <div>
+                             <h4 class="font-bold text-gray-800 text-lg group-hover:text-brandGreen transition-colors">Para Emprendedores</h4>
+                             <p class="text-xs text-gray-500">Formalización, Despegue y Mentoria Inicial.</p>
+                         </div>
+                         <i class="fas fa-chevron-right ml-auto text-gray-300 group-hover:text-brandGreen"></i>
+                     </button>
                 </div>
 
                 <div class="max-w-sm mx-auto mb-16 stagger-2 video-section">
@@ -373,10 +398,6 @@
                         <span>¡Sé un EVONAUTA! Evoluciona hoy</span>
                         <i class="fas fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
                     </a>
-                    <div class="flex justify-center gap-4 mt-2 animate-pop-in" style="animation-delay: 1s; opacity: 0; animation-fill-mode: forwards;">
-                        <button onclick="switchTab('empresas')" class="px-6 py-2 rounded-full border border-brandBlue text-brandBlue hover:bg-brandBlue hover:text-white transition-all text-sm font-semibold cursor-none transform hover:scale-105"><i class="fas fa-building mr-2"></i> Empresas</button>
-                        <button onclick="switchTab('emprendedores')" class="px-6 py-2 rounded-full border border-brandGreen text-brandGreen hover:bg-brandGreen hover:text-white transition-all text-sm font-semibold cursor-none transform hover:scale-105"><i class="fas fa-lightbulb mr-2"></i> Emprendedores</button>
-                    </div>
                 </div>
             </div>
 
@@ -394,7 +415,7 @@
                         <div class="text-center mb-4"><i class="fas fa-industry text-4xl text-brandAmber"></i></div><h3 class="text-xl font-bold text-gray-800 text-center mb-2">Industria</h3><p class="text-xs text-gray-500 text-center mb-4">Sector Productivo</p><ul class="text-sm text-gray-600 space-y-2 mb-6"><li><i class="fas fa-check text-brandGreen mr-2"></i> Seguridad Industrial (SSO)</li><li><i class="fas fa-check text-brandGreen mr-2"></i> Licencias Ambientales</li><li><i class="fas fa-check text-brandGreen mr-2"></i> Certificaciones de Calidad</li></ul>
                     </div>
                 </div>
-                <div class="text-center mt-8"><a href="https://wa.me/593983900050?text=Hola,%20busco%20soluciones%20para%20mi%20Empresa" target="_blank" class="inline-block bg-brandBlue text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-blue-700 transition cursor-none">Agendar Diagnóstico Empresarial</a><div class="mt-4"><button onclick="switchTab('carta')" class="text-sm text-gray-400 hover:text-brandBlue transition cursor-none">Volver al inicio</button></div></div>
+                <div class="text-center mt-8"><a href="https://wa.me/593983900050?text=Hola,%20busco%20soluciones%20para%20mi%20Empresa" target="_blank" class="inline-block bg-brandBlue text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-blue-700 transition cursor-none">Agendar Diagnóstico Empresarial</a><div class="mt-4"><button onclick="switchTab('brochure')" class="text-sm text-gray-400 hover:text-brandBlue transition cursor-none"><i class="fas fa-arrow-left mr-1"></i> Volver a Servicios</button></div></div>
             </div>
 
             <!-- VISTA EMPRENDEDORES -->
@@ -409,7 +430,7 @@
                         <a href="https://wa.me/593983900050?text=Hola%20Ev,%20tengo%20un%20emprendimiento%20y%20necesito%20ayuda" target="_blank" class="inline-block bg-gradient-to-r from-brandGreen to-green-600 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:shadow-green-500/50 transition transform hover:scale-105 cursor-none">Hablar con un Asesor Humano</a>
                     </div>
                 </div>
-                <div class="text-center mt-8"><button onclick="switchTab('carta')" class="text-sm text-gray-400 hover:text-brandBlue transition cursor-none">Volver al inicio</button></div>
+                <div class="text-center mt-8"><button onclick="switchTab('brochure')" class="text-sm text-gray-400 hover:text-brandBlue transition cursor-none"><i class="fas fa-arrow-left mr-1"></i> Volver a Servicios</button></div>
             </div>
         </div>
     </main>
