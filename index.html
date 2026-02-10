@@ -428,7 +428,8 @@
 
     <script>
         // --- CONFIGURACIÓN DE IA (CONEXIÓN CLOUDFLARE) ---
-        const USE_MOCK_AI = false; // DESACTIVAR MODO SIMULACIÓN
+        const USE_MOCK_AI = true; // ⚠️ CAMBIADO A TRUE TEMPORALMENTE (Para que funcione sin créditos)
+        // Cuando recargues saldo en xAI, cambia esto a 'false'
         const BACKEND_URL = "https://cerebro-evoluser.comercialregionaldireccion.workers.dev"; // TU URL REAL
 
         let chatHistory = [];
@@ -436,10 +437,25 @@
 
         // --- SISTEMA DE SIMULACIÓN (Respaldo en caso de error) ---
         const simulateGrokResponse = (text) => {
+            const lowerText = text.toLowerCase();
             return new Promise((resolve) => {
                 setTimeout(() => {
-                    resolve("¡Hola! Soy Ev en modo de respaldo. Parece que hay un problema de conexión con mi cerebro principal. Por favor, verifica tu conexión o contacta a soporte.");
-                }, 1000);
+                    if (lowerText.includes('hola') || lowerText.includes('buenos')) {
+                        resolve("¡Hola, Evonauta! 🚀 Soy Ev, tu asistente virtual. Estoy lista para ayudarte con temas de Talento Humano, Seguridad Ocupacional o Sostenibilidad. ¿Por dónde empezamos?");
+                    } else if (lowerText.includes('precio') || lowerText.includes('costo')) {
+                        resolve("Cada proyecto en EvoluSer es único. Para darte un valor exacto, necesitamos un diagnóstico rápido. ¿Te gustaría contactar a un asesor humano por WhatsApp? 📲");
+                    } else if (lowerText.includes('humano') || lowerText.includes('talento')) {
+                        resolve("En **Talento Humano**, liderado por Nury Echeverria, nos enfocamos en Clima Laboral, Reclutamiento y Habilidades Blandas. ¡Potenciamos el activo más importante de tu empresa!");
+                    } else if (lowerText.includes('seguridad') || lowerText.includes('sso')) {
+                        resolve("La seguridad es primero 🛡️. Christian Ortega dirige nuestro equipo de **SSO**, implementando normas ISO y auditorías para proteger la vida de tus colaboradores.");
+                    } else if (lowerText.includes('ambiente') || lowerText.includes('sostenible')) {
+                        resolve("¡El futuro es verde! 🌿 Te ayudamos con licencias ambientales y huella de carbono para que tu empresa sea **Sostenible** y competitiva.");
+                    } else if (lowerText.includes('agro')) {
+                        resolve("Para el sector **Agroindustrial** 🚜, optimizamos procesos y garantizamos inocuidad alimentaria (BPA) bajo la dirección de la Ing. Lilian Eras.");
+                    } else {
+                        resolve("Entiendo tu consulta. Como soy una IA en entrenamiento (Modo Simulación), te sugiero hablar directamente con nuestro equipo humano en WhatsApp para una respuesta más precisa. ¡Están a un clic de distancia! 👉 <a href='https://wa.me/593983900050' target='_blank' class='text-brandBlue underline'>Clic aquí</a>");
+                    }
+                }, 1500); // Retardo para simular "pensamiento"
             });
         };
 
