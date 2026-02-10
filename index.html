@@ -440,22 +440,57 @@
             const lowerText = text.toLowerCase();
             return new Promise((resolve) => {
                 setTimeout(() => {
-                    if (lowerText.includes('hola') || lowerText.includes('buenos')) {
-                        resolve("¡Hola, Evonauta! 🚀 Soy Ev, tu asistente virtual. Estoy lista para ayudarte con temas de Talento Humano, Seguridad Ocupacional o Sostenibilidad. ¿Por dónde empezamos?");
-                    } else if (lowerText.includes('precio') || lowerText.includes('costo')) {
-                        resolve("Cada proyecto en EvoluSer es único. Para darte un valor exacto, necesitamos un diagnóstico rápido. ¿Te gustaría contactar a un asesor humano por WhatsApp? 📲");
-                    } else if (lowerText.includes('humano') || lowerText.includes('talento')) {
-                        resolve("En **Talento Humano**, liderado por Nury Echeverria, nos enfocamos en Clima Laboral, Reclutamiento y Habilidades Blandas. ¡Potenciamos el activo más importante de tu empresa!");
-                    } else if (lowerText.includes('seguridad') || lowerText.includes('sso')) {
-                        resolve("La seguridad es primero 🛡️. Christian Ortega dirige nuestro equipo de **SSO**, implementando normas ISO y auditorías para proteger la vida de tus colaboradores.");
-                    } else if (lowerText.includes('ambiente') || lowerText.includes('sostenible')) {
-                        resolve("¡El futuro es verde! 🌿 Te ayudamos con licencias ambientales y huella de carbono para que tu empresa sea **Sostenible** y competitiva.");
-                    } else if (lowerText.includes('agro')) {
-                        resolve("Para el sector **Agroindustrial** 🚜, optimizamos procesos y garantizamos inocuidad alimentaria (BPA) bajo la dirección de la Ing. Lilian Eras.");
+                    // --- SALUDOS Y CORTESÍA ---
+                    if (lowerText.match(/^(hola|buenos|buenas|hi|hello)/)) {
+                        resolve("¡Hola, Evonauta! 🚀 Soy Ev, tu copiloto virtual. Estoy lista para despegar contigo hacia el éxito. ¿Te interesa Talento Humano, Seguridad, Ambiente o Agroindustria?");
+                    } else if (lowerText.includes('gracias') || lowerText.includes('agradezco')) {
+                        resolve("¡Es un placer servirte! Recuerda que en EvoluSer estamos para potenciar el ser y proteger la vida. 💚 ¿Necesitas algo más?");
+                    } else if (lowerText.includes('adios') || lowerText.includes('chao') || lowerText.includes('hasta luego')) {
+                        resolve("¡Hasta pronto, Evonauta! Que tu viaje empresarial siga evolucionando. Estaré aquí cuando me necesites. 🚀");
+                    
+                    // --- IDENTIDAD ---
+                    } else if (lowerText.includes('quien eres') || lowerText.includes('que eres') || lowerText.includes('tu nombre')) {
+                        resolve("Soy Ev, la inteligencia artificial de EvoluSer. Mi misión es guiarte a través de nuestros servicios integrales y conectarte con nuestros expertos humanos.");
+                    } else if (lowerText.includes('evoluser') || lowerText.includes('empresa') || lowerText.includes('hacen')) {
+                        resolve("EvoluSer es una consultora integral en Ecuador. Fusionamos Talento Humano, Seguridad Ocupacional, Gestión Ambiental y Agroindustria para que tu empresa crezca cuidando a la gente y al planeta.");
+
+                    // --- PRECIOS Y COSTOS ---
+                    } else if (lowerText.includes('precio') || lowerText.includes('costo') || lowerText.includes('valor') || lowerText.includes('cotiza')) {
+                        resolve("Cada proyecto es único, como tu huella digital. Para darte un valor exacto, necesitamos un diagnóstico rápido. ¿Te gustaría contactar a un asesor humano por WhatsApp? 📲 👉 <a href='https://wa.me/593983900050' target='_blank' class='text-brandBlue font-bold underline'>Clic aquí</a>");
+                    
+                    // --- SERVICIOS ESPECÍFICOS ---
+                    // Talento Humano
+                    } else if (lowerText.includes('humano') || lowerText.includes('talento') || lowerText.includes('clima') || lowerText.includes('reclutamiento')) {
+                        resolve("En **Talento Humano** (Dir: Nury Echeverria), nos enfocamos en: <br>• Selección de personal 🕵️‍♀️<br>• Clima y Cultura Laboral 🌡️<br>• Habilidades Blandas 🧠<br>¡Potenciamos tu activo más valioso!");
+                    // Seguridad (SSO)
+                    } else if (lowerText.includes('seguridad') || lowerText.includes('sso') || lowerText.includes('riesgo') || lowerText.includes('auditoria')) {
+                        resolve("La seguridad es primero 🛡️. (Dir: Christian Ortega). Ofrecemos:<br>• Implementación ISO 45001<br>• Auditorías de Riesgos<br>• Vigilancia de la Salud<br>• Capacitaciones de alto impacto.");
+                    // Ambiente
+                    } else if (lowerText.includes('ambiente') || lowerText.includes('sostenible') || lowerText.includes('licencia') || lowerText.includes('verde')) {
+                        resolve("¡El futuro es verde! 🌿 (Dir: Christian Ortega). Te ayudamos con:<br>• Licencias Ambientales<br>• Huella de Carbono<br>• Planes de Manejo<br>Haz que tu empresa sea Sostenible y competitiva.");
+                    // Agro
+                    } else if (lowerText.includes('agro') || lowerText.includes('bpa') || lowerText.includes('inocuidad') || lowerText.includes('alimento')) {
+                        resolve("Para el sector **Agroindustrial** 🚜 (Dir: Lilian Eras), optimizamos:<br>• Buenas Prácticas Agrícolas (BPA)<br>• Inocuidad Alimentaria<br>• Procesos de Industrialización.<br>Calidad desde el origen.");
+                    
+                    // --- CONTACTO Y UBICACIÓN ---
+                    } else if (lowerText.includes('telefono') || lowerText.includes('celular') || lowerText.includes('llamar') || lowerText.includes('whatsapp')) {
+                        resolve("Claro, contáctanos directamente al WhatsApp: **+593 98 390 0050** o llámanos al **+593 99 640 8009**. ¡Estamos atentos!");
+                    } else if (lowerText.includes('correo') || lowerText.includes('email') || lowerText.includes('mail')) {
+                        resolve("Escríbenos a: **evoluserec@gmail.com**. Revisamos nuestra bandeja de entrada constantemente. 📧");
+                    } else if (lowerText.includes('ubicacion') || lowerText.includes('donde estan') || lowerText.includes('direccion') || lowerText.includes('quito')) {
+                        resolve("Nuestra base de operaciones está en **Quito, Ecuador**, pero nuestros servicios llegan a todo el país gracias a la tecnología y a nuestros consultores móviles. 🌎");
+                    
+                    // --- FILOSOFÍA ---
+                    } else if (lowerText.includes('mision') || lowerText.includes('proposito')) {
+                        resolve("Nuestra misión es simple pero poderosa: **Potenciar el Ser, Proteger la Vida**. Buscamos que las empresas crezcan siendo más humanas, seguras y sostenibles.");
+                    } else if (lowerText.includes('vision')) {
+                        resolve("Ser el referente nacional en consultoría integral, demostrando que la rentabilidad y el bienestar humano/ambiental pueden ir de la mano.");
+
+                    // --- DEFAULT ---
                     } else {
-                        resolve("Entiendo tu consulta. Como soy una IA en entrenamiento (Modo Simulación), te sugiero hablar directamente con nuestro equipo humano en WhatsApp para una respuesta más precisa. ¡Están a un clic de distancia! 👉 <a href='https://wa.me/593983900050' target='_blank' class='text-brandBlue underline'>Clic aquí</a>");
+                        resolve("Entiendo tu consulta, pero mi base de datos simulada es limitada. 🧠 Te sugiero hablar directamente con nuestro equipo humano en WhatsApp para una respuesta experta y personalizada. ¡Están a un clic! 👉 <a href='https://wa.me/593983900050' target='_blank' class='text-brandBlue font-bold underline'>Clic aquí para chatear</a>");
                     }
-                }, 1500); // Retardo para simular "pensamiento"
+                }, 1000); // Retardo para simular "pensamiento"
             });
         };
 
