@@ -231,6 +231,42 @@
             92% { transform: rotateY(180deg); color: #3E8E8E; text-shadow: 0 0 15px rgba(255, 255, 255, 0.9); }
             100% { transform: rotateY(360deg); color: inherit; text-shadow: none; }
         }
+
+        /* ESTILO MENÚ HAMBURGUESA FOOTER (GLASS PREMUM) */
+        .footer-menu-trigger {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            width: 45px; height: 45px;
+            border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            color: white; font-size: 1.2rem;
+            cursor: pointer; transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+        .footer-menu-trigger:hover {
+            background: rgba(62, 142, 142, 0.3);
+            border-color: #3E8E8E;
+            box-shadow: 0 0 15px rgba(62, 142, 142, 0.5);
+            transform: scale(1.05);
+        }
+        .footer-menu-content {
+            position: absolute; bottom: 60px; right: 0;
+            background: rgba(19, 41, 61, 0.95);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(62, 142, 142, 0.4);
+            border-radius: 16px;
+            padding: 1rem;
+            width: 200px;
+            transform-origin: bottom right;
+            transform: scale(0); opacity: 0;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+            z-index: 50;
+        }
+        .footer-menu-wrapper:hover .footer-menu-content {
+            transform: scale(1); opacity: 1;
+        }
     </style>
 </head>
 <body class="flex flex-col min-h-screen font-sans">
@@ -606,27 +642,54 @@
         </div>
     </main>
 
-    <!-- FOOTER PREMIUM (ICONOS CORREGIDOS + PADDING INFERIOR) -->
-    <footer class="bg-brandBlue text-white py-20 pb-72 border-t-8 border-brandGreen">
-        <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-16 text-base">
-            <div><img src="https://raw.githubusercontent.com/direccioncomercial/evoluser-web/1b862973e8003850daadd6a47bffd5b6cf04b2f6/logo.png" class="h-12 mb-8 brightness-0 invert opacity-90"><p class="text-white/60 leading-relaxed font-light text-justify text-sm">Potenciamos el ser, protegemos la vida. Aliado estratégico líder en la región para la evolución empresarial sostenible.</p></div>
-            <div><h5 class="font-bold mb-8 uppercase tracking-widest text-brandGreen text-sm">Atención</h5><ul class="space-y-4 text-white/70 text-sm"><li><button onclick="setSegment('soluciones')" class="hover:text-brandGreen transition">Soluciones</button></li><li><button onclick="setSegment('empresas')" class="hover:text-brandGreen transition">Empresas</button></li><li><button onclick="setSegment('oficina')" class="hover:text-brandGreen transition">Oficina Virtual</button></li></ul></div>
-            <div><h5 class="font-bold mb-8 uppercase tracking-widest text-brandGreen text-sm">Contacto Principal</h5><ul class="space-y-4 text-white/70 font-bold uppercase text-sm"><li><i class="fas fa-map-marker-alt text-brandGreen mr-2"></i> Quito, Ecuador</li>
-                <!-- Número de Llamadas -->
-                <li><a href="tel:+593987003357" class="hover:text-brandGreen transition flex items-center gap-2"><i class="fas fa-phone-alt text-brandGreen mr-2"></i> +593 98 700 3357</a></li>
-                <li><a href="https://wa.me/593983900050" target="_blank" class="hover:text-brandGreen transition flex items-center gap-2"><i class="fab fa-whatsapp text-brandGreen mr-2"></i> +593 98 390 0050</a></li>
-                <li><a href="mailto:evoluserec@gmail.com" class="hover:text-brandGreen transition flex items-center gap-2 lowercase tracking-wider font-bold"><i class="fas fa-envelope text-brandGreen mr-2"></i> evoluserec@gmail.com</a></li></ul></div>
+    <!-- FOOTER PREMIUM (MODIFICADO SIN PADDING EXCESIVO) -->
+    <footer class="bg-brandBlue text-white py-20 pb-20 border-t-8 border-brandGreen relative overflow-visible">
+        <!-- Contenedor ajustado a la izquierda para evitar a EV -->
+        <div class="container mx-auto px-4 pr-0 md:pr-48 grid grid-cols-1 md:grid-cols-12 gap-8 text-base">
             
-            <!-- ICONOS REDES SOCIALES (IDÉNTICOS AL TOP BAR) -->
-            <div><h5 class="font-bold mb-8 uppercase tracking-widest text-brandGreen text-sm text-nowrap">Síguenos</h5>
-                <div class="flex gap-6 text-2xl">
-                    <a href="#" class="social-icon hover-linkedin transition"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="#" class="social-icon hover-facebook transition"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" class="social-icon hover-instagram transition"><i class="fab fa-instagram"></i></a>
-                    <a href="#" class="social-icon hover-youtube transition"><i class="fab fa-youtube"></i></a>
-                    <a href="#" class="social-icon hover-tiktok transition"><i class="fab fa-tiktok"></i></a>
-                    <a href="#" class="social-icon hover-x transition"><i class="fab fa-x-twitter"></i></a>
+            <!-- Columna 1: Logo (4 espacios) -->
+            <div class="md:col-span-4">
+                <img src="https://raw.githubusercontent.com/direccioncomercial/evoluser-web/1b862973e8003850daadd6a47bffd5b6cf04b2f6/logo.png" class="h-14 mb-6 brightness-0 invert opacity-90">
+                <p class="text-white/60 leading-relaxed font-light text-justify text-sm">Potenciamos el ser, protegemos la vida. Aliado estratégico líder en la región para la evolución empresarial sostenible.</p>
+            </div>
+
+            <!-- Columna 2: Contacto (4 espacios) -->
+            <div class="md:col-span-4">
+                <h5 class="font-bold mb-6 uppercase tracking-widest text-brandGreen text-sm">Contacto Principal</h5>
+                <ul class="space-y-4 text-white/70 font-bold uppercase text-sm">
+                    <li><i class="fas fa-map-marker-alt text-brandGreen mr-2"></i> Quito, Ecuador</li>
+                    <li><a href="tel:+593987003357" class="hover:text-brandGreen transition flex items-center gap-2"><i class="fas fa-phone-alt text-brandGreen mr-2"></i> +593 98 700 3357</a></li>
+                    <li><a href="https://wa.me/593983900050" target="_blank" class="hover:text-brandGreen transition flex items-center gap-2"><i class="fab fa-whatsapp text-brandGreen mr-2"></i> +593 98 390 0050</a></li>
+                    <li><a href="mailto:evoluserec@gmail.com" class="hover:text-brandGreen transition flex items-center gap-2 lowercase tracking-wider font-bold"><i class="fas fa-envelope text-brandGreen mr-2"></i> evoluserec@gmail.com</a></li>
+                </ul>
+            </div>
+
+            <!-- Columna 3: Redes (4 espacios - Ajustado a la izquierda) -->
+            <div class="md:col-span-4">
+                <h5 class="font-bold mb-6 uppercase tracking-widest text-brandGreen text-sm text-nowrap">Síguenos</h5>
+                <div class="flex gap-4 text-xl">
+                    <a href="#" class="social-icon hover-linkedin transition p-2 rounded-full border border-white/10 hover:border-brandGreen/50"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="social-icon hover-facebook transition p-2 rounded-full border border-white/10 hover:border-brandGreen/50"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-icon hover-instagram transition p-2 rounded-full border border-white/10 hover:border-brandGreen/50"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-icon hover-youtube transition p-2 rounded-full border border-white/10 hover:border-brandGreen/50"><i class="fab fa-youtube"></i></a>
+                    <a href="#" class="social-icon hover-tiktok transition p-2 rounded-full border border-white/10 hover:border-brandGreen/50"><i class="fab fa-tiktok"></i></a>
                 </div>
+            </div>
+        </div>
+
+        <!-- BOTÓN DE MENÚ HAMBURGUESA FLOTANTE EN EL FOOTER (POSICIÓN SUPERIOR DERECHA) -->
+        <div class="absolute top-10 right-4 md:right-10 z-20 footer-menu-wrapper">
+            <button class="footer-menu-trigger group">
+                <i class="fas fa-bars group-hover:text-brandGreen transition"></i>
+            </button>
+            <!-- Menú Desplegable -->
+            <div class="footer-menu-content">
+                <h5 class="text-brandGreen font-bold uppercase text-xs mb-3 tracking-widest border-b border-white/10 pb-2">Navegación</h5>
+                <ul class="space-y-3 text-white text-sm">
+                    <li><button onclick="setSegment('soluciones')" class="hover:text-brandGreen transition flex items-center w-full text-left"><i class="fas fa-chevron-right text-xs mr-2 text-brandGreen/50"></i> Soluciones</button></li>
+                    <li><button onclick="setSegment('empresas')" class="hover:text-brandGreen transition flex items-center w-full text-left"><i class="fas fa-chevron-right text-xs mr-2 text-brandGreen/50"></i> Empresas</button></li>
+                    <li><button onclick="setSegment('oficina')" class="hover:text-brandGreen transition flex items-center w-full text-left"><i class="fas fa-chevron-right text-xs mr-2 text-brandGreen/50"></i> Oficina Virtual</button></li>
+                </ul>
             </div>
         </div>
     </footer>
