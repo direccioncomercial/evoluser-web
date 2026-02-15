@@ -267,6 +267,16 @@
         .footer-menu-wrapper:hover .footer-menu-content {
             transform: scale(1); opacity: 1;
         }
+
+        /* Indicador de carga chat */
+        .typing-indicator {
+            display: flex; gap: 4px; padding: 10px 15px; background: white; border-radius: 15px; border-bottom-left-radius: 0;
+            width: fit-content; border: 1px solid #f0f0f0;
+        }
+        .typing-dot { width: 6px; height: 6px; background: #3E8E8E; border-radius: 50%; animation: typingAnimation 1.4s infinite ease-in-out; }
+        .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+        .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+        @keyframes typingAnimation { 0%, 80%, 100% { transform: translateY(0); } 40% { transform: translateY(-6px); } }
     </style>
 </head>
 <body class="flex flex-col min-h-screen font-sans">
@@ -724,8 +734,28 @@
             </div>
             <button onclick="toggleChat()" class="text-white/50 hover:text-white transition"><i class="fas fa-times text-xl"></i></button>
         </div>
-        <ul id="chat-box" class="flex-1 overflow-y-auto p-6 space-y-4 bg-gray-50/50 scrollbar-hide"><li class="flex justify-start"><div class="bg-white text-gray-700 p-4 rounded-2xl rounded-tl-none shadow-sm text-sm border border-gray-100 max-w-[85%] italic">"Bienvenido Evonauta. Soy Ev, tu consultora experta. ¿Deseas optimizar hoy tu equipo, tu seguridad o tu cumplimiento ambiental?"</div></li></ul>
-        <div class="p-4 bg-white border-t border-gray-100"><div class="flex items-center gap-3 bg-gray-50 rounded-full px-5 py-3 border border-gray-200 focus-within:border-brandBlue transition-all"><input id="chat-input" class="flex-1 bg-transparent border-none outline-none text-sm font-medium" placeholder="Consulta estratégica..."> <button onclick="handleChat()" class="text-brandBlue hover:text-brandGreen transition transform hover:scale-110"><i class="fas fa-paper-plane text-lg"></i></button></div></div>
+        <ul id="chat-box" class="flex-1 overflow-y-auto p-6 space-y-4 bg-gray-50/50 scrollbar-hide">
+            <li class="flex justify-start">
+                <div class="bg-white text-gray-700 p-4 rounded-2xl rounded-tl-none shadow-sm text-sm border border-gray-100 max-w-[85%] italic">
+                    "Bienvenido Evonauta. Soy Ev, tu consultora experta. ¿Deseas optimizar hoy tu equipo, tu seguridad o tu cumplimiento ambiental?"
+                </div>
+            </li>
+        </ul>
+        <div id="chat-loading" class="hidden px-6 py-2">
+            <div class="typing-indicator">
+                <div class="typing-dot"></div>
+                <div class="typing-dot"></div>
+                <div class="typing-dot"></div>
+            </div>
+        </div>
+        <div class="p-4 bg-white border-t border-gray-100">
+            <div class="flex items-center gap-3 bg-gray-50 rounded-full px-5 py-3 border border-gray-200 focus-within:border-brandBlue transition-all">
+                <input id="chat-input" class="flex-1 bg-transparent border-none outline-none text-sm font-medium" placeholder="Consulta estratégica..."> 
+                <button onclick="handleChat()" class="text-brandBlue hover:text-brandGreen transition transform hover:scale-110">
+                    <i class="fas fa-paper-plane text-lg"></i>
+                </button>
+            </div>
+        </div>
     </div>
 
     <!-- MODAL UNIVERSAL -->
@@ -741,6 +771,25 @@
     </div>
 
     <script>
+        // --- CONFIGURACIÓN GEMINI API ---
+        const apiKey = ""; // La clave se provee en el entorno de ejecución
+        const systemPrompt = `Eres Ev, la consultora de IA inteligente y estratégica de EvoluSer. 
+        Tu objetivo es ayudar a los usuarios (Evonautas) con información sobre la consultora EvoluSer.
+        
+        CONTEXTO DE EVOLUSER:
+        - Eslogan: Potenciamos el Ser, Protegemos la Vida.
+        - Misión: Brindar soluciones técnicas con enfoque humano para transformar la cultura organizacional.
+        - Servicios:
+            1. Talento Humano: Reclutamiento, Cultura, Evaluación 360, Clima Laboral. Liderado por Nury Echeverria.
+            2. Seguridad Industrial (SSO): ISO 45001, Vigilancia Médica, Riesgos Técnicos. Liderado por Christian Ortega.
+            3. Ingeniería Agroindustrial: Certificación BPA, HACCP, Diseño de Plantas. Liderado por Lilian Eras.
+            4. Ingeniería Ambiental: Licencias, Huella de Carbono, Manejo de Desechos. Liderado por Christian Ortega.
+        - Segmentos: Soluciones para Empresas (Corporativo e Industrias) y Emprendedores (Startups - constitución legal, RUC, permisos ARCSA).
+        - Contacto: Teléfono +593 98 700 3357, WhatsApp +593 98 390 0050, Email evoluserec@gmail.com. Sede en Quito, Ecuador.
+        
+        TONO DE VOZ: Profesional, visionario, amable, breve y siempre enfocado en el crecimiento estratégico.
+        REGLA DE ORO: Si preguntan por precios específicos, invita a agendar una consulta gratuita por WhatsApp. Responde siempre en español.`;
+
         // Lógica de Movimiento EV
         const evContainer = document.getElementById('ev-floating-container');
         let isDragging = false; let startX, startY, initialX, initialY; let hasMoved = false;
@@ -842,11 +891,62 @@
         }
         function closeModal() { document.getElementById('service-modal').classList.add('hidden'); }
         function toggleChat() { const win = document.getElementById('ai-chat-window'); if(win.classList.contains('hidden')) { win.classList.remove('hidden'); setTimeout(()=>win.classList.remove('scale-0'),10); } else { win.classList.add('scale-0'); setTimeout(()=>win.classList.add('hidden'),300); } }
+
+        // --- LÓGICA DE INTELIGENCIA EV ---
+        async function fetchWithRetry(url, options, retries = 5, backoff = 1000) {
+            try {
+                const response = await fetch(url, options);
+                if (!response.ok) throw new Error('API_ERROR');
+                return await response.json();
+            } catch (err) {
+                if (retries > 0) {
+                    await new Promise(r => setTimeout(r, backoff));
+                    return fetchWithRetry(url, options, retries - 1, backoff * 2);
+                }
+                throw err;
+            }
+        }
+
         async function handleChat() { 
-            const input = document.getElementById('chat-input'); const text = input.value; if(!text) return;
-            const chatBox = document.getElementById('chat-box'); chatBox.innerHTML += `<li class="flex justify-end"><div class="bg-brandBlue text-white p-3 rounded-2xl rounded-tr-none text-sm font-bold">${text}</div></li>`;
-            input.value = ''; chatBox.scrollTop = chatBox.scrollHeight;
-            setTimeout(() => { chatBox.innerHTML += `<li class="flex justify-start"><div class="bg-white text-gray-700 p-4 rounded-2xl rounded-tl-none shadow-md text-sm border border-gray-100 italic font-medium leading-relaxed font-bold">"Soy Ev. Mi consejo hoy: la inversión en talento y seguridad es el único camino real hacia la rentabilidad infinita. ¿Deseas que agendemos con un director?"</div></li>`; chatBox.scrollTop = chatBox.scrollHeight; }, 1000);
+            const input = document.getElementById('chat-input'); 
+            const text = input.value.trim(); 
+            if(!text) return;
+            
+            const chatBox = document.getElementById('chat-box'); 
+            const loading = document.getElementById('chat-loading');
+
+            // Añadir mensaje de usuario
+            chatBox.innerHTML += `<li class="flex justify-end"><div class="bg-brandBlue text-white p-3 rounded-2xl rounded-tr-none text-sm font-bold shadow-md">${text}</div></li>`;
+            input.value = ''; 
+            chatBox.scrollTop = chatBox.scrollHeight;
+
+            // Mostrar "pensando"
+            loading.classList.remove('hidden');
+            chatBox.scrollTop = chatBox.scrollHeight;
+
+            try {
+                const response = await fetchWithRetry(
+                    `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`,
+                    {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            contents: [{ parts: [{ text: text }] }],
+                            systemInstruction: { parts: [{ text: systemPrompt }] }
+                        })
+                    }
+                );
+
+                const aiText = response.candidates?.[0]?.content?.parts?.[0]?.text || "Lo siento, tuve un pequeño fallo en mi matriz de IA. ¿Podrías repetirlo?";
+                
+                loading.classList.add('hidden');
+                chatBox.innerHTML += `<li class="flex justify-start"><div class="bg-white text-gray-700 p-4 rounded-2xl rounded-tl-none shadow-md text-sm border border-gray-100 italic font-medium leading-relaxed font-bold">${aiText}</div></li>`;
+            } catch (error) {
+                loading.classList.add('hidden');
+                chatBox.innerHTML += `<li class="flex justify-start"><div class="bg-red-50 text-red-600 p-4 rounded-2xl rounded-tl-none shadow-md text-sm border border-red-100 italic font-bold">"Evauta, parece que mi conexión externa es inestable. Por favor, intenta de nuevo o contáctanos directamente por WhatsApp."</div></li>`;
+            }
+            
+            chatBox.scrollTop = chatBox.scrollHeight;
         }
 
         // --- Lógica del Carrusel (Añadida) ---
@@ -873,7 +973,7 @@
             showSlide(currentSlide);
         }
 
-        // Auto-play opcional (comenta esta línea si prefieres solo manual)
+        // Auto-play opcional
         setInterval(nextSlide, 6000);
 
         // --- Efecto Letras Giratorias (Slogan) ---
@@ -881,12 +981,16 @@
             const slogan = document.getElementById('slogan-animado');
             if(slogan) {
                 const text = slogan.innerText;
-                // Dividimos por letras pero respetamos espacios para el responsive
                 slogan.innerHTML = text.split('').map((char, i) => {
                     if (char === ' ') return ' '; 
                     return `<span class="inline-block" style="animation: spinLetters 8s ease-in-out infinite; animation-delay: ${i * 0.03}s; transform-style: preserve-3d; backface-visibility: hidden;">${char}</span>`;
                 }).join('');
             }
+
+            // Escuchar tecla Enter en el chat
+            document.getElementById('chat-input').addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') handleChat();
+            });
         });
         
         // --- JS para el Cursor Personalizado ---
@@ -899,22 +1003,16 @@
         });
 
         // Efecto Hover en elementos interactivos
-        const interactables = document.querySelectorAll('a, button, input, textarea, select, .cursor-pointer');
-        interactables.forEach(el => {
-            el.addEventListener('mouseenter', () => cursor.classList.add('hovering'));
-            el.addEventListener('mouseleave', () => cursor.classList.remove('hovering'));
-        });
-        
-        // Re-aplicar listeners cuando se abren modales o cambia contenido dinámico
-        const observer = new MutationObserver((mutations) => {
-             const newInteractables = document.querySelectorAll('a, button, input, textarea, select, .cursor-pointer');
-             newInteractables.forEach(el => {
-                el.removeEventListener('mouseenter', () => cursor.classList.add('hovering'));
-                el.removeEventListener('mouseleave', () => cursor.classList.remove('hovering'));
+        const applyHoverListeners = () => {
+            const interactables = document.querySelectorAll('a, button, input, textarea, select, .cursor-pointer');
+            interactables.forEach(el => {
                 el.addEventListener('mouseenter', () => cursor.classList.add('hovering'));
                 el.addEventListener('mouseleave', () => cursor.classList.remove('hovering'));
             });
-        });
+        };
+        
+        applyHoverListeners();
+        const observer = new MutationObserver(applyHoverListeners);
         observer.observe(document.body, { childList: true, subtree: true });
 
     </script>
