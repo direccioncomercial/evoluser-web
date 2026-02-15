@@ -3,1145 +3,681 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EvoluSer - Comunidad de Evonautas</title>
-    <!-- Metadatos importantes para móviles -->
-    <meta name="theme-color" content="#005691">
+    <title>EvoluSer - Consultoría Premium e IA</title>
+    <meta name="theme-color" content="#ffffff">
     
-    <!-- Librerías Externas -->
+    <!-- Librerías -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&family=Mulish:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
 
     <script>
-        // Configuración de Colores y Animaciones
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        brandBlue: '#005691',
-                        brandBlueLight: '#007ccb',
+                        brandBlue: '#005691', 
+                        brandBlueDark: '#003d66',
                         brandGreen: '#7AB800',
-                        brandGreenLight: '#9bd81a',
-                        brandDark: '#0f172a',
-                        brandAmber: '#d97706',
+                        brandGold: '#D4AF37', 
+                        brandGoldDark: '#B8860B',
+                        brandGray: '#F2F2F2',
+                        brandText: '#333333',
                     },
                     fontFamily: {
+                        sans: ['Mulish', 'sans-serif'],
                         heading: ['Montserrat', 'sans-serif'],
-                        body: ['Open Sans', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'card': '0 4px 20px rgba(0,0,0,0.06)',
+                        'gold': '0 10px 30px rgba(212, 175, 55, 0.25)',
+                        'hover': '0 15px 35px rgba(0,86,145,0.12)'
                     },
                     animation: {
-                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-                        'float': 'float 6s ease-in-out infinite',
-                        'glow-entrance': 'glowEntrance 1.5s ease-out forwards',
-                        'shimmer-text': 'shimmer 3s infinite linear',
                         'pop-in': 'popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards',
-                        'float-avatar': 'floatAvatar 4s ease-in-out infinite',
-                        'crystal-shine': 'crystalShine 8s infinite',
-                        
-                        // --- ANIMACIONES PREMIUM ---
-                        'leaf-flow': 'leafFlow 3s ease-in-out infinite',
-                        'heartbeat-soft': 'heartbeatSoft 2s ease-in-out infinite',
-                        'metal-shine': 'metalShine 3s linear infinite',
-                        'suspension': 'suspension 2s ease-in-out infinite',
-                        'pen-write': 'penWrite 3s ease-in-out infinite',
-                        'float-elegant': 'floatElegant 6s ease-in-out infinite',
-                        'logo-reveal': 'logoReveal 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards',
-                        'shimmer-infinite': 'shimmerInfinite 4s cubic-bezier(0.4, 0, 0.2, 1) infinite',
+                        'slide-up-fade': 'slideUpFade 1s cubic-bezier(0.16, 1, 0.3, 1) forwards',
                     },
                     keyframes: {
-                        logoReveal: {
-                            '0%': { opacity: '0', transform: 'scale(0.5) translateY(50px) rotateX(20deg)' },
-                            '100%': { opacity: '1', transform: 'scale(1) translateY(0) rotateX(0deg)' }
-                        },
-                        shimmerInfinite: {
-                            '0%': { transform: 'translateX(-150%) skewX(-25deg)' },
-                            '20%': { transform: 'translateX(150%) skewX(-25deg)' },
-                            '100%': { transform: 'translateX(150%) skewX(-25deg)' }
-                        },
-                        floatElegant: {
-                            '0%, 100%': { transform: 'translateY(0px)', filter: 'drop-shadow(0 15px 15px rgba(0,50,100,0.1))' },
-                            '50%': { transform: 'translateY(-15px)', filter: 'drop-shadow(0 35px 25px rgba(0,50,100,0.15))' }
-                        },
-                        metalShine: {
-                            '0%': { backgroundPosition: '0% 50%' },
-                            '50%': { backgroundPosition: '100% 50%' },
-                            '100%': { backgroundPosition: '0% 50%' },
-                        },
-                        heartbeatSoft: {
-                            '0%, 100%': { transform: 'scale(1)', filter: 'brightness(100%)' },
-                            '50%': { transform: 'scale(1.1)', filter: 'brightness(110%) drop-shadow(0 10px 10px rgba(0,86,145,0.3))' }
-                        },
-                        leafFlow: {
-                            '0%, 100%': { transform: 'rotate(0deg) translateY(0)' },
-                            '25%': { transform: 'rotate(5deg) translateY(-2px)' },
-                            '75%': { transform: 'rotate(-3deg) translateY(-1px)' }
-                        },
-                        suspension: {
-                            '0%, 100%': { transform: 'translateY(0)' },
-                            '50%': { transform: 'translateY(-4px) scale(1.02)' }
-                        },
-                        penWrite: {
-                            '0%, 100%': { transform: 'rotate(0deg) translate(0,0)' },
-                            '25%': { transform: 'rotate(-5deg) translate(-2px, 2px)' },
-                            '75%': { transform: 'rotate(5deg) translate(2px, -2px)' }
-                        },
-                        float: { '0%, 100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-10px)' } },
-                        floatAvatar: { '0%, 100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-8px)' } },
-                        glowEntrance: { '0%': { opacity: 0, transform: 'scale(0.9) translateY(20px)', filter: 'blur(10px)' }, '100%': { opacity: 1, transform: 'scale(1) translateY(0)', filter: 'blur(0)' } },
-                        shimmer: { '0%': { backgroundPosition: '-200% center' }, '100%': { backgroundPosition: '200% center' } },
-                        popIn: { '0%': { opacity: 0, transform: 'scale(0.5) translateY(50px)' }, '100%': { opacity: 1, transform: 'scale(1) translateY(0)' } },
-                        crystalShine: { '0%, 40%': { left: '-150%', opacity: '0' }, '50%': { opacity: '0.5' }, '60%': { left: '150%', opacity: '0' }, '100%': { left: '150%', opacity: '0' } },
-                        propulsion: { 
-                            '0%': { transform: 'scale(0.9) translateY(-2px)', opacity: '0.8' }, 
-                            '100%': { transform: 'scale(1.1) translateY(2px)', opacity: '1' } 
-                        }
+                        popIn: { '0%': { opacity: 0, transform: 'scale(0.98)' }, '100%': { opacity: 1, transform: 'scale(1)' } },
+                        slideUpFade: { '0%': { opacity: 0, transform: 'translateY(40px)' }, '100%': { opacity: 1, transform: 'translateY(0)' } },
                     }
                 }
             }
         }
     </script>
-
     <style>
-        body { 
-            font-family: 'Open Sans', sans-serif; 
-            background-color: #f0f4f8; 
-            overflow-x: hidden; 
-            cursor: none; 
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
-        @media (hover: none) { body { cursor: auto; } #custom-cursor { display: none; } }
-
-        /* FONDO CINEMÁTICO */
-        .cinematic-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2; overflow: hidden; }
-        .cinematic-bg::before {
-            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background-image: url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=2832&auto=format&fit=crop');
-            background-size: cover; background-position: center;
-            animation: kenBurns 120s infinite alternate ease-in-out;
-        }
-        .cinematic-bg::after {
-            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(to bottom, 
-                rgba(255, 255, 255, 0.2) 0%, 
-                rgba(0, 86, 145, 0.1) 60%, 
-                rgba(122, 184, 0, 0.1) 100%);
-        }
-        @keyframes kenBurns { 0% { transform: scale(1); } 100% { transform: scale(1.1); } }
-
-        #particles-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
+        body { background-color: #ffffff; color: #333; scroll-behavior: smooth; }
         
-        .glass-card { 
-            background: rgba(255, 255, 255, 0.85); 
-            backdrop-filter: blur(20px); 
-            -webkit-backdrop-filter: blur(20px); 
-            border: 1px solid rgba(255, 255, 255, 0.9); 
-            box-shadow: 0 20px 60px rgba(0, 50, 100, 0.15); 
-            position: relative;
-            z-index: 10; 
-        }
+        /* Navegación */
+        .nav-link { position: relative; color: #555; font-weight: 700; transition: color 0.3s; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px; }
+        .nav-link:hover { color: #005691; }
+        .nav-link.active { color: #D4AF37; }
+        .nav-link.active::after { content: ''; position: absolute; bottom: -28px; left: 0; width: 100%; height: 4px; background: linear-gradient(90deg, #D4AF37, #B8860B); border-radius: 2px; }
         
-        .logo-card { 
-            background: rgba(255, 255, 255, 0.95); 
-            border-radius: 1.5rem; 
-            box-shadow: 0 20px 40px -5px rgba(0, 86, 145, 0.2), 0 0 20px rgba(255, 255, 255, 0.8) inset; 
-            border: 1px solid rgba(255, 255, 255, 1); 
-            display: inline-block; 
-            padding: 2rem; 
-            min-width: 300px; 
-            position: relative; 
-            z-index: 10; 
-            overflow: hidden; 
-            backdrop-filter: blur(10px); 
-            transition: transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.5s ease;
-        }
+        /* IMPACT CARDS */
+        .impact-card { position: relative; overflow: hidden; border-radius: 12px; background: #000; height: 100%; min-height: 280px; }
+        .impact-card img { width: 100%; height: 100%; object-fit: cover; opacity: 0.7; transition: transform 0.8s ease; }
+        .impact-card:hover img { transform: scale(1.08); opacity: 0.85; }
+        .impact-content { position: absolute; inset: 0; padding: 2.5rem; display: flex; flex-direction: column; justify-content: flex-end; background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, transparent 65%); z-index: 10; }
         
-        .logo-glow { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 160%; height: 160%; background: radial-gradient(circle, rgba(255,255,255,0.9) 0%, rgba(0,86,145,0.2) 60%, rgba(255,255,255,0) 80%); z-index: -1; filter: blur(50px); animation: pulse-slow 5s infinite; }
-
-        .stagger-1 { animation: slideIn 0.6s ease-out both; animation-delay: 0.1s; }
-        .stagger-2 { animation: slideIn 0.6s ease-out both; animation-delay: 0.2s; }
-        .stagger-3 { animation: slideIn 0.6s ease-out both; animation-delay: 0.3s; }
-        .stagger-4 { animation: slideIn 0.6s ease-out both; animation-delay: 0.4s; }
-        @keyframes slideIn { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-
-        #custom-cursor { position: fixed; top: 0; left: 0; width: 30px; height: 30px; pointer-events: none; z-index: 9999; transform: translate(-50%, -50%); transition: transform 0.05s ease-out; display: flex; align-items: center; justify-content: center; }
-        #custom-cursor::before { content: ''; position: absolute; width: 40px; height: 40px; background: radial-gradient(circle, rgba(122, 184, 0, 0.4) 0%, transparent 70%); border-radius: 50%; z-index: -1; }
-        a:hover ~ #custom-cursor, button:hover ~ #custom-cursor, .cursor-pointer:hover ~ #custom-cursor { transform: translate(-50%, -50%) scale(1.5); }
-
-        .neon-3d-wrapper { font-family: 'Montserrat', sans-serif; font-weight: 800; text-transform: uppercase; perspective: 1200px; display: flex; justify-content: center; flex-wrap: wrap; gap: 0.6em; }
-        .neon-word { display: flex; white-space: nowrap; }
-        .neon-letter { display: inline-block; color: #ffffff; position: relative; transform-style: preserve-3d; animation: elegant-spin 8s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite; text-shadow: 0 2px 15px rgba(0, 86, 145, 0.6); }
-        @keyframes elegant-spin { 0%, 85% { transform: rotateY(0deg); color: #ffffff; text-shadow: 0 2px 15px rgba(0, 86, 145, 0.6); } 92% { color: #9bd81a; text-shadow: 0 0 25px rgba(155, 216, 26, 0.8), 0 0 10px #ffffff; } 100% { transform: rotateY(360deg); color: #ffffff; text-shadow: 0 2px 15px rgba(0, 86, 145, 0.6); } }
-        .neon-letter:hover { color: #005691; text-shadow: 0 0 15px rgba(255, 255, 255, 0.8); transition: all 0.3s ease; }
-
-        .interactive-card { 
-            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); 
-            transform-style: preserve-3d; 
-        }
-        .interactive-card:hover { transform: translateY(-8px); background: rgba(255,255,255, 1); box-shadow: 0 15px 30px -5px rgba(0, 50, 100, 0.1), 0 10px 10px -5px rgba(0, 50, 100, 0.04); border-color: rgba(255,255,255,1); }
-        
-        .metal-icon { 
-            background-clip: text; 
-            -webkit-background-clip: text; 
-            color: transparent; 
-            filter: drop-shadow(0 4px 3px rgba(0,0,0,0.15)); 
-            background-size: 200% 200%; 
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        
-        .metal-blue { background-image: linear-gradient(120deg, #003056 0%, #005691 25%, #60a5fa 50%, #005691 75%, #003056 100%); }
-        .metal-gray { background-image: linear-gradient(120deg, #1f2937 0%, #4b5563 25%, #9ca3af 50%, #4b5563 75%, #1f2937 100%); }
-        .metal-green { background-image: linear-gradient(120deg, #1a2e05 0%, #4d7c0f 25%, #a3e635 50%, #4d7c0f 75%, #1a2e05 100%); }
-        .metal-amber { background-image: linear-gradient(120deg, #78350f 0%, #b45309 25%, #fbbf24 50%, #b45309 75%, #78350f 100%); }
-        
-        .group:hover .metal-icon {
-            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.2));
-            background-position: 100% 50%; 
+        .btn-gold-gradient {
+            background: linear-gradient(135deg, #D4AF37 0%, #B8860B 100%);
+            color: white; padding: 0.75rem 1.5rem; border-radius: 999px; 
+            font-weight: 800; font-size: 0.75rem; text-transform: uppercase;
+            letter-spacing: 1px; display: inline-block; transition: all 0.3s ease; 
+            box-shadow: 0 4px 15px rgba(184, 134, 11, 0.3);
         }
 
-        .group:hover .animate-leaf { animation: leaf-flow 3s ease-in-out infinite; }
-        .group:hover .animate-hug { animation: heartbeat-soft 2s ease-in-out infinite; }
-        .group:hover .animate-tractor { animation: suspension 2s ease-in-out infinite; }
-        .group:hover .animate-shield { animation: metal-shine 2s linear infinite; }
-        .hover-pen:hover i { animation: pen-write 2s ease-in-out infinite; }
+        /* Listas Mapfre */
+        .mapfre-list-card { background: #FDFDFD; padding: 2.5rem 2rem; border-radius: 12px; transition: all 0.3s ease; border: 1px solid #f0f0f0; height: 100%; display: flex; flex-direction: column; justify-content: space-between; }
+        .mapfre-list-card:hover { background: white; box-shadow: 0 25px 50px rgba(0,0,0,0.06); transform: translateY(-5px); border-color: #D4AF37; }
+        .check-list li { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 12px; font-size: 0.9rem; color: #444; }
+        .check-list i { color: #7AB800; margin-top: 4px; }
+        
+        .link-elegant { color: #D4AF37; font-weight: 800; font-size: 0.85rem; display: inline-flex; align-items: center; gap: 6px; margin-top: 1.5rem; transition: all 0.3s; cursor: pointer; text-transform: uppercase; }
 
-        .chat-bubble { position: relative; background: #ffffff; border-radius: 1.5rem; padding: 1.25rem; box-shadow: 0 10px 25px rgba(0,0,0,0.15); margin-bottom: 2rem; border-bottom-right-radius: 0; transition: all 0.3s ease-in-out; }
-        .chat-bubble::after { content: ''; position: absolute; bottom: -10px; right: 20px; width: 0; height: 0; border-left: 10px solid transparent; border-right: 10px solid transparent; border-top: 15px solid #ffffff; }
+        /* Slogan mejorado */
+        .premium-quote {
+            background: linear-gradient(135deg, #005691 0%, #003d66 100%);
+            padding: 4rem 2rem; border-radius: 24px; position: relative; overflow: hidden;
+            border: 2px solid #D4AF37;
+        }
+
+        /* Redes Sociales Hover Colors */
+        .social-icon { transition: all 0.3s ease; display: inline-flex; align-items: center; justify-content: center; }
+        .social-icon:hover { transform: translateY(-3px); }
+
+        /* Actualización: Selectores específicos para forzar color en el icono (i) incluso en el footer */
+        .hover-linkedin:hover, .hover-linkedin:hover i { color: #0077b5 !important; }
+        .hover-facebook:hover, .hover-facebook:hover i { color: #1877f2 !important; }
+        .hover-instagram:hover, .hover-instagram:hover i { color: #E4405F !important; }
+        .hover-youtube:hover, .hover-youtube:hover i { color: #FF0000 !important; }
+        .hover-tiktok:hover, .hover-tiktok:hover i { color: #000000 !important; }
+        .hover-x:hover, .hover-x:hover i { color: #000000 !important; }
+
+        /* Home Cards */
+        .image-card { border-radius: 20px; overflow: hidden; background: white; transition: all 0.4s ease; border: 1px solid #f3f3f3; height: 100%; display: flex; flex-direction: column; position: relative; }
+        .image-card:hover { transform: translateY(-10px); box-shadow: 0 30px 60px rgba(0,86,145,0.12); }
+        .card-tag { position: absolute; top: 1.2rem; left: 1.2rem; padding: 0.4rem 1rem; border-radius: 999px; font-size: 0.65rem; font-weight: 800; text-transform: uppercase; color: white; z-index: 10; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
+
+        /* Validación */
+        .validation-card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.05); transition: all 0.3s ease; height: 100%; display: flex; flex-direction: column; }
+        .validation-card:hover { transform: translateY(-5px); box-shadow: 0 15px 35px rgba(0,0,0,0.1); }
+        .validation-card img { transition: transform 0.5s ease; width: 100%; height: 200px; object-fit: cover; }
+
+        .philosophy-block { border-left: 4px solid #D4AF37; padding-left: 1.5rem; margin-bottom: 2.5rem; transition: transform 0.3s; }
+        .ov-login-container { background-color: white; border-radius: 12px; box-shadow: 0 20px 50px rgba(0,0,0,0.1); max-width: 500px; width: 100%; overflow: hidden; border: 1px solid #eee; }
+        .fade-in { animation: fadeIn 0.6s ease-out forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
         .scrollbar-hide::-webkit-scrollbar { display: none; }
-        .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
 
-        /* --- COHETE TOON 3D (SVG Vectorial) --- */
-        .wandering-rocket {
-            position: fixed;
-            z-index: 1; 
-            width: 140px; 
-            height: 140px;
-            pointer-events: none;
-            opacity: 0; 
-            transition: left 1s linear, top 1s linear, transform 0.8s ease-in-out;
+        /* --------------------------------------------------------------
+           ANIMACIONES PERSONALIZADAS EV (Solicitud Ingenio)
+           -------------------------------------------------------------- */
+        .animate-float { 
+            animation: float 6s ease-in-out infinite; 
+        }
+        
+        .animate-glow-latency { 
+            animation: glowLatency 4s infinite ease-in-out; 
+        }
+        
+        @keyframes float { 
+            0% { transform: translateY(0px); } 
+            50% { transform: translateY(-10px); } 
+            100% { transform: translateY(0px); } 
+        }
+        
+        @keyframes glowLatency { 
+            0%, 100% { 
+                filter: drop-shadow(0 0 5px rgba(212, 175, 55, 0.3)); 
+                transform: scale(1); 
+            } 
+            50% { 
+                filter: drop-shadow(0 0 25px rgba(212, 175, 55, 0.8)); 
+                transform: scale(1.03); 
+            } 
+        }
+
+        /* --------------------------------------------------------------
+           ESTILOS DEL CARRUSEL DE CRISTAL 3D
+           -------------------------------------------------------------- */
+        .glass-3d-arrow {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 
+                0 8px 32px 0 rgba(31, 38, 135, 0.2), 
+                inset 0 0 0 1px rgba(255, 255, 255, 0.1),
+                inset 0 2px 10px rgba(255, 255, 255, 0.2);
+            width: 60px; height: 60px;
+            border-radius: 50%;
             display: flex; align-items: center; justify-content: center;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-style: preserve-3d;
+            cursor: pointer; z-index: 50;
+            color: white;
         }
-
-        .rocket-svg {
-            width: 100%; height: 100%;
-            filter: drop-shadow(0 10px 10px rgba(0,0,0,0.3));
+        .glass-3d-arrow:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-50%) scale(1.15) perspective(500px) translateZ(10px);
+            box-shadow: 
+                0 15px 35px rgba(0, 0, 0, 0.3), 
+                0 0 20px rgba(212, 175, 55, 0.3);
+            border-color: rgba(212, 175, 55, 0.6);
+            color: #D4AF37;
         }
-
-        .rocket-smoke-puff {
-            position: fixed; 
-            width: 25px; height: 25px;
-            background: radial-gradient(circle, rgba(255,255,255,0.9) 20%, rgba(255,255,255,0) 70%);
-            border-radius: 50%; 
-            pointer-events: none; 
-            z-index: 0;
-            animation: cloudExpand 2s forwards ease-out;
-            filter: blur(4px);
+        .glass-3d-arrow:active { transform: translateY(-50%) scale(0.95); }
+        
+        .carousel-slide {
+            position: absolute; inset: 0; opacity: 0; transition: opacity 1s ease-in-out;
+            background-size: cover; background-position: center;
         }
-        @keyframes cloudExpand { 
-            0% { transform: scale(0.5); opacity: 0.9; } 
-            100% { transform: scale(3.5); opacity: 0; } 
+        .carousel-slide.active { opacity: 1; z-index: 10; }
+        
+        .carousel-text-content {
+            opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; transition-delay: 0.3s;
+        }
+        .carousel-slide.active .carousel-text-content {
+            opacity: 1; transform: translateY(0);
         }
     </style>
 </head>
-<body class="text-gray-700 antialiased min-h-screen flex flex-col relative" id="document-body">
-    <div id="custom-cursor"><i class="fas fa-leaf text-brandGreen text-opacity-90 text-xl transform -rotate-45 drop-shadow-md"></i></div>
-    <div class="cinematic-bg"></div>
-    <canvas id="particles-canvas"></canvas>
+<body class="flex flex-col min-h-screen font-sans">
 
-    <!-- MENÚ HAMBURGUESA MINIMALISTA (FUTURISTA) - LADO IZQUIERDO -->
-    <button onclick="toggleMenu()" class="fixed top-6 left-6 z-[70] p-3.5 bg-white/10 backdrop-blur-md rounded-full shadow-lg hover:scale-110 hover:bg-white/20 transition-all duration-300 group border border-white/30 cursor-pointer">
-        <div class="flex flex-col gap-1.5 w-6 items-start">
-            <span class="block w-6 h-0.5 bg-brandBlue group-hover:bg-brandGreen transition-all duration-300 shadow-[0_0_8px_rgba(0,86,145,0.8)]"></span>
-            <span class="block w-4 group-hover:w-6 h-0.5 bg-brandBlue group-hover:bg-brandGreen transition-all duration-300 shadow-[0_0_8px_rgba(0,86,145,0.8)]"></span>
-            <span class="block w-5 group-hover:w-6 h-0.5 bg-brandBlue group-hover:bg-brandGreen transition-all duration-300 shadow-[0_0_8px_rgba(0,86,145,0.8)]"></span>
-        </div>
-    </button>
-
-    <!-- BACKDROP OSCURO DISCRETO -->
-    <div id="menu-backdrop" onclick="toggleMenu()" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-[55] hidden transition-opacity duration-500 opacity-0"></div>
-
-    <!-- PANEL LATERAL "GLASS DRAWER" (HUD STYLE) - DESDE LA IZQUIERDA -->
-    <div id="side-menu" class="fixed top-0 left-0 h-full w-80 md:w-96 bg-brandDark/95 backdrop-blur-2xl z-[60] transform -translate-x-full transition-all duration-500 cubic-bezier(0.22, 1, 0.36, 1) border-r border-white/10 shadow-[0_0_50px_rgba(0,0,0,0.5)] flex flex-col">
-        
-        <!-- Decoración Futurista de Fondo (Espejo) -->
-        <div class="absolute top-[-10%] left-[-10%] w-60 h-60 bg-brandBlue/20 rounded-full blur-[80px] pointer-events-none animate-pulse-slow"></div>
-        <div class="absolute bottom-[-10%] right-[-10%] w-60 h-60 bg-brandGreen/10 rounded-full blur-[80px] pointer-events-none"></div>
-
-        <div class="px-8 pb-8 h-full flex flex-col relative z-10 overflow-y-auto scrollbar-hide">
-             <!-- Header Menu -->
-             <!-- Ajuste de Padding Superior (pt-24) para evitar solapamiento con el botón -->
-             <div class="flex justify-between items-end mb-8 pt-24 border-b border-white/5 pb-4">
-                 <h2 class="text-white/60 text-xs font-bold tracking-[0.4em] uppercase">Navegación</h2>
-                 <button onclick="toggleMenu()" class="text-white/40 hover:text-white transition-colors transform hover:rotate-90 duration-300"><i class="fas fa-times text-xl"></i></button>
-             </div>
-
-             <!-- Links Principales -->
-             <nav class="space-y-5 flex-grow">
-                 <a href="#" onclick="navTo('carta'); return false;" class="group block">
-                     <span class="block text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-400 group-hover:to-white transition-all duration-300">Propuesta</span>
-                     <span class="block h-0.5 w-0 group-hover:w-12 bg-brandGreen transition-all duration-300 mt-1"></span>
-                 </a>
-
-                 <!-- Grupo Servicios -->
-                 <div class="group">
-                     <a href="#" onclick="navTo('brochure'); return false;" class="block text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-400 group-hover:to-brandBlue transition-all duration-300 mb-2">
-                         Servicios
-                     </a>
-                     <div class="pl-4 border-l border-white/10 space-y-2">
-                         <button onclick="navToService('humano')" class="block text-sm text-gray-400 hover:text-white hover:translate-x-2 transition-all duration-300 text-left w-full"><i class="fas fa-circle text-[6px] mr-2 text-brandBlue"></i>Humano</button>
-                         <button onclick="navToService('seguro')" class="block text-sm text-gray-400 hover:text-white hover:translate-x-2 transition-all duration-300 text-left w-full"><i class="fas fa-circle text-[6px] mr-2 text-gray-500"></i>SSO</button>
-                         <button onclick="navToService('sostenible')" class="block text-sm text-gray-400 hover:text-white hover:translate-x-2 transition-all duration-300 text-left w-full"><i class="fas fa-circle text-[6px] mr-2 text-brandGreen"></i>Sostenible</button>
-                         <button onclick="navToService('agro')" class="block text-sm text-gray-400 hover:text-white hover:translate-x-2 transition-all duration-300 text-left w-full"><i class="fas fa-circle text-[6px] mr-2 text-brandAmber"></i>Agroindustrial</button>
-                     </div>
-                 </div>
-
-                 <a href="#" onclick="navTo('empresas'); return false;" class="group block">
-                     <span class="block text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-400 group-hover:to-brandAmber transition-all duration-300">Empresas</span>
-                     <span class="block h-0.5 w-0 group-hover:w-12 bg-brandAmber transition-all duration-300 mt-1"></span>
-                 </a>
-
-                 <a href="#" onclick="navTo('emprendedores'); return false;" class="group block">
-                     <span class="block text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-400 group-hover:to-brandGreen transition-all duration-300">Emprendedores</span>
-                     <span class="block h-0.5 w-0 group-hover:w-12 bg-brandGreen transition-all duration-300 mt-1"></span>
-                 </a>
-
-                 <!-- NUEVA SECCIÓN: CONTACTO RÁPIDO (CARD) -->
-                 <div class="mt-8 bg-white/5 rounded-xl p-5 border border-white/10 backdrop-blur-sm">
-                    <h3 class="text-brandBlue text-xs font-bold uppercase tracking-widest mb-4 flex items-center gap-2"><i class="fas fa-address-card"></i> Contáctanos</h3>
-                    <ul class="space-y-3">
-                        <li class="flex items-center gap-3 group/item">
-                            <div class="w-6 h-6 rounded-full bg-brandGreen/20 flex items-center justify-center group-hover/item:bg-brandGreen transition-colors">
-                                <i class="fab fa-whatsapp text-brandGreen text-xs group-hover/item:text-white"></i>
-                            </div>
-                            <a href="https://wa.me/593983900050" target="_blank" class="text-sm text-gray-300 hover:text-white transition-colors font-medium">+593 98 390 0050</a>
-                        </li>
-                        <li class="flex items-center gap-3 group/item">
-                            <div class="w-6 h-6 rounded-full bg-brandBlue/20 flex items-center justify-center group-hover/item:bg-brandBlue transition-colors">
-                                <i class="fas fa-envelope text-brandBlue text-xs group-hover/item:text-white"></i>
-                            </div>
-                            <a href="mailto:evoluserec@gmail.com" class="text-sm text-gray-300 hover:text-white transition-colors truncate">evoluserec@gmail.com</a>
-                        </li>
-                        <li class="flex items-center gap-3 group/item">
-                            <div class="w-6 h-6 rounded-full bg-brandAmber/20 flex items-center justify-center group-hover/item:bg-brandAmber transition-colors">
-                                <i class="fas fa-map-marker-alt text-brandAmber text-xs group-hover/item:text-white"></i>
-                            </div>
-                            <span class="text-sm text-gray-300">Quito - Ecuador</span>
-                        </li>
-                    </ul>
-                 </div>
-             </nav>
-
-             <!-- Footer Menu -->
-             <div class="mt-6 pt-6 border-t border-white/5">
-                <button onclick="navToService('equipo')" class="flex items-center gap-3 text-sm font-bold text-gray-400 hover:text-white transition-colors w-full group">
-                    <div class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-brandBlue group-hover:text-white transition-all">
-                        <i class="fas fa-pen-nib text-xs"></i>
-                    </div>
-                    <span class="uppercase tracking-widest text-xs">Equipo Directivo</span>
-                </button>
+    <!-- TOP BAR -->
+    <div class="bg-brandBlueDark py-2 hidden md:block border-b border-white/10">
+        <div class="container mx-auto px-6 flex justify-between items-center text-[10px] font-extrabold text-white/70 uppercase tracking-widest">
+            <div class="flex gap-6">
+                <a href="https://wa.me/593983900050" target="_blank" class="hover:text-brandGold transition flex items-center gap-2"><i class="fas fa-phone-alt text-brandGold"></i> +593 98 390 0050</a>
+                <a href="mailto:evoluserec@gmail.com" class="hover:text-brandGold transition flex items-center gap-2 lowercase"><i class="fas fa-envelope text-brandGold text-[10px]"></i> evoluserec@gmail.com</a>
+                <div class="flex gap-4 border-l border-white/20 pl-6 ml-2">
+                    <a href="#" class="social-icon hover-linkedin transition"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="social-icon hover-facebook transition"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-icon hover-instagram transition"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-icon hover-youtube transition"><i class="fab fa-youtube"></i></a>
+                    <a href="#" class="social-icon hover-tiktok transition"><i class="fab fa-tiktok"></i></a>
+                    <a href="#" class="social-icon hover-x transition"><i class="fab fa-x-twitter"></i></a>
+                </div>
+            </div>
+            <div class="flex gap-6 items-center">
+                <span class="text-brandGold italic lowercase font-normal tracking-normal">Potenciamos el Ser, Protegemos la Vida</span>
+                <button onclick="setSegment('oficina')" class="hover:text-brandGold transition flex items-center gap-2 border-l border-white/20 pl-6">Oficina Virtual <i class="fas fa-chevron-right text-[8px]"></i></button>
             </div>
         </div>
     </div>
 
-    <header class="pt-20 pb-32 relative overflow-hidden z-10">
-        <div class="absolute top-10 left-1/2 transform -translate-x-1/2 w-[600px] h-[600px] bg-white rounded-full mix-blend-overlay filter blur-[120px] opacity-40 pointer-events-none"></div>
-        <div class="container mx-auto px-6 text-center relative z-20">
-            <div class="mb-14 relative inline-block group perspective-1000">
-                <div class="logo-glow animate-pulse-slow"></div>
-                <div class="logo-card animate-logo-reveal interactive-card cursor-pointer overflow-hidden transform-style-3d group-hover:scale-105 transition-transform duration-500" data-tilt data-tilt-max="15" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.5">
-                    <div class="absolute inset-0 z-20 pointer-events-none">
-                        <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent w-full h-full -translate-x-full animate-shimmer-infinite"></div>
-                    </div>
-                    <div class="flex flex-col items-center justify-center relative z-30">
-                        <img src="logo.png" alt="EvoluSer Logo" class="h-auto object-contain filter drop-shadow-lg" style="max-height: 180px; max-width: 100%;" onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?name=EvoluSer&background=005691&color=fff&size=128';">
-                    </div>
-                </div>
+    <!-- NAVBAR PRINCIPAL -->
+    <header class="bg-white sticky top-0 z-50 border-b border-gray-100 shadow-sm">
+        <div class="container mx-auto px-4 h-24 flex items-center justify-between">
+            <div class="flex items-center gap-3 cursor-pointer" onclick="window.location.reload()">
+                <img src="https://raw.githubusercontent.com/direccioncomercial/evoluser-web/1b862973e8003850daadd6a47bffd5b6cf04b2f6/logo.png" alt="EvoluSer" class="h-14 w-auto object-contain">
             </div>
-            <h1 class="text-4xl md:text-6xl font-extrabold mb-6 tracking-tight drop-shadow-2xl text-white bg-clip-text text-transparent bg-gradient-to-br from-white via-gray-100 to-gray-300" style="text-shadow: 0 4px 20px rgba(0,0,0,0.2);">Evolución Integral</h1>
-            <div class="h-1.5 w-24 bg-gradient-to-r from-brandBlue to-brandGreen mx-auto rounded-full mb-8 shadow-[0_0_20px_rgba(122,184,0,0.8)]"></div>
-            <div id="slogan-container" class="neon-3d-wrapper text-lg md:text-2xl mt-4 mb-8 min-h-[50px] items-center tracking-widest"></div>
+            <div class="hidden md:flex gap-10 h-full items-center">
+                <button onclick="setSegment('soluciones')" id="nav-soluciones" class="nav-link active h-full flex items-center">Soluciones</button>
+                <button onclick="setSegment('empresas')" id="nav-empresas" class="nav-link h-full flex items-center">Empresas</button>
+                <button onclick="setSegment('emprendedores')" id="nav-emprendedores" class="nav-link h-full flex items-center">Emprendedores</button>
+                <button onclick="openModal('filosofia_premium')" class="nav-link h-full flex items-center text-nowrap">Filosofía</button>
+            </div>
+            <div class="flex items-center gap-4">
+                <a href="https://wa.me/593983900050?text=Hola%20EvoluSer,%20deseo%20una%20consultoría%20experta%20en..." target="_blank" class="hidden lg:block px-8 py-3 bg-gradient-to-r from-brandGold to-brandGoldDark text-white font-extrabold rounded-full hover:shadow-gold transition uppercase text-xs tracking-wider">WhatsApp Directo</a>
+                <button onclick="openModal('equipo')" class="bg-brandBlue text-white px-6 py-2.5 rounded-full font-bold text-[10px] shadow-md hover:bg-brandBlueDark transition uppercase tracking-tighter">Directorio</button>
+            </div>
         </div>
     </header>
 
-    <main class="container mx-auto px-4 -mt-24 relative z-30 mb-12 flex-grow">
-        <!-- Navegación -->
-        <div class="glass-card rounded-full shadow-2xl p-2 flex justify-center max-w-lg mx-auto mb-10 transform transition-all hover:scale-[1.01] relative z-50">
-            <button onclick="switchTab('carta')" id="btn-carta" class="flex-1 py-3 px-6 rounded-full text-sm font-bold uppercase tracking-wider transition-all duration-500 bg-brandBlue text-white shadow-lg ring-4 ring-brandBlue/30 cursor-none"><i class="fas fa-file-alt mr-2"></i> Propuesta</button>
-            <button onclick="switchTab('brochure')" id="btn-brochure" class="flex-1 py-3 px-6 rounded-full text-sm font-bold uppercase tracking-wider transition-all duration-500 text-gray-500 hover:bg-white/50 hover:text-brandBlue cursor-none"><i class="fas fa-th-large mr-2"></i> Servicios</button>
+    <main class="flex-grow bg-white">
+        
+        <!-- SECCIÓN 1: SOLUCIONES (HOME) -->
+        <div id="segment-soluciones" class="fade-in pb-24">
+            
+            <!-- NUEVO CARRUSEL PREMIUM -->
+            <div id="hero-carousel" class="relative w-full h-[500px] md:h-[650px] overflow-hidden group bg-black">
+                <!-- Slides Container -->
+                <div id="carousel-slides" class="relative w-full h-full">
+                    <!-- Slide 1: Talento -->
+                    <div class="carousel-slide active" style="background-image: url('https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=1600&q=80');">
+                        <div class="absolute inset-0 bg-gradient-to-r from-brandBlueDark/90 via-brandBlueDark/50 to-transparent"></div>
+                        <div class="absolute inset-0 flex items-center container mx-auto px-6">
+                            <div class="max-w-2xl carousel-text-content">
+                                <span class="text-brandGold font-extrabold tracking-[0.4em] text-xs uppercase mb-4 block">Evolución Corporativa</span>
+                                <h2 class="text-4xl md:text-6xl font-extrabold text-white mb-6 leading-tight">Gestión Humana de <br><span class="text-brandGold">Alto Impacto</span></h2>
+                                <p class="text-white/80 text-lg font-light border-l-4 border-brandGold pl-6">Transformamos equipos ordinarios en fuerzas de alto rendimiento mediante cultura y estrategia.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Slide 2: Seguridad -->
+                    <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1600&q=80');">
+                        <div class="absolute inset-0 bg-gradient-to-r from-gray-900/90 via-gray-900/50 to-transparent"></div>
+                        <div class="absolute inset-0 flex items-center container mx-auto px-6">
+                            <div class="max-w-2xl carousel-text-content">
+                                <span class="text-brandGreen font-extrabold tracking-[0.4em] text-xs uppercase mb-4 block">Blindaje Técnico</span>
+                                <h2 class="text-4xl md:text-6xl font-extrabold text-white mb-6 leading-tight">Seguridad Industrial <br><span class="text-brandGreen">Inteligente</span></h2>
+                                <p class="text-white/80 text-lg font-light border-l-4 border-brandGreen pl-6">Cumplimiento ISO 45001 y protección integral para salvaguardar el activo más valioso: la vida.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Slide 3: Agro -->
+                    <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1625246333195-78d9c38ad449?auto=format&fit=crop&w=1600&q=80');">
+                        <div class="absolute inset-0 bg-gradient-to-r from-green-900/90 via-green-900/50 to-transparent"></div>
+                        <div class="absolute inset-0 flex items-center container mx-auto px-6">
+                            <div class="max-w-2xl carousel-text-content">
+                                <span class="text-white font-extrabold tracking-[0.4em] text-xs uppercase mb-4 block">Calidad Global</span>
+                                <h2 class="text-4xl md:text-6xl font-extrabold text-white mb-6 leading-tight">Agroindustria y <br><span class="text-white underline decoration-brandGold">Sostenibilidad</span></h2>
+                                <p class="text-white/80 text-lg font-light border-l-4 border-white pl-6">Estándares internacionales de inocuidad y producción responsable para mercados exigentes.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Botones de Cristal 3D -->
+                <button onclick="prevSlide()" class="absolute left-4 md:left-10 top-1/2 -translate-y-1/2 glass-3d-arrow group-hover:opacity-100 opacity-70">
+                    <i class="fas fa-chevron-left text-2xl drop-shadow-md"></i>
+                </button>
+                <button onclick="nextSlide()" class="absolute right-4 md:right-10 top-1/2 -translate-y-1/2 glass-3d-arrow group-hover:opacity-100 opacity-70">
+                    <i class="fas fa-chevron-right text-2xl drop-shadow-md"></i>
+                </button>
+            </div>
+
+            <!-- TEXTO ORIGINAL REUBICADO -->
+            <div class="bg-gradient-to-b from-[#F9FBFF] to-white border-b border-gray-100 mt-0">
+                <div class="container mx-auto px-4 py-20 text-center">
+                    <span class="text-brandGold font-extrabold tracking-[0.3em] text-[10px] uppercase mb-4 block animate-pulse">Liderazgo y Evolución</span>
+                    <h1 class="text-4xl md:text-6xl font-extrabold text-brandBlue mb-6 tracking-tight">Potenciamos el <span class="text-brandGold">Ser.</span></h1>
+                    <p class="text-gray-500 text-lg mb-10 max-w-2xl mx-auto font-medium">Aliado estratégico líder para el desarrollo integral de tu organización en la región.</p>
+                </div>
+            </div>
+
+            <div class="container mx-auto px-4 mt-16">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                    <div onclick="openModal('humano')" class="image-card group cursor-pointer">
+                        <div class="h-64 overflow-hidden relative"><img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover image-zoom"><span class="card-tag bg-brandBlue">Gestión Humana</span></div>
+                        <div class="p-8 flex flex-col flex-1"><h4 class="text-2xl font-extrabold text-brandBlue mb-3 group-hover:text-brandGold transition uppercase tracking-tighter">Talento y Cultura</h4><p class="text-gray-500 text-sm mb-6 leading-relaxed">Equipos de alto rendimiento y mejora del clima laboral.</p><span class="text-brandGold font-extrabold text-xs uppercase">Ver más <i class="fas fa-arrow-right ml-2"></i></span></div>
+                    </div>
+                    <div onclick="openModal('seguro')" class="image-card group cursor-pointer">
+                        <div class="h-64 overflow-hidden relative"><img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover image-zoom"><span class="card-tag bg-brandBlueDark">Seguridad Industrial</span></div>
+                        <div class="p-8 flex flex-col flex-1"><h4 class="text-2xl font-extrabold text-brandBlue mb-3 group-hover:text-brandGold transition uppercase tracking-tighter">Protección SSO</h4><p class="text-gray-500 text-sm mb-6 leading-relaxed">Cumplimiento ISO 45001 y blindaje normativo legal.</p><span class="text-brandGold font-extrabold text-xs uppercase">Ver más <i class="fas fa-arrow-right ml-2"></i></span></div>
+                    </div>
+                    <div onclick="openModal('agro')" class="image-card group cursor-pointer">
+                        <div class="h-64 overflow-hidden relative"><img src="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover image-zoom"><span class="card-tag bg-brandAmber">Agroindustria</span></div>
+                        <div class="p-8 flex flex-col flex-1"><h4 class="text-2xl font-extrabold text-brandBlue mb-3 group-hover:text-brandGold transition uppercase tracking-tighter">Calidad y Calidez</h4><p class="text-gray-500 text-sm mb-6 leading-relaxed">Inocuidad alimentaria y estándares de exportación globales.</p><span class="text-brandGold font-extrabold text-xs uppercase">Ver más <i class="fas fa-arrow-right ml-2"></i></span></div>
+                    </div>
+                    <div class="image-card group cursor-pointer">
+                        <div class="h-64 overflow-hidden relative"><img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover image-zoom"><span class="card-tag bg-gray-800">Insight</span></div>
+                        <div class="p-8 flex flex-col flex-1"><h4 class="text-xl font-bold text-gray-800 mb-3 group-hover:text-brandGold transition">Clima Laboral 2026</h4><p class="text-gray-500 text-sm mb-6 leading-relaxed">Tendencias de bienestar en la era digital.</p><span class="text-brandGold font-extrabold text-xs uppercase mt-auto">Leer Más</span></div>
+                    </div>
+                    <div class="image-card group cursor-pointer">
+                        <div class="h-64 overflow-hidden relative"><img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover image-zoom"><span class="card-tag bg-gray-800">Cumplimiento</span></div>
+                        <div class="p-8 flex flex-col flex-1"><h4 class="text-xl font-bold text-gray-800 mb-3 group-hover:text-brandGold transition">ISO 45001: Ventaja Real</h4><p class="text-gray-500 text-sm mb-6 leading-relaxed">El escudo legal de tu organización.</p><span class="text-brandGold font-extrabold text-xs uppercase mt-auto">Leer Más</span></div>
+                    </div>
+                    <div onclick="openModal('sostenible')" class="image-card group cursor-pointer">
+                        <div class="h-64 overflow-hidden relative"><img src="https://images.unsplash.com/photo-1473448912268-2022ce9509d8?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover image-zoom"><span class="card-tag bg-brandGreen">Ambiente</span></div>
+                        <div class="p-8 flex flex-col flex-1"><h4 class="text-2xl font-extrabold text-brandBlue mb-3 group-hover:text-brandGold transition uppercase tracking-tighter">Impacto Verde</h4><p class="text-gray-500 text-sm mb-6 leading-relaxed">Licencias y planes de manejo responsable.</p><span class="text-brandGold font-extrabold text-xs uppercase cursor-pointer">Ver más <i class="fas fa-arrow-right ml-2"></i></span></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLOGAN MEJORADO -->
+            <div class="container mx-auto px-4 mt-24">
+                <div class="premium-quote text-center">
+                    <div class="relative z-10 max-w-4xl mx-auto">
+                        <h2 class="text-3xl md:text-5xl font-extrabold text-white mb-6 leading-tight tracking-tighter">
+                            Potenciamos el <span class="text-brandGold">Ser</span>, protegemos la <span class="text-brandGreen">Vida</span>.
+                        </h2>
+                        <div class="w-24 h-1 bg-brandGold mx-auto mb-8"></div>
+                        <p class="text-white opacity-90 text-xl md:text-2xl font-light italic uppercase tracking-widest">
+                            Aliado estratégico líder en la región.
+                        </p>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <div class="glass-card rounded-3xl shadow-2xl p-8 md:p-14 min-h-[600px] relative overflow-hidden transition-all duration-500 z-40" id="main-content-area">
-            
-            <!-- VISTA CARTA -->
-            <div id="view-carta" class="max-w-5xl mx-auto stagger-1">
-                <div class="flex justify-between items-end border-b border-gray-300 pb-6 mb-8">
-                    <div><span class="bg-gradient-to-r from-brandBlue to-brandBlueLight text-white text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-wider shadow-md">Propuesta Corporativa</span></div>
-                    <div class="text-right"><p class="text-brandBlue font-bold text-sm">QUITO, ECUADOR</p><p class="text-gray-500 text-xs" id="currentDate"></p></div>
+        <!-- SECCIÓN 2: EMPRESAS -->
+        <div id="segment-empresas" class="hidden fade-in">
+            <div class="bg-gray-50 py-20 border-b border-gray-200">
+                <div class="container mx-auto px-4 flex flex-col md:flex-row items-center gap-16">
+                    <div class="w-full md:w-1/2 space-y-8">
+                        <span class="text-brandGold font-bold tracking-widest text-sm uppercase flex items-center gap-2"><i class="fas fa-star"></i> EvoluSer Corporativo</span>
+                        <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 leading-tight">Soluciones que <br><span class="text-brandBlue">blindan tu éxito.</span></h1>
+                        <p class="text-xl text-gray-600 font-light font-medium leading-relaxed text-justify">Garantizamos seguridad técnica y bienestar humano en cada rincón de su organización.</p>
+                        <button onclick="setSegment('oficina')" class="btn-gold-gradient shadow-gold uppercase text-[10px] tracking-widest font-extrabold">Solicitar Diagnóstico</button>
+                    </div>
+                    <div class="w-full md:w-1/2 h-72 md:h-96 bg-black rounded-xl overflow-hidden shadow-2xl relative border-[8px] border-white">
+                        <iframe class="w-full h-full absolute inset-0" src="https://www.youtube.com/embed/VfmFZdAbAyQ?rel=0&autoplay=0" frameborder="0" allowfullscreen></iframe>
+                    </div>
                 </div>
-                <div class="prose prose-lg text-gray-600 mx-auto leading-relaxed text-justify">
-                    <h2 class="text-3xl font-heading font-bold text-gray-800 mb-2 text-left">Estimados Clientes,</h2>
-                    <p class="text-xl text-brandBlue font-light mb-8 text-left">Presentamos una nueva forma de entender el crecimiento empresarial.</p>
-                    <p class="mb-6">En un entorno empresarial cada vez más exigente, el crecimiento real solo ocurre cuando cuidamos lo más importante: <strong>las personas y el entorno que habitan</strong>.</p>
-                    <p class="mb-6">Les presento a <strong>EvoluSer</strong>, no solo como proveedores, sino como sus aliados estratégicos. Entendemos que una empresa exitosa del siglo XXI debe cumplir cuatro requisitos innegociables: ser <span class="text-brandBlue font-semibold">Humana</span>, garantizar la <span class="text-gray-800 font-semibold">Seguridad y Salud Ocupacional</span>, ser <span class="text-brandGreen font-semibold">Sostenible</span> y <span class="text-brandAmber font-semibold">Productiva</span>.</p>
-                    <p class="text-sm text-gray-500 italic mt-8 mb-4 text-center">Haga clic en cada área para conocer a nuestros directores:</p>
+            </div>
+
+            <div class="container mx-auto px-4 py-20">
+                <h3 class="text-3xl font-extrabold text-gray-900 mb-12 border-l-8 border-brandGold pl-6 uppercase tracking-tighter">DIVISIONES EMPRESARIALES</h3>
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-8 h-full">
+                    <div class="md:col-span-8">
+                        <div class="impact-card group cursor-pointer" onclick="openModal('agro')">
+                            <img src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?auto=format&fit=crop&w=1200&q=80" alt="Industria">
+                            <div class="impact-content"><h3 class="text-5xl font-extrabold text-white mb-3 uppercase tracking-tighter">Industria</h3><p class="text-white/80 text-xl max-w-lg font-light text-justify">Seguridad industrial y cumplimiento técnico de alta complejidad.</p><span class="more-info-gold">Más información</span></div>
+                        </div>
+                    </div>
+                    <div class="md:col-span-4 flex flex-col gap-8">
+                        <div class="impact-card group cursor-pointer flex-1" onclick="openModal('empresas_info')">
+                            <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=800&q=80" alt="PYMES"><div class="impact-content p-8"><h3 class="text-2xl font-extrabold text-white mb-1 uppercase text-nowrap">Pymes</h3><span class="more-info-gold !py-2 !px-5 !text-[0.7rem]">Más información</span></div>
+                        </div>
+                        <div class="impact-card group cursor-pointer flex-1" onclick="openModal('humano')">
+                            <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80" alt="Corporativo"><div class="impact-content p-8"><h3 class="text-2xl font-extrabold text-white mb-1 uppercase text-nowrap">Corporativo</h3><span class="more-info-gold !py-2 !px-5 !text-[0.7rem]">Más información</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-[#FBFBFB] py-20 border-y border-gray-100">
+                <div class="container mx-auto px-4">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+                        <div class="mapfre-list-card"><div><h4 class="text-2xl font-extrabold text-brandBlue mb-8 uppercase tracking-tighter">Seguridad SSO</h4><ul class="check-list"><li><i class="fas fa-check-circle text-brandGreen"></i> Auditorías ISO 45001</li><li><i class="fas fa-check-circle text-brandGreen"></i> Planes de Emergencia</li><li><i class="fas fa-check-circle text-brandGreen"></i> Vigilancia Médica</li></ul></div><span class="link-elegant" onclick="openModal('seguro')">Saber más <i class="fas fa-chevron-right text-xs"></i></span></div>
+                        <div class="mapfre-list-card"><div><h4 class="text-2xl font-extrabold text-brandBlue mb-8 uppercase tracking-tighter">Gestión Humana</h4><ul class="check-list"><li><i class="fas fa-check-circle text-brandGreen"></i> Clima y Cultura Laboral</li><li><i class="fas fa-check-circle text-brandGreen"></i> Headhunting Senior</li><li><i class="fas fa-check-circle text-brandGreen"></i> Talleres Directivos</li></ul></div><span class="link-elegant" onclick="openModal('humano')">Saber más <i class="fas fa-chevron-right text-xs"></i></span></div>
+                        <div class="mapfre-list-card"><div><h4 class="text-2xl font-extrabold text-brandBlue mb-8 uppercase tracking-tighter text-nowrap">Ambientales</h4><ul class="check-list"><li><i class="fas fa-check-circle text-brandGreen"></i> Licencias Ambientales</li><li><i class="fas fa-check-circle text-brandGreen"></i> Huella de Carbono</li><li><i class="fas fa-check-circle text-brandGreen"></i> Manejo de Desechos</li></ul></div><span class="link-elegant" onclick="openModal('sostenible')">Saber más <i class="fas fa-chevron-right text-xs"></i></span></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Validación Final -->
+            <div class="container mx-auto px-4 py-24">
+                <h3 class="text-3xl font-extrabold text-gray-900 mb-12 text-center uppercase tracking-widest">NUESTRO COMPROMISO</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+                    <div class="validation-card group cursor-pointer" onclick="openModal('filosofia_premium')">
+                        <div class="overflow-hidden h-56"><img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=800&q=80" alt="Aliado"></div>
+                        <div class="p-10 flex-1 flex flex-col"><h4 class="text-xl font-bold text-brandBlue mb-4 group-hover:text-brandGold transition">Aliado Estratégico</h4><p class="text-gray-500 text-sm mb-6 leading-relaxed text-justify">Delegar su cumplimiento legal es la inversión más rentable para su patrimonio.</p><span class="link-elegant mt-auto !text-brandBlue font-bold underline">Leer más <i class="fas fa-arrow-right ml-2"></i></span></div>
+                    </div>
+                    <div class="validation-card group cursor-pointer" onclick="openModal('seguro')">
+                        <div class="overflow-hidden h-56"><img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=800&q=80" alt="Bienestar"></div>
+                        <div class="p-10 flex-1 flex flex-col"><h4 class="text-xl font-bold text-brandBlue mb-4 group-hover:text-brandGold transition">Tranquilidad Total</h4><p class="text-gray-500 text-sm mb-6 leading-relaxed text-justify">Protección activa de su equipo humano ante cualquier riesgo operacional.</p><span class="link-elegant mt-auto !text-brandBlue font-bold underline">Explorar <i class="fas fa-arrow-right ml-2"></i></span></div>
+                    </div>
+                    <div class="validation-card group cursor-pointer" onclick="openModal('sostenible')">
+                        <div class="overflow-hidden h-56"><img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=800&q=80" alt="Auditoría"></div>
+                        <div class="p-10 flex-1 flex flex-col"><h4 class="text-xl font-bold text-brandBlue mb-4 group-hover:text-brandGold transition">Avance Seguro</h4><p class="text-gray-500 text-sm mb-6 leading-relaxed text-justify">Validación técnica ante autoridades regionales. Avance sobre bases firmes.</p><span class="link-elegant mt-auto !text-brandBlue font-bold underline">Validar <i class="fas fa-arrow-right ml-2"></i></span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECCIÓN 3: EMPRENDEDORES (RESTAURADO) -->
+        <div id="segment-emprendedores" class="hidden fade-in">
+            <div class="bg-white py-20 border-b border-gray-100">
+                <div class="container mx-auto px-4 flex flex-col md:flex-row items-center gap-16">
+                    <div class="w-full md:w-1/2 space-y-8">
+                        <span class="text-brandGold font-bold tracking-widest text-sm uppercase">EvoluSer Startup</span>
+                        <h2 class="text-4xl md:text-5xl font-extrabold text-brandBlue leading-tight">Tu socio de despegue <br><span class="text-brandGold">desde el día uno.</span></h2>
+                        <p class="text-xl text-gray-600 leading-relaxed font-light font-medium">Formaliza tu empresa con agilidad. Asesoría en RUC, estatutos, permisos y tu primer equipo de trabajo.</p>
+                        <button onclick="setSegment('oficina')" class="btn-gold-gradient shadow-gold text-[10px] tracking-widest uppercase font-extrabold">Ver Paquetes</button>
+                    </div>
                     
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 my-6 not-prose">
-                        <!-- HUMANO -->
-                        <div class="interactive-card bg-white/70 p-4 rounded-xl border border-blue-100 cursor-pointer group hover:-translate-y-2 transition duration-300" onclick="openModal('humano')" data-tilt data-tilt-max="15" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.5">
-                            <div class="flex flex-col items-center text-center">
-                                <div class="w-20 h-20 flex items-center justify-center mb-3">
-                                    <i class="fas fa-users text-7xl metal-icon metal-blue group-hover:animate-hug"></i>
-                                </div>
-                                <h4 class="font-bold text-gray-800 text-sm">Humano</h4>
-                                <p class="text-[10px] text-gray-500 uppercase tracking-wide">Talento</p>
-                                <span class="text-[10px] text-brandBlue mt-2 opacity-0 group-hover:opacity-100 transition-opacity">Ver Directora</span>
-                            </div>
+                    <!-- NUEVO CONTENEDOR EV CON FONDO PREMIUM -->
+                    <div class="w-full md:w-1/2 relative min-h-[400px] flex items-center justify-center rounded-3xl overflow-hidden shadow-2xl group">
+                        <!-- Fondo: Imagen Abstracta Tech/Futuro -->
+                        <div class="absolute inset-0 bg-cover bg-center transition-transform duration-1000 group-hover:scale-110" 
+                             style="background-image: url('https://images.unsplash.com/photo-1639322537228-f710d846310a?auto=format&fit=crop&w=800&q=80'); opacity: 0.9;">
                         </div>
                         
-                        <!-- SSO -->
-                        <div class="interactive-card bg-white/70 p-4 rounded-xl border border-gray-200 cursor-pointer group hover:-translate-y-2 transition duration-300" onclick="openModal('seguro')" data-tilt data-tilt-max="15" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.5">
-                            <div class="flex flex-col items-center text-center">
-                                <div class="w-20 h-20 flex items-center justify-center mb-3 relative">
-                                    <i class="fas fa-shield-halved text-7xl metal-icon metal-gray absolute transition-all duration-500 group-hover:opacity-0 group-hover:scale-50"></i>
-                                    <i class="fas fa-user-shield text-7xl metal-icon metal-gray group-hover:animate-shield"></i>
-                                </div>
-                                <h4 class="font-bold text-gray-800 text-sm">S.S.O.</h4>
-                                <p class="text-[10px] text-gray-500 uppercase tracking-wide">Seguridad y Salud</p>
-                                <span class="text-[10px] text-gray-600 mt-2 opacity-0 group-hover:opacity-100 transition-opacity">Ver Director</span>
-                            </div>
-                        </div>
+                        <!-- Overlays para suavizar y dar marca -->
+                        <div class="absolute inset-0 bg-brandBlueDark/20 mix-blend-overlay"></div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-white via-transparent to-white/50"></div>
                         
-                        <!-- SOSTENIBLE -->
-                        <div class="interactive-card bg-white/70 p-4 rounded-xl border border-green-100 cursor-pointer group hover:-translate-y-2 transition duration-300" onclick="openModal('sostenible')" data-tilt data-tilt-max="15" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.5">
-                            <div class="flex flex-col items-center text-center">
-                                <div class="w-20 h-20 flex items-center justify-center mb-3">
-                                    <i class="fas fa-leaf text-7xl metal-icon metal-green group-hover:animate-leaf"></i>
-                                </div>
-                                <h4 class="font-bold text-gray-800 text-sm">Sostenible</h4>
-                                <p class="text-[10px] text-gray-400 font-bold uppercase tracking-wide">Ambiente</p>
-                                <span class="text-[10px] text-brandGreen mt-2 opacity-0 group-hover:opacity-100 transition-opacity">Ver Director</span>
-                            </div>
-                        </div>
-                        
-                        <!-- AGRO -->
-                        <div class="interactive-card bg-white/70 p-4 rounded-xl border border-amber-100 cursor-pointer group hover:-translate-y-2 transition duration-300" onclick="openModal('agro')" data-tilt data-tilt-max="15" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.5">
-                            <div class="flex flex-col items-center text-center">
-                                <div class="w-20 h-20 flex items-center justify-center mb-3">
-                                    <i class="fas fa-tractor text-7xl metal-icon metal-amber group-hover:animate-tractor"></i>
-                                </div>
-                                <h4 class="font-bold text-gray-800 text-sm">Agroindustrial</h4>
-                                <p class="text-[10px] text-gray-400 font-bold uppercase tracking-wide">Calidad</p>
-                                <span class="text-[10px] text-amber-600 mt-2 opacity-0 group-hover:opacity-100 transition-opacity">Ver Directora</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="mt-12 flex items-center gap-5 border-t border-gray-100 pt-8 not-prose">
-                        <div onclick="openModal('equipo')" class="w-16 h-16 bg-gradient-to-br from-brandBlue to-brandBlueLight rounded-full flex items-center justify-center text-white shadow-lg text-2xl cursor-pointer hover-pen transition-transform duration-300 hover:scale-110" title="Ver Equipo Directivo">
-                            <i class="fas fa-pen-nib text-3xl"></i>
-                        </div>
-                        <div><p class="font-heading font-bold text-xl text-gray-900">Equipo Directivo</p><p class="text-brandBlue font-semibold">EvoluSer Consultores</p><a href="mailto:evoluserec@gmail.com" class="text-sm text-gray-400 hover:text-brandBlue transition cursor-none">evoluserec@gmail.com</a></div>
+                        <!-- Elemento decorativo circular brillante -->
+                        <div class="absolute top-1/4 right-1/4 w-32 h-32 bg-brandGold/30 rounded-full blur-3xl animate-pulse"></div>
+
+                        <!-- Avatar EV -->
+                        <img src="https://raw.githubusercontent.com/direccioncomercial/evoluser-web/1b862973e8003850daadd6a47bffd5b6cf04b2f6/imagen6.png" 
+                             class="h-96 object-contain ev-free-avatar relative z-10 animate-float drop-shadow-2xl filter brightness-110">
                     </div>
                 </div>
             </div>
 
-            <!-- VISTA BROCHURE -->
-            <div id="view-brochure" class="hidden">
-                <div class="text-center mb-10 stagger-1">
-                    <span class="text-brandGreen font-bold tracking-widest uppercase text-xs bg-green-50 px-3 py-1 rounded-full">Nuestro Portafolio</span>
-                    <h2 class="text-4xl font-heading font-bold text-gray-800 mb-4 mt-4">Soluciones Integrales</h2>
-                    <p class="text-lg text-gray-500 max-w-2xl mx-auto">Selecciona tu etapa actual para ver soluciones a medida.</p>
-                </div>
-
-                <!-- SELECTOR DE ETAPA (SEGMENTATION HERO) -->
-                <div class="flex flex-col md:flex-row gap-6 justify-center mb-16 stagger-1 max-w-3xl mx-auto">
-                     <button onclick="switchTab('empresas')" class="flex-1 bg-white/90 p-6 rounded-2xl shadow-lg border-2 border-transparent hover:border-brandBlue transition-all group flex items-center gap-4 text-left hover:scale-[1.02]">
-                         <div class="w-14 h-14 rounded-full bg-blue-50 flex items-center justify-center flex-shrink-0">
-                             <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Travel%20and%20places/Office%20Building.png" alt="Empresas" class="w-10 h-10 object-contain">
-                         </div>
-                         <div>
-                             <h4 class="font-bold text-gray-800 text-lg group-hover:text-brandBlue transition-colors">Para Empresas</h4>
-                             <p class="text-xs text-gray-500">Optimización, Normativa y Crecimiento Sostenible.</p>
-                         </div>
-                         <i class="fas fa-chevron-right ml-auto text-gray-300 group-hover:text-brandBlue"></i>
-                     </button>
-                     
-                     <button onclick="switchTab('emprendedores')" class="flex-1 bg-white/90 p-6 rounded-2xl shadow-lg border-2 border-transparent hover:border-brandGreen transition-all group flex items-center gap-4 text-left hover:scale-[1.02]">
-                         <div class="w-14 h-14 rounded-full bg-green-50 flex items-center justify-center flex-shrink-0">
-                             <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Travel%20and%20places/Rocket.png" alt="Emprendedores" class="w-10 h-10 object-contain">
-                         </div>
-                         <div>
-                             <h4 class="font-bold text-gray-800 text-lg group-hover:text-brandGreen transition-colors">Para Emprendedores</h4>
-                             <p class="text-xs text-gray-500">Formalización, Despegue y Mentoria Inicial.</p>
-                         </div>
-                         <i class="fas fa-chevron-right ml-auto text-gray-300 group-hover:text-brandGreen"></i>
-                     </button>
-                </div>
-
-                <div class="max-w-sm mx-auto mb-16 stagger-2 video-section">
-                    <div class="bg-white p-2 rounded-2xl shadow-xl border border-gray-100 relative group">
-                        <div class="absolute -inset-1 bg-gradient-to-r from-brandBlue to-brandGreen rounded-2xl blur opacity-25 group-hover:opacity-40 transition duration-1000"></div>
-                        <div class="relative rounded-xl overflow-hidden bg-black flex justify-center aspect-[9/16]">
-                            <iframe 
-                                class="w-full h-full"
-                                src="https://www.youtube.com/embed/VfmFZdAbAyQ?rel=0" 
-                                title="EvoluSer Video" 
-                                frameborder="0" 
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                                referrerpolicy="strict-origin-when-cross-origin" 
-                                allowfullscreen>
-                            </iframe>
+            <!-- Bloque Impacto Startup 1+2 -->
+            <div class="container mx-auto px-4 py-20">
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-8 h-full">
+                    <div class="md:col-span-8">
+                        <div class="impact-card group cursor-pointer" onclick="openModal('emprendedores_info')">
+                            <img src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?auto=format&fit=crop&w=1200&q=80" alt="Legalización">
+                            <div class="impact-content"><h3 class="text-5xl font-extrabold text-white mb-3 uppercase tracking-tighter text-nowrap">Legalización Total</h3><p class="text-white/80 text-xl max-w-lg font-light text-justify">Constitución de compañía y RUC en tiempo récord para que empieces a facturar.</p><span class="more-info-gold">Ver más</span></div>
                         </div>
                     </div>
-                    <p class="text-center text-xs text-gray-400 mt-3 italic">Descubre nuestra filosofía en acción</p>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 px-2">
-                    <div class="stagger-1 h-full"><div class="bg-white/80 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all h-full border-t-4 border-brandBlue group flex flex-col cursor-pointer" onclick="openModal('humano')" data-tilt data-tilt-max="10"><div class="w-full flex justify-center mb-6"><i class="fas fa-users text-7xl metal-icon metal-blue animate-hug"></i></div><h3 class="text-xl font-bold text-gray-800 mb-2">EvoluSer <span class="text-brandBlue">HUMANO</span></h3><p class="text-[10px] text-gray-400 font-bold uppercase tracking-wider mb-6">Gestión del Talento</p><ul class="space-y-3 text-sm text-gray-600 flex-grow"><li class="flex items-start"><i class="fas fa-check text-brandGreen mt-1 mr-2 text-xs"></i> Reclutamiento</li><li class="flex items-start"><i class="fas fa-check text-brandGreen mt-1 mr-2 text-xs"></i> Clima y Cultura</li><li class="flex items-start"><i class="fas fa-check text-brandGreen mt-1 mr-2 text-xs"></i> Soft Skills</li><li class="flex items-start"><i class="fas fa-check text-brandGreen mt-1 mr-2 text-xs"></i> Evaluaciones</li></ul></div></div>
-                    <div class="stagger-2 h-full"><div class="bg-white/80 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all h-full border-t-4 border-gray-600 group flex flex-col cursor-pointer" onclick="openModal('seguro')" data-tilt data-tilt-max="10"><div class="w-full flex justify-center mb-6 relative h-16"><i class="fas fa-shield-halved text-7xl metal-icon metal-gray absolute transition-all duration-500 group-hover:opacity-0 group-hover:scale-50"></i><i class="fas fa-user-shield text-7xl metal-icon metal-gray animate-shield"></i></div><h3 class="text-xl font-bold text-gray-800 mb-2">EvoluSer <span class="text-gray-600">S.S.O.</span></h3><p class="text-[10px] text-gray-400 font-bold uppercase tracking-wider mb-6">Seguridad y Salud Ocupacional</p><ul class="space-y-3 text-sm text-gray-600 flex-grow"><li class="flex items-start"><i class="fas fa-check text-brandGreen mt-1 mr-2 text-xs"></i> Normativa ISO</li><li class="flex items-start"><i class="fas fa-check text-brandGreen mt-1 mr-2 text-xs"></i> Auditorías</li><li class="flex items-start"><i class="fas fa-check text-brandGreen mt-1 mr-2 text-xs"></i> Salud Ocupacional</li><li class="flex items-start"><i class="fas fa-check text-brandGreen mt-1 mr-2 text-xs"></i> Capacitaciones</li></ul></div></div>
-                    <div class="stagger-3 h-full"><div class="bg-white/80 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all h-full border-t-4 border-brandGreen group flex flex-col cursor-pointer" onclick="openModal('sostenible')" data-tilt data-tilt-max="10"><div class="w-full flex justify-center mb-6"><i class="fas fa-leaf text-7xl metal-icon metal-green animate-leaf"></i></div><h3 class="text-xl font-bold text-gray-800 mb-2">EvoluSer <span class="text-brandGreen">SOSTENIBLE</span></h3><p class="text-[10px] text-gray-400 font-bold uppercase tracking-wider mb-6">Medio Ambiente</p><ul class="space-y-3 text-sm text-gray-600 flex-grow"><li class="flex items-start"><i class="fas fa-check text-brandBlue mt-1 mr-2 text-xs"></i> Manejo Ambiental</li><li class="flex items-start"><i class="fas fa-check text-brandBlue mt-1 mr-2 text-xs"></i> Certificaciones</li><li class="flex items-start"><i class="fas fa-check text-brandBlue mt-1 mr-2 text-xs"></i> Eficiencia</li><li class="flex items-start"><i class="fas fa-check text-brandBlue mt-1 mr-2 text-xs"></i> Cultura Verde</li></ul></div></div>
-                    <div class="stagger-4 h-full"><div class="bg-white/80 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all h-full border-t-4 border-brandAmber group flex flex-col cursor-pointer" onclick="openModal('agro')" data-tilt data-tilt-max="10"><div class="w-full flex justify-center mb-6"><i class="fas fa-tractor text-7xl metal-icon metal-amber animate-tractor"></i></div><h3 class="text-xl font-bold text-gray-800 mb-2">EvoluSer <span class="text-amber-600">AGRO</span></h3><p class="text-[10px] text-gray-400 font-bold uppercase tracking-wider mb-6">Agroindustrial</p><ul class="space-y-3 text-sm text-gray-600 flex-grow"><li class="flex items-start"><i class="fas fa-check text-brandBlue mt-1 mr-2 text-xs"></i> Buenas Prácticas (BPA)</li><li class="flex items-start"><i class="fas fa-check text-brandBlue mt-1 mr-2 text-xs"></i> Inocuidad Alimentaria</li><li class="flex items-start"><i class="fas fa-check text-brandBlue mt-1 mr-2 text-xs"></i> Industrialización de Producto</li><li class="flex items-start"><i class="fas fa-check text-brandBlue mt-1 mr-2 text-xs"></i> Optimización Procesos</li></ul></div></div>
-                </div>
-
-                <div class="mt-16 text-center stagger-3 pb-4">
-                    <!-- NUEVO BOTÓN: MEJOR ANIMACIÓN (Hyper-Button) -->
-                    <a href="https://wa.me/593983900050" target="_blank" class="inline-flex items-center gap-3 bg-gradient-to-r from-brandGreen to-green-600 text-white font-bold py-4 px-10 rounded-full transition-all transform hover:scale-105 shadow-xl hover:shadow-green-500/30 group cursor-none mb-6 relative overflow-hidden animate-pulse-slow">
-                        <div class="absolute inset-0 bg-white/20 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 ease-in-out skew-x-12"></div> <!-- Shine effect -->
-                        <span class="relative z-10">¡Sé un EVONAUTA! Evoluciona hoy</span>
-                        <i class="fas fa-arrow-right group-hover:translate-x-2 transition-transform duration-300 relative z-10"></i>
-                    </a>
+                    <div class="md:col-span-4 flex flex-col gap-8">
+                        <div class="impact-card group cursor-pointer flex-1"><img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=800&q=80" alt="Permisos"><div class="impact-content p-8"><h3 class="text-2xl font-extrabold text-white mb-1 uppercase">Permisos</h3><span class="more-info-gold !py-2 !px-5 !text-[0.7rem]">Ver guía</span></div></div>
+                        <div class="impact-card group cursor-pointer flex-1"><img src="https://images.unsplash.com/photo-1521791136064-7986c29596ad?auto=format&fit=crop&w=800&q=80" alt="Equipo"><div class="impact-content p-8"><h3 class="text-2xl font-extrabold text-white mb-1 uppercase text-nowrap">Tu Equipo</h3><span class="more-info-gold !py-2 !px-5 !text-[0.7rem]">Ver servicios</span></div></div>
+                    </div>
                 </div>
             </div>
 
-            <!-- VISTA EMPRESAS -->
-            <div id="view-empresas" class="hidden max-w-5xl mx-auto">
-                <div class="text-center mb-8"><span class="text-brandBlue font-bold tracking-widest uppercase text-xs bg-blue-50 px-3 py-1 rounded-full">Soluciones Corporativas</span><h2 class="text-3xl font-heading font-bold text-gray-800 mb-2 mt-4">Impulso Empresarial</h2><p class="text-gray-500">Estrategias a medida para cada etapa de tu organización.</p></div>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <!-- PYMES -->
-                    <div class="bg-white/80 p-6 rounded-2xl shadow-lg border-t-4 border-brandBlue hover:transform hover:-translate-y-2 transition duration-300 group">
-                        <div class="text-center mb-4">
-                            <i class="fas fa-store text-7xl metal-icon metal-blue group-hover:animate-hug"></i>
-                        </div>
-                        <h3 class="text-xl font-bold text-gray-800 text-center mb-2">PYMES</h3><p class="text-xs text-gray-500 text-center mb-4">Pequeñas y Medianas Empresas</p><ul class="text-sm text-gray-600 space-y-2 mb-6"><li><i class="fas fa-check text-brandGreen mr-2"></i> Optimización de Procesos</li><li><i class="fas fa-check text-brandGreen mr-2"></i> Cumplimiento Legal Laboral</li><li><i class="fas fa-check text-brandGreen mr-2"></i> Estructura Organizacional</li></ul>
-                    </div>
-                    <!-- CORPORATIVO -->
-                    <div class="bg-white/80 p-6 rounded-2xl shadow-lg border-t-4 border-brandDark hover:transform hover:-translate-y-2 transition duration-300 group">
-                        <div class="text-center mb-4">
-                            <i class="fas fa-building text-7xl metal-icon metal-gray group-hover:animate-shield"></i>
-                        </div>
-                        <h3 class="text-xl font-bold text-gray-800 text-center mb-2">Corporativo</h3><p class="text-xs text-gray-500 text-center mb-4">Grandes Organizaciones</p><ul class="text-sm text-gray-600 space-y-2 mb-6"><li><i class="fas fa-check text-brandGreen mr-2"></i> Auditorías ISO Integrales</li><li><i class="fas fa-check text-brandGreen mr-2"></i> Cultura y Clima Laboral</li><li><i class="fas fa-check text-brandGreen mr-2"></i> Sostenibilidad Corporativa</li></ul>
-                    </div>
-                    <!-- INDUSTRIA -->
-                    <div class="bg-white/80 p-6 rounded-2xl shadow-lg border-t-4 border-brandAmber hover:transform hover:-translate-y-2 transition duration-300 group">
-                        <div class="text-center mb-4">
-                            <i class="fas fa-industry text-7xl metal-icon metal-amber group-hover:animate-tractor"></i>
-                        </div>
-                        <h3 class="text-xl font-bold text-gray-800 text-center mb-2">Industria</h3><p class="text-xs text-gray-500 text-center mb-4">Sector Productivo</p><ul class="text-sm text-gray-600 space-y-2 mb-6"><li><i class="fas fa-check text-brandGreen mr-2"></i> Seguridad Industrial (SSO)</li><li><i class="fas fa-check text-brandGreen mr-2"></i> Licencias Ambientales</li><li><i class="fas fa-check text-brandGreen mr-2"></i> Certificaciones de Calidad</li></ul>
+            <!-- Listas Startup -->
+            <div class="bg-[#FBFBFB] py-24 border-y border-gray-100">
+                <div class="container mx-auto px-4">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+                        <div class="mapfre-list-card"><div><h4 class="text-2xl font-extrabold text-brandBlue mb-8 uppercase tracking-tighter">Bases Legales</h4><ul class="check-list"><li><i class="fas fa-check-circle text-brandGold"></i> Estatutos Personalizados</li><li><i class="fas fa-check-circle text-brandGold"></i> Registro Mercantil</li></ul></div><span class="link-elegant">Detalles <i class="fas fa-chevron-right text-xs"></i></span></div>
+                        <div class="mapfre-list-card"><div><h4 class="text-2xl font-extrabold text-brandBlue mb-8 uppercase tracking-tighter text-nowrap">RRHH Inicial</h4><ul class="check-list"><li><i class="fas fa-check-circle text-brandGold"></i> Contratos de Trabajo</li><li><i class="fas fa-check-circle text-brandGold"></i> Afiliación IESS</li></ul></div><span class="link-elegant">Detalles <i class="fas fa-chevron-right text-xs"></i></span></div>
+                        <div class="mapfre-list-card"><div><h4 class="text-2xl font-extrabold text-brandBlue mb-8 uppercase tracking-tighter text-nowrap">Regulatorio</h4><ul class="check-list"><li><i class="fas fa-check-circle text-brandGold"></i> Permisos Bomberos</li><li><i class="fas fa-check-circle text-brandGold"></i> Notificación ARCSA</li></ul></div><span class="link-elegant">Detalles <i class="fas fa-chevron-right text-xs"></i></span></div>
                     </div>
                 </div>
-                <div class="text-center mt-8"><a href="https://wa.me/593983900050?text=Hola,%20busco%20soluciones%20para%20mi%20Empresa" target="_blank" class="inline-block bg-brandBlue text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-blue-700 transition cursor-none">Agendar Diagnóstico Empresarial</a><div class="mt-4"><button onclick="switchTab('brochure')" class="text-sm text-gray-400 hover:text-brandBlue transition cursor-none"><i class="fas fa-arrow-left mr-1"></i> Volver a Servicios</button></div></div>
             </div>
 
-            <!-- VISTA EMPRENDEDORES -->
-            <div id="view-emprendedores" class="hidden max-w-4xl mx-auto">
-                <div class="text-center mb-8"><span class="text-brandGreen font-bold tracking-widest uppercase text-xs bg-green-50 px-3 py-1 rounded-full">Startups & Nuevos Negocios</span><h2 class="text-3xl font-heading font-bold text-gray-800 mb-2 mt-4">Tu Socio de Despegue</h2></div>
-                <div class="bg-white/90 p-8 rounded-3xl shadow-xl border border-gray-100 flex flex-col md:flex-row items-center gap-8">
-                    <div class="w-40 h-40 md:w-56 md:h-56 relative flex-shrink-0"><div class="absolute inset-0 bg-brandGreen/20 rounded-full animate-pulse-slow"></div><img src="imagen6.png" alt="Ev Emprendedora" class="w-full h-full object-contain relative z-10 drop-shadow-2xl"></div>
-                    <div class="text-center md:text-left">
-                        <h3 class="text-2xl font-bold text-brandBlue mb-2">¡Hola! Soy Ev, tu Mentora Virtual</h3>
-                        <p class="text-gray-600 mb-6 leading-relaxed">Sé lo difícil que es empezar. Por eso, en EvoluSer hemos diseñado un programa especial para emprendedores como tú. Te ayudamos a formalizar tu idea, cumplir con los requisitos legales básicos y estructurar tu primer equipo de trabajo sin complicaciones.</p>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6"><div class="bg-blue-50 p-3 rounded-lg text-sm text-brandBlue font-semibold"><i class="fas fa-rocket mr-2"></i> Modelo de Negocio</div><div class="bg-green-50 p-3 rounded-lg text-sm text-brandGreen font-semibold"><i class="fas fa-file-contract mr-2"></i> Permisos Básicos</div><div class="bg-amber-50 p-3 rounded-lg text-sm text-brandAmber font-semibold"><i class="fas fa-users-cog mr-2"></i> Selección del Primer Equipo</div><div class="bg-gray-50 p-3 rounded-lg text-sm text-gray-600 font-semibold"><i class="fas fa-chalkboard-teacher mr-2"></i> Mentoria Personalizada</div></div>
-                        <a href="https://wa.me/593983900050?text=Hola%20Ev,%20tengo%20un%20emprendimiento%20y%20necesito%20ayuda" target="_blank" class="inline-block bg-gradient-to-r from-brandGreen to-green-600 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:shadow-green-500/50 transition transform hover:scale-105 cursor-none">Hablar con un Asesor Humano</a>
+            <!-- Validación Emprendedores -->
+            <div class="container mx-auto px-4 py-24">
+                <h3 class="text-3xl font-extrabold text-gray-900 mb-12 text-center uppercase tracking-widest">ÉXITO GARANTIZADO</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+                    <div class="validation-card group cursor-pointer" onclick="openModal('emprendedores_info')">
+                        <div class="overflow-hidden h-56"><img src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=800&q=80" alt="Ahorro"></div>
+                        <div class="p-10 flex-1 flex flex-col"><h4 class="text-xl font-bold text-brandBlue mb-4 group-hover:text-brandGold transition italic">Empezar bien es ahorrar</h4><p class="text-gray-500 text-sm mb-6 leading-relaxed text-justify">Evita multas futuras con blindaje legal desde el día 1.</p><span class="link-elegant mt-auto !text-brandBlue font-bold underline">Leer más <i class="fas fa-arrow-right ml-2"></i></span></div>
+                    </div>
+                    <div class="validation-card group cursor-pointer" onclick="openModal('emprendedores_info')">
+                        <div class="overflow-hidden h-56"><img src="https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&w=800&q=80" alt="Delegación"></div>
+                        <div class="p-10 flex-1 flex flex-col"><h4 class="text-xl font-bold text-brandBlue mb-4 group-hover:text-brandGold transition italic text-nowrap">Enfócate en vender</h4><p class="text-gray-500 text-sm mb-6 leading-relaxed text-justify">Gestionamos tu back-office legal mientras tú escalas tu negocio.</p><span class="link-elegant mt-auto !text-brandBlue font-bold underline">Explorar <i class="fas fa-arrow-right ml-2"></i></span></div>
+                    </div>
+                    <div class="validation-card group cursor-pointer" onclick="openModal('equipo')">
+                        <div class="overflow-hidden h-56"><img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=800&q=80" alt="Socio"></div>
+                        <div class="p-10 flex-1 flex flex-col"><h4 class="text-xl font-bold text-brandBlue mb-4 group-hover:text-brandGold transition italic text-nowrap">Tu socio en el tiempo</h4><p class="text-gray-500 text-sm mb-6 leading-relaxed text-justify">Evolucionamos contigo desde tu primera factura hasta tu consolidación.</p><span class="link-elegant mt-auto !text-brandBlue font-bold underline">Validar <i class="fas fa-arrow-right ml-2"></i></span></div>
                     </div>
                 </div>
-                <div class="text-center mt-8"><button onclick="switchTab('brochure')" class="text-sm text-gray-400 hover:text-brandBlue transition cursor-none"><i class="fas fa-arrow-left mr-1"></i> Volver a Servicios</button></div>
+            </div>
+        </div>
+
+        <!-- SECCIÓN 4: OFICINA VIRTUAL -->
+        <div id="segment-oficina" class="hidden fade-in min-h-[80vh] flex flex-col md:flex-row">
+            <div class="hidden md:block w-full md:w-3/5 bg-cover bg-center relative" style="background-image: url('https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=1200&q=80');">
+                <div class="absolute inset-0 bg-brandBlueDark/30"></div>
+                <div class="absolute bottom-20 left-20 text-white max-w-lg">
+                    <h2 class="text-4xl font-extrabold mb-6 uppercase tracking-tighter">Gestión Digital</h2>
+                    <p class="text-xl font-light border-l-4 border-brandGold pl-6 italic">Atención ágil para el crecimiento organizacional.</p>
+                </div>
+            </div>
+            <div class="w-full md:w-2/5 flex items-center justify-center bg-gray-50 p-6 md:p-12">
+                <div class="ov-login-container">
+                    <div class="ov-header"><h2 class="uppercase tracking-widest text-xl">Acceso</h2><p class="text-[10px] text-gray-400 font-bold uppercase mt-1 tracking-widest tracking-tighter text-nowrap">Mesa de Ayuda EvoluSer</p></div>
+                    <form id="ov-form" class="p-10 space-y-5" onsubmit="handleOfficeSubmit(event)">
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="col-span-2 sm:col-span-1"><label class="block text-[10px] font-bold text-gray-500 uppercase mb-2">Identificación:</label><select id="ov-type" class="w-full border border-gray-300 rounded p-3 text-sm outline-none"><option>Cédula</option><option>RUC</option></select></div>
+                            <div class="col-span-2 sm:col-span-1"><label class="block text-[10px] font-bold text-gray-500 uppercase mb-2">Número:</label><input id="ov-id" type="text" placeholder="171..." class="w-full border border-gray-300 rounded p-3 text-sm focus:border-brandGold outline-none"></div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="col-span-2 sm:col-span-1"><label class="block text-[10px] font-bold text-gray-500 uppercase mb-2">Teléfono:</label><input id="ov-phone" type="tel" placeholder="098..." class="w-full border border-gray-300 rounded p-3 text-sm focus:border-brandGold outline-none"></div>
+                            <div class="col-span-2 sm:col-span-1"><label class="block text-[10px] font-bold text-gray-500 uppercase mb-2">Ciudad:</label><input id="ov-city" type="text" placeholder="Quito" class="w-full border border-gray-300 rounded p-3 text-sm focus:border-brandGold outline-none"></div>
+                        </div>
+                        <div><label class="block text-[10px] font-bold text-gray-500 uppercase mb-2 text-nowrap">¿Qué necesitas?</label><textarea id="ov-message" rows="3" placeholder="Describe tu requerimiento..." class="w-full border border-gray-300 rounded p-3 text-sm focus:border-brandGold outline-none"></textarea></div>
+                        <button type="submit" class="w-full bg-gradient-to-r from-brandGold to-brandGoldDark text-white font-extrabold py-4 rounded transition uppercase text-xs tracking-widest shadow-md">Enviar Solicitud</button>
+                    </form>
+                    <div id="ov-success" class="hidden p-10 text-center animate-pop-in"><div class="w-20 h-20 bg-brandGreen/10 rounded-full flex items-center justify-center mx-auto mb-6"><i class="fas fa-check text-brandGreen text-3xl"></i></div><h3 class="text-xl font-bold text-brandBlue mb-2">¡Recibido!</h3><p class="text-sm text-gray-500">Un consultor especializado revisará su solicitud pronto.</p></div>
+                </div>
             </div>
         </div>
     </main>
 
-    <!-- VENTANA CHAT -->
-    <div id="ai-chat-window" class="fixed bottom-28 right-6 w-80 md:w-96 glass-card rounded-2xl flex flex-col transition-all duration-300 transform scale-0 origin-bottom-right z-[90] hidden" style="height: 450px;">
-        <div class="bg-gradient-to-r from-brandBlue to-brandGreen p-4 rounded-t-2xl flex justify-between items-center relative overflow-hidden">
-            <div class="absolute inset-0 bg-white opacity-10 animate-pulse-slow"></div>
-            <div class="flex items-center gap-3 z-10">
-                <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-lg overflow-hidden"><img src="logo.png" alt="Logo" class="w-full h-full object-contain p-1" onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?name=EvoluSer&background=005691&color=fff&size=128';"></div>
-                <div><h4 class="text-white font-bold text-sm">Soy Ev (IA)</h4><p class="text-xs text-white/80">Tu copiloto Evonauta</p></div>
-            </div>
-            <button onclick="toggleChat()" class="text-white hover:text-gray-200 z-10 transition-transform hover:rotate-90"><i class="fas fa-times text-xl"></i></button>
-        </div>
-        <ul id="chat-box" class="flex-1 overflow-y-auto p-4 space-y-4 scrollbar-hide bg-white/60 backdrop-blur-sm">
-            <li class="flex justify-start"><div class="bg-white text-gray-700 p-3 rounded-2xl rounded-tl-none shadow-sm max-w-[85%] text-sm border border-gray-100">¡Hola! 👋 Soy Ev, la IA experta de EvoluSer. <br>¿En qué puedo ayudarte hoy?</div></li>
-        </ul>
-        <div class="p-3 bg-white/80 border-t border-gray-100 rounded-b-2xl">
-            <div class="flex items-center gap-2 bg-gray-50 rounded-full px-4 py-2 border border-gray-200 focus-within:border-brandBlue transition-colors">
-                <textarea id="chat-input" rows="1" class="flex-1 bg-transparent border-none outline-none text-sm resize-none text-gray-700" placeholder="Pregúntame algo..."></textarea>
-                <button id="send-btn" class="text-brandBlue hover:text-brandGreen transition-colors transform hover:scale-110"><i class="fas fa-paper-plane"></i></button>
-            </div>
-            <div class="text-[10px] text-center text-gray-400 mt-1">Potenciado por xAI (Seguro)</div>
-        </div>
-    </div>
-    
-    <!-- AVATAR -->
-    <div id="avatar-container" class="fixed bottom-6 right-6 z-[100] flex flex-col items-end pointer-events-none animate-pop-in" style="touch-action: none;">
-        <div id="avatar-bubble" onclick="toggleChat()" class="chat-bubble mb-8 max-w-[280px] animate-float pointer-events-auto transform transition hover:scale-105 origin-bottom-right duration-300 cursor-pointer pointer-events-auto"><div id="bubble-content-default"><h4 class="font-bold text-brandBlue text-sm mb-1">¡Hola, Evonauta! Soy Ev</h4><p class="text-xs text-gray-600 leading-snug mb-2">Haz clic para chatear con IA.</p></div></div>
-        <div id="avatar-wrapper" onclick="toggleChat()" class="relative w-36 h-36 pointer-events-auto cursor-pointer active:cursor-grabbing group animate-float-avatar pointer-events-auto"><img src="imagen6.png" alt="Asistente" class="w-full h-full object-contain filter drop-shadow-2xl transition-transform duration-300 group-hover:scale-110" onerror="this.style.display='none'; document.getElementById('avatar-fallback').style.display='flex';"><div id="avatar-fallback" class="hidden w-full h-full bg-brandBlue rounded-full items-center justify-center text-white shadow-xl"><i class="fas fa-robot text-4xl"></i></div></div>
-    </div>
-
-    <!-- MODAL -->
-    <div id="service-modal" class="fixed inset-0 z-[100] hidden items-center justify-center bg-black/70 backdrop-blur-sm p-4">
-        <div class="bg-white rounded-3xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto relative animate-float">
-            <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-800 z-10 bg-white rounded-full p-2 shadow-md transition cursor-none"><i class="fas fa-times text-xl"></i></button>
-            <div class="grid grid-cols-1 md:grid-cols-2">
-                <div class="relative h-64 md:h-auto overflow-hidden bg-gray-100"><img id="modal-image" src="" alt="Servicio" class="w-full h-full object-cover transition duration-700 hover:scale-110"><div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent flex items-end p-6"><div class="text-white w-full"><p class="text-sm font-bold uppercase tracking-wider opacity-90 mb-1 drop-shadow-md" id="modal-subtitle">Dpto</p><div id="modal-title-container" class="flex items-center gap-3"><h3 class="text-3xl font-heading font-bold text-white drop-shadow-lg" id="modal-title">Titulo</h3></div></div></div></div>
-                <div class="p-8 md:p-12 flex flex-col justify-center">
-                    <div class="mb-6 border-l-4 border-brandBlue pl-4"><p class="text-xs text-gray-500 uppercase tracking-widest font-bold mb-1">Liderado por</p><h4 class="text-2xl font-bold text-gray-800" id="modal-leader">Nombre</h4><p class="text-brandBlue text-sm font-semibold" id="modal-role">Rol</p></div>
-                    <div class="prose prose-sm text-gray-600 mb-8" id="modal-desc"></div>
-                    <h5 class="font-bold text-gray-800 mb-3 text-sm uppercase tracking-wide border-b pb-2">Servicios Clave</h5><ul class="space-y-2 text-sm text-gray-600 mb-8" id="modal-list"></ul>
-                    <button onclick="closeModal()" class="w-full bg-gray-100 hover:bg-gray-200 text-gray-800 font-bold py-3 rounded-xl transition cursor-none">Cerrar Perfil</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Footer -->
-    <footer class="bg-white/80 border-t border-gray-200 mt-auto backdrop-blur-sm relative z-30">
-        <div class="container mx-auto px-6 py-10">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-center text-center md:text-left">
-                <div class="space-y-3">
-                    <h5 class="font-bold text-gray-800 uppercase text-xs tracking-wider mb-4">Contacto Directo</h5>
-                    <a href="tel:+593996408009" class="block text-gray-600 hover:text-brandBlue transition-colors cursor-none"><i class="fas fa-phone-alt w-6 text-brandGreen"></i> +593 99 640 8009</a>
-                    <a href="https://wa.me/593983900050" class="block text-gray-600 hover:text-brandBlue transition-colors cursor-none"><i class="fab fa-whatsapp w-6 text-brandGreen"></i> +593 98 390 0050</a>
-                    <a href="mailto:evoluserec@gmail.com" class="block text-gray-600 hover:text-brandBlue transition-colors cursor-none"><i class="fas fa-envelope w-6 text-brandGreen"></i> evoluserec@gmail.com</a>
-                </div>
-                <div class="text-center">
-                   <p class="text-sm text-gray-400">© 2024 EvoluSer Consultores</p>
-                   <p class="text-xs text-brandBlue font-bold mt-1 tracking-wider uppercase">Comunidad de Evonautas</p>
-                   <p class="text-xs text-gray-300 mt-1">Quito, Ecuador</p>
-                </div>
-                <div class="text-center md:text-right">
-                    <h5 class="font-bold text-gray-800 uppercase text-xs tracking-wider mb-4">Conecta con la Misión</h5>
-                    <div class="flex justify-center md:justify-end space-x-4 mb-3">
-                        <a href="https://www.linkedin.com/in/evoluser-ecuador-4b5462382/" target="_blank" class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-brandBlue hover:text-white transition-all transform hover:scale-110 cursor-none" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="http://www.youtube.com/@EVOLUSEREC" target="_blank" class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-red-600 hover:text-white transition-all transform hover:scale-110 cursor-none" title="YouTube"><i class="fab fa-youtube"></i></a>
-                        <a href="https://www.facebook.com/share/14SRDeBzp77/" target="_blank" class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-blue-600 hover:text-white transition-all transform hover:scale-110 cursor-none" title="Facebook"><i class="fab fa-facebook-f"></i></a>
-                        <a href="https://www.instagram.com/evoluserec?igsh=bXB6dWN5ejAxd2Yw" target="_blank" class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-pink-600 hover:text-white transition-all transform hover:scale-110 cursor-none" title="Instagram"><i class="fab fa-instagram"></i></a>
-                        <a href="https://www.tiktok.com/@evoluserec?_r=1&_t=ZM-92aiiE2yhad" target="_blank" class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-black hover:text-white transition-all transform hover:scale-110 cursor-none" title="TikTok"><i class="fab fa-tiktok"></i></a>
-                        <a href="https://x.com/evoluserec" target="_blank" class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-black hover:text-white transition-all transform hover:scale-110 cursor-none" title="X"><i class="fab fa-x-twitter"></i></a>
-                    </div>
-                    <p class="text-xs text-gray-500 italic">"Únete a la tripulación y navega hacia la Evolución. <br><span class="font-bold text-brandGreen">¡Sé un Evonauta!</span>"</p>
-                </div>
-            </div>
+    <!-- FOOTER PREMIUM -->
+    <footer class="bg-brandBlueDark text-white py-20 border-t-8 border-brandGold">
+        <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-16 text-base">
+            <div><img src="https://raw.githubusercontent.com/direccioncomercial/evoluser-web/1b862973e8003850daadd6a47bffd5b6cf04b2f6/logo.png" class="h-12 mb-8 brightness-0 invert opacity-90"><p class="text-white/60 leading-relaxed font-light text-justify text-sm">Potenciamos el ser, protegemos la vida. Aliado estratégico líder en la región para la evolución empresarial sostenible.</p></div>
+            <div><h5 class="font-bold mb-8 uppercase tracking-widest text-brandGold text-sm">Atención</h5><ul class="space-y-4 text-white/70 text-sm"><li><button onclick="setSegment('soluciones')" class="hover:text-brandGold transition">Soluciones</button></li><li><button onclick="setSegment('empresas')" class="hover:text-brandGold transition">Empresas</button></li><li><button onclick="setSegment('oficina')" class="hover:text-brandGold transition">Oficina Virtual</button></li></ul></div>
+            <div><h5 class="font-bold mb-8 uppercase tracking-widest text-brandGold text-sm">Contacto Principal</h5><ul class="space-y-4 text-white/70 font-bold uppercase text-sm"><li><i class="fas fa-map-marker-alt text-brandGold mr-2"></i> Quito, Ecuador</li><li><a href="https://wa.me/593983900050" target="_blank" class="hover:text-brandGold transition flex items-center gap-2"><i class="fab fa-whatsapp text-brandGold mr-2"></i> +593 98 390 0050</a></li><li><a href="mailto:evoluserec@gmail.com" class="hover:text-brandGold transition flex items-center gap-2 lowercase tracking-wider font-bold"><i class="fas fa-envelope text-brandGold mr-2"></i> evoluserec@gmail.com</a></li></ul></div>
+            <div><h5 class="font-bold mb-8 uppercase tracking-widest text-brandGold text-sm text-nowrap">Síguenos</h5><div class="flex gap-6 text-2xl"><a href="#" class="social-icon hover-linkedin transition"><i class="fab fa-linkedin text-brandGold"></i></a><a href="#" class="social-icon hover-facebook transition"><i class="fab fa-facebook text-brandGold"></i></a><a href="#" class="social-icon hover-instagram transition"><i class="fab fa-instagram text-brandGold"></i></a><a href="#" class="social-icon hover-youtube transition"><i class="fab fa-youtube text-brandGold"></i></a><a href="#" class="social-icon hover-tiktok transition"><i class="fab fa-tiktok text-brandGold"></i></a><a href="#" class="social-icon hover-x transition"><i class="fab fa-x-twitter text-brandGold"></i></a></div></div>
         </div>
     </footer>
 
+    <!-- EV MOVIBLE Y FUTURISTA (ACTUALIZADO CON CÓDIGO INGENIO) -->
+    <div id="ev-floating-container" class="fixed z-[80] flex flex-col items-center cursor-pointer group select-none touch-none" style="bottom: 40px; right: 40px;">
+        <!-- Globo de Texto Superior (Animación Bounce de Tailwind) -->
+        <div class="bg-white px-4 py-2 rounded-xl shadow-md border-b-2 border-[#D4AF37] mb-2 animate-bounce whitespace-nowrap">
+           <span class="text-xs font-extrabold text-[#005691] uppercase tracking-wider">
+             ¡Hola! Soy Ev. ¿Hablamos?
+           </span>
+        </div>
+        
+        <!-- Contenedor del Avatar (Aplica el Brillo Dorado) -->
+        <div class="w-[90px] h-auto relative animate-glow-latency">
+           <!-- Imagen de Ev (Aplica la Flotación) -->
+           <img 
+             src="https://raw.githubusercontent.com/direccioncomercial/evoluser-web/1b862973e8003850daadd6a47bffd5b6cf04b2f6/imagen6.png" 
+             id="ev-avatar-trigger"
+             class="w-full h-full object-contain drop-shadow-2xl transition-transform duration-300 animate-float" 
+             alt="Consultora IA Ev" 
+           >
+        </div>
+    </div>
+
+    <!-- CHATBOT WINDOW -->
+    <div id="ai-chat-window" class="fixed bottom-24 right-6 w-80 md:w-96 bg-white rounded-2xl shadow-2xl flex flex-col transition-all duration-500 transform scale-0 origin-bottom-right z-[90] hidden border border-gray-100 overflow-hidden" style="height: 500px;">
+        <div class="bg-gradient-to-r from-brandBlue to-brandBlueDark p-6 flex justify-between items-center border-b-4 border-brandGold">
+            <div class="flex items-center gap-4">
+                <img src="https://raw.githubusercontent.com/direccioncomercial/evoluser-web/1b862973e8003850daadd6a47bffd5b6cf04b2f6/imagen6.png" class="w-12 h-12 object-contain ev-free-avatar">
+                <div><h4 class="text-white font-bold text-sm text-nowrap">Consultora Ev</h4><p class="text-[10px] text-brandGold font-bold uppercase tracking-widest leading-none">Inteligencia Estratégica</p></div>
+            </div>
+            <button onclick="toggleChat()" class="text-white/50 hover:text-white transition"><i class="fas fa-times text-xl"></i></button>
+        </div>
+        <ul id="chat-box" class="flex-1 overflow-y-auto p-6 space-y-4 bg-gray-50/50 scrollbar-hide"><li class="flex justify-start"><div class="bg-white text-gray-700 p-4 rounded-2xl rounded-tl-none shadow-sm text-sm border border-gray-100 max-w-[85%] italic">"Bienvenido Evonauta. Soy Ev, tu consultora experta. ¿Deseas optimizar hoy tu equipo, tu seguridad o tu cumplimiento ambiental?"</div></li></ul>
+        <div class="p-4 bg-white border-t border-gray-100"><div class="flex items-center gap-3 bg-gray-50 rounded-full px-5 py-3 border border-gray-200 focus-within:border-brandGold transition-all"><input id="chat-input" class="flex-1 bg-transparent border-none outline-none text-sm font-medium" placeholder="Consulta estratégica..."> <button onclick="handleChat()" class="text-brandBlue hover:text-brandGold transition transform hover:scale-110"><i class="fas fa-paper-plane text-lg"></i></button></div></div>
+    </div>
+
+    <!-- MODAL UNIVERSAL -->
+    <div id="service-modal" class="fixed inset-0 z-[100] hidden items-center justify-center bg-brandBlueDark/80 backdrop-blur-md p-4">
+        <div class="bg-white rounded-2xl shadow-2xl max-w-5xl w-full max-h-[90vh] overflow-y-auto relative animate-pop-in flex flex-col md:flex-row overflow-hidden">
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-400 hover:text-brandGold z-20 bg-white/80 rounded-full p-2 transition"><i class="fas fa-times text-2xl"></i></button>
+            <div class="w-full md:w-2/5 h-64 md:h-auto bg-gray-50 relative flex items-center justify-center border-r border-gray-100"><img id="modal-image" src="" class="w-full h-full object-cover object-top"></div>
+            <div class="w-full md:w-3/5 p-10 md:p-14 flex flex-col justify-center"><div id="modal-content" class="scrollbar-hide overflow-y-auto max-h-[60vh]"></div><button onclick="closeModal()" class="mt-10 w-full bg-gray-100 hover:bg-brandGold hover:text-white text-gray-500 font-extrabold py-4 rounded-xl transition uppercase text-xs tracking-[0.2em]">Cerrar</button></div>
+        </div>
+    </div>
+
     <script>
-        // --- CONFIGURACIÓN DE IA (CONEXIÓN CLOUDFLARE) ---
-        const USE_MOCK_AI = true; // ⚠️ CAMBIAR A 'false' CUANDO TENGAS CREDITOS DE XAI
-        const BACKEND_URL = "https://cerebro-evoluser.comercialregionaldireccion.workers.dev"; // TU URL REAL
+        // Lógica de Movimiento EV
+        const evContainer = document.getElementById('ev-floating-container');
+        let isDragging = false; let startX, startY, initialX, initialY; let hasMoved = false;
 
-        let chatHistory = [];
-        let isDragging = false, hasMoved = false, startX, startY;
+        evContainer.addEventListener('mousedown', startDragging);
+        document.addEventListener('mousemove', drag);
+        document.addEventListener('mouseup', stopDragging);
+        evContainer.addEventListener('touchstart', (e) => startDragging(e.touches[0]));
+        document.addEventListener('touchmove', (e) => drag(e.touches[0]));
+        document.addEventListener('touchend', stopDragging);
 
-        // --- SISTEMA DE NAVEGACIÓN FULLSCREEN ---
-        function toggleMenu() {
-            const menu = document.getElementById('side-menu');
-            const backdrop = document.getElementById('menu-backdrop');
-            
-            // Check for the negative translate class (hidden state)
-            const isOpen = !menu.classList.contains('-translate-x-full');
-            
-            if (isOpen) {
-                // Cerrar
-                menu.classList.add('-translate-x-full');
-                backdrop.classList.remove('opacity-100');
-                backdrop.classList.add('opacity-0');
-                setTimeout(() => backdrop.classList.add('hidden'), 500); // Wait for fade out
-            } else {
-                // Abrir
-                backdrop.classList.remove('hidden');
-                // Force reflow
-                void backdrop.offsetWidth;
-                backdrop.classList.remove('opacity-0');
-                backdrop.classList.add('opacity-100');
-                menu.classList.remove('-translate-x-full');
-            }
-        }
-        
-        function navTo(tab) {
-            toggleMenu(); // Cerrar menú
-            setTimeout(() => {
-                switchTab(tab);
-            }, 300); // Esperar un poco a que se cierre para transición suave
-        }
-        
-        function navToService(modalType) {
-            toggleMenu(); // Cerrar menú
-            
-            // Si no estamos en la pestaña de servicios, cambiar primero
-            const brochureView = document.getElementById('view-brochure');
-            if (brochureView.classList.contains('hidden')) {
-                switchTab('brochure');
-                setTimeout(() => {
-                     openModal(modalType);
-                }, 500);
-            } else {
-                setTimeout(() => {
-                     openModal(modalType);
-                }, 300);
-            }
+        function startDragging(e) { isDragging = true; hasMoved = false; startX = e.clientX; startY = e.clientY; initialX = evContainer.offsetLeft; initialY = evContainer.offsetTop; }
+        function drag(e) { if (!isDragging) return; hasMoved = true; const dx = e.clientX - startX; const dy = e.clientY - startY; evContainer.style.left = (initialX + dx) + 'px'; evContainer.style.top = (initialY + dy) + 'px'; evContainer.style.bottom = 'auto'; evContainer.style.right = 'auto'; }
+        function stopDragging() { isDragging = false; }
+        document.getElementById('ev-avatar-trigger').onclick = () => { if (!hasMoved) toggleChat(); };
+
+        function setSegment(segment) {
+            document.querySelectorAll('.nav-link').forEach(btn => btn.classList.remove('active'));
+            if(document.getElementById('nav-' + segment)) document.getElementById('nav-' + segment).classList.add('active');
+            ['soluciones', 'empresas', 'emprendedores', 'oficina'].forEach(s => { const el = document.getElementById('segment-' + s); if(el) el.classList.add('hidden'); });
+            const target = document.getElementById('segment-' + segment); if(target) target.classList.remove('hidden');
+            window.scrollTo({top: 0, behavior: 'smooth'});
         }
 
-        // --- SISTEMA DE SIMULACIÓN (Respaldo en caso de error) ---
-        const simulateGrokResponse = (text) => {
-            const lowerText = text.toLowerCase();
-            return new Promise((resolve) => {
-                setTimeout(() => {
-                    // --- SALUDOS Y CORTESÍA ---
-                    if (lowerText.match(/^(hola|buenos|buenas|hi|hello)/)) {
-                        resolve("¡Hola, Evonauta! 🚀 Soy Ev, tu copiloto virtual. Estoy lista para despegar contigo hacia el éxito. ¿Te interesa Talento Humano, Seguridad, Ambiente o Agroindustria?");
-                    } else if (lowerText.includes('gracias') || lowerText.includes('agradezco')) {
-                        resolve("¡Es un placer servirte! Recuerda que en EvoluSer estamos para potenciar el ser y proteger la vida. 💚 ¿Necesitas algo más?");
-                    } else if (lowerText.includes('adios') || lowerText.includes('chao') || lowerText.includes('hasta luego')) {
-                        resolve("¡Hasta pronto, Evonauta! Que tu viaje empresarial siga evolucionando. Estaré aquí cuando me necesites. 🚀");
-                    
-                    // --- IDENTIDAD ---
-                    } else if (lowerText.includes('quien eres') || lowerText.includes('que eres') || lowerText.includes('tu nombre')) {
-                        resolve("Soy Ev, la inteligencia artificial de EvoluSer. Mi misión es guiarte a través de nuestros servicios integrales y conectarte con nuestros expertos humanos.");
-                    } else if (lowerText.includes('evoluser') || lowerText.includes('empresa') || lowerText.includes('hacen')) {
-                        resolve("EvoluSer es una consultora integral en Ecuador. Fusionamos Talento Humano, Seguridad Ocupacional, Gestión Ambiental y Agroindustria para que tu empresa crezca cuidando a la gente y al planeta.");
-
-                    // --- PRECIOS Y COSTOS ---
-                    } else if (lowerText.includes('precio') || lowerText.includes('costo') || lowerText.includes('valor') || lowerText.includes('cotiza')) {
-                        resolve("Cada proyecto es único, como tu huella digital. Para darte un valor exacto, necesitamos un diagnóstico rápido. ¿Te gustaría contactar a un asesor humano por WhatsApp? 📲 👉 <a href='https://wa.me/593983900050' target='_blank' class='text-brandBlue font-bold underline'>Clic aquí</a>");
-                    
-                    // --- SERVICIOS ESPECÍFICOS ---
-                    // Talento Humano
-                    } else if (lowerText.includes('humano') || lowerText.includes('talento') || lowerText.includes('clima') || lowerText.includes('reclutamiento')) {
-                        resolve("En **Talento Humano** (Dir: Nury Echeverria), nos enfocamos en: <br>• Selección de personal 🕵️‍♀️<br>• Clima y Cultura Laboral 🌡️<br>• Habilidades Blandas 🧠<br>¡Potenciamos tu activo más valioso!");
-                    // Seguridad (SSO)
-                    } else if (lowerText.includes('seguridad') || lowerText.includes('sso') || lowerText.includes('riesgo') || lowerText.includes('auditoria')) {
-                        resolve("La seguridad es primero 🛡️. (Dir: Christian Ortega). Ofrecemos:<br>• Implementación ISO 45001<br>• Auditorías de Riesgos<br>• Vigilancia de la Salud<br>• Capacitaciones de alto impacto.");
-                    // Ambiente
-                    } else if (lowerText.includes('ambiente') || lowerText.includes('sostenible') || lowerText.includes('licencia') || lowerText.includes('verde')) {
-                        resolve("¡El futuro es verde! 🌿 (Dir: Christian Ortega). Te ayudamos con:<br>• Licencias Ambientales<br>• Huella de Carbono<br>• Planes de Manejo<br>Haz que tu empresa sea Sostenible y competitiva.");
-                    // Agro
-                    } else if (lowerText.includes('agro') || lowerText.includes('bpa') || lowerText.includes('inocuidad') || lowerText.includes('alimento')) {
-                        resolve("Para el sector **Agroindustrial** 🚜 (Dir: Lilian Eras), optimizamos:<br>• Buenas Prácticas Agrícolas (BPA)<br>• Inocuidad Alimentaria<br>• Procesos de Industrialización.<br>Calidad desde el origen.");
-                    
-                    // --- CONTACTO Y UBICACIÓN ---
-                    } else if (lowerText.includes('telefono') || lowerText.includes('celular') || lowerText.includes('llamar') || lowerText.includes('whatsapp')) {
-                        resolve("Claro, contáctanos directamente al WhatsApp: **+593 98 390 0050** o llámanos al **+593 99 640 8009**. ¡Estamos atentos!");
-                    } else if (lowerText.includes('correo') || lowerText.includes('email') || lowerText.includes('mail')) {
-                        resolve("Escríbenos a: **evoluserec@gmail.com**. Revisamos nuestra bandeja de entrada constantemente. 📧");
-                    } else if (lowerText.includes('ubicacion') || lowerText.includes('donde estan') || lowerText.includes('direccion') || lowerText.includes('quito')) {
-                        resolve("Nuestra base de operaciones está en **Quito, Ecuador**, pero nuestros servicios llegan a todo el país gracias a la tecnología y a nuestros consultores móviles. 🌎");
-                    
-                    // --- FILOSOFÍA ---
-                    } else if (lowerText.includes('mision') || lowerText.includes('proposito')) {
-                        resolve("Nuestra misión es simple pero poderosa: **Potenciar el Ser, Proteger la Vida**. Buscamos que las empresas crezcan siendo más humanas, seguras y sostenibles.");
-                    } else if (lowerText.includes('vision')) {
-                        resolve("Ser el referente nacional en consultoría integral, demostrando que la rentabilidad y el bienestar humano/ambiental pueden ir de la mano.");
-
-                    // --- DEFAULT ---
-                    } else {
-                        resolve("Entiendo tu consulta, pero mi base de datos simulada es limitada. 🧠 Te sugiero hablar directamente con nuestro equipo humano en WhatsApp para una respuesta experta y personalizada. ¡Están a un clic! 👉 <a href='https://wa.me/593983900050' target='_blank' class='text-brandBlue font-bold underline'>Clic aquí para chatear</a>");
-                    }
-                }, 1000); // Retardo para simular "pensamiento"
-            });
-        };
-
-        // --- INICIALIZACIÓN ---
-        document.addEventListener('DOMContentLoaded', () => {
-            createNeonText("POTENCIAR EL SER, PROTEGER LA VIDA");
-            launchWanderingRocket();
-            
-            const sendBtn = document.getElementById('send-btn');
-            const chatInput = document.getElementById('chat-input');
-            const avatarContainer = document.getElementById('avatar-container');
-            const serviceModal = document.getElementById('service-modal');
-
-            if(sendBtn) sendBtn.addEventListener("click", handleChat);
-            if(chatInput) chatInput.addEventListener("keydown", (e) => {
-                if(e.key === "Enter" && !e.shiftKey) { e.preventDefault(); handleChat(); }
-            });
-            
-            if(avatarContainer) {
-                avatarContainer.addEventListener('mousedown', startDrag);
-                avatarContainer.addEventListener('touchstart', startDrag, {passive: false});
-            }
-
-            if(serviceModal) {
-                serviceModal.addEventListener('click', function(e) {
-                    if (e.target === this) closeModal();
-                });
-            }
-
-            const dateEl = document.getElementById('currentDate');
-            if (dateEl) { dateEl.textContent = new Date().toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' }); }
-        });
-
-        // --- LÓGICA DEL CHAT ---
-        const createMessage = (text, type) => {
-            const chatBox = document.getElementById('chat-box');
-            const li = document.createElement("li");
-            li.className = type === "outgoing" ? "flex justify-end" : "flex justify-start";
-            const div = document.createElement("div");
-            
-            div.style.animation = "popIn 0.3s ease-out";
-            div.className = type === "outgoing" ? 
-                "bg-brandBlue text-white p-3 rounded-2xl rounded-tr-none shadow-md max-w-[85%] text-sm" : 
-                "bg-white text-gray-700 p-3 rounded-2xl rounded-tl-none shadow-sm max-w-[85%] text-sm border border-gray-100";
-            
-            div.innerHTML = text.replace(/\n/g, "<br>");
-            li.appendChild(div);
-            chatBox.appendChild(li);
-            chatBox.scrollTo({ top: chatBox.scrollHeight, behavior: 'smooth' });
-            return div;
+        function handleOfficeSubmit(e) {
+            e.preventDefault();
+            const id = document.getElementById('ov-id').value; const phone = document.getElementById('ov-phone').value; const city = document.getElementById('ov-city').value; const message = document.getElementById('ov-message').value;
+            if(!id || !phone || !message) return;
+            const body = encodeURIComponent(`ID: ${id}\nTel: ${phone}\nCiudad: ${city}\n\nMensaje:\n${message}`);
+            window.location.href = `mailto:evoluserec@gmail.com?subject=Solicitud Oficina Virtual&body=${body}`;
+            document.getElementById('ov-form').classList.add('hidden'); document.getElementById('ov-success').classList.remove('hidden');
         }
 
-        const handleChat = async () => {
-            const chatInput = document.getElementById('chat-input');
-            const userText = chatInput.value.trim();
-            if (!userText) return;
+        function resetOfficeForm() { document.getElementById('ov-form').classList.remove('hidden'); document.getElementById('ov-success').classList.add('hidden'); document.getElementById('ov-form').reset(); }
 
-            createMessage(userText, "outgoing");
-            chatInput.value = "";
-            chatInput.focus();
-
-            // Indicador de "Escribiendo..."
-            const loadingId = 'loading-' + Date.now();
-            const loadingLi = document.createElement("li");
-            loadingLi.className = "flex justify-start";
-            loadingLi.id = loadingId;
-            loadingLi.innerHTML = `
-                <div class="bg-white text-gray-500 p-3 rounded-2xl rounded-tl-none shadow-sm border border-gray-100 flex items-center gap-2">
-                    <i class="fas fa-circle-notch fa-spin text-brandBlue"></i> 
-                    <span class="text-xs italic">Ev está pensando...</span>
-                </div>`;
-            document.getElementById('chat-box').appendChild(loadingLi);
-            document.getElementById('chat-box').scrollTo({ top: document.getElementById('chat-box').scrollHeight, behavior: 'smooth' });
-
-            try {
-                let apiResponse;
-
-                if (USE_MOCK_AI) {
-                    apiResponse = await simulateGrokResponse(userText);
-                } else {
-                    // LLAMADA REAL A TU WORKER
-                    const response = await fetch(BACKEND_URL, {
-                        method: "POST",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify({ message: userText, history: chatHistory })
-                    });
-                    
-                    if (!response.ok) {
-                        const errorData = await response.json();
-                        throw new Error(errorData.error || "Error en el servidor");
-                    }
-                    const data = await response.json();
-                    
-                    if (data.error) throw new Error(data.error);
-                    apiResponse = data.reply;
-                }
-
-                const loadingElement = document.getElementById(loadingId);
-                if(loadingElement) loadingElement.remove();
-
-                createMessage(apiResponse, "incoming");
-                
-                chatHistory.push({ role: "user", content: userText });
-                chatHistory.push({ role: "assistant", content: apiResponse });
-                if (chatHistory.length > 10) chatHistory = chatHistory.slice(-10);
-
-            } catch (error) {
-                console.error("Error Chat:", error);
-                const loadingElement = document.getElementById(loadingId);
-                if(loadingElement) loadingElement.remove();
-                createMessage(`📡 Ups, tuve un problema: ${error.message}. Por favor intenta de nuevo.`, "incoming");
-            }
-        };
-
-        // --- INTERFAZ EXTRA ---
-        const cursor = document.getElementById('custom-cursor');
-        document.addEventListener('mousemove', (e) => { 
-            if(cursor) cursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`; 
-        });
-        document.addEventListener('mouseenter', () => { if(cursor) cursor.style.display = 'flex'; });
-        document.addEventListener('mouseleave', () => { if(cursor) cursor.style.display = 'none'; });
-
-        // --- PARTÍCULAS ---
-        const canvas = document.getElementById('particles-canvas');
-        if (canvas) {
-            const ctx = canvas.getContext('2d'); let width, height, particles = [];
-            function resize() { width = canvas.width = window.innerWidth; height = canvas.height = window.innerHeight; }
-            class Particle {
-                constructor() { this.reset(); }
-                reset() {
-                    this.x = Math.random() * width; 
-                    this.y = Math.random() * height; 
-                    this.vy = -(0.2 + Math.random() * 0.5); 
-                    this.size = Math.random() * 2; 
-                    this.alpha = Math.random() * 0.5;
-                }
-                update() { this.y += this.vy; if (this.y < 0) this.reset(); }
-                draw() { 
-                    ctx.fillStyle = `rgba(255, 255, 255, ${this.alpha})`; 
-                    ctx.beginPath(); 
-                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); 
-                    ctx.fill(); 
-                }
-            }
-            function initParticles() { particles = []; for(let i=0; i<40; i++) particles.push(new Particle()); }
-            function animateParticles() { ctx.clearRect(0, 0, width, height); particles.forEach(p => { p.update(); p.draw(); }); requestAnimationFrame(animateParticles); }
-            window.addEventListener('resize', resize); resize(); initParticles(); animateParticles();
-        }
-        
-        function switchTab(tabName) {
-            const views = ['view-carta', 'view-brochure', 'view-empresas', 'view-emprendedores'];
-            views.forEach(v => {
-                const el = document.getElementById(v);
-                if(el) el.classList.add('hidden');
-            });
-            
-            const selected = document.getElementById('view-' + tabName);
-            if(selected) {
-                selected.classList.remove('hidden');
-                const animatedElements = selected.querySelectorAll('.animate-pop-in, .stagger-1, .stagger-2, .stagger-3, .stagger-4');
-                animatedElements.forEach(el => {
-                    el.style.animation = 'none';
-                    el.offsetHeight; 
-                    el.style.animation = null; 
-                });
-            }
-
-            const btnCarta = document.getElementById('btn-carta');
-            const btnBrochure = document.getElementById('btn-brochure');
-            
-            if (tabName === 'carta' || tabName === 'empresas' || tabName === 'emprendedores') {
-                btnCarta.className = "flex-1 py-3 px-6 rounded-full text-sm font-bold uppercase tracking-wider transition-all duration-500 bg-brandBlue text-white shadow-lg ring-4 ring-brandBlue/30 cursor-none";
-                btnBrochure.className = "flex-1 py-3 px-6 rounded-full text-sm font-bold uppercase tracking-wider transition-all duration-500 text-gray-500 hover:bg-white/50 hover:text-brandBlue cursor-none";
-            } else {
-                btnBrochure.className = "flex-1 py-3 px-6 rounded-full text-sm font-bold uppercase tracking-wider transition-all duration-500 bg-brandBlue text-white shadow-lg ring-4 ring-brandBlue/30 cursor-none";
-                btnCarta.className = "flex-1 py-3 px-6 rounded-full text-sm font-bold uppercase tracking-wider transition-all duration-500 text-gray-500 hover:bg-white/50 hover:text-brandBlue cursor-none";
-            }
-        }
-
-        if (typeof VanillaTilt !== 'undefined') { VanillaTilt.init(document.querySelectorAll("[data-tilt]"), { max: 15, speed: 400 }); }
-
-        function createNeonText(text) {
-            const container = document.getElementById('slogan-container');
-            if(!container) return;
-            const words = text.split(' ');
-            words.forEach(word => {
-                const wordSpan = document.createElement('span');
-                wordSpan.className = 'neon-word';
-                word.split('').forEach((char, index) => {
-                    const span = document.createElement('span');
-                    span.innerText = char;
-                    span.className = 'neon-letter';
-                    span.style.animationDelay = `${index * 0.15}s`;
-                    wordSpan.appendChild(span);
-                });
-                container.appendChild(wordSpan);
-            });
-        }
-
-        function launchWanderingRocket() {
-            const rocket = document.createElement('div');
-            rocket.className = 'wandering-rocket';
-            
-            rocket.innerHTML = `
-                <div class="rocket-container" style="transform: rotate(45deg);">
-                    <svg viewBox="0 0 512 512" style="width: 100%; height: 100%; overflow: visible;">
-                        <defs>
-                            <linearGradient id="bodyGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                                <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
-                                <stop offset="50%" style="stop-color:#f0f4f8;stop-opacity:1" />
-                                <stop offset="100%" style="stop-color:#d1d5db;stop-opacity:1" />
-                            </linearGradient>
-                            <linearGradient id="windowGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                                <stop offset="0%" style="stop-color:#38bdf8;stop-opacity:1" />
-                                <stop offset="100%" style="stop-color:#0284c7;stop-opacity:1" />
-                            </linearGradient>
-                            <linearGradient id="finsGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                                <stop offset="0%" style="stop-color:#7AB800;stop-opacity:1" />
-                                <stop offset="100%" style="stop-color:#005691;stop-opacity:1" />
-                            </linearGradient>
-                        </defs>
-                        <g transform="translate(256, 256)">
-                            <ellipse cx="0" cy="-20" rx="70" ry="140" fill="url(#bodyGradient)" />
-                            <path d="M-55 -100 Q0 -220 55 -100" fill="url(#finsGradient)" />
-                            <path d="M-60 40 Q-100 100 -60 110 L-40 80 Z" fill="url(#finsGradient)" />
-                            <path d="M60 40 Q100 100 60 110 L40 80 Z" fill="url(#finsGradient)" />
-                            <rect x="-35" y="100" width="70" height="20" fill="#94a3b8" />
-                            <circle cx="0" cy="-50" r="35" fill="#1e293b" />
-                            <circle cx="0" cy="-50" r="25" fill="url(#windowGradient)" />
-                            <circle cx="10" cy="-60" r="8" fill="white" opacity="0.4" />
-                        </g>
-                    </svg>
-                </div>
-            `;
-            document.body.appendChild(rocket);
-            
-            setInterval(() => {
-                const rect = rocket.getBoundingClientRect();
-                const smoke = document.createElement('div');
-                smoke.className = 'rocket-smoke-puff';
-                
-                const centerX = rect.left + rect.width/2;
-                const centerY = rect.top + rect.height/2;
-                
-                smoke.style.left = `${centerX}px`;
-                smoke.style.top = `${centerY}px`;
-                
-                document.body.appendChild(smoke);
-                setTimeout(() => smoke.remove(), 2500);
-            }, 200);
-
-            function flyToNextPoint() {
-                const margin = 80;
-                const startX = Math.random() * (window.innerWidth - margin*2) + margin;
-                const startY = Math.random() * (window.innerHeight - margin*2) + margin;
-                const endX = Math.random() * (window.innerWidth - margin*2) + margin;
-                const endY = Math.random() * (window.innerHeight - margin*2) + margin;
-
-                const deltaX = endX - startX;
-                const deltaY = endY - startY;
-                const angle = Math.atan2(deltaY, deltaX) * 180 / Math.PI + 90;
-
-                if (!rocket.style.left) {
-                    rocket.style.left = '50%';
-                    rocket.style.top = '50%';
-                }
-
-                const duration = Math.random() * 20 + 15; 
-                
-                rocket.style.transition = `left ${duration}s linear, top ${duration}s linear, transform 1.5s ease-in-out`; 
-                
-                requestAnimationFrame(() => {
-                    rocket.style.opacity = '0.9'; 
-                    rocket.style.transform = `rotate(${angle}deg)`;
-                    rocket.style.left = `${endX}px`;
-                    rocket.style.top = `${endY}px`;
-                });
-                
-                setTimeout(flyToNextPoint, duration * 1000);
-            }
-            setTimeout(flyToNextPoint, 100);
-        }
-
-        const serviceData = {
-            humano: { title: "EvoluSer HUMANO", icon: "fas fa-users", subtitle: "Gestión del Talento", leader: "Nury Echeverria", role: "Directora de Talento Humano", image: "imagen2.png", desc: "Creemos que el activo más valioso es la gente. Bajo una dirección experta, transformamos la cultura organizacional mediante estrategias integrales de bienestar, desarrollo de habilidades blandas y diagnósticos precisos que potencian el capital humano.", list: ["Reclutamiento y Selección", "Clima y Cultura", "Soft Skills y Liderazgo", "Evaluaciones de Desempeño"], iconClass: "metal-blue", animation: "animate-hug" },
-            seguro: { title: "EvoluSer S.S.O.", icon: "fas fa-shield-halved", subtitle: "Seguridad y Salud Ocupacional", leader: "Christian Ortega", role: "Director Técnico SST", image: "imagen3.png", desc: "La seguridad no es negociable. Lideramos un equipo técnico enfocado en blindar tus operaciones, asegurando el estricto cumplimiento normativo y protegiendo la integridad de cada colaborador en todos los niveles.", list: ["Sistemas de Gestión ISO 45001", "Auditorías de Riesgos", "Vigilancia de Salud", "Capacitación Técnica"], iconClass: "metal-gray", animation: "animate-shield" },
-            sostenible: { title: "EvoluSer SOSTENIBLE", icon: "fas fa-leaf", subtitle: "Medio Ambiente", leader: "Christian Ortega", role: "Director de Sostenibilidad", image: "imagen4.png", desc: "El futuro es verde. Integramos la visión ambiental directamente en tu estrategia de negocio, gestionando planes de manejo y certificaciones que no solo cumplen la ley, sino que te diferencian competitivamente en el mercado.", list: ["Planes de Manejo Ambiental", "Certificaciones Verdes", "Eficiencia Energética", "Cultura Ambiental Corporativa"], iconClass: "metal-green", animation: "animate-leaf" },
-            agro: { title: "EvoluSer AGRO", icon: "fas fa-tractor", subtitle: "Agroindustrial", leader: "Lilian Eras", role: "Directora Agroindustrial", image: "imagen5.png", desc: "Calidad desde el origen. Aportamos una vasta experiencia técnica para optimizar procesos agroindustriales, garantizando la inocuidad alimentaria y el cumplimiento riguroso de buenas prácticas desde el campo hasta la mesa, incluyendo la transformación del producto.", list: ["Buenas Prácticas Agrícolas (BPA)", "Inocuidad Alimentaria", "Industrialización de Producto", "Optimización de Procesos"], iconClass: "metal-amber", animation: "animate-tractor" },
-            equipo: { title: "Equipo Directivo", icon: "fas fa-pen-nib", subtitle: "EvoluSer Consultores", leader: "Junta Directiva", role: "Liderazgo Estratégico", image: "imagen7.jpeg", desc: "Nuestro equipo directivo encarna la misión de potenciar el ser y proteger la vida. Guiamos a la organización con una visión integral, asegurando que cada paso que damos genere valor real para nuestros clientes y la sociedad.", list: ["Dirección Estratégica", "Gestión de Calidad", "Innovación Corporativa", "Responsabilidad Social"], iconClass: "metal-blue" }
+        const contentData = {
+            filosofia_premium: {
+                title: "Filosofía EvoluSer",
+                image: "https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=800&q=80",
+                customHTML: `
+                    <div class="space-y-8">
+                        <div class="philosophy-block">
+                            <h4 class="text-brandGold font-extrabold uppercase text-[10px] tracking-[0.3em] mb-4 italic">Carta a nuestros Clientes</h4>
+                            <div class="text-gray-700 text-sm leading-relaxed text-justify space-y-4 font-bold border-l-4 border-gray-100 pl-4">
+                                <p><strong>Estimados Clientes,</strong></p>
+                                <p>Presentamos una nueva forma de entender el crecimiento empresarial. Entendemos que una empresa exitosa del siglo XXI debe ser <strong>Humana, Segura, Sostenible y Productiva.</strong></p>
+                                <p>En EvoluSer, no somos proveedores, somos sus aliados estratégicos. Nuestra razón de ser es acompañar su evolución técnica y humana para que el éxito sea el resultado natural de una organización sana y responsable.</p>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-10">
+                            <div class="border-l-4 border-brandBlueDark pl-6"><h4 class="text-brandBlueDark font-extrabold uppercase text-[10px] tracking-widest mb-3">Misión</h4><p class="text-gray-600 text-xs leading-relaxed font-bold">Brindar soluciones técnicas de consultoría con enfoque humano, transformando la cultura organizacional y asegurando el cumplimiento legal para potenciar a su gente.</p></div>
+                            <div class="border-l-4 border-brandGreen pl-6"><h4 class="text-brandGreen font-extrabold uppercase text-[10px] tracking-widest mb-3">Visión</h4><p class="text-gray-600 text-xs leading-relaxed font-bold">Ser el referente de excelencia en consultoría integral en la región, demostrando que el bienestar humano es el motor inamovible de la rentabilidad sostenible.</p></div>
+                        </div>
+                    </div>
+                `
+            },
+            humano: { title: "Gestión de Talento", image: "https://raw.githubusercontent.com/direccioncomercial/evoluser-web/1b862973e8003850daadd6a47bffd5b6cf04b2f6/imagen2.png", leader: "Nury Echeverria", role: "Directora de Talento", desc: "Potenciamos el capital humano con diagnósticos precisos.", list: ["Reclutamiento Senior", "Cultura de Éxito", "Evaluación 360°"] },
+            seguro: { title: "Seguridad Industrial", image: "https://raw.githubusercontent.com/direccioncomercial/evoluser-web/1b862973e8003850daadd6a47bffd5b6cf04b2f6/imagen3.png", leader: "Christian Ortega", role: "Director Técnico", desc: "Garantizamos el cumplimiento normativo integral.", list: ["ISO 45001", "Vigilancia Médica", "Riesgos Técnicos"] },
+            agro: { title: "Agroindustria", image: "https://raw.githubusercontent.com/direccioncomercial/evoluser-web/1b862973e8003850daadd6a47bffd5b6cf04b2f6/imagen5.png", leader: "Lilian Eras", role: "Directora Agro", desc: "Optimizamos la cadena de valor alimentaria.", list: ["Certificación BPA", "HACCP", "Diseño Industrial"] },
+            sostenible: { title: "Gestión Ambiental", image: "https://raw.githubusercontent.com/direccioncomercial/evoluser-web/1b862973e8003850daadd6a47bffd5b6cf04b2f6/imagen3.png", leader: "Christian Ortega", role: "Director Sostenibilidad", desc: "Convertimos la responsabilidad ambiental en rentabilidad real.", list: ["Licencias Verdes", "Huella de Carbono", "Manejo de Desechos"] },
+            empresas_info: { title: "Consultoría 360°", image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80", desc: "Soluciones corporativas de alto impacto estratégico.", list: ["Outsourcing RRHH", "Auditorías ISO", "Plan Estratégico"] },
+            emprendedores_info: { title: "Pack Startup", image: "https://raw.githubusercontent.com/direccioncomercial/evoluser-web/1b862973e8003850daadd6a47bffd5b6cf04b2f6/imagen6.png", desc: "Formalización ágil de tu idea de negocio en tiempo récord.", list: ["Constitución Empresa", "Permisos ARCSA", "Imagen Inicial"] },
+            equipo: { title: "Directorio", image: "https://raw.githubusercontent.com/direccioncomercial/evoluser-web/1b862973e8003850daadd6a47bffd5b6cf04b2f6/imagen7.jpeg", desc: "Liderazgo multidisciplinario comprometido con la excelencia.", list: ["Dirección Estratégica", "Calidad", "Innovación"] }
         };
 
         function openModal(type) {
-            const data = serviceData[type];
-            if(!data) return;
-            
-            const imgEl = document.getElementById('modal-image');
-            const imgContainer = imgEl.parentElement; // El contenedor div
-
-            imgEl.src = data.image; 
-            imgEl.onerror = function() { this.src = 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80'; };
-            
-            // --- CORRECCIÓN DE ENCUADRE ---
-            // Si es la foto de equipo, usamos 'contain' para verla entera.
-            // Si son servicios, usamos 'cover' para que sea inmersiva.
-            if (type === 'equipo') {
-                imgEl.classList.remove('object-cover');
-                imgEl.classList.add('object-contain');
-                imgContainer.classList.remove('bg-gray-100');
-                imgContainer.classList.add('bg-gray-900'); // Fondo oscuro profesional
-            } else {
-                imgEl.classList.add('object-cover');
-                imgEl.classList.remove('object-contain');
-                imgContainer.classList.add('bg-gray-100');
-                imgContainer.classList.remove('bg-gray-900');
+            const data = contentData[type]; if(!data) return;
+            const img = document.getElementById('modal-image'); img.src = data.image;
+            if (['equipo', 'emprendedores_info', 'humano', 'seguro', 'sostenible', 'agro'].includes(type)) { img.classList.replace('object-cover', 'object-contain'); }
+            else { img.classList.add('object-cover'); img.classList.remove('object-contain'); }
+            let html = `<h3 class="text-3xl font-extrabold text-brandBlue mb-4 uppercase tracking-tighter text-nowrap">${data.title}</h3>`;
+            if(data.customHTML) { html += data.customHTML; } else {
+                if(data.leader) html += `<div class="mb-6 p-4 bg-gray-50 border-l-4 border-brandGold font-bold text-sm text-nowrap"><span class="text-gray-800">${data.leader}</span> | <span class="text-brandBlue">${data.role}</span></div>`;
+                html += `<p class="text-gray-600 mb-8 leading-relaxed font-bold text-justify text-sm">${data.desc}</p>`;
+                if(data.list) { html += `<ul class="space-y-4">`; data.list.forEach(item => html += `<li class="flex items-center text-xs font-extrabold text-gray-700 uppercase tracking-tighter"><i class="fas fa-check-circle text-brandGreen mr-3 text-lg"></i>${item}</li>`); html += `</ul>`; }
+                html += `<div class="mt-10"><a href="https://wa.me/593983900050" target="_blank" class="inline-block bg-brandGold text-white px-10 py-4 rounded-full font-extrabold shadow-gold transition w-full text-center uppercase tracking-widest text-xs">Agendar Consulta</a></div>`;
             }
+            document.getElementById('modal-content').innerHTML = html;
+            document.getElementById('service-modal').classList.remove('hidden'); document.getElementById('service-modal').classList.add('flex');
+        }
+        function closeModal() { document.getElementById('service-modal').classList.add('hidden'); }
+        function toggleChat() { const win = document.getElementById('ai-chat-window'); if(win.classList.contains('hidden')) { win.classList.remove('hidden'); setTimeout(()=>win.classList.remove('scale-0'),10); } else { win.classList.add('scale-0'); setTimeout(()=>win.classList.add('hidden'),300); } }
+        async function handleChat() { 
+            const input = document.getElementById('chat-input'); const text = input.value; if(!text) return;
+            const chatBox = document.getElementById('chat-box'); chatBox.innerHTML += `<li class="flex justify-end"><div class="bg-brandBlue text-white p-3 rounded-2xl rounded-tr-none text-sm font-bold">${text}</div></li>`;
+            input.value = ''; chatBox.scrollTop = chatBox.scrollHeight;
+            setTimeout(() => { chatBox.innerHTML += `<li class="flex justify-start"><div class="bg-white text-gray-700 p-4 rounded-2xl rounded-tl-none shadow-md text-sm border border-gray-100 italic font-medium leading-relaxed font-bold">"Soy Ev. Mi consejo hoy: la inversión en talento y seguridad es el único camino real hacia la rentabilidad infinita. ¿Deseas que agendemos con un director?"</div></li>`; chatBox.scrollTop = chatBox.scrollHeight; }, 1000);
+        }
 
-            // Icono Metálico en Modal
-            document.getElementById('modal-title').innerHTML = `<i class="${data.icon} text-5xl mr-4 metal-icon ${data.iconClass} drop-shadow-md"></i>${data.title}`;
-            
-            document.getElementById('modal-subtitle').innerText = data.subtitle; 
-            document.getElementById('modal-leader').innerText = data.leader; 
-            document.getElementById('modal-role').innerText = data.role; 
-            document.getElementById('modal-desc').innerText = data.desc;
-            
-            const listEl = document.getElementById('modal-list');
-            listEl.innerHTML = '';
-            const colorClass = type === 'humano' ? 'text-brandBlue' : type === 'seguro' ? 'text-gray-600' : type === 'sostenible' ? 'text-brandGreen' : 'text-brandAmber';
-            data.list.forEach(item => {
-                listEl.innerHTML += `<li class="flex items-center"><i class="fas fa-check-circle mr-2 ${colorClass}"></i> ${item}</li>`;
+        // --- Lógica del Carrusel (Añadida) ---
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.carousel-slide');
+        const totalSlides = slides.length;
+
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.classList.remove('active');
+                if (i === index) {
+                    slide.classList.add('active');
+                }
             });
-
-            const modal = document.getElementById('service-modal');
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
         }
 
-        function closeModal() {
-            const modal = document.getElementById('service-modal');
-            modal.classList.add('hidden');
-            modal.classList.remove('flex');
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            showSlide(currentSlide);
         }
 
-        function toggleChat() {
-            const chatWindow = document.getElementById('ai-chat-window');
-            const avatarBubble = document.getElementById('avatar-bubble');
-            if (chatWindow.classList.contains('hidden')) {
-                chatWindow.classList.remove('hidden');
-                setTimeout(() => chatWindow.classList.remove('scale-0'), 10);
-                avatarBubble.classList.add('opacity-0');
-            } else {
-                chatWindow.classList.add('scale-0');
-                setTimeout(() => chatWindow.classList.add('hidden'), 300);
-                avatarBubble.classList.remove('opacity-0');
-            }
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            showSlide(currentSlide);
         }
 
-        function startDrag(e) {
-            const avatarContainer = document.getElementById('avatar-container');
-            if (e.target.closest('#avatar-bubble')) return;
-            const clientX = e.type === 'mousedown' ? e.clientX : e.touches[0].clientX;
-            const clientY = e.type === 'mousedown' ? e.clientY : e.touches[0].clientY;
-            startX = clientX; startY = clientY;
-            isDragging = false; hasMoved = false;
-            document.addEventListener('mousemove', onDrag);
-            document.addEventListener('mouseup', endDrag);
-            document.addEventListener('touchmove', onDrag, {passive: false});
-            document.addEventListener('touchend', endDrag);
-        }
-
-        function onDrag(e) {
-            const avatarContainer = document.getElementById('avatar-container');
-            const clientX = e.type === 'mousemove' ? e.clientX : e.touches[0].clientX;
-            const clientY = e.type === 'mousemove' ? e.clientY : e.touches[0].clientY;
-            if (Math.abs(clientX - startX) > 10 || Math.abs(clientY - startY) > 10) {
-                isDragging = true; hasMoved = true;
-                e.preventDefault();
-                const rect = avatarContainer.getBoundingClientRect();
-                avatarContainer.style.left = (rect.left + (clientX - startX)) + 'px';
-                avatarContainer.style.top = (rect.top + (clientY - startY)) + 'px';
-                startX = clientX; startY = clientY;
-                avatarContainer.classList.remove('bottom-6', 'right-6');
-            }
-        }
-
-        function endDrag(e) {
-            document.removeEventListener('mousemove', onDrag);
-            document.removeEventListener('mouseup', endDrag);
-            document.removeEventListener('touchmove', onDrag);
-            document.removeEventListener('touchend', endDrag);
-            if (!hasMoved && !e.target.closest('#avatar-bubble')) {
-                 toggleChat();
-            }
-        }
+        // Auto-play opcional (comenta esta línea si prefieres solo manual)
+        setInterval(nextSlide, 6000);
     </script>
 </body>
 </html>
