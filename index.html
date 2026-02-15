@@ -668,7 +668,10 @@
     <div id="service-modal" class="fixed inset-0 z-[100] hidden items-center justify-center bg-brandBlue/90 backdrop-blur-md p-4">
         <div class="bg-white rounded-2xl shadow-2xl max-w-5xl w-full max-h-[90vh] overflow-y-auto relative animate-pop-in flex flex-col md:flex-row overflow-hidden">
             <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-400 hover:text-brandBlue z-20 bg-white/80 rounded-full p-2 transition"><i class="fas fa-times text-2xl"></i></button>
-            <div class="w-full md:w-2/5 h-64 md:h-auto bg-gray-50 relative flex items-center justify-center border-r border-gray-100"><img id="modal-image" src="" class="w-full h-full object-cover object-top"></div>
+            <!-- CONTENEDOR IZQUIERDO CON ID PARA MANIPULACIÓN -->
+            <div id="modal-left-container" class="w-full md:w-2/5 h-64 md:h-auto bg-gray-50 relative flex items-center justify-center border-r border-gray-100 overflow-hidden">
+                <img id="modal-image" src="" class="w-full h-full object-cover object-top">
+            </div>
             <div class="w-full md:w-3/5 p-10 md:p-14 flex flex-col justify-center"><div id="modal-content" class="scrollbar-hide overflow-y-auto max-h-[60vh]"></div><button onclick="closeModal()" class="mt-10 w-full bg-gray-100 hover:bg-brandBlue hover:text-white text-gray-500 font-extrabold py-4 rounded-xl transition uppercase text-xs tracking-[0.2em]">Cerrar</button></div>
         </div>
     </div>
@@ -741,9 +744,28 @@
 
         function openModal(type) {
             const data = contentData[type]; if(!data) return;
-            const img = document.getElementById('modal-image'); img.src = data.image;
-            if (['equipo', 'emprendedores_info', 'humano', 'seguro', 'sostenible', 'agro'].includes(type)) { img.classList.replace('object-cover', 'object-contain'); }
-            else { img.classList.add('object-cover'); img.classList.remove('object-contain'); }
+            const container = document.getElementById('modal-left-container');
+            
+            // Lógica Especial para Filosofía (Logo Vertical + Fondo Transparente)
+            if (type === 'filosofia_premium') {
+                container.innerHTML = `
+                    <div class="absolute inset-0 bg-cover bg-center opacity-20" style="background-image: url('${data.image}');"></div>
+                    <div class="relative z-10 flex items-center justify-center h-full w-full">
+                        <img src="https://raw.githubusercontent.com/direccioncomercial/evoluser-web/1b862973e8003850daadd6a47bffd5b6cf04b2f6/logo.png" 
+                             alt="EvoluSer Vertical" 
+                             class="h-4/5 w-auto object-contain transform -rotate-90 filter drop-shadow-xl"
+                             style="max-width: 80%;">
+                    </div>
+                `;
+            } else {
+                // Lógica Estándar para el resto
+                let imgClass = "w-full h-full object-cover object-top";
+                if (['equipo', 'emprendedores_info', 'humano', 'seguro', 'sostenible', 'agro'].includes(type)) { 
+                    imgClass = "w-full h-full object-contain bg-gray-50"; 
+                }
+                container.innerHTML = `<img id="modal-image" src="${data.image}" class="${imgClass}">`;
+            }
+
             let html = `<h3 class="text-3xl font-extrabold text-brandBlue mb-4 uppercase tracking-tighter text-nowrap">${data.title}</h3>`;
             if(data.customHTML) { html += data.customHTML; } else {
                 if(data.leader) html += `<div class="mb-6 p-4 bg-gray-50 border-l-4 border-brandGreen font-bold text-sm text-nowrap"><span class="text-gray-800">${data.leader}</span> | <span class="text-brandBlue">${data.role}</span></div>`;
