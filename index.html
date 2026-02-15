@@ -7,87 +7,171 @@
     <meta name="theme-color" content="#ffffff">
     
     <!-- Librerías -->
-    <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&family=Mulish:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    
+    <!-- Cargar Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
 
+    <!-- Configuración de Tailwind con control de carga seguro -->
     <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        brandBlue: '#005691', 
-                        brandBlueDark: '#003d66',
-                        brandGreen: '#7AB800',
-                        brandGold: '#D4AF37', 
-                        brandGoldDark: '#B8860B',
-                        brandGray: '#F2F2F2',
-                        brandText: '#333333',
-                    },
-                    fontFamily: {
-                        sans: ['Mulish', 'sans-serif'],
-                        heading: ['Montserrat', 'sans-serif'],
-                    },
-                    boxShadow: {
-                        'card': '0 4px 20px rgba(0,0,0,0.06)',
-                        'gold': '0 10px 30px rgba(212, 175, 55, 0.25)',
-                        'hover': '0 15px 35px rgba(0,86,145,0.12)'
-                    },
-                    animation: {
-                        'pop-in': 'popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards',
-                        'slide-up-fade': 'slideUpFade 1s cubic-bezier(0.16, 1, 0.3, 1) forwards',
-                    },
-                    keyframes: {
-                        popIn: { '0%': { opacity: 0, transform: 'scale(0.98)' }, '100%': { opacity: 1, transform: 'scale(1)' } },
-                        slideUpFade: { '0%': { opacity: 0, transform: 'translateY(40px)' }, '100%': { opacity: 1, transform: 'translateY(0)' } },
+        const setupTailwind = () => {
+            tailwind.config = {
+                theme: {
+                    extend: {
+                        colors: {
+                            // PALETA EXACTA DEL LOGO EVOLUSER (Extraída de la imagen)
+                            brandBlue: '#13293D',      // Azul Marino Profundo ("Evolu")
+                            brandGreen: '#3E8E8E',     // Turquesa Petróleo ("Ser" e Isotipo)
+                            
+                            brandGray: '#F7F9FC',
+                            brandText: '#1F2937',
+                        },
+                        fontFamily: {
+                            sans: ['Mulish', 'sans-serif'],
+                            heading: ['Montserrat', 'sans-serif'],
+                        },
+                        boxShadow: {
+                            'card': '0 4px 20px rgba(0,0,0,0.06)',
+                            'brand': '0 10px 40px rgba(62, 142, 142, 0.25)', 
+                            'neon-light': '0 0 15px rgba(62, 142, 142, 0.5), 0 0 30px rgba(255, 255, 255, 0.4)',
+                            'hover': '0 20px 40px rgba(19, 41, 61, 0.12)'
+                        },
+                        animation: {
+                            'pop-in': 'popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards',
+                            'slide-up-fade': 'slideUpFade 1s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+                            'float': 'float 6s ease-in-out infinite',
+                            'glow-latency': 'glowLatency 4s infinite ease-in-out',
+                        },
+                        keyframes: {
+                            popIn: { '0%': { opacity: 0, transform: 'scale(0.98)' }, '100%': { opacity: 1, transform: 'scale(1)' } },
+                            slideUpFade: { '0%': { opacity: 0, transform: 'translateY(40px)' }, '100%': { opacity: 1, transform: 'translateY(0)' } },
+                            float: { 
+                                '0%': { transform: 'translateY(0px)' }, 
+                                '50%': { transform: 'translateY(-10px)' }, 
+                                '100%': { transform: 'translateY(0px)' } 
+                            },
+                            glowLatency: { 
+                                '0%, 100%': { 
+                                    filter: 'drop-shadow(0 0 5px rgba(62, 142, 142, 0.4))', 
+                                    transform: 'scale(1)' 
+                                }, 
+                                '50%': { 
+                                    filter: 'drop-shadow(0 0 20px rgba(62, 142, 142, 0.7))', 
+                                    transform: 'scale(1.03)' 
+                                } 
+                            }
+                        }
                     }
                 }
             }
+        };
+
+        if (typeof tailwind === 'undefined') {
+            document.querySelector('script[src*="tailwindcss"]').onload = setupTailwind;
+        } else {
+            setupTailwind();
         }
     </script>
+
     <style>
+        /* Ocultar cursor por defecto */
+        body, a, button, input, textarea, select { cursor: none !important; }
         body { background-color: #ffffff; color: #333; scroll-behavior: smooth; }
+
+        /* CURSOR 3D HOJA EVOLUSER - DISEÑO EXACTO */
+        #custom-cursor {
+            position: fixed;
+            top: 0; left: 0;
+            width: 40px; /* Tamaño ideal */
+            height: 40px;
+            pointer-events: none;
+            z-index: 10000;
+            /* HOTSPOT: Punta superior centrada */
+            transform: translate(-50%, -5px); 
+            transition: transform 0.1s ease-out, filter 0.2s ease;
+            filter: drop-shadow(0 4px 6px rgba(19, 41, 61, 0.3));
+            
+            /* SVG DISEÑADO DESDE CERO SEGÚN TU IMAGEN */
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 120'%3E%3Cdefs%3E%3ClinearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%233E8E8E;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%2313293D;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3C!-- Tallo (Peciolo) en la base --%3E%3Cpath d='M50,95 Q50,110 45,115' stroke='%2313293D' stroke-width='3' fill='none' stroke-linecap='round' /%3E%3C!-- Hoja (Limbo) - Forma ovalada puntiaguda --%3E%3Cpath d='M50,0 Q90,40 50,95 Q10,40 50,0 Z' fill='url(%23grad)' /%3E%3C!-- Nervio Central (Blanco fino) --%3E%3Cpath d='M50,0 L50,95' stroke='rgba(255,255,255,0.7)' stroke-width='1.5' /%3E%3C!-- Nervaduras Secundarias (Simétricas y blancas) --%3E%3Cg stroke='rgba(255,255,255,0.4)' stroke-width='1'%3E%3Cpath d='M50,20 L80,35' /%3E%3Cpath d='M50,20 L20,35' /%3E%3Cpath d='M50,45 L85,60' /%3E%3Cpath d='M50,45 L15,60' /%3E%3Cpath d='M50,70 L75,80' /%3E%3Cpath d='M50,70 L25,80' /%3E%3C/g%3E%3C/svg%3E");
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
+
+        /* Estado Hover: La hoja crece un poco para indicar acción */
+        #custom-cursor.hovering {
+            transform: translate(-50%, -5px) scale(1.2);
+            filter: drop-shadow(0 0 10px rgba(62, 142, 142, 0.8)); /* Glow Turquesa */
+        }
+
         
         /* Navegación */
         .nav-link { position: relative; color: #555; font-weight: 700; transition: color 0.3s; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px; }
-        .nav-link:hover { color: #005691; }
-        .nav-link.active { color: #D4AF37; }
-        .nav-link.active::after { content: ''; position: absolute; bottom: -28px; left: 0; width: 100%; height: 4px; background: linear-gradient(90deg, #D4AF37, #B8860B); border-radius: 2px; }
+        .nav-link:hover { color: #3E8E8E; }
+        .nav-link.active { color: #13293D; } 
+        .nav-link.active::after { content: ''; position: absolute; bottom: -28px; left: 0; width: 100%; height: 4px; background: linear-gradient(90deg, #3E8E8E, #13293D); border-radius: 2px; }
         
         /* IMPACT CARDS */
         .impact-card { position: relative; overflow: hidden; border-radius: 12px; background: #000; height: 100%; min-height: 280px; }
         .impact-card img { width: 100%; height: 100%; object-fit: cover; opacity: 0.7; transition: transform 0.8s ease; }
         .impact-card:hover img { transform: scale(1.08); opacity: 0.85; }
-        .impact-content { position: absolute; inset: 0; padding: 2.5rem; display: flex; flex-direction: column; justify-content: flex-end; background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, transparent 65%); z-index: 10; }
+        .impact-content { position: absolute; inset: 0; padding: 2.5rem; display: flex; flex-direction: column; justify-content: flex-end; background: linear-gradient(to top, rgba(19, 41, 61, 0.95) 0%, transparent 70%); z-index: 10; }
         
-        .btn-gold-gradient {
-            background: linear-gradient(135deg, #D4AF37 0%, #B8860B 100%);
+        /* Botones Principales - Degradado Marca */
+        .btn-brand-gradient {
+            background: linear-gradient(135deg, #13293D 0%, #3E8E8E 100%);
             color: white; padding: 0.75rem 1.5rem; border-radius: 999px; 
             font-weight: 800; font-size: 0.75rem; text-transform: uppercase;
             letter-spacing: 1px; display: inline-block; transition: all 0.3s ease; 
-            box-shadow: 0 4px 15px rgba(184, 134, 11, 0.3);
+            box-shadow: 0 4px 15px rgba(19, 41, 61, 0.2);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .btn-brand-gradient:hover {
+            box-shadow: 0 0 20px rgba(62, 142, 142, 0.5); /* Glow Turquesa */
+            transform: translateY(-2px);
+            background: linear-gradient(135deg, #1A3650 0%, #4CA3A3 100%);
+        }
+
+        /* Botón "Más información" */
+        .more-info-brand {
+            border: 1px solid white; color: white; padding: 0.5rem 1.2rem; 
+            border-radius: 999px; font-weight: 700; text-transform: uppercase; 
+            font-size: 0.75rem; letter-spacing: 1px; display: inline-block; 
+            transition: all 0.3s; margin-top: 1rem; backdrop-filter: blur(5px);
+        }
+        .more-info-brand:hover { 
+            background: #3E8E8E; 
+            border-color: #3E8E8E; 
+            color: white; 
+            box-shadow: 0 0 15px rgba(255,255,255,0.4);
         }
 
         /* Listas Mapfre */
-        .mapfre-list-card { background: #FDFDFD; padding: 2.5rem 2rem; border-radius: 12px; transition: all 0.3s ease; border: 1px solid #f0f0f0; height: 100%; display: flex; flex-direction: column; justify-content: space-between; }
-        .mapfre-list-card:hover { background: white; box-shadow: 0 25px 50px rgba(0,0,0,0.06); transform: translateY(-5px); border-color: #D4AF37; }
+        .mapfre-list-card { background: #FFFFFF; padding: 2.5rem 2rem; border-radius: 12px; transition: all 0.3s ease; border: 1px solid #f0f0f0; height: 100%; display: flex; flex-direction: column; justify-content: space-between; }
+        .mapfre-list-card:hover { background: white; box-shadow: 0 25px 50px rgba(62, 142, 142, 0.15); transform: translateY(-5px); border-color: #3E8E8E; }
         .check-list li { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 12px; font-size: 0.9rem; color: #444; }
-        .check-list i { color: #7AB800; margin-top: 4px; }
+        .check-list i { color: #3E8E8E; margin-top: 4px; }
         
-        .link-elegant { color: #D4AF37; font-weight: 800; font-size: 0.85rem; display: inline-flex; align-items: center; gap: 6px; margin-top: 1.5rem; transition: all 0.3s; cursor: pointer; text-transform: uppercase; }
+        .link-elegant { color: #13293D; font-weight: 800; font-size: 0.85rem; display: inline-flex; align-items: center; gap: 6px; margin-top: 1.5rem; transition: all 0.3s; cursor: pointer; text-transform: uppercase; }
+        .link-elegant:hover { color: #3E8E8E; }
 
         /* Slogan mejorado */
         .premium-quote {
-            background: linear-gradient(135deg, #005691 0%, #003d66 100%);
+            background: linear-gradient(135deg, #13293D 0%, #0B1A26 100%);
             padding: 4rem 2rem; border-radius: 24px; position: relative; overflow: hidden;
-            border: 2px solid #D4AF37;
+            border: 1px solid rgba(62, 142, 142, 0.3);
+            box-shadow: 0 10px 40px rgba(19, 41, 61, 0.4);
+        }
+        .premium-quote::before {
+            content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+            background: radial-gradient(circle, rgba(62, 142, 142, 0.1) 0%, transparent 60%);
+            pointer-events: none;
         }
 
         /* Redes Sociales Hover Colors */
         .social-icon { transition: all 0.3s ease; display: inline-flex; align-items: center; justify-content: center; }
-        .social-icon:hover { transform: translateY(-3px); }
-
-        /* Actualización: Selectores específicos para forzar color en el icono (i) incluso en el footer */
+        .social-icon:hover { transform: translateY(-3px); text-shadow: 0 0 10px rgba(255,255,255,0.8); }
+        
         .hover-linkedin:hover, .hover-linkedin:hover i { color: #0077b5 !important; }
         .hover-facebook:hover, .hover-facebook:hover i { color: #1877f2 !important; }
         .hover-instagram:hover, .hover-instagram:hover i { color: #E4405F !important; }
@@ -97,60 +181,27 @@
 
         /* Home Cards */
         .image-card { border-radius: 20px; overflow: hidden; background: white; transition: all 0.4s ease; border: 1px solid #f3f3f3; height: 100%; display: flex; flex-direction: column; position: relative; }
-        .image-card:hover { transform: translateY(-10px); box-shadow: 0 30px 60px rgba(0,86,145,0.12); }
-        .card-tag { position: absolute; top: 1.2rem; left: 1.2rem; padding: 0.4rem 1rem; border-radius: 999px; font-size: 0.65rem; font-weight: 800; text-transform: uppercase; color: white; z-index: 10; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
+        .image-card:hover { transform: translateY(-10px); box-shadow: 0 30px 60px rgba(62, 142, 142, 0.15); border-color: rgba(62, 142, 142, 0.2); }
+        .card-tag { position: absolute; top: 1.2rem; left: 1.2rem; padding: 0.4rem 1rem; border-radius: 999px; font-size: 0.65rem; font-weight: 800; text-transform: uppercase; color: white; z-index: 10; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
 
         /* Validación */
         .validation-card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.05); transition: all 0.3s ease; height: 100%; display: flex; flex-direction: column; }
-        .validation-card:hover { transform: translateY(-5px); box-shadow: 0 15px 35px rgba(0,0,0,0.1); }
+        .validation-card:hover { transform: translateY(-5px); box-shadow: 0 15px 35px rgba(62, 142, 142, 0.15); border-bottom: 4px solid #3E8E8E; }
         .validation-card img { transition: transform 0.5s ease; width: 100%; height: 200px; object-fit: cover; }
 
-        .philosophy-block { border-left: 4px solid #D4AF37; padding-left: 1.5rem; margin-bottom: 2.5rem; transition: transform 0.3s; }
-        .ov-login-container { background-color: white; border-radius: 12px; box-shadow: 0 20px 50px rgba(0,0,0,0.1); max-width: 500px; width: 100%; overflow: hidden; border: 1px solid #eee; }
+        .philosophy-block { border-left: 4px solid #3E8E8E; padding-left: 1.5rem; margin-bottom: 2.5rem; transition: transform 0.3s; }
+        .ov-login-container { background-color: white; border-radius: 12px; box-shadow: 0 20px 50px rgba(19, 41, 61, 0.1); max-width: 500px; width: 100%; overflow: hidden; border: 1px solid #eee; }
         .fade-in { animation: fadeIn 0.6s ease-out forwards; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
         .scrollbar-hide::-webkit-scrollbar { display: none; }
 
-        /* --------------------------------------------------------------
-           ANIMACIONES PERSONALIZADAS EV (Solicitud Ingenio)
-           -------------------------------------------------------------- */
-        .animate-float { 
-            animation: float 6s ease-in-out infinite; 
-        }
-        
-        .animate-glow-latency { 
-            animation: glowLatency 4s infinite ease-in-out; 
-        }
-        
-        @keyframes float { 
-            0% { transform: translateY(0px); } 
-            50% { transform: translateY(-10px); } 
-            100% { transform: translateY(0px); } 
-        }
-        
-        @keyframes glowLatency { 
-            0%, 100% { 
-                filter: drop-shadow(0 0 5px rgba(212, 175, 55, 0.3)); 
-                transform: scale(1); 
-            } 
-            50% { 
-                filter: drop-shadow(0 0 25px rgba(212, 175, 55, 0.8)); 
-                transform: scale(1.03); 
-            } 
-        }
-
-        /* --------------------------------------------------------------
-           ESTILOS DEL CARRUSEL DE CRISTAL 3D
-           -------------------------------------------------------------- */
+        /* Carrusel 3D Arrow */
         .glass-3d-arrow {
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 
-                0 8px 32px 0 rgba(31, 38, 135, 0.2), 
-                inset 0 0 0 1px rgba(255, 255, 255, 0.1),
-                inset 0 2px 10px rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
             width: 60px; height: 60px;
             border-radius: 50%;
             display: flex; align-items: center; justify-content: center;
@@ -160,38 +211,39 @@
             color: white;
         }
         .glass-3d-arrow:hover {
-            background: rgba(255, 255, 255, 0.15);
+            background: rgba(62, 142, 142, 0.2); 
             transform: translateY(-50%) scale(1.15) perspective(500px) translateZ(10px);
-            box-shadow: 
-                0 15px 35px rgba(0, 0, 0, 0.3), 
-                0 0 20px rgba(212, 175, 55, 0.3);
-            border-color: rgba(212, 175, 55, 0.6);
-            color: #D4AF37;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3), 0 0 20px rgba(255, 255, 255, 0.5), 0 0 10px rgba(62, 142, 142, 0.5);
+            border-color: rgba(255, 255, 255, 0.9);
+            color: white;
         }
         .glass-3d-arrow:active { transform: translateY(-50%) scale(0.95); }
         
-        .carousel-slide {
-            position: absolute; inset: 0; opacity: 0; transition: opacity 1s ease-in-out;
-            background-size: cover; background-position: center;
-        }
+        .carousel-slide { position: absolute; inset: 0; opacity: 0; transition: opacity 1s ease-in-out; background-size: cover; background-position: center; }
         .carousel-slide.active { opacity: 1; z-index: 10; }
         
-        .carousel-text-content {
-            opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; transition-delay: 0.3s;
-        }
-        .carousel-slide.active .carousel-text-content {
-            opacity: 1; transform: translateY(0);
+        .carousel-text-content { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; transition-delay: 0.3s; }
+        .carousel-slide.active .carousel-text-content { opacity: 1; transform: translateY(0); }
+
+        @keyframes spinLetters {
+            0%, 85% { transform: rotateY(0deg); color: inherit; text-shadow: none; }
+            92% { transform: rotateY(180deg); color: #3E8E8E; text-shadow: 0 0 15px rgba(255, 255, 255, 0.9); }
+            100% { transform: rotateY(360deg); color: inherit; text-shadow: none; }
         }
     </style>
 </head>
 <body class="flex flex-col min-h-screen font-sans">
+    <!-- ELEMENTO DEL CURSOR 3D -->
+    <div id="custom-cursor"></div>
 
     <!-- TOP BAR -->
-    <div class="bg-brandBlueDark py-2 hidden md:block border-b border-white/10">
-        <div class="container mx-auto px-6 flex justify-between items-center text-[10px] font-extrabold text-white/70 uppercase tracking-widest">
+    <div class="bg-brandBlue py-2 hidden md:block border-b border-white/10 shadow-lg relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent pointer-events-none"></div>
+        <div class="container mx-auto px-6 flex justify-between items-center text-[10px] font-extrabold text-white uppercase tracking-widest relative z-10">
             <div class="flex gap-6">
-                <a href="https://wa.me/593983900050" target="_blank" class="hover:text-brandGold transition flex items-center gap-2"><i class="fas fa-phone-alt text-brandGold"></i> +593 98 390 0050</a>
-                <a href="mailto:evoluserec@gmail.com" class="hover:text-brandGold transition flex items-center gap-2 lowercase"><i class="fas fa-envelope text-brandGold text-[10px]"></i> evoluserec@gmail.com</a>
+                <!-- Número de Llamadas -->
+                <a href="tel:+593987003357" class="hover:text-brandGreen transition flex items-center gap-2 hover:drop-shadow-[0_0_5px_rgba(255,255,255,0.8)]"><i class="fas fa-phone-alt"></i> +593 98 700 3357</a>
+                <a href="mailto:evoluserec@gmail.com" class="hover:text-brandGreen transition flex items-center gap-2 lowercase hover:drop-shadow-[0_0_5px_rgba(255,255,255,0.8)]"><i class="fas fa-envelope text-[10px]"></i> evoluserec@gmail.com</a>
                 <div class="flex gap-4 border-l border-white/20 pl-6 ml-2">
                     <a href="#" class="social-icon hover-linkedin transition"><i class="fab fa-linkedin-in"></i></a>
                     <a href="#" class="social-icon hover-facebook transition"><i class="fab fa-facebook-f"></i></a>
@@ -202,8 +254,12 @@
                 </div>
             </div>
             <div class="flex gap-6 items-center">
-                <span class="text-brandGold italic lowercase font-normal tracking-normal">Potenciamos el Ser, Protegemos la Vida</span>
-                <button onclick="setSegment('oficina')" class="hover:text-brandGold transition flex items-center gap-2 border-l border-white/20 pl-6">Oficina Virtual <i class="fas fa-chevron-right text-[8px]"></i></button>
+                <!-- BANDERA DE ECUADOR AGREGADA -->
+                <div class="flex items-center gap-2 drop-shadow-md">
+                    <span class="text-white/90 italic lowercase font-normal tracking-normal">Potenciamos el Ser, Protegemos la Vida</span>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/e/e8/Flag_of_Ecuador.svg" alt="Ecuador" class="h-3 w-auto shadow-sm rounded-sm">
+                </div>
+                <button onclick="setSegment('oficina')" class="hover:text-brandGreen transition flex items-center gap-2 border-l border-white/20 pl-6 hover:drop-shadow-[0_0_5px_rgba(255,255,255,0.8)]">Oficina Virtual <i class="fas fa-chevron-right text-[8px]"></i></button>
             </div>
         </div>
     </div>
@@ -212,7 +268,10 @@
     <header class="bg-white sticky top-0 z-50 border-b border-gray-100 shadow-sm">
         <div class="container mx-auto px-4 h-24 flex items-center justify-between">
             <div class="flex items-center gap-3 cursor-pointer" onclick="window.location.reload()">
-                <img src="https://raw.githubusercontent.com/direccioncomercial/evoluser-web/1b862973e8003850daadd6a47bffd5b6cf04b2f6/logo.png" alt="EvoluSer" class="h-14 w-auto object-contain">
+                <!-- LOGO -->
+                <img src="https://raw.githubusercontent.com/direccioncomercial/evoluser-web/1b862973e8003850daadd6a47bffd5b6cf04b2f6/logo.png" 
+                     alt="EvoluSer" 
+                     class="h-20 w-auto object-contain drop-shadow-md transition-all duration-500 hover:scale-105 hover:drop-shadow-xl filter">
             </div>
             <div class="hidden md:flex gap-10 h-full items-center">
                 <button onclick="setSegment('soluciones')" id="nav-soluciones" class="nav-link active h-full flex items-center">Soluciones</button>
@@ -221,8 +280,8 @@
                 <button onclick="openModal('filosofia_premium')" class="nav-link h-full flex items-center text-nowrap">Filosofía</button>
             </div>
             <div class="flex items-center gap-4">
-                <a href="https://wa.me/593983900050?text=Hola%20EvoluSer,%20deseo%20una%20consultoría%20experta%20en..." target="_blank" class="hidden lg:block px-8 py-3 bg-gradient-to-r from-brandGold to-brandGoldDark text-white font-extrabold rounded-full hover:shadow-gold transition uppercase text-xs tracking-wider">WhatsApp Directo</a>
-                <button onclick="openModal('equipo')" class="bg-brandBlue text-white px-6 py-2.5 rounded-full font-bold text-[10px] shadow-md hover:bg-brandBlueDark transition uppercase tracking-tighter">Directorio</button>
+                <a href="https://wa.me/593983900050?text=Hola%20EvoluSer,%20deseo%20una%20consultoría%20experta%20en..." target="_blank" class="hidden lg:block px-8 py-3 bg-gradient-to-r from-brandBlue to-brandGreen text-white font-extrabold rounded-full hover:shadow-neon-light transition uppercase text-xs tracking-wider border border-white/20">WhatsApp Directo</a>
+                <button onclick="openModal('equipo')" class="bg-white border-2 border-brandBlue text-brandBlue px-6 py-2.5 rounded-full font-bold text-[10px] shadow-sm hover:bg-brandBlue hover:text-white transition uppercase tracking-tighter">Directorio</button>
             </div>
         </div>
     </header>
@@ -233,39 +292,61 @@
         <div id="segment-soluciones" class="fade-in pb-24">
             
             <!-- NUEVO CARRUSEL PREMIUM -->
-            <div id="hero-carousel" class="relative w-full h-[500px] md:h-[650px] overflow-hidden group bg-black">
+            <div id="hero-carousel" class="relative w-full h-[500px] md:h-[650px] overflow-hidden group bg-brandBlue">
                 <!-- Slides Container -->
                 <div id="carousel-slides" class="relative w-full h-full">
                     <!-- Slide 1: Talento -->
-                    <div class="carousel-slide active" style="background-image: url('https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=1600&q=80');">
-                        <div class="absolute inset-0 bg-gradient-to-r from-brandBlueDark/90 via-brandBlueDark/50 to-transparent"></div>
+                    <div class="carousel-slide active" style="background-image: url('https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=1600&q=80');">
+                        <div class="absolute inset-0 bg-gradient-to-r from-brandBlue/95 via-brandBlue/60 to-transparent"></div>
                         <div class="absolute inset-0 flex items-center container mx-auto px-6">
                             <div class="max-w-2xl carousel-text-content">
-                                <span class="text-brandGold font-extrabold tracking-[0.4em] text-xs uppercase mb-4 block">Evolución Corporativa</span>
-                                <h2 class="text-4xl md:text-6xl font-extrabold text-white mb-6 leading-tight">Gestión Humana de <br><span class="text-brandGold">Alto Impacto</span></h2>
-                                <p class="text-white/80 text-lg font-light border-l-4 border-brandGold pl-6">Transformamos equipos ordinarios en fuerzas de alto rendimiento mediante cultura y estrategia.</p>
+                                <span class="text-brandGreen font-extrabold tracking-[0.4em] text-xs uppercase mb-4 block drop-shadow-[0_0_5px_rgba(0,0,0,0.5)]">Evolución Corporativa</span>
+                                <h2 class="text-4xl md:text-6xl font-extrabold text-white mb-6 leading-tight drop-shadow-lg">Talento Humano de <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-white to-brandGreen">Alto Impacto</span></h2>
+                                <p class="text-white text-lg font-light border-l-4 border-brandGreen pl-6 drop-shadow-md">Transformamos equipos ordinarios en fuerzas de alto rendimiento mediante cultura y estrategia.</p>
                             </div>
                         </div>
                     </div>
                     <!-- Slide 2: Seguridad -->
-                    <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1600&q=80');">
-                        <div class="absolute inset-0 bg-gradient-to-r from-gray-900/90 via-gray-900/50 to-transparent"></div>
+                    <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=1600&q=80');">
+                        <div class="absolute inset-0 bg-gradient-to-r from-brandBlue/95 via-brandBlue/60 to-transparent"></div>
                         <div class="absolute inset-0 flex items-center container mx-auto px-6">
                             <div class="max-w-2xl carousel-text-content">
-                                <span class="text-brandGreen font-extrabold tracking-[0.4em] text-xs uppercase mb-4 block">Blindaje Técnico</span>
-                                <h2 class="text-4xl md:text-6xl font-extrabold text-white mb-6 leading-tight">Seguridad Industrial <br><span class="text-brandGreen">Inteligente</span></h2>
-                                <p class="text-white/80 text-lg font-light border-l-4 border-brandGreen pl-6">Cumplimiento ISO 45001 y protección integral para salvaguardar el activo más valioso: la vida.</p>
+                                <span class="text-brandGreen font-extrabold tracking-[0.4em] text-xs uppercase mb-4 block drop-shadow-md">Blindaje Técnico</span>
+                                <h2 class="text-4xl md:text-6xl font-extrabold text-white mb-6 leading-tight drop-shadow-lg">Seguridad y Salud <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-white to-brandGreen">Ocupacional</span></h2>
+                                <p class="text-white text-lg font-light border-l-4 border-brandGreen pl-6 drop-shadow-md">Cumplimiento ISO 45001 y protección integral para salvaguardar el activo más valioso: la vida.</p>
                             </div>
                         </div>
                     </div>
                     <!-- Slide 3: Agro -->
                     <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1625246333195-78d9c38ad449?auto=format&fit=crop&w=1600&q=80');">
-                        <div class="absolute inset-0 bg-gradient-to-r from-green-900/90 via-green-900/50 to-transparent"></div>
+                        <div class="absolute inset-0 bg-gradient-to-r from-brandGreen/90 via-brandGreen/50 to-transparent"></div>
                         <div class="absolute inset-0 flex items-center container mx-auto px-6">
                             <div class="max-w-2xl carousel-text-content">
-                                <span class="text-white font-extrabold tracking-[0.4em] text-xs uppercase mb-4 block">Calidad Global</span>
-                                <h2 class="text-4xl md:text-6xl font-extrabold text-white mb-6 leading-tight">Agroindustria y <br><span class="text-white underline decoration-brandGold">Sostenibilidad</span></h2>
-                                <p class="text-white/80 text-lg font-light border-l-4 border-white pl-6">Estándares internacionales de inocuidad y producción responsable para mercados exigentes.</p>
+                                <span class="text-white font-extrabold tracking-[0.4em] text-xs uppercase mb-4 block drop-shadow-md">Calidad Global</span>
+                                <h2 class="text-4xl md:text-6xl font-extrabold text-white mb-6 leading-tight drop-shadow-lg">Ingeniería <br><span class="text-brandBlue underline decoration-white">Agroindustrial</span></h2>
+                                <p class="text-white text-lg font-light border-l-4 border-white pl-6 drop-shadow-md">Estándares internacionales de inocuidad y producción responsable para mercados exigentes.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Slide 4: Ambiente -->
+                    <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1473448912268-2022ce9509d8?auto=format&fit=crop&w=1600&q=80');">
+                        <div class="absolute inset-0 bg-gradient-to-r from-brandGreen/90 via-brandGreen/50 to-transparent"></div>
+                        <div class="absolute inset-0 flex items-center container mx-auto px-6">
+                            <div class="max-w-2xl carousel-text-content">
+                                <span class="text-white font-extrabold tracking-[0.4em] text-xs uppercase mb-4 block drop-shadow-md">Futuro Sostenible</span>
+                                <h2 class="text-4xl md:text-6xl font-extrabold text-white mb-6 leading-tight drop-shadow-lg">Ingeniería <br><span class="text-brandBlue underline decoration-white">Ambiental</span></h2>
+                                <p class="text-white text-lg font-light border-l-4 border-white pl-6 drop-shadow-md">Soluciones integrales en licencias y manejo de recursos para una industria limpia.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Slide 5: Pymes -->
+                    <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1559136555-9303baea8ebd?auto=format&fit=crop&w=1600&q=80');">
+                        <div class="absolute inset-0 bg-gradient-to-r from-brandBlue/95 via-brandBlue/60 to-transparent"></div>
+                        <div class="absolute inset-0 flex items-center container mx-auto px-6">
+                            <div class="max-w-2xl carousel-text-content">
+                                <span class="text-brandGreen font-extrabold tracking-[0.4em] text-xs uppercase mb-4 block drop-shadow-md">Crecimiento Pyme</span>
+                                <h2 class="text-4xl md:text-6xl font-extrabold text-white mb-6 leading-tight drop-shadow-lg">Tu Visión, Nuestra <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-white to-brandGreen">Misión</span></h2>
+                                <p class="text-white text-lg font-light border-l-4 border-brandGreen pl-6 drop-shadow-md">Acompañamiento experto para formalizar y escalar tu emprendimiento con seguridad.</p>
                             </div>
                         </div>
                     </div>
@@ -281,101 +362,42 @@
             </div>
 
             <!-- TEXTO ORIGINAL REUBICADO -->
-            <div class="bg-gradient-to-b from-[#F9FBFF] to-white border-b border-gray-100 mt-0">
+            <div class="bg-gradient-to-b from-[#F0F4F8] to-white border-b border-gray-100 mt-0">
                 <div class="container mx-auto px-4 py-20 text-center">
-                    <span class="text-brandGold font-extrabold tracking-[0.3em] text-[10px] uppercase mb-4 block animate-pulse">Liderazgo y Evolución</span>
-                    <h1 class="text-4xl md:text-6xl font-extrabold text-brandBlue mb-6 tracking-tight">Potenciamos el <span class="text-brandGold">Ser.</span></h1>
-                    <p class="text-gray-500 text-lg mb-10 max-w-2xl mx-auto font-medium">Aliado estratégico líder para el desarrollo integral de tu organización en la región.</p>
+                    <span class="text-brandGreen font-extrabold tracking-[0.3em] text-[10px] uppercase mb-4 block animate-pulse">Liderazgo y Evolución</span>
+                    <h1 class="text-4xl md:text-6xl font-extrabold text-brandBlue mb-6 tracking-tight">Potenciamos el <span class="text-brandGreen">Ser.</span></h1>
+                    <!-- APLICADO ID PARA EL EFECTO -->
+                    <p id="slogan-animado" class="text-gray-500 text-lg mb-10 max-w-2xl mx-auto font-medium perspective-1000">Aliado estratégico líder para el desarrollo integral de tu organización en la región.</p>
                 </div>
             </div>
 
             <div class="container mx-auto px-4 mt-16">
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
                     <div onclick="openModal('humano')" class="image-card group cursor-pointer">
-                        <div class="h-64 overflow-hidden relative"><img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover image-zoom"><span class="card-tag bg-brandBlue">Gestión Humana</span></div>
-                        <div class="p-8 flex flex-col flex-1"><h4 class="text-2xl font-extrabold text-brandBlue mb-3 group-hover:text-brandGold transition uppercase tracking-tighter">Talento y Cultura</h4><p class="text-gray-500 text-sm mb-6 leading-relaxed">Equipos de alto rendimiento y mejora del clima laboral.</p><span class="text-brandGold font-extrabold text-xs uppercase">Ver más <i class="fas fa-arrow-right ml-2"></i></span></div>
+                        <div class="h-64 overflow-hidden relative"><img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover image-zoom"><span class="card-tag bg-brandBlue">Gestión Humana</span></div>
+                        <div class="p-8 flex flex-col flex-1"><h4 class="text-2xl font-extrabold text-brandBlue mb-3 group-hover:text-brandGreen transition uppercase tracking-tighter">Talento Humano</h4><p class="text-gray-500 text-sm mb-6 leading-relaxed">Equipos de alto rendimiento y mejora del clima laboral.</p><span class="text-brandBlue font-extrabold text-xs uppercase group-hover:text-brandGreen transition">Ver más <i class="fas fa-arrow-right ml-2"></i></span></div>
                     </div>
                     <div onclick="openModal('seguro')" class="image-card group cursor-pointer">
-                        <div class="h-64 overflow-hidden relative"><img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover image-zoom"><span class="card-tag bg-brandBlueDark">Seguridad Industrial</span></div>
-                        <div class="p-8 flex flex-col flex-1"><h4 class="text-2xl font-extrabold text-brandBlue mb-3 group-hover:text-brandGold transition uppercase tracking-tighter">Protección SSO</h4><p class="text-gray-500 text-sm mb-6 leading-relaxed">Cumplimiento ISO 45001 y blindaje normativo legal.</p><span class="text-brandGold font-extrabold text-xs uppercase">Ver más <i class="fas fa-arrow-right ml-2"></i></span></div>
+                        <div class="h-64 overflow-hidden relative"><img src="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover image-zoom"><span class="card-tag bg-brandBlueDark">Seguridad Industrial</span></div>
+                        <div class="p-8 flex flex-col flex-1"><h4 class="text-2xl font-extrabold text-brandBlue mb-3 group-hover:text-brandGreen transition uppercase tracking-tighter">Seguridad y Salud Ocupacional</h4><p class="text-gray-500 text-sm mb-6 leading-relaxed">Cumplimiento ISO 45001 y blindaje normativo legal.</p><span class="text-brandBlue font-extrabold text-xs uppercase group-hover:text-brandGreen transition">Ver más <i class="fas fa-arrow-right ml-2"></i></span></div>
                     </div>
+                    <!-- CARD ACTUALIZADA: INGENIERÍA AGROINDUSTRIAL -->
                     <div onclick="openModal('agro')" class="image-card group cursor-pointer">
-                        <div class="h-64 overflow-hidden relative"><img src="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover image-zoom"><span class="card-tag bg-brandAmber">Agroindustria</span></div>
-                        <div class="p-8 flex flex-col flex-1"><h4 class="text-2xl font-extrabold text-brandBlue mb-3 group-hover:text-brandGold transition uppercase tracking-tighter">Calidad y Calidez</h4><p class="text-gray-500 text-sm mb-6 leading-relaxed">Inocuidad alimentaria y estándares de exportación globales.</p><span class="text-brandGold font-extrabold text-xs uppercase">Ver más <i class="fas fa-arrow-right ml-2"></i></span></div>
+                        <div class="h-64 overflow-hidden relative"><img src="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?auto=format&fit=crop&w=1200&q=80" class="w-full h-full object-cover image-zoom"><span class="card-tag bg-brandGreen">Agroindustria</span></div>
+                        <div class="p-8 flex flex-col flex-1"><h4 class="text-2xl font-extrabold text-brandBlue mb-3 group-hover:text-brandGreen transition uppercase tracking-tighter">Ingeniería Agroindustrial</h4><p class="text-gray-500 text-sm mb-6 leading-relaxed">Inocuidad alimentaria y estándares de exportación globales.</p><span class="text-brandBlue font-extrabold text-xs uppercase group-hover:text-brandGreen transition">Ver más <i class="fas fa-arrow-right ml-2"></i></span></div>
                     </div>
                     <div class="image-card group cursor-pointer">
-                        <div class="h-64 overflow-hidden relative"><img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover image-zoom"><span class="card-tag bg-gray-800">Insight</span></div>
-                        <div class="p-8 flex flex-col flex-1"><h4 class="text-xl font-bold text-gray-800 mb-3 group-hover:text-brandGold transition">Clima Laboral 2026</h4><p class="text-gray-500 text-sm mb-6 leading-relaxed">Tendencias de bienestar en la era digital.</p><span class="text-brandGold font-extrabold text-xs uppercase mt-auto">Leer Más</span></div>
+                        <div class="h-64 overflow-hidden relative"><img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover image-zoom"><span class="card-tag bg-brandBlue">Insight</span></div>
+                        <div class="p-8 flex flex-col flex-1"><h4 class="text-xl font-bold text-gray-800 mb-3 group-hover:text-brandGreen transition">Clima Laboral 2026</h4><p class="text-gray-500 text-sm mb-6 leading-relaxed">Tendencias de bienestar en la era digital.</p><span class="text-brandBlue font-extrabold text-xs uppercase mt-auto group-hover:text-brandGreen transition">Leer Más</span></div>
                     </div>
                     <div class="image-card group cursor-pointer">
-                        <div class="h-64 overflow-hidden relative"><img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover image-zoom"><span class="card-tag bg-gray-800">Cumplimiento</span></div>
-                        <div class="p-8 flex flex-col flex-1"><h4 class="text-xl font-bold text-gray-800 mb-3 group-hover:text-brandGold transition">ISO 45001: Ventaja Real</h4><p class="text-gray-500 text-sm mb-6 leading-relaxed">El escudo legal de tu organización.</p><span class="text-brandGold font-extrabold text-xs uppercase mt-auto">Leer Más</span></div>
+                        <div class="h-64 overflow-hidden relative"><img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover image-zoom"><span class="card-tag bg-brandBlue">Cumplimiento</span></div>
+                        <div class="p-8 flex flex-col flex-1"><h4 class="text-xl font-bold text-gray-800 mb-3 group-hover:text-brandGreen transition">ISO 45001: Ventaja Real</h4><p class="text-gray-500 text-sm mb-6 leading-relaxed">El escudo legal de tu organización.</p><span class="text-brandBlue font-extrabold text-xs uppercase mt-auto group-hover:text-brandGreen transition">Leer Más</span></div>
                     </div>
+                    <!-- CARD ACTUALIZADA: INGENIERÍA AMBIENTAL -->
                     <div onclick="openModal('sostenible')" class="image-card group cursor-pointer">
                         <div class="h-64 overflow-hidden relative"><img src="https://images.unsplash.com/photo-1473448912268-2022ce9509d8?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover image-zoom"><span class="card-tag bg-brandGreen">Ambiente</span></div>
-                        <div class="p-8 flex flex-col flex-1"><h4 class="text-2xl font-extrabold text-brandBlue mb-3 group-hover:text-brandGold transition uppercase tracking-tighter">Impacto Verde</h4><p class="text-gray-500 text-sm mb-6 leading-relaxed">Licencias y planes de manejo responsable.</p><span class="text-brandGold font-extrabold text-xs uppercase cursor-pointer">Ver más <i class="fas fa-arrow-right ml-2"></i></span></div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- SLOGAN MEJORADO -->
-            <div class="container mx-auto px-4 mt-24">
-                <div class="premium-quote text-center">
-                    <div class="relative z-10 max-w-4xl mx-auto">
-                        <h2 class="text-3xl md:text-5xl font-extrabold text-white mb-6 leading-tight tracking-tighter">
-                            Potenciamos el <span class="text-brandGold">Ser</span>, protegemos la <span class="text-brandGreen">Vida</span>.
-                        </h2>
-                        <div class="w-24 h-1 bg-brandGold mx-auto mb-8"></div>
-                        <p class="text-white opacity-90 text-xl md:text-2xl font-light italic uppercase tracking-widest">
-                            Aliado estratégico líder en la región.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- SECCIÓN 2: EMPRESAS -->
-        <div id="segment-empresas" class="hidden fade-in">
-            <div class="bg-gray-50 py-20 border-b border-gray-200">
-                <div class="container mx-auto px-4 flex flex-col md:flex-row items-center gap-16">
-                    <div class="w-full md:w-1/2 space-y-8">
-                        <span class="text-brandGold font-bold tracking-widest text-sm uppercase flex items-center gap-2"><i class="fas fa-star"></i> EvoluSer Corporativo</span>
-                        <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 leading-tight">Soluciones que <br><span class="text-brandBlue">blindan tu éxito.</span></h1>
-                        <p class="text-xl text-gray-600 font-light font-medium leading-relaxed text-justify">Garantizamos seguridad técnica y bienestar humano en cada rincón de su organización.</p>
-                        <button onclick="setSegment('oficina')" class="btn-gold-gradient shadow-gold uppercase text-[10px] tracking-widest font-extrabold">Solicitar Diagnóstico</button>
-                    </div>
-                    <div class="w-full md:w-1/2 h-72 md:h-96 bg-black rounded-xl overflow-hidden shadow-2xl relative border-[8px] border-white">
-                        <iframe class="w-full h-full absolute inset-0" src="https://www.youtube.com/embed/VfmFZdAbAyQ?rel=0&autoplay=0" frameborder="0" allowfullscreen></iframe>
-                    </div>
-                </div>
-            </div>
-
-            <div class="container mx-auto px-4 py-20">
-                <h3 class="text-3xl font-extrabold text-gray-900 mb-12 border-l-8 border-brandGold pl-6 uppercase tracking-tighter">DIVISIONES EMPRESARIALES</h3>
-                <div class="grid grid-cols-1 md:grid-cols-12 gap-8 h-full">
-                    <div class="md:col-span-8">
-                        <div class="impact-card group cursor-pointer" onclick="openModal('agro')">
-                            <img src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?auto=format&fit=crop&w=1200&q=80" alt="Industria">
-                            <div class="impact-content"><h3 class="text-5xl font-extrabold text-white mb-3 uppercase tracking-tighter">Industria</h3><p class="text-white/80 text-xl max-w-lg font-light text-justify">Seguridad industrial y cumplimiento técnico de alta complejidad.</p><span class="more-info-gold">Más información</span></div>
-                        </div>
-                    </div>
-                    <div class="md:col-span-4 flex flex-col gap-8">
-                        <div class="impact-card group cursor-pointer flex-1" onclick="openModal('empresas_info')">
-                            <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=800&q=80" alt="PYMES"><div class="impact-content p-8"><h3 class="text-2xl font-extrabold text-white mb-1 uppercase text-nowrap">Pymes</h3><span class="more-info-gold !py-2 !px-5 !text-[0.7rem]">Más información</span></div>
-                        </div>
-                        <div class="impact-card group cursor-pointer flex-1" onclick="openModal('humano')">
-                            <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80" alt="Corporativo"><div class="impact-content p-8"><h3 class="text-2xl font-extrabold text-white mb-1 uppercase text-nowrap">Corporativo</h3><span class="more-info-gold !py-2 !px-5 !text-[0.7rem]">Más información</span></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="bg-[#FBFBFB] py-20 border-y border-gray-100">
-                <div class="container mx-auto px-4">
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
-                        <div class="mapfre-list-card"><div><h4 class="text-2xl font-extrabold text-brandBlue mb-8 uppercase tracking-tighter">Seguridad SSO</h4><ul class="check-list"><li><i class="fas fa-check-circle text-brandGreen"></i> Auditorías ISO 45001</li><li><i class="fas fa-check-circle text-brandGreen"></i> Planes de Emergencia</li><li><i class="fas fa-check-circle text-brandGreen"></i> Vigilancia Médica</li></ul></div><span class="link-elegant" onclick="openModal('seguro')">Saber más <i class="fas fa-chevron-right text-xs"></i></span></div>
-                        <div class="mapfre-list-card"><div><h4 class="text-2xl font-extrabold text-brandBlue mb-8 uppercase tracking-tighter">Gestión Humana</h4><ul class="check-list"><li><i class="fas fa-check-circle text-brandGreen"></i> Clima y Cultura Laboral</li><li><i class="fas fa-check-circle text-brandGreen"></i> Headhunting Senior</li><li><i class="fas fa-check-circle text-brandGreen"></i> Talleres Directivos</li></ul></div><span class="link-elegant" onclick="openModal('humano')">Saber más <i class="fas fa-chevron-right text-xs"></i></span></div>
-                        <div class="mapfre-list-card"><div><h4 class="text-2xl font-extrabold text-brandBlue mb-8 uppercase tracking-tighter text-nowrap">Ambientales</h4><ul class="check-list"><li><i class="fas fa-check-circle text-brandGreen"></i> Licencias Ambientales</li><li><i class="fas fa-check-circle text-brandGreen"></i> Huella de Carbono</li><li><i class="fas fa-check-circle text-brandGreen"></i> Manejo de Desechos</li></ul></div><span class="link-elegant" onclick="openModal('sostenible')">Saber más <i class="fas fa-chevron-right text-xs"></i></span></div>
+                        <div class="p-8 flex flex-col flex-1"><h4 class="text-2xl font-extrabold text-brandBlue mb-3 group-hover:text-brandGreen transition uppercase tracking-tighter">Ingeniería Ambiental</h4><p class="text-gray-500 text-sm mb-6 leading-relaxed">Licencias y planes de manejo responsable.</p><span class="text-brandBlue font-extrabold text-xs uppercase cursor-pointer group-hover:text-brandGreen transition">Ver más <i class="fas fa-arrow-right ml-2"></i></span></div>
                     </div>
                 </div>
             </div>
@@ -386,15 +408,86 @@
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
                     <div class="validation-card group cursor-pointer" onclick="openModal('filosofia_premium')">
                         <div class="overflow-hidden h-56"><img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=800&q=80" alt="Aliado"></div>
-                        <div class="p-10 flex-1 flex flex-col"><h4 class="text-xl font-bold text-brandBlue mb-4 group-hover:text-brandGold transition">Aliado Estratégico</h4><p class="text-gray-500 text-sm mb-6 leading-relaxed text-justify">Delegar su cumplimiento legal es la inversión más rentable para su patrimonio.</p><span class="link-elegant mt-auto !text-brandBlue font-bold underline">Leer más <i class="fas fa-arrow-right ml-2"></i></span></div>
+                        <div class="p-10 flex-1 flex flex-col"><h4 class="text-xl font-bold text-brandBlue mb-4 group-hover:text-brandGreen transition">Aliado Estratégico</h4><p class="text-gray-500 text-sm mb-6 leading-relaxed text-justify">Delegar su cumplimiento legal es la inversión más rentable para su patrimonio.</p><span class="link-elegant mt-auto !text-brandBlue font-bold underline">Leer más <i class="fas fa-arrow-right ml-2"></i></span></div>
                     </div>
                     <div class="validation-card group cursor-pointer" onclick="openModal('seguro')">
                         <div class="overflow-hidden h-56"><img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=800&q=80" alt="Bienestar"></div>
-                        <div class="p-10 flex-1 flex flex-col"><h4 class="text-xl font-bold text-brandBlue mb-4 group-hover:text-brandGold transition">Tranquilidad Total</h4><p class="text-gray-500 text-sm mb-6 leading-relaxed text-justify">Protección activa de su equipo humano ante cualquier riesgo operacional.</p><span class="link-elegant mt-auto !text-brandBlue font-bold underline">Explorar <i class="fas fa-arrow-right ml-2"></i></span></div>
+                        <div class="p-10 flex-1 flex flex-col"><h4 class="text-xl font-bold text-brandBlue mb-4 group-hover:text-brandGreen transition">Tranquilidad Total</h4><p class="text-gray-500 text-sm mb-6 leading-relaxed text-justify">Protección activa de su equipo humano ante cualquier riesgo operacional.</p><span class="link-elegant mt-auto !text-brandBlue font-bold underline">Explorar <i class="fas fa-arrow-right ml-2"></i></span></div>
                     </div>
                     <div class="validation-card group cursor-pointer" onclick="openModal('sostenible')">
                         <div class="overflow-hidden h-56"><img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=800&q=80" alt="Auditoría"></div>
-                        <div class="p-10 flex-1 flex flex-col"><h4 class="text-xl font-bold text-brandBlue mb-4 group-hover:text-brandGold transition">Avance Seguro</h4><p class="text-gray-500 text-sm mb-6 leading-relaxed text-justify">Validación técnica ante autoridades regionales. Avance sobre bases firmes.</p><span class="link-elegant mt-auto !text-brandBlue font-bold underline">Validar <i class="fas fa-arrow-right ml-2"></i></span></div>
+                        <div class="p-10 flex-1 flex flex-col"><h4 class="text-xl font-bold text-brandBlue mb-4 group-hover:text-brandGreen transition">Avance Seguro</h4><p class="text-gray-500 text-sm mb-6 leading-relaxed text-justify">Validación técnica ante autoridades regionales. Avance sobre bases firmes.</p><span class="link-elegant mt-auto !text-brandBlue font-bold underline">Validar <i class="fas fa-arrow-right ml-2"></i></span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECCIÓN 2: EMPRESAS -->
+        <div id="segment-empresas" class="hidden fade-in">
+            <div class="bg-gray-50 py-20 border-b border-gray-200">
+                <div class="container mx-auto px-4 flex flex-col md:flex-row items-center gap-16">
+                    <div class="w-full md:w-1/2 space-y-8">
+                        <span class="text-brandGreen font-bold tracking-widest text-sm uppercase flex items-center gap-2"><i class="fas fa-star"></i> EvoluSer Corporativo</span>
+                        <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 leading-tight">Soluciones que <br><span class="text-brandBlue">blindan tu éxito.</span></h1>
+                        <p class="text-xl text-gray-600 font-light font-medium leading-relaxed text-justify">Garantizamos seguridad técnica y bienestar humano en cada rincón de su organización.</p>
+                        <button onclick="setSegment('oficina')" class="btn-brand-gradient shadow-brand uppercase text-[10px] tracking-widest font-extrabold">Solicitar Diagnóstico</button>
+                    </div>
+                    <!-- AJUSTE VIDEO VERTICAL (TIKTOK STYLE) -->
+                    <div class="w-full md:w-1/2 flex justify-center">
+                        <div class="relative w-full max-w-[320px] aspect-[9/16] bg-black rounded-3xl overflow-hidden shadow-2xl border-[8px] border-white ring-1 ring-gray-200">
+                            <iframe class="w-full h-full absolute inset-0" src="https://www.youtube.com/embed/VfmFZdAbAyQ?rel=0&autoplay=0" frameborder="0" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container mx-auto px-4 py-20">
+                <h3 class="text-3xl font-extrabold text-gray-900 mb-12 border-l-8 border-brandGreen pl-6 uppercase tracking-tighter">DIVISIONES EMPRESARIALES</h3>
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-8 h-full">
+                    <div class="md:col-span-8">
+                        <div class="impact-card group cursor-pointer" onclick="openModal('agro')">
+                            <img src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?auto=format&fit=crop&w=1200&q=80" alt="Industria">
+                            <div class="impact-content"><h3 class="text-5xl font-extrabold text-white mb-3 uppercase tracking-tighter">Industria</h3><p class="text-white/80 text-xl max-w-lg font-light text-justify">Seguridad industrial y cumplimiento técnico de alta complejidad.</p><span class="more-info-brand">Más información</span></div>
+                        </div>
+                    </div>
+                    <div class="md:col-span-4 flex flex-col gap-8">
+                        <div class="impact-card group cursor-pointer flex-1" onclick="openModal('empresas_info')">
+                            <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=800&q=80" alt="PYMES"><div class="impact-content p-8"><h3 class="text-2xl font-extrabold text-white mb-1 uppercase text-nowrap">Pymes</h3><span class="more-info-brand !py-2 !px-5 !text-[0.7rem]">Más información</span></div>
+                        </div>
+                        <div class="impact-card group cursor-pointer flex-1" onclick="openModal('humano')">
+                            <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80" alt="Corporativo"><div class="impact-content p-8"><h3 class="text-2xl font-extrabold text-white mb-1 uppercase text-nowrap">Corporativo</h3><span class="more-info-brand !py-2 !px-5 !text-[0.7rem]">Más información</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-[#FBFBFB] py-20 border-y border-gray-100">
+                <div class="container mx-auto px-4">
+                    <!-- GRID A 4 COLUMNAS -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8">
+                        <div class="mapfre-list-card"><div><h4 class="text-2xl font-extrabold text-brandBlue mb-8 uppercase tracking-tighter">Seguridad SSO</h4><ul class="check-list"><li><i class="fas fa-check-circle text-brandGreen"></i> Auditorías ISO 45001</li><li><i class="fas fa-check-circle text-brandGreen"></i> Planes de Emergencia</li><li><i class="fas fa-check-circle text-brandGreen"></i> Vigilancia Médica</li></ul></div><span class="link-elegant" onclick="openModal('seguro')">Saber más <i class="fas fa-chevron-right text-xs"></i></span></div>
+                        <div class="mapfre-list-card"><div><h4 class="text-2xl font-extrabold text-brandBlue mb-8 uppercase tracking-tighter">Gestión Humana</h4><ul class="check-list"><li><i class="fas fa-check-circle text-brandBlue"></i> Clima y Cultura Laboral</li><li><i class="fas fa-check-circle text-brandBlue"></i> Headhunting Senior</li><li><i class="fas fa-check-circle text-brandBlue"></i> Talleres Directivos</li></ul></div><span class="link-elegant" onclick="openModal('humano')">Saber más <i class="fas fa-chevron-right text-xs"></i></span></div>
+                        <div class="mapfre-list-card"><div><h4 class="text-2xl font-extrabold text-brandBlue mb-8 uppercase tracking-tighter text-nowrap">Ing. Ambiental</h4><ul class="check-list"><li><i class="fas fa-check-circle text-brandGreen"></i> Licencias Ambientales</li><li><i class="fas fa-check-circle text-brandGreen"></i> Huella de Carbono</li><li><i class="fas fa-check-circle text-brandGreen"></i> Manejo de Desechos</li></ul></div><span class="link-elegant" onclick="openModal('sostenible')">Saber más <i class="fas fa-chevron-right text-xs"></i></span></div>
+                        <div class="mapfre-list-card"><div><h4 class="text-2xl font-extrabold text-brandBlue mb-8 uppercase tracking-tighter">Ing. Agroindustrial</h4><ul class="check-list"><li><i class="fas fa-check-circle text-brandGreen"></i> Diseño de Plantas</li><li><i class="fas fa-check-circle text-brandGreen"></i> Procesos Productivos</li><li><i class="fas fa-check-circle text-brandGreen"></i> Certificaciones BPM</li></ul></div><span class="link-elegant" onclick="openModal('agro')">Saber más <i class="fas fa-chevron-right text-xs"></i></span></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Validación Final -->
+            <div class="container mx-auto px-4 py-24">
+                <h3 class="text-3xl font-extrabold text-gray-900 mb-12 text-center uppercase tracking-widest">NUESTRO COMPROMISO</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+                    <div class="validation-card group cursor-pointer" onclick="openModal('filosofia_premium')">
+                        <div class="overflow-hidden h-56"><img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=800&q=80" alt="Aliado"></div>
+                        <div class="p-10 flex-1 flex flex-col"><h4 class="text-xl font-bold text-brandBlue mb-4 group-hover:text-brandGreen transition">Aliado Estratégico</h4><p class="text-gray-500 text-sm mb-6 leading-relaxed text-justify">Delegar su cumplimiento legal es la inversión más rentable para su patrimonio.</p><span class="link-elegant mt-auto !text-brandBlue font-bold underline">Leer más <i class="fas fa-arrow-right ml-2"></i></span></div>
+                    </div>
+                    <div class="validation-card group cursor-pointer" onclick="openModal('seguro')">
+                        <div class="overflow-hidden h-56"><img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=800&q=80" alt="Bienestar"></div>
+                        <div class="p-10 flex-1 flex flex-col"><h4 class="text-xl font-bold text-brandBlue mb-4 group-hover:text-brandGreen transition">Tranquilidad Total</h4><p class="text-gray-500 text-sm mb-6 leading-relaxed text-justify">Protección activa de su equipo humano ante cualquier riesgo operacional.</p><span class="link-elegant mt-auto !text-brandBlue font-bold underline">Explorar <i class="fas fa-arrow-right ml-2"></i></span></div>
+                    </div>
+                    <div class="validation-card group cursor-pointer" onclick="openModal('sostenible')">
+                        <div class="overflow-hidden h-56"><img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=800&q=80" alt="Auditoría"></div>
+                        <div class="p-10 flex-1 flex flex-col"><h4 class="text-xl font-bold text-brandBlue mb-4 group-hover:text-brandGreen transition">Avance Seguro</h4><p class="text-gray-500 text-sm mb-6 leading-relaxed text-justify">Validación técnica ante autoridades regionales. Avance sobre bases firmes.</p><span class="link-elegant mt-auto !text-brandBlue font-bold underline">Validar <i class="fas fa-arrow-right ml-2"></i></span></div>
                     </div>
                 </div>
             </div>
@@ -405,10 +498,10 @@
             <div class="bg-white py-20 border-b border-gray-100">
                 <div class="container mx-auto px-4 flex flex-col md:flex-row items-center gap-16">
                     <div class="w-full md:w-1/2 space-y-8">
-                        <span class="text-brandGold font-bold tracking-widest text-sm uppercase">EvoluSer Startup</span>
-                        <h2 class="text-4xl md:text-5xl font-extrabold text-brandBlue leading-tight">Tu socio de despegue <br><span class="text-brandGold">desde el día uno.</span></h2>
+                        <span class="text-brandGreen font-bold tracking-widest text-sm uppercase">EvoluSer Startup</span>
+                        <h2 class="text-4xl md:text-5xl font-extrabold text-brandBlue leading-tight">Tu socio de despegue <br><span class="text-brandGreen">desde el día uno.</span></h2>
                         <p class="text-xl text-gray-600 leading-relaxed font-light font-medium">Formaliza tu empresa con agilidad. Asesoría en RUC, estatutos, permisos y tu primer equipo de trabajo.</p>
-                        <button onclick="setSegment('oficina')" class="btn-gold-gradient shadow-gold text-[10px] tracking-widest uppercase font-extrabold">Ver Paquetes</button>
+                        <button onclick="setSegment('oficina')" class="btn-brand-gradient shadow-brand text-[10px] tracking-widest uppercase font-extrabold">Ver Paquetes</button>
                     </div>
                     
                     <!-- NUEVO CONTENEDOR EV CON FONDO PREMIUM -->
@@ -419,11 +512,11 @@
                         </div>
                         
                         <!-- Overlays para suavizar y dar marca -->
-                        <div class="absolute inset-0 bg-brandBlueDark/20 mix-blend-overlay"></div>
+                        <div class="absolute inset-0 bg-brandBlue/20 mix-blend-overlay"></div>
                         <div class="absolute inset-0 bg-gradient-to-t from-white via-transparent to-white/50"></div>
                         
                         <!-- Elemento decorativo circular brillante -->
-                        <div class="absolute top-1/4 right-1/4 w-32 h-32 bg-brandGold/30 rounded-full blur-3xl animate-pulse"></div>
+                        <div class="absolute top-1/4 right-1/4 w-32 h-32 bg-brandGreen/30 rounded-full blur-3xl animate-pulse"></div>
 
                         <!-- Avatar EV -->
                         <img src="https://raw.githubusercontent.com/direccioncomercial/evoluser-web/1b862973e8003850daadd6a47bffd5b6cf04b2f6/imagen6.png" 
@@ -438,12 +531,13 @@
                     <div class="md:col-span-8">
                         <div class="impact-card group cursor-pointer" onclick="openModal('emprendedores_info')">
                             <img src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?auto=format&fit=crop&w=1200&q=80" alt="Legalización">
-                            <div class="impact-content"><h3 class="text-5xl font-extrabold text-white mb-3 uppercase tracking-tighter text-nowrap">Legalización Total</h3><p class="text-white/80 text-xl max-w-lg font-light text-justify">Constitución de compañía y RUC en tiempo récord para que empieces a facturar.</p><span class="more-info-gold">Ver más</span></div>
+                            <div class="impact-content"><h3 class="text-5xl font-extrabold text-white mb-3 uppercase tracking-tighter text-nowrap">Legalización Total</h3><p class="text-white/80 text-xl max-w-lg font-light text-justify">Constitución de compañía y RUC en tiempo récord para que empieces a facturar.</p><span class="more-info-brand">Ver más</span></div>
                         </div>
                     </div>
                     <div class="md:col-span-4 flex flex-col gap-8">
-                        <div class="impact-card group cursor-pointer flex-1"><img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=800&q=80" alt="Permisos"><div class="impact-content p-8"><h3 class="text-2xl font-extrabold text-white mb-1 uppercase">Permisos</h3><span class="more-info-gold !py-2 !px-5 !text-[0.7rem]">Ver guía</span></div></div>
-                        <div class="impact-card group cursor-pointer flex-1"><img src="https://images.unsplash.com/photo-1521791136064-7986c29596ad?auto=format&fit=crop&w=800&q=80" alt="Equipo"><div class="impact-content p-8"><h3 class="text-2xl font-extrabold text-white mb-1 uppercase text-nowrap">Tu Equipo</h3><span class="more-info-gold !py-2 !px-5 !text-[0.7rem]">Ver servicios</span></div></div>
+                        <div class="impact-card group cursor-pointer flex-1"><img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=800&q=80" alt="Permisos"><div class="impact-content p-8"><h3 class="text-2xl font-extrabold text-white mb-1 uppercase">Permisos</h3><span class="more-info-brand !py-2 !px-5 !text-[0.7rem]">Ver guía</span></div></div>
+                        <!-- IMAGEN CORREGIDA: Tu Equipo (Ambiente Startup Latino) -->
+                        <div class="impact-card group cursor-pointer flex-1" onclick="openModal('equipo')"><img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=800&q=80" alt="Equipo"><div class="impact-content p-8"><h3 class="text-2xl font-extrabold text-white mb-1 uppercase text-nowrap">Tu Equipo</h3><span class="more-info-brand !py-2 !px-5 !text-[0.7rem]">Ver servicios</span></div></div>
                     </div>
                 </div>
             </div>
@@ -451,10 +545,12 @@
             <!-- Listas Startup -->
             <div class="bg-[#FBFBFB] py-24 border-y border-gray-100">
                 <div class="container mx-auto px-4">
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
-                        <div class="mapfre-list-card"><div><h4 class="text-2xl font-extrabold text-brandBlue mb-8 uppercase tracking-tighter">Bases Legales</h4><ul class="check-list"><li><i class="fas fa-check-circle text-brandGold"></i> Estatutos Personalizados</li><li><i class="fas fa-check-circle text-brandGold"></i> Registro Mercantil</li></ul></div><span class="link-elegant">Detalles <i class="fas fa-chevron-right text-xs"></i></span></div>
-                        <div class="mapfre-list-card"><div><h4 class="text-2xl font-extrabold text-brandBlue mb-8 uppercase tracking-tighter text-nowrap">RRHH Inicial</h4><ul class="check-list"><li><i class="fas fa-check-circle text-brandGold"></i> Contratos de Trabajo</li><li><i class="fas fa-check-circle text-brandGold"></i> Afiliación IESS</li></ul></div><span class="link-elegant">Detalles <i class="fas fa-chevron-right text-xs"></i></span></div>
-                        <div class="mapfre-list-card"><div><h4 class="text-2xl font-extrabold text-brandBlue mb-8 uppercase tracking-tighter text-nowrap">Regulatorio</h4><ul class="check-list"><li><i class="fas fa-check-circle text-brandGold"></i> Permisos Bomberos</li><li><i class="fas fa-check-circle text-brandGold"></i> Notificación ARCSA</li></ul></div><span class="link-elegant">Detalles <i class="fas fa-chevron-right text-xs"></i></span></div>
+                    <!-- GRID A 4 COLUMNAS -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8">
+                        <div class="mapfre-list-card"><div><h4 class="text-2xl font-extrabold text-brandBlue mb-8 uppercase tracking-tighter">Bases Legales</h4><ul class="check-list"><li><i class="fas fa-check-circle text-brandGreen"></i> Estatutos Personalizados</li><li><i class="fas fa-check-circle text-brandGreen"></i> Registro Mercantil</li></ul></div><span class="link-elegant">Detalles <i class="fas fa-chevron-right text-xs"></i></span></div>
+                        <div class="mapfre-list-card"><div><h4 class="text-2xl font-extrabold text-brandBlue mb-8 uppercase tracking-tighter text-nowrap">RRHH Inicial</h4><ul class="check-list"><li><i class="fas fa-check-circle text-brandGreen"></i> Contratos de Trabajo</li><li><i class="fas fa-check-circle text-brandGreen"></i> Afiliación IESS</li></ul></div><span class="link-elegant">Detalles <i class="fas fa-chevron-right text-xs"></i></span></div>
+                        <div class="mapfre-list-card"><div><h4 class="text-2xl font-extrabold text-brandBlue mb-8 uppercase tracking-tighter text-nowrap">Regulatorio</h4><ul class="check-list"><li><i class="fas fa-check-circle text-brandBlue"></i> Permisos Bomberos</li><li><i class="fas fa-check-circle text-brandBlue"></i> Notificación ARCSA</li></ul></div><span class="link-elegant">Detalles <i class="fas fa-chevron-right text-xs"></i></span></div>
+                        <div class="mapfre-list-card"><div><h4 class="text-2xl font-extrabold text-brandBlue mb-8 uppercase tracking-tighter">Agro Emprendedor</h4><ul class="check-list"><li><i class="fas fa-check-circle text-brandGreen"></i> Notificación Sanitaria</li><li><i class="fas fa-check-circle text-brandGreen"></i> Tabla Nutricional</li><li><i class="fas fa-check-circle text-brandGreen"></i> Vida Útil</li></ul></div><span class="link-elegant" onclick="openModal('agro')">Detalles <i class="fas fa-chevron-right text-xs"></i></span></div>
                     </div>
                 </div>
             </div>
@@ -465,15 +561,15 @@
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
                     <div class="validation-card group cursor-pointer" onclick="openModal('emprendedores_info')">
                         <div class="overflow-hidden h-56"><img src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=800&q=80" alt="Ahorro"></div>
-                        <div class="p-10 flex-1 flex flex-col"><h4 class="text-xl font-bold text-brandBlue mb-4 group-hover:text-brandGold transition italic">Empezar bien es ahorrar</h4><p class="text-gray-500 text-sm mb-6 leading-relaxed text-justify">Evita multas futuras con blindaje legal desde el día 1.</p><span class="link-elegant mt-auto !text-brandBlue font-bold underline">Leer más <i class="fas fa-arrow-right ml-2"></i></span></div>
+                        <div class="p-10 flex-1 flex flex-col"><h4 class="text-xl font-bold text-brandBlue mb-4 group-hover:text-brandGreen transition italic">Empezar bien es ahorrar</h4><p class="text-gray-500 text-sm mb-6 leading-relaxed text-justify">Evita multas futuras con blindaje legal desde el día 1.</p><span class="link-elegant mt-auto !text-brandBlue font-bold underline">Leer más <i class="fas fa-arrow-right ml-2"></i></span></div>
                     </div>
                     <div class="validation-card group cursor-pointer" onclick="openModal('emprendedores_info')">
                         <div class="overflow-hidden h-56"><img src="https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&w=800&q=80" alt="Delegación"></div>
-                        <div class="p-10 flex-1 flex flex-col"><h4 class="text-xl font-bold text-brandBlue mb-4 group-hover:text-brandGold transition italic text-nowrap">Enfócate en vender</h4><p class="text-gray-500 text-sm mb-6 leading-relaxed text-justify">Gestionamos tu back-office legal mientras tú escalas tu negocio.</p><span class="link-elegant mt-auto !text-brandBlue font-bold underline">Explorar <i class="fas fa-arrow-right ml-2"></i></span></div>
+                        <div class="p-10 flex-1 flex flex-col"><h4 class="text-xl font-bold text-brandBlue mb-4 group-hover:text-brandGreen transition italic text-nowrap">Enfócate en vender</h4><p class="text-gray-500 text-sm mb-6 leading-relaxed text-justify">Gestionamos tu back-office legal mientras tú escalas tu negocio.</p><span class="link-elegant mt-auto !text-brandBlue font-bold underline">Explorar <i class="fas fa-arrow-right ml-2"></i></span></div>
                     </div>
                     <div class="validation-card group cursor-pointer" onclick="openModal('equipo')">
                         <div class="overflow-hidden h-56"><img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=800&q=80" alt="Socio"></div>
-                        <div class="p-10 flex-1 flex flex-col"><h4 class="text-xl font-bold text-brandBlue mb-4 group-hover:text-brandGold transition italic text-nowrap">Tu socio en el tiempo</h4><p class="text-gray-500 text-sm mb-6 leading-relaxed text-justify">Evolucionamos contigo desde tu primera factura hasta tu consolidación.</p><span class="link-elegant mt-auto !text-brandBlue font-bold underline">Validar <i class="fas fa-arrow-right ml-2"></i></span></div>
+                        <div class="p-10 flex-1 flex flex-col"><h4 class="text-xl font-bold text-brandBlue mb-4 group-hover:text-brandGreen transition italic text-nowrap">Tu socio en el tiempo</h4><p class="text-gray-500 text-sm mb-6 leading-relaxed text-justify">Evolucionamos contigo desde tu primera factura hasta tu consolidación.</p><span class="link-elegant mt-auto !text-brandBlue font-bold underline">Validar <i class="fas fa-arrow-right ml-2"></i></span></div>
                     </div>
                 </div>
             </div>
@@ -482,26 +578,26 @@
         <!-- SECCIÓN 4: OFICINA VIRTUAL -->
         <div id="segment-oficina" class="hidden fade-in min-h-[80vh] flex flex-col md:flex-row">
             <div class="hidden md:block w-full md:w-3/5 bg-cover bg-center relative" style="background-image: url('https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=1200&q=80');">
-                <div class="absolute inset-0 bg-brandBlueDark/30"></div>
+                <div class="absolute inset-0 bg-brandBlue/30"></div>
                 <div class="absolute bottom-20 left-20 text-white max-w-lg">
                     <h2 class="text-4xl font-extrabold mb-6 uppercase tracking-tighter">Gestión Digital</h2>
-                    <p class="text-xl font-light border-l-4 border-brandGold pl-6 italic">Atención ágil para el crecimiento organizacional.</p>
+                    <p class="text-xl font-light border-l-4 border-brandGreen pl-6 italic">Atención ágil para el crecimiento organizacional.</p>
                 </div>
             </div>
             <div class="w-full md:w-2/5 flex items-center justify-center bg-gray-50 p-6 md:p-12">
                 <div class="ov-login-container">
-                    <div class="ov-header"><h2 class="uppercase tracking-widest text-xl">Acceso</h2><p class="text-[10px] text-gray-400 font-bold uppercase mt-1 tracking-widest tracking-tighter text-nowrap">Mesa de Ayuda EvoluSer</p></div>
+                    <div class="ov-header"><h2 class="uppercase tracking-widest text-xl text-brandBlue">Acceso</h2><p class="text-[10px] text-gray-400 font-bold uppercase mt-1 tracking-widest tracking-tighter text-nowrap">Mesa de Ayuda EvoluSer</p></div>
                     <form id="ov-form" class="p-10 space-y-5" onsubmit="handleOfficeSubmit(event)">
                         <div class="grid grid-cols-2 gap-4">
                             <div class="col-span-2 sm:col-span-1"><label class="block text-[10px] font-bold text-gray-500 uppercase mb-2">Identificación:</label><select id="ov-type" class="w-full border border-gray-300 rounded p-3 text-sm outline-none"><option>Cédula</option><option>RUC</option></select></div>
-                            <div class="col-span-2 sm:col-span-1"><label class="block text-[10px] font-bold text-gray-500 uppercase mb-2">Número:</label><input id="ov-id" type="text" placeholder="171..." class="w-full border border-gray-300 rounded p-3 text-sm focus:border-brandGold outline-none"></div>
+                            <div class="col-span-2 sm:col-span-1"><label class="block text-[10px] font-bold text-gray-500 uppercase mb-2">Número:</label><input id="ov-id" type="text" placeholder="171..." class="w-full border border-gray-300 rounded p-3 text-sm focus:border-brandGreen outline-none"></div>
                         </div>
                         <div class="grid grid-cols-2 gap-4">
-                            <div class="col-span-2 sm:col-span-1"><label class="block text-[10px] font-bold text-gray-500 uppercase mb-2">Teléfono:</label><input id="ov-phone" type="tel" placeholder="098..." class="w-full border border-gray-300 rounded p-3 text-sm focus:border-brandGold outline-none"></div>
-                            <div class="col-span-2 sm:col-span-1"><label class="block text-[10px] font-bold text-gray-500 uppercase mb-2">Ciudad:</label><input id="ov-city" type="text" placeholder="Quito" class="w-full border border-gray-300 rounded p-3 text-sm focus:border-brandGold outline-none"></div>
+                            <div class="col-span-2 sm:col-span-1"><label class="block text-[10px] font-bold text-gray-500 uppercase mb-2">Teléfono:</label><input id="ov-phone" type="tel" placeholder="098..." class="w-full border border-gray-300 rounded p-3 text-sm focus:border-brandGreen outline-none"></div>
+                            <div class="col-span-2 sm:col-span-1"><label class="block text-[10px] font-bold text-gray-500 uppercase mb-2">Ciudad:</label><input id="ov-city" type="text" placeholder="Quito" class="w-full border border-gray-300 rounded p-3 text-sm focus:border-brandGreen outline-none"></div>
                         </div>
-                        <div><label class="block text-[10px] font-bold text-gray-500 uppercase mb-2 text-nowrap">¿Qué necesitas?</label><textarea id="ov-message" rows="3" placeholder="Describe tu requerimiento..." class="w-full border border-gray-300 rounded p-3 text-sm focus:border-brandGold outline-none"></textarea></div>
-                        <button type="submit" class="w-full bg-gradient-to-r from-brandGold to-brandGoldDark text-white font-extrabold py-4 rounded transition uppercase text-xs tracking-widest shadow-md">Enviar Solicitud</button>
+                        <div><label class="block text-[10px] font-bold text-gray-500 uppercase mb-2 text-nowrap">¿Qué necesitas?</label><textarea id="ov-message" rows="3" placeholder="Describe tu requerimiento..." class="w-full border border-gray-300 rounded p-3 text-sm focus:border-brandGreen outline-none"></textarea></div>
+                        <button type="submit" class="w-full btn-brand-gradient shadow-brand text-white font-extrabold py-4 rounded transition uppercase text-xs tracking-widest">Enviar Solicitud</button>
                     </form>
                     <div id="ov-success" class="hidden p-10 text-center animate-pop-in"><div class="w-20 h-20 bg-brandGreen/10 rounded-full flex items-center justify-center mx-auto mb-6"><i class="fas fa-check text-brandGreen text-3xl"></i></div><h3 class="text-xl font-bold text-brandBlue mb-2">¡Recibido!</h3><p class="text-sm text-gray-500">Un consultor especializado revisará su solicitud pronto.</p></div>
                 </div>
@@ -509,26 +605,41 @@
         </div>
     </main>
 
-    <!-- FOOTER PREMIUM -->
-    <footer class="bg-brandBlueDark text-white py-20 border-t-8 border-brandGold">
+    <!-- FOOTER PREMIUM (ICONOS CORREGIDOS + PADDING INFERIOR) -->
+    <footer class="bg-brandBlue text-white py-20 pb-72 border-t-8 border-brandGreen">
         <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-16 text-base">
             <div><img src="https://raw.githubusercontent.com/direccioncomercial/evoluser-web/1b862973e8003850daadd6a47bffd5b6cf04b2f6/logo.png" class="h-12 mb-8 brightness-0 invert opacity-90"><p class="text-white/60 leading-relaxed font-light text-justify text-sm">Potenciamos el ser, protegemos la vida. Aliado estratégico líder en la región para la evolución empresarial sostenible.</p></div>
-            <div><h5 class="font-bold mb-8 uppercase tracking-widest text-brandGold text-sm">Atención</h5><ul class="space-y-4 text-white/70 text-sm"><li><button onclick="setSegment('soluciones')" class="hover:text-brandGold transition">Soluciones</button></li><li><button onclick="setSegment('empresas')" class="hover:text-brandGold transition">Empresas</button></li><li><button onclick="setSegment('oficina')" class="hover:text-brandGold transition">Oficina Virtual</button></li></ul></div>
-            <div><h5 class="font-bold mb-8 uppercase tracking-widest text-brandGold text-sm">Contacto Principal</h5><ul class="space-y-4 text-white/70 font-bold uppercase text-sm"><li><i class="fas fa-map-marker-alt text-brandGold mr-2"></i> Quito, Ecuador</li><li><a href="https://wa.me/593983900050" target="_blank" class="hover:text-brandGold transition flex items-center gap-2"><i class="fab fa-whatsapp text-brandGold mr-2"></i> +593 98 390 0050</a></li><li><a href="mailto:evoluserec@gmail.com" class="hover:text-brandGold transition flex items-center gap-2 lowercase tracking-wider font-bold"><i class="fas fa-envelope text-brandGold mr-2"></i> evoluserec@gmail.com</a></li></ul></div>
-            <div><h5 class="font-bold mb-8 uppercase tracking-widest text-brandGold text-sm text-nowrap">Síguenos</h5><div class="flex gap-6 text-2xl"><a href="#" class="social-icon hover-linkedin transition"><i class="fab fa-linkedin text-brandGold"></i></a><a href="#" class="social-icon hover-facebook transition"><i class="fab fa-facebook text-brandGold"></i></a><a href="#" class="social-icon hover-instagram transition"><i class="fab fa-instagram text-brandGold"></i></a><a href="#" class="social-icon hover-youtube transition"><i class="fab fa-youtube text-brandGold"></i></a><a href="#" class="social-icon hover-tiktok transition"><i class="fab fa-tiktok text-brandGold"></i></a><a href="#" class="social-icon hover-x transition"><i class="fab fa-x-twitter text-brandGold"></i></a></div></div>
+            <div><h5 class="font-bold mb-8 uppercase tracking-widest text-brandGreen text-sm">Atención</h5><ul class="space-y-4 text-white/70 text-sm"><li><button onclick="setSegment('soluciones')" class="hover:text-brandGreen transition">Soluciones</button></li><li><button onclick="setSegment('empresas')" class="hover:text-brandGreen transition">Empresas</button></li><li><button onclick="setSegment('oficina')" class="hover:text-brandGreen transition">Oficina Virtual</button></li></ul></div>
+            <div><h5 class="font-bold mb-8 uppercase tracking-widest text-brandGreen text-sm">Contacto Principal</h5><ul class="space-y-4 text-white/70 font-bold uppercase text-sm"><li><i class="fas fa-map-marker-alt text-brandGreen mr-2"></i> Quito, Ecuador</li>
+                <!-- Número de Llamadas -->
+                <li><a href="tel:+593987003357" class="hover:text-brandGreen transition flex items-center gap-2"><i class="fas fa-phone-alt text-brandGreen mr-2"></i> +593 98 700 3357</a></li>
+                <li><a href="https://wa.me/593983900050" target="_blank" class="hover:text-brandGreen transition flex items-center gap-2"><i class="fab fa-whatsapp text-brandGreen mr-2"></i> +593 98 390 0050</a></li>
+                <li><a href="mailto:evoluserec@gmail.com" class="hover:text-brandGreen transition flex items-center gap-2 lowercase tracking-wider font-bold"><i class="fas fa-envelope text-brandGreen mr-2"></i> evoluserec@gmail.com</a></li></ul></div>
+            
+            <!-- ICONOS REDES SOCIALES (IDÉNTICOS AL TOP BAR) -->
+            <div><h5 class="font-bold mb-8 uppercase tracking-widest text-brandGreen text-sm text-nowrap">Síguenos</h5>
+                <div class="flex gap-6 text-2xl">
+                    <a href="#" class="social-icon hover-linkedin transition"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="social-icon hover-facebook transition"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-icon hover-instagram transition"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-icon hover-youtube transition"><i class="fab fa-youtube"></i></a>
+                    <a href="#" class="social-icon hover-tiktok transition"><i class="fab fa-tiktok"></i></a>
+                    <a href="#" class="social-icon hover-x transition"><i class="fab fa-x-twitter"></i></a>
+                </div>
+            </div>
         </div>
     </footer>
 
-    <!-- EV MOVIBLE Y FUTURISTA (ACTUALIZADO CON CÓDIGO INGENIO) -->
+    <!-- EV MOVIBLE Y FUTURISTA -->
     <div id="ev-floating-container" class="fixed z-[80] flex flex-col items-center cursor-pointer group select-none touch-none" style="bottom: 40px; right: 40px;">
-        <!-- Globo de Texto Superior (Animación Bounce de Tailwind) -->
-        <div class="bg-white px-4 py-2 rounded-xl shadow-md border-b-2 border-[#D4AF37] mb-2 animate-bounce whitespace-nowrap">
-           <span class="text-xs font-extrabold text-[#005691] uppercase tracking-wider">
+        <!-- Globo de Texto Superior -->
+        <div class="bg-white px-4 py-2 rounded-xl shadow-neon-light border-b-2 border-brandBlue mb-2 animate-bounce whitespace-nowrap">
+           <span class="text-xs font-extrabold text-brandBlue uppercase tracking-wider">
              ¡Hola! Soy Ev. ¿Hablamos?
            </span>
         </div>
         
-        <!-- Contenedor del Avatar (Aplica el Brillo Dorado) -->
+        <!-- Contenedor del Avatar (Aplica el Brillo Azul Neón) -->
         <div class="w-[90px] h-auto relative animate-glow-latency">
            <!-- Imagen de Ev (Aplica la Flotación) -->
            <img 
@@ -542,23 +653,23 @@
 
     <!-- CHATBOT WINDOW -->
     <div id="ai-chat-window" class="fixed bottom-24 right-6 w-80 md:w-96 bg-white rounded-2xl shadow-2xl flex flex-col transition-all duration-500 transform scale-0 origin-bottom-right z-[90] hidden border border-gray-100 overflow-hidden" style="height: 500px;">
-        <div class="bg-gradient-to-r from-brandBlue to-brandBlueDark p-6 flex justify-between items-center border-b-4 border-brandGold">
+        <div class="bg-gradient-to-r from-brandBlue to-brandGreen p-6 flex justify-between items-center border-b-4 border-white/20">
             <div class="flex items-center gap-4">
                 <img src="https://raw.githubusercontent.com/direccioncomercial/evoluser-web/1b862973e8003850daadd6a47bffd5b6cf04b2f6/imagen6.png" class="w-12 h-12 object-contain ev-free-avatar">
-                <div><h4 class="text-white font-bold text-sm text-nowrap">Consultora Ev</h4><p class="text-[10px] text-brandGold font-bold uppercase tracking-widest leading-none">Inteligencia Estratégica</p></div>
+                <div><h4 class="text-white font-bold text-sm text-nowrap">Consultora Ev</h4><p class="text-[10px] text-white/80 font-bold uppercase tracking-widest leading-none">Inteligencia Estratégica</p></div>
             </div>
             <button onclick="toggleChat()" class="text-white/50 hover:text-white transition"><i class="fas fa-times text-xl"></i></button>
         </div>
         <ul id="chat-box" class="flex-1 overflow-y-auto p-6 space-y-4 bg-gray-50/50 scrollbar-hide"><li class="flex justify-start"><div class="bg-white text-gray-700 p-4 rounded-2xl rounded-tl-none shadow-sm text-sm border border-gray-100 max-w-[85%] italic">"Bienvenido Evonauta. Soy Ev, tu consultora experta. ¿Deseas optimizar hoy tu equipo, tu seguridad o tu cumplimiento ambiental?"</div></li></ul>
-        <div class="p-4 bg-white border-t border-gray-100"><div class="flex items-center gap-3 bg-gray-50 rounded-full px-5 py-3 border border-gray-200 focus-within:border-brandGold transition-all"><input id="chat-input" class="flex-1 bg-transparent border-none outline-none text-sm font-medium" placeholder="Consulta estratégica..."> <button onclick="handleChat()" class="text-brandBlue hover:text-brandGold transition transform hover:scale-110"><i class="fas fa-paper-plane text-lg"></i></button></div></div>
+        <div class="p-4 bg-white border-t border-gray-100"><div class="flex items-center gap-3 bg-gray-50 rounded-full px-5 py-3 border border-gray-200 focus-within:border-brandBlue transition-all"><input id="chat-input" class="flex-1 bg-transparent border-none outline-none text-sm font-medium" placeholder="Consulta estratégica..."> <button onclick="handleChat()" class="text-brandBlue hover:text-brandGreen transition transform hover:scale-110"><i class="fas fa-paper-plane text-lg"></i></button></div></div>
     </div>
 
     <!-- MODAL UNIVERSAL -->
-    <div id="service-modal" class="fixed inset-0 z-[100] hidden items-center justify-center bg-brandBlueDark/80 backdrop-blur-md p-4">
+    <div id="service-modal" class="fixed inset-0 z-[100] hidden items-center justify-center bg-brandBlue/90 backdrop-blur-md p-4">
         <div class="bg-white rounded-2xl shadow-2xl max-w-5xl w-full max-h-[90vh] overflow-y-auto relative animate-pop-in flex flex-col md:flex-row overflow-hidden">
-            <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-400 hover:text-brandGold z-20 bg-white/80 rounded-full p-2 transition"><i class="fas fa-times text-2xl"></i></button>
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-400 hover:text-brandBlue z-20 bg-white/80 rounded-full p-2 transition"><i class="fas fa-times text-2xl"></i></button>
             <div class="w-full md:w-2/5 h-64 md:h-auto bg-gray-50 relative flex items-center justify-center border-r border-gray-100"><img id="modal-image" src="" class="w-full h-full object-cover object-top"></div>
-            <div class="w-full md:w-3/5 p-10 md:p-14 flex flex-col justify-center"><div id="modal-content" class="scrollbar-hide overflow-y-auto max-h-[60vh]"></div><button onclick="closeModal()" class="mt-10 w-full bg-gray-100 hover:bg-brandGold hover:text-white text-gray-500 font-extrabold py-4 rounded-xl transition uppercase text-xs tracking-[0.2em]">Cerrar</button></div>
+            <div class="w-full md:w-3/5 p-10 md:p-14 flex flex-col justify-center"><div id="modal-content" class="scrollbar-hide overflow-y-auto max-h-[60vh]"></div><button onclick="closeModal()" class="mt-10 w-full bg-gray-100 hover:bg-brandBlue hover:text-white text-gray-500 font-extrabold py-4 rounded-xl transition uppercase text-xs tracking-[0.2em]">Cerrar</button></div>
         </div>
     </div>
 
@@ -605,7 +716,7 @@
                 customHTML: `
                     <div class="space-y-8">
                         <div class="philosophy-block">
-                            <h4 class="text-brandGold font-extrabold uppercase text-[10px] tracking-[0.3em] mb-4 italic">Carta a nuestros Clientes</h4>
+                            <h4 class="text-brandGreen font-extrabold uppercase text-[10px] tracking-[0.3em] mb-4 italic">Carta a nuestros Clientes</h4>
                             <div class="text-gray-700 text-sm leading-relaxed text-justify space-y-4 font-bold border-l-4 border-gray-100 pl-4">
                                 <p><strong>Estimados Clientes,</strong></p>
                                 <p>Presentamos una nueva forma de entender el crecimiento empresarial. Entendemos que una empresa exitosa del siglo XXI debe ser <strong>Humana, Segura, Sostenible y Productiva.</strong></p>
@@ -613,7 +724,7 @@
                             </div>
                         </div>
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-10">
-                            <div class="border-l-4 border-brandBlueDark pl-6"><h4 class="text-brandBlueDark font-extrabold uppercase text-[10px] tracking-widest mb-3">Misión</h4><p class="text-gray-600 text-xs leading-relaxed font-bold">Brindar soluciones técnicas de consultoría con enfoque humano, transformando la cultura organizacional y asegurando el cumplimiento legal para potenciar a su gente.</p></div>
+                            <div class="border-l-4 border-brandBlue pl-6"><h4 class="text-brandBlue font-extrabold uppercase text-[10px] tracking-widest mb-3">Misión</h4><p class="text-gray-600 text-xs leading-relaxed font-bold">Brindar soluciones técnicas de consultoría con enfoque humano, transformando la cultura organizacional y asegurando el cumplimiento legal para potenciar a su gente.</p></div>
                             <div class="border-l-4 border-brandGreen pl-6"><h4 class="text-brandGreen font-extrabold uppercase text-[10px] tracking-widest mb-3">Visión</h4><p class="text-gray-600 text-xs leading-relaxed font-bold">Ser el referente de excelencia en consultoría integral en la región, demostrando que el bienestar humano es el motor inamovible de la rentabilidad sostenible.</p></div>
                         </div>
                     </div>
@@ -621,8 +732,8 @@
             },
             humano: { title: "Gestión de Talento", image: "https://raw.githubusercontent.com/direccioncomercial/evoluser-web/1b862973e8003850daadd6a47bffd5b6cf04b2f6/imagen2.png", leader: "Nury Echeverria", role: "Directora de Talento", desc: "Potenciamos el capital humano con diagnósticos precisos.", list: ["Reclutamiento Senior", "Cultura de Éxito", "Evaluación 360°"] },
             seguro: { title: "Seguridad Industrial", image: "https://raw.githubusercontent.com/direccioncomercial/evoluser-web/1b862973e8003850daadd6a47bffd5b6cf04b2f6/imagen3.png", leader: "Christian Ortega", role: "Director Técnico", desc: "Garantizamos el cumplimiento normativo integral.", list: ["ISO 45001", "Vigilancia Médica", "Riesgos Técnicos"] },
-            agro: { title: "Agroindustria", image: "https://raw.githubusercontent.com/direccioncomercial/evoluser-web/1b862973e8003850daadd6a47bffd5b6cf04b2f6/imagen5.png", leader: "Lilian Eras", role: "Directora Agro", desc: "Optimizamos la cadena de valor alimentaria.", list: ["Certificación BPA", "HACCP", "Diseño Industrial"] },
-            sostenible: { title: "Gestión Ambiental", image: "https://raw.githubusercontent.com/direccioncomercial/evoluser-web/1b862973e8003850daadd6a47bffd5b6cf04b2f6/imagen3.png", leader: "Christian Ortega", role: "Director Sostenibilidad", desc: "Convertimos la responsabilidad ambiental en rentabilidad real.", list: ["Licencias Verdes", "Huella de Carbono", "Manejo de Desechos"] },
+            agro: { title: "Ingeniería Agroindustrial", image: "https://raw.githubusercontent.com/direccioncomercial/evoluser-web/1b862973e8003850daadd6a47bffd5b6cf04b2f6/imagen5.png", leader: "Lilian Eras", role: "Directora Agro", desc: "Optimizamos la cadena de valor alimentaria.", list: ["Certificación BPA", "HACCP", "Diseño Industrial"] },
+            sostenible: { title: "Ingeniería Ambiental", image: "https://raw.githubusercontent.com/direccioncomercial/evoluser-web/1b862973e8003850daadd6a47bffd5b6cf04b2f6/imagen3.png", leader: "Christian Ortega", role: "Director Sostenibilidad", desc: "Convertimos la responsabilidad ambiental en rentabilidad real.", list: ["Licencias Verdes", "Huella de Carbono", "Manejo de Desechos"] },
             empresas_info: { title: "Consultoría 360°", image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80", desc: "Soluciones corporativas de alto impacto estratégico.", list: ["Outsourcing RRHH", "Auditorías ISO", "Plan Estratégico"] },
             emprendedores_info: { title: "Pack Startup", image: "https://raw.githubusercontent.com/direccioncomercial/evoluser-web/1b862973e8003850daadd6a47bffd5b6cf04b2f6/imagen6.png", desc: "Formalización ágil de tu idea de negocio en tiempo récord.", list: ["Constitución Empresa", "Permisos ARCSA", "Imagen Inicial"] },
             equipo: { title: "Directorio", image: "https://raw.githubusercontent.com/direccioncomercial/evoluser-web/1b862973e8003850daadd6a47bffd5b6cf04b2f6/imagen7.jpeg", desc: "Liderazgo multidisciplinario comprometido con la excelencia.", list: ["Dirección Estratégica", "Calidad", "Innovación"] }
@@ -635,10 +746,10 @@
             else { img.classList.add('object-cover'); img.classList.remove('object-contain'); }
             let html = `<h3 class="text-3xl font-extrabold text-brandBlue mb-4 uppercase tracking-tighter text-nowrap">${data.title}</h3>`;
             if(data.customHTML) { html += data.customHTML; } else {
-                if(data.leader) html += `<div class="mb-6 p-4 bg-gray-50 border-l-4 border-brandGold font-bold text-sm text-nowrap"><span class="text-gray-800">${data.leader}</span> | <span class="text-brandBlue">${data.role}</span></div>`;
+                if(data.leader) html += `<div class="mb-6 p-4 bg-gray-50 border-l-4 border-brandGreen font-bold text-sm text-nowrap"><span class="text-gray-800">${data.leader}</span> | <span class="text-brandBlue">${data.role}</span></div>`;
                 html += `<p class="text-gray-600 mb-8 leading-relaxed font-bold text-justify text-sm">${data.desc}</p>`;
                 if(data.list) { html += `<ul class="space-y-4">`; data.list.forEach(item => html += `<li class="flex items-center text-xs font-extrabold text-gray-700 uppercase tracking-tighter"><i class="fas fa-check-circle text-brandGreen mr-3 text-lg"></i>${item}</li>`); html += `</ul>`; }
-                html += `<div class="mt-10"><a href="https://wa.me/593983900050" target="_blank" class="inline-block bg-brandGold text-white px-10 py-4 rounded-full font-extrabold shadow-gold transition w-full text-center uppercase tracking-widest text-xs">Agendar Consulta</a></div>`;
+                html += `<div class="mt-10"><a href="https://wa.me/593983900050" target="_blank" class="inline-block bg-brandGreen text-white px-10 py-4 rounded-full font-extrabold shadow-brand transition w-full text-center uppercase tracking-widest text-xs">Agendar Consulta</a></div>`;
             }
             document.getElementById('modal-content').innerHTML = html;
             document.getElementById('service-modal').classList.remove('hidden'); document.getElementById('service-modal').classList.add('flex');
@@ -678,6 +789,48 @@
 
         // Auto-play opcional (comenta esta línea si prefieres solo manual)
         setInterval(nextSlide, 6000);
+
+        // --- Efecto Letras Giratorias (Slogan) ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const slogan = document.getElementById('slogan-animado');
+            if(slogan) {
+                const text = slogan.innerText;
+                // Dividimos por letras pero respetamos espacios para el responsive
+                slogan.innerHTML = text.split('').map((char, i) => {
+                    if (char === ' ') return ' '; 
+                    return `<span class="inline-block" style="animation: spinLetters 8s ease-in-out infinite; animation-delay: ${i * 0.03}s; transform-style: preserve-3d; backface-visibility: hidden;">${char}</span>`;
+                }).join('');
+            }
+        });
+        
+        // --- JS para el Cursor Personalizado ---
+        const cursor = document.getElementById('custom-cursor');
+        
+        // Mover cursor
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+
+        // Efecto Hover en elementos interactivos
+        const interactables = document.querySelectorAll('a, button, input, textarea, select, .cursor-pointer');
+        interactables.forEach(el => {
+            el.addEventListener('mouseenter', () => cursor.classList.add('hovering'));
+            el.addEventListener('mouseleave', () => cursor.classList.remove('hovering'));
+        });
+        
+        // Re-aplicar listeners cuando se abren modales o cambia contenido dinámico
+        const observer = new MutationObserver((mutations) => {
+             const newInteractables = document.querySelectorAll('a, button, input, textarea, select, .cursor-pointer');
+             newInteractables.forEach(el => {
+                el.removeEventListener('mouseenter', () => cursor.classList.add('hovering'));
+                el.removeEventListener('mouseleave', () => cursor.classList.remove('hovering'));
+                el.addEventListener('mouseenter', () => cursor.classList.add('hovering'));
+                el.addEventListener('mouseleave', () => cursor.classList.remove('hovering'));
+            });
+        });
+        observer.observe(document.body, { childList: true, subtree: true });
+
     </script>
 </body>
 </html>
