@@ -830,15 +830,51 @@
                 container.innerHTML = `<img id="modal-image" src="${data.image}" class="${imgClass}">`;
             }
 
-            let html = `<h3 class="text-3xl font-extrabold text-brandBlue mb-4 uppercase tracking-tighter text-nowrap">${data.title}</h3>`;
-            if(data.customHTML) { html += data.customHTML; } else {
-                if(data.leader) html += `<div class="mb-6 p-4 bg-gray-50 border-l-4 border-brandGreen font-bold text-sm text-nowrap"><span class="text-gray-800">${data.leader}</span> | <span class="text-brandBlue">${data.role}</span></div>`;
-                html += `<p class="text-gray-600 mb-8 leading-relaxed font-bold text-justify text-sm">${data.desc}</p>`;
-                if(data.list) { html += `<ul class="space-y-4">`; data.list.forEach(item => html += `<li class="flex items-center text-xs font-extrabold text-gray-700 uppercase tracking-tighter"><i class="fas fa-check-circle text-brandGreen mr-3 text-lg"></i>${item}</li>`); html += `</ul>`; }
-                html += `<div class="mt-10"><a href="https://wa.me/593983900050" target="_blank" class="inline-block bg-brandGreen text-white px-10 py-4 rounded-full font-extrabold shadow-brand transition w-full text-center uppercase tracking-widest text-xs">Agendar Consulta</a></div>`;
+            let html = `
+                <h3 class="text-3xl font-extrabold text-brandBlue mb-4 uppercase tracking-tighter text-nowrap">
+                    ${data.title}
+                </h3>
+            `;
+            if (data.customHTML) {
+                html += data.customHTML;
+            } else {
+                if (data.leader) {
+                    html += `
+                        <div class="mb-6 p-4 bg-gray-50 border-l-4 border-brandGreen font-bold text-sm text-nowrap">
+                            <span class="text-gray-800">${data.leader}</span> |
+                            <span class="text-brandBlue">${data.role}</span>
+                        </div>
+                    `;
+                }
+                html += `
+                    <p class="text-gray-600 mb-8 leading-relaxed font-bold text-justify text-sm">
+                        ${data.desc}
+                    </p>
+                `;
+                if (data.list) {
+                    html += `<ul class="space-y-4">`;
+                    data.list.forEach(item => {
+                        html += `
+                            <li class="flex items-center text-xs font-extrabold text-gray-700 uppercase tracking-tighter">
+                                <i class="fas fa-check-circle text-brandGreen mr-3 text-lg"></i>${item}
+                            </li>
+                        `;
+                    });
+                    html += `</ul>`;
+                }
+                html += `
+                    <div class="mt-10">
+                        <a href="https://wa.me/593983900050" target="_blank" class="inline-block bg-brandGreen text-white px-10 py-4 rounded-full font-extrabold shadow-brand transition w-full text-center uppercase tracking-widest text-xs">
+                            Agendar Consulta
+                        </a>
+                    </div>
+                `;
             }
             document.getElementById('modal-content').innerHTML = html;
-            document.getElementById('service-modal').classList.remove('hidden'); document.getElementById('service-modal').classList.add('flex');
+
+            const modal = document.getElementById('service-modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
         }
         function closeModal() { document.getElementById('service-modal').classList.add('hidden'); }
         function toggleChat() { const win = document.getElementById('ai-chat-window'); if(win.classList.contains('hidden')) { win.classList.remove('hidden'); setTimeout(()=>win.classList.remove('scale-0'),10); } else { win.classList.add('scale-0'); setTimeout(()=>win.classList.add('hidden'),300); } }
