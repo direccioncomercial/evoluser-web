@@ -841,7 +841,16 @@
             document.getElementById('service-modal').classList.remove('hidden'); document.getElementById('service-modal').classList.add('flex');
         }
         function closeModal() { document.getElementById('service-modal').classList.add('hidden'); }
-        function toggleChat() { const win = document.getElementById('ai-chat-window'); if(win.classList.contains('hidden')) { win.classList.remove('hidden'); setTimeout(()=>win.classList.remove('scale-0'),10); } else { win.classList.add('scale-0'); setTimeout(()=>win.classList.add('hidden'),300); } }
+        function toggleChat() {
+            const win = document.getElementById('ai-chat-window');
+            if(win.classList.contains('hidden')) {
+                win.classList.remove('hidden');
+                setTimeout(()=>win.classList.remove('scale-0'),10);
+            } else {
+                win.classList.add('scale-0');
+                setTimeout(()=>win.classList.add('hidden'),300);
+            }
+        }
         async function handleChat() { 
             const input = document.getElementById('chat-input'); const text = input.value; if(!text) return;
             const chatBox = document.getElementById('chat-box'); chatBox.innerHTML += `<li class="flex justify-end"><div class="bg-brandBlue text-white p-3 rounded-2xl rounded-tr-none text-sm font-bold">${text}</div></li>`;
