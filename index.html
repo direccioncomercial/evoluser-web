@@ -752,9 +752,29 @@
         document.addEventListener('touchmove', (e) => drag(e.touches[0]));
         document.addEventListener('touchend', stopDragging);
 
-        function startDragging(e) { isDragging = true; hasMoved = false; startX = e.clientX; startY = e.clientY; initialX = evContainer.offsetLeft; initialY = evContainer.offsetTop; }
-        function drag(e) { if (!isDragging) return; hasMoved = true; const dx = e.clientX - startX; const dy = e.clientY - startY; evContainer.style.left = (initialX + dx) + 'px'; evContainer.style.top = (initialY + dy) + 'px'; evContainer.style.bottom = 'auto'; evContainer.style.right = 'auto'; }
-        function stopDragging() { isDragging = false; }
+        function startDragging(e) {
+            isDragging = true;
+            hasMoved = false;
+            startX = e.clientX;
+            startY = e.clientY;
+            initialX = evContainer.offsetLeft;
+            initialY = evContainer.offsetTop;
+        }
+
+        function drag(e) {
+            if (!isDragging) return;
+            hasMoved = true;
+            const dx = e.clientX - startX;
+            const dy = e.clientY - startY;
+            evContainer.style.left = (initialX + dx) + 'px';
+            evContainer.style.top = (initialY + dy) + 'px';
+            evContainer.style.bottom = 'auto';
+            evContainer.style.right = 'auto';
+        }
+
+        function stopDragging() {
+            isDragging = false;
+        }
         document.getElementById('ev-avatar-trigger').onclick = () => { if (!hasMoved) toggleChat(); };
 
         function setSegment(segment) {
