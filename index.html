@@ -740,6 +740,7 @@
         </div>
     </div>
 
+    <script src="navigation.js"></script>
     <script>
         // Lógica de Movimiento EV
         const evContainer = document.getElementById('ev-floating-container');
@@ -756,14 +757,6 @@
         function drag(e) { if (!isDragging) return; hasMoved = true; const dx = e.clientX - startX; const dy = e.clientY - startY; evContainer.style.left = (initialX + dx) + 'px'; evContainer.style.top = (initialY + dy) + 'px'; evContainer.style.bottom = 'auto'; evContainer.style.right = 'auto'; }
         function stopDragging() { isDragging = false; }
         document.getElementById('ev-avatar-trigger').onclick = () => { if (!hasMoved) toggleChat(); };
-
-        function setSegment(segment) {
-            document.querySelectorAll('.nav-link').forEach(btn => btn.classList.remove('active'));
-            if(document.getElementById('nav-' + segment)) document.getElementById('nav-' + segment).classList.add('active');
-            ['soluciones', 'empresas', 'emprendedores', 'oficina'].forEach(s => { const el = document.getElementById('segment-' + s); if(el) el.classList.add('hidden'); });
-            const target = document.getElementById('segment-' + segment); if(target) target.classList.remove('hidden');
-            window.scrollTo({top: 0, behavior: 'smooth'});
-        }
 
         function handleOfficeSubmit(e) {
             e.preventDefault();
