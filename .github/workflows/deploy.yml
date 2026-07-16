@@ -12,6 +12,17 @@ jobs:
     - name: 🚚 Get latest code
       uses: actions/checkout@v4
 
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+
+    - name: Install Dependencies
+      run: npm ci
+
+    - name: Build CSS
+      run: npm run build:css
+
     - name: 📂 Sync files
       uses: SamKirkland/FTP-Deploy-Action@v4.3.4
       with:
@@ -22,3 +33,5 @@ jobs:
         exclude: |
           **/.git*
           **/.git*/**
+          **/node_modules/**
+          **/src/**
