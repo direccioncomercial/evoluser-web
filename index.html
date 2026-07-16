@@ -900,19 +900,22 @@
 
         // Efecto Hover en elementos interactivos
         const interactables = document.querySelectorAll('a, button, input, textarea, select, .cursor-pointer');
+        const handleMouseEnter = () => cursor.classList.add('hovering');
+        const handleMouseLeave = () => cursor.classList.remove('hovering');
+
         interactables.forEach(el => {
-            el.addEventListener('mouseenter', () => cursor.classList.add('hovering'));
-            el.addEventListener('mouseleave', () => cursor.classList.remove('hovering'));
+            el.addEventListener('mouseenter', handleMouseEnter);
+            el.addEventListener('mouseleave', handleMouseLeave);
         });
         
         // Re-aplicar listeners cuando se abren modales o cambia contenido dinámico
         const observer = new MutationObserver((mutations) => {
              const newInteractables = document.querySelectorAll('a, button, input, textarea, select, .cursor-pointer');
              newInteractables.forEach(el => {
-                el.removeEventListener('mouseenter', () => cursor.classList.add('hovering'));
-                el.removeEventListener('mouseleave', () => cursor.classList.remove('hovering'));
-                el.addEventListener('mouseenter', () => cursor.classList.add('hovering'));
-                el.addEventListener('mouseleave', () => cursor.classList.remove('hovering'));
+                el.removeEventListener('mouseenter', handleMouseEnter);
+                el.removeEventListener('mouseleave', handleMouseLeave);
+                el.addEventListener('mouseenter', handleMouseEnter);
+                el.addEventListener('mouseleave', handleMouseLeave);
             });
         });
         observer.observe(document.body, { childList: true, subtree: true });
