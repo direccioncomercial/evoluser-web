@@ -741,6 +741,107 @@
     </div>
 
     <script>
+        const contentData = {
+            filosofia_premium: {
+                title: "Filosofía EvoluSer",
+                image: "https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=800&q=80",
+                customHTML: `
+                    <div class="space-y-8">
+                        <div class="philosophy-block">
+                            <h4 class="text-brandGreen font-extrabold uppercase text-[10px] tracking-[0.3em] mb-4 italic">Carta a nuestros Clientes</h4>
+                            <div class="text-gray-700 text-sm leading-relaxed text-justify space-y-4 font-bold border-l-4 border-gray-100 pl-4">
+                                <p><strong>Estimados Clientes,</strong></p>
+                                <p>Presentamos una nueva forma de entender el crecimiento empresarial. Entendemos que una empresa exitosa del siglo XXI debe ser <strong>Humana, Segura, Sostenible y Productiva.</strong></p>
+                                <p>En EvoluSer, no somos proveedores, somos sus aliados estratégicos. Nuestra razón de ser es acompañar su evolución técnica y humana para que el éxito sea el resultado natural de una organización sana y responsable.</p>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-10">
+                            <div class="border-l-4 border-brandBlue pl-6"><h4 class="text-brandBlue font-extrabold uppercase text-[10px] tracking-widest mb-3">Misión</h4><p class="text-gray-600 text-xs leading-relaxed font-bold">Brindar soluciones técnicas de consultoría con enfoque humano, transformando la cultura organizacional y asegurando el cumplimiento legal para potenciar a su gente.</p></div>
+                            <div class="border-l-4 border-brandGreen pl-6"><h4 class="text-brandGreen font-extrabold uppercase text-[10px] tracking-widest mb-3">Visión</h4><p class="text-gray-600 text-xs leading-relaxed font-bold">Ser el referente de excelencia en consultoría integral en la región, demostrando que el bienestar humano es el motor inamovible de la rentabilidad sostenible.</p></div>
+                        </div>
+                    </div>
+                `
+            },
+            humano: {
+                title: "Gestión de Talento",
+                image: "https://raw.githubusercontent.com/direccioncomercial/evoluser-web/1b862973e8003850daadd6a47bffd5b6cf04b2f6/imagen2.png",
+                leader: "Nury Echeverria",
+                role: "Directora de Talento",
+                desc: "Potenciamos el capital humano con diagnósticos precisos.",
+                list: [
+                    "Reclutamiento Senior",
+                    "Cultura de Éxito",
+                    "Evaluación 360°"
+                ]
+            },
+            seguro: {
+                title: "Seguridad Industrial",
+                image: "https://raw.githubusercontent.com/direccioncomercial/evoluser-web/1b862973e8003850daadd6a47bffd5b6cf04b2f6/imagen3.png",
+                leader: "Christian Ortega",
+                role: "Director Técnico",
+                desc: "Garantizamos el cumplimiento normativo integral.",
+                list: [
+                    "ISO 45001",
+                    "Vigilancia Médica",
+                    "Riesgos Técnicos"
+                ]
+            },
+            agro: {
+                title: "Ingeniería Agroindustrial",
+                image: "https://raw.githubusercontent.com/direccioncomercial/evoluser-web/1b862973e8003850daadd6a47bffd5b6cf04b2f6/imagen5.png",
+                leader: "Lilian Eras",
+                role: "Directora Agro",
+                desc: "Optimizamos la cadena de valor alimentaria.",
+                list: [
+                    "Certificación BPA",
+                    "HACCP",
+                    "Diseño Industrial"
+                ]
+            },
+            sostenible: {
+                title: "Ingeniería Ambiental",
+                image: "https://raw.githubusercontent.com/direccioncomercial/evoluser-web/1b862973e8003850daadd6a47bffd5b6cf04b2f6/imagen3.png",
+                leader: "Christian Ortega",
+                role: "Director Sostenibilidad",
+                desc: "Convertimos la responsabilidad ambiental en rentabilidad real.",
+                list: [
+                    "Licencias Verdes",
+                    "Huella de Carbono",
+                    "Manejo de Desechos"
+                ]
+            },
+            empresas_info: {
+                title: "Consultoría 360°",
+                image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80",
+                desc: "Soluciones corporativas de alto impacto estratégico.",
+                list: [
+                    "Outsourcing RRHH",
+                    "Auditorías ISO",
+                    "Plan Estratégico"
+                ]
+            },
+            emprendedores_info: {
+                title: "Pack Startup",
+                image: "https://raw.githubusercontent.com/direccioncomercial/evoluser-web/1b862973e8003850daadd6a47bffd5b6cf04b2f6/imagen6.png",
+                desc: "Formalización ágil de tu idea de negocio en tiempo récord.",
+                list: [
+                    "Constitución Empresa",
+                    "Permisos ARCSA",
+                    "Imagen Inicial"
+                ]
+            },
+            equipo: {
+                title: "Directorio",
+                image: "https://raw.githubusercontent.com/direccioncomercial/evoluser-web/1b862973e8003850daadd6a47bffd5b6cf04b2f6/imagen7.jpeg",
+                desc: "Liderazgo multidisciplinario comprometido con la excelencia.",
+                list: [
+                    "Dirección Estratégica",
+                    "Calidad",
+                    "Innovación"
+                ]
+            }
+        };
+
         // Lógica de Movimiento EV
         const evContainer = document.getElementById('ev-floating-container');
         let isDragging = false; let startX, startY, initialX, initialY; let hasMoved = false;
@@ -775,36 +876,6 @@
         }
 
         function resetOfficeForm() { document.getElementById('ov-form').classList.remove('hidden'); document.getElementById('ov-success').classList.add('hidden'); document.getElementById('ov-form').reset(); }
-
-        const contentData = {
-            filosofia_premium: {
-                title: "Filosofía EvoluSer",
-                image: "https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=800&q=80",
-                customHTML: `
-                    <div class="space-y-8">
-                        <div class="philosophy-block">
-                            <h4 class="text-brandGreen font-extrabold uppercase text-[10px] tracking-[0.3em] mb-4 italic">Carta a nuestros Clientes</h4>
-                            <div class="text-gray-700 text-sm leading-relaxed text-justify space-y-4 font-bold border-l-4 border-gray-100 pl-4">
-                                <p><strong>Estimados Clientes,</strong></p>
-                                <p>Presentamos una nueva forma de entender el crecimiento empresarial. Entendemos que una empresa exitosa del siglo XXI debe ser <strong>Humana, Segura, Sostenible y Productiva.</strong></p>
-                                <p>En EvoluSer, no somos proveedores, somos sus aliados estratégicos. Nuestra razón de ser es acompañar su evolución técnica y humana para que el éxito sea el resultado natural de una organización sana y responsable.</p>
-                            </div>
-                        </div>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-10">
-                            <div class="border-l-4 border-brandBlue pl-6"><h4 class="text-brandBlue font-extrabold uppercase text-[10px] tracking-widest mb-3">Misión</h4><p class="text-gray-600 text-xs leading-relaxed font-bold">Brindar soluciones técnicas de consultoría con enfoque humano, transformando la cultura organizacional y asegurando el cumplimiento legal para potenciar a su gente.</p></div>
-                            <div class="border-l-4 border-brandGreen pl-6"><h4 class="text-brandGreen font-extrabold uppercase text-[10px] tracking-widest mb-3">Visión</h4><p class="text-gray-600 text-xs leading-relaxed font-bold">Ser el referente de excelencia en consultoría integral en la región, demostrando que el bienestar humano es el motor inamovible de la rentabilidad sostenible.</p></div>
-                        </div>
-                    </div>
-                `
-            },
-            humano: { title: "Gestión de Talento", image: "https://raw.githubusercontent.com/direccioncomercial/evoluser-web/1b862973e8003850daadd6a47bffd5b6cf04b2f6/imagen2.png", leader: "Nury Echeverria", role: "Directora de Talento", desc: "Potenciamos el capital humano con diagnósticos precisos.", list: ["Reclutamiento Senior", "Cultura de Éxito", "Evaluación 360°"] },
-            seguro: { title: "Seguridad Industrial", image: "https://raw.githubusercontent.com/direccioncomercial/evoluser-web/1b862973e8003850daadd6a47bffd5b6cf04b2f6/imagen3.png", leader: "Christian Ortega", role: "Director Técnico", desc: "Garantizamos el cumplimiento normativo integral.", list: ["ISO 45001", "Vigilancia Médica", "Riesgos Técnicos"] },
-            agro: { title: "Ingeniería Agroindustrial", image: "https://raw.githubusercontent.com/direccioncomercial/evoluser-web/1b862973e8003850daadd6a47bffd5b6cf04b2f6/imagen5.png", leader: "Lilian Eras", role: "Directora Agro", desc: "Optimizamos la cadena de valor alimentaria.", list: ["Certificación BPA", "HACCP", "Diseño Industrial"] },
-            sostenible: { title: "Ingeniería Ambiental", image: "https://raw.githubusercontent.com/direccioncomercial/evoluser-web/1b862973e8003850daadd6a47bffd5b6cf04b2f6/imagen3.png", leader: "Christian Ortega", role: "Director Sostenibilidad", desc: "Convertimos la responsabilidad ambiental en rentabilidad real.", list: ["Licencias Verdes", "Huella de Carbono", "Manejo de Desechos"] },
-            empresas_info: { title: "Consultoría 360°", image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80", desc: "Soluciones corporativas de alto impacto estratégico.", list: ["Outsourcing RRHH", "Auditorías ISO", "Plan Estratégico"] },
-            emprendedores_info: { title: "Pack Startup", image: "https://raw.githubusercontent.com/direccioncomercial/evoluser-web/1b862973e8003850daadd6a47bffd5b6cf04b2f6/imagen6.png", desc: "Formalización ágil de tu idea de negocio en tiempo récord.", list: ["Constitución Empresa", "Permisos ARCSA", "Imagen Inicial"] },
-            equipo: { title: "Directorio", image: "https://raw.githubusercontent.com/direccioncomercial/evoluser-web/1b862973e8003850daadd6a47bffd5b6cf04b2f6/imagen7.jpeg", desc: "Liderazgo multidisciplinario comprometido con la excelencia.", list: ["Dirección Estratégica", "Calidad", "Innovación"] }
-        };
 
         function openModal(type) {
             const data = contentData[type]; if(!data) return;
