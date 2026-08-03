@@ -317,7 +317,7 @@
                 <button onclick="openModal('filosofia_premium')" class="nav-link h-full flex items-center text-nowrap">Filosofía</button>
             </div>
             <div class="flex items-center gap-4">
-                <a href="https://wa.me/593983900050?text=Hola%20EvoluSer,%20deseo%20una%20consultoría%20experta%20en..." target="_blank" class="hidden lg:block px-8 py-3 bg-gradient-to-r from-brandBlue to-brandGreen text-white font-extrabold rounded-full hover:shadow-neon-light transition uppercase text-xs tracking-wider border border-white/20">WhatsApp Directo</a>
+                <a href="https://wa.me/593983900050?text=Hola%20EvoluSer,%20deseo%20una%20consultoría%20experta%20en..." target="_blank" rel="noopener noreferrer" class="hidden lg:block px-8 py-3 bg-gradient-to-r from-brandBlue to-brandGreen text-white font-extrabold rounded-full hover:shadow-neon-light transition uppercase text-xs tracking-wider border border-white/20">WhatsApp Directo</a>
                 <button onclick="openModal('equipo')" class="bg-white border-2 border-brandBlue text-brandBlue px-6 py-2.5 rounded-full font-bold text-[10px] shadow-sm hover:bg-brandBlue hover:text-white transition uppercase tracking-tighter">Directorio</button>
             </div>
         </div>
@@ -659,7 +659,7 @@
                 <ul class="space-y-4 text-white/70 font-bold uppercase text-sm">
                     <li><i class="fas fa-map-marker-alt text-brandGreen mr-2"></i> Quito, Ecuador</li>
                     <li><a href="tel:+593987003357" class="hover:text-brandGreen transition flex items-center gap-2"><i class="fas fa-phone-alt text-brandGreen mr-2"></i> +593 98 700 3357</a></li>
-                    <li><a href="https://wa.me/593983900050" target="_blank" class="hover:text-brandGreen transition flex items-center gap-2"><i class="fab fa-whatsapp text-brandGreen mr-2"></i> +593 98 390 0050</a></li>
+                    <li><a href="https://wa.me/593983900050" target="_blank" rel="noopener noreferrer" class="hover:text-brandGreen transition flex items-center gap-2"><i class="fab fa-whatsapp text-brandGreen mr-2"></i> +593 98 390 0050</a></li>
                     <li><a href="mailto:evoluserec@gmail.com" class="hover:text-brandGreen transition flex items-center gap-2 lowercase tracking-wider font-bold"><i class="fas fa-envelope text-brandGreen mr-2"></i> evoluserec@gmail.com</a></li>
                 </ul>
             </div>
@@ -835,7 +835,7 @@
                 if(data.leader) html += `<div class="mb-6 p-4 bg-gray-50 border-l-4 border-brandGreen font-bold text-sm text-nowrap"><span class="text-gray-800">${data.leader}</span> | <span class="text-brandBlue">${data.role}</span></div>`;
                 html += `<p class="text-gray-600 mb-8 leading-relaxed font-bold text-justify text-sm">${data.desc}</p>`;
                 if(data.list) { html += `<ul class="space-y-4">`; data.list.forEach(item => html += `<li class="flex items-center text-xs font-extrabold text-gray-700 uppercase tracking-tighter"><i class="fas fa-check-circle text-brandGreen mr-3 text-lg"></i>${item}</li>`); html += `</ul>`; }
-                html += `<div class="mt-10"><a href="https://wa.me/593983900050" target="_blank" class="inline-block bg-brandGreen text-white px-10 py-4 rounded-full font-extrabold shadow-brand transition w-full text-center uppercase tracking-widest text-xs">Agendar Consulta</a></div>`;
+                html += `<div class="mt-10"><a href="https://wa.me/593983900050" target="_blank" rel="noopener noreferrer" class="inline-block bg-brandGreen text-white px-10 py-4 rounded-full font-extrabold shadow-brand transition w-full text-center uppercase tracking-widest text-xs">Agendar Consulta</a></div>`;
             }
             document.getElementById('modal-content').innerHTML = html;
             document.getElementById('service-modal').classList.remove('hidden'); document.getElementById('service-modal').classList.add('flex');
