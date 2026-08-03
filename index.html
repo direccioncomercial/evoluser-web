@@ -744,6 +744,7 @@
         // Lógica de Movimiento EV
         const evContainer = document.getElementById('ev-floating-container');
         let isDragging = false; let startX, startY, initialX, initialY; let hasMoved = false;
+        let dragAnimation = null;
 
         evContainer.addEventListener('mousedown', startDragging);
         document.addEventListener('mousemove', drag);
@@ -753,8 +754,20 @@
         document.addEventListener('touchend', stopDragging);
 
         function startDragging(e) { isDragging = true; hasMoved = false; startX = e.clientX; startY = e.clientY; initialX = evContainer.offsetLeft; initialY = evContainer.offsetTop; }
-        function drag(e) { if (!isDragging) return; hasMoved = true; const dx = e.clientX - startX; const dy = e.clientY - startY; evContainer.style.left = (initialX + dx) + 'px'; evContainer.style.top = (initialY + dy) + 'px'; evContainer.style.bottom = 'auto'; evContainer.style.right = 'auto'; }
-        function stopDragging() { isDragging = false; }
+        function drag(e) {
+            if (!isDragging) return;
+            hasMoved = true;
+            if (dragAnimation) window.cancelAnimationFrame(dragAnimation);
+            dragAnimation = window.requestAnimationFrame(() => {
+                const dx = e.clientX - startX;
+                const dy = e.clientY - startY;
+                evContainer.style.left = (initialX + dx) + 'px';
+                evContainer.style.top = (initialY + dy) + 'px';
+                evContainer.style.bottom = 'auto';
+                evContainer.style.right = 'auto';
+            });
+        }
+        function stopDragging() { isDragging = false; if (dragAnimation) window.cancelAnimationFrame(dragAnimation); }
         document.getElementById('ev-avatar-trigger').onclick = () => { if (!hasMoved) toggleChat(); };
 
         function setSegment(segment) {
