@@ -898,24 +898,24 @@
             cursor.style.top = e.clientY + 'px';
         });
 
-        // Efecto Hover en elementos interactivos
-        const interactables = document.querySelectorAll('a, button, input, textarea, select, .cursor-pointer');
-        interactables.forEach(el => {
-            el.addEventListener('mouseenter', () => cursor.classList.add('hovering'));
-            el.addEventListener('mouseleave', () => cursor.classList.remove('hovering'));
+        // Efecto Hover en elementos interactivos (Delegación de eventos)
+        document.addEventListener('mouseover', (e) => {
+            if (e.target.closest('a, button, input, textarea, select, .cursor-pointer')) {
+                cursor.classList.add('hovering');
+            }
         });
         
-        // Re-aplicar listeners cuando se abren modales o cambia contenido dinámico
-        const observer = new MutationObserver((mutations) => {
-             const newInteractables = document.querySelectorAll('a, button, input, textarea, select, .cursor-pointer');
-             newInteractables.forEach(el => {
-                el.removeEventListener('mouseenter', () => cursor.classList.add('hovering'));
-                el.removeEventListener('mouseleave', () => cursor.classList.remove('hovering'));
-                el.addEventListener('mouseenter', () => cursor.classList.add('hovering'));
-                el.addEventListener('mouseleave', () => cursor.classList.remove('hovering'));
-            });
+        document.addEventListener('mouseout', (e) => {
+            const interactable = e.target.closest('a, button, input, textarea, select, .cursor-pointer');
+            if (interactable) {
+                // Remove hovering class if the cursor is moving out of the interactable element
+                // e.relatedTarget is the element the cursor is entering. If it is a child of the interactable,
+                // we are still inside the interactable.
+                if (!e.relatedTarget || !interactable.contains(e.relatedTarget)) {
+                    cursor.classList.remove('hovering');
+                }
+            }
         });
-        observer.observe(document.body, { childList: true, subtree: true });
 
     </script>
 </body>
