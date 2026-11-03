@@ -88,7 +88,7 @@
             pointer-events: none;
             z-index: 10000;
             /* HOTSPOT: Punta superior centrada */
-            transform: translate(-50%, -5px); 
+            transform: translate(calc(var(--x, 0px) - 50%), calc(var(--y, 0px) - 5px));
             transition: transform 0.1s ease-out, filter 0.2s ease;
             filter: drop-shadow(0 4px 6px rgba(19, 41, 61, 0.3));
             
@@ -100,7 +100,7 @@
 
         /* Estado Hover: La hoja crece un poco para indicar acción */
         #custom-cursor.hovering {
-            transform: translate(-50%, -5px) scale(1.2);
+            transform: translate(calc(var(--x, 0px) - 50%), calc(var(--y, 0px) - 5px)) scale(1.2);
             filter: drop-shadow(0 0 10px rgba(62, 142, 142, 0.8)); /* Glow Turquesa */
         }
 
@@ -894,8 +894,8 @@
         
         // Mover cursor
         document.addEventListener('mousemove', (e) => {
-            cursor.style.left = e.clientX + 'px';
-            cursor.style.top = e.clientY + 'px';
+            cursor.style.setProperty('--x', e.clientX + 'px');
+            cursor.style.setProperty('--y', e.clientY + 'px');
         });
 
         // Efecto Hover en elementos interactivos
