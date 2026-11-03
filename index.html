@@ -19,6 +19,9 @@
             tailwind.config = {
                 theme: {
                     extend: {
+                        backgroundImage: {
+                            'custom-cursor': 'url("data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 120\'%3E%3Cdefs%3E%3ClinearGradient id=\'grad\' x1=\'0%25\' y1=\'0%25\' x2=\'100%25\' y2=\'100%25\'%3E%3Cstop offset=\'0%25\' style=\'stop-color:%233E8E8E;stop-opacity:1\' /%3E%3Cstop offset=\'100%25\' style=\'stop-color:%2313293D;stop-opacity:1\' /%3E%3C/linearGradient%3E%3C/defs%3E%3C!-- Tallo (Peciolo) en la base --%3E%3Cpath d=\'M50,95 Q50,110 45,115\' stroke=\'%2313293D\' stroke-width=\'3\' fill=\'none\' stroke-linecap=\'round\' /%3E%3C!-- Hoja (Limbo) - Forma ovalada puntiaguda --%3E%3Cpath d=\'M50,0 Q90,40 50,95 Q10,40 50,0 Z\' fill=\'url(%23grad)\' /%3E%3C!-- Nervio Central (Blanco fino) --%3E%3Cpath d=\'M50,0 L50,95\' stroke=\'rgba(255,255,255,0.7)\' stroke-width=\'1.5\' /%3E%3C!-- Nervaduras Secundarias (Simétricas y blancas) --%3E%3Cg stroke=\'rgba(255,255,255,0.4)\' stroke-width=\'1\'%3E%3Cpath d=\'M50,20 L80,35\' /%3E%3Cpath d=\'M50,20 L20,35\' /%3E%3Cpath d=\'M50,45 L85,60\' /%3E%3Cpath d=\'M50,45 L15,60\' /%3E%3Cpath d=\'M50,70 L75,80\' /%3E%3Cpath d=\'M50,70 L25,80\' /%3E%3C/g%3E%3C/svg%3E")'
+                        },
                         colors: {
                             // PALETA EXACTA DEL LOGO EVOLUSER (Extraída de la imagen)
                             brandBlue: '#13293D',      // Azul Marino Profundo ("Evolu")
@@ -79,32 +82,6 @@
         body, a, button, input, textarea, select { cursor: none !important; }
         body { background-color: #ffffff; color: #333; scroll-behavior: smooth; }
 
-        /* CURSOR 3D HOJA EVOLUSER - DISEÑO EXACTO */
-        #custom-cursor {
-            position: fixed;
-            top: 0; left: 0;
-            width: 40px; /* Tamaño ideal */
-            height: 40px;
-            pointer-events: none;
-            z-index: 10000;
-            /* HOTSPOT: Punta superior centrada */
-            transform: translate(-50%, -5px); 
-            transition: transform 0.1s ease-out, filter 0.2s ease;
-            filter: drop-shadow(0 4px 6px rgba(19, 41, 61, 0.3));
-            
-            /* SVG DISEÑADO DESDE CERO SEGÚN TU IMAGEN */
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 120'%3E%3Cdefs%3E%3ClinearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%233E8E8E;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%2313293D;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3C!-- Tallo (Peciolo) en la base --%3E%3Cpath d='M50,95 Q50,110 45,115' stroke='%2313293D' stroke-width='3' fill='none' stroke-linecap='round' /%3E%3C!-- Hoja (Limbo) - Forma ovalada puntiaguda --%3E%3Cpath d='M50,0 Q90,40 50,95 Q10,40 50,0 Z' fill='url(%23grad)' /%3E%3C!-- Nervio Central (Blanco fino) --%3E%3Cpath d='M50,0 L50,95' stroke='rgba(255,255,255,0.7)' stroke-width='1.5' /%3E%3C!-- Nervaduras Secundarias (Simétricas y blancas) --%3E%3Cg stroke='rgba(255,255,255,0.4)' stroke-width='1'%3E%3Cpath d='M50,20 L80,35' /%3E%3Cpath d='M50,20 L20,35' /%3E%3Cpath d='M50,45 L85,60' /%3E%3Cpath d='M50,45 L15,60' /%3E%3Cpath d='M50,70 L75,80' /%3E%3Cpath d='M50,70 L25,80' /%3E%3C/g%3E%3C/svg%3E");
-            background-size: contain;
-            background-repeat: no-repeat;
-        }
-
-        /* Estado Hover: La hoja crece un poco para indicar acción */
-        #custom-cursor.hovering {
-            transform: translate(-50%, -5px) scale(1.2);
-            filter: drop-shadow(0 0 10px rgba(62, 142, 142, 0.8)); /* Glow Turquesa */
-        }
-
-        
         /* Navegación */
         .nav-link { position: relative; color: #555; font-weight: 700; transition: color 0.3s; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px; }
         .nav-link:hover { color: #3E8E8E; }
@@ -271,7 +248,7 @@
 </head>
 <body class="flex flex-col min-h-screen font-sans">
     <!-- ELEMENTO DEL CURSOR 3D -->
-    <div id="custom-cursor"></div>
+    <div id="custom-cursor" class="fixed top-0 left-0 w-10 h-10 pointer-events-none z-[10000] -translate-x-1/2 -translate-y-[5px] [transition:transform_0.1s_ease-out,_filter_0.2s_ease] drop-shadow-[0_4px_6px_rgba(19,41,61,0.3)] bg-custom-cursor bg-contain bg-no-repeat [&.hovering]:scale-[1.2] [&.hovering]:drop-shadow-[0_0_10px_rgba(62,142,142,0.8)]"></div>
 
     <!-- TOP BAR -->
     <div class="bg-brandBlue py-2 hidden md:block border-b border-white/10 shadow-lg relative overflow-hidden">
