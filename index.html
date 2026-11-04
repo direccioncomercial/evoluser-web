@@ -972,9 +972,10 @@
                     <p class="text-[10px] text-white/80 font-bold uppercase tracking-widest leading-none mt-1">Inteligencia Estratégica EvoluSer</p>
                 </div>
             </div>
-            <div class="flex items-center gap-2">
-                <button onclick="resetEvChat()" class="text-white/60 hover:text-white transition p-1.5" title="Reiniciar conversación"><i class="fas fa-rotate-right text-sm"></i></button>
-                <button onclick="toggleChat()" class="text-white/70 hover:text-white transition p-1.5" title="Cerrar"><i class="fas fa-times text-lg"></i></button>
+            <div class="flex items-center gap-1.5">
+                <a href="https://wa.me/593983900050?text=Hola%20EvoluSer,%20vengo%20del%20asistente%20Ev%20y%20deseo%20atenci%C3%B3n%20directa" target="_blank" rel="noopener noreferrer" class="bg-white/15 hover:bg-brandGreen text-white text-[10px] font-extrabold px-2.5 py-1.5 rounded-full transition flex items-center gap-1 border border-white/20" title="Hablar por WhatsApp"><i class="fab fa-whatsapp text-xs"></i> <span class="hidden sm:inline">WhatsApp</span></a>
+                <button onclick="resetEvChat()" class="text-white/70 hover:text-white transition p-1.5" title="Reiniciar conversación"><i class="fas fa-rotate-right text-sm"></i></button>
+                <button onclick="toggleChat()" class="text-white/80 hover:text-white transition p-1.5" title="Cerrar"><i class="fas fa-times text-lg"></i></button>
             </div>
         </div>
 
@@ -985,12 +986,14 @@
 
         <!-- Barra de Sugerencias Rápidas Persistentes -->
         <div class="px-4 py-2 bg-gray-50 border-t border-gray-100 flex gap-2 overflow-x-auto scrollbar-hide">
+            <button onclick="triggerQuickIntent('cotizar')" class="ev-chip whitespace-nowrap"><i class="fas fa-calculator text-brandGreen"></i> Cotizar Ahora</button>
+            <button onclick="triggerQuickIntent('agendar')" class="ev-chip whitespace-nowrap"><i class="fab fa-whatsapp text-brandGreen"></i> Agendar Cita</button>
+            <button onclick="triggerQuickIntent('faq')" class="ev-chip whitespace-nowrap"><i class="fas fa-circle-question text-brandGreen"></i> Preguntas Frecuentes</button>
             <button onclick="triggerQuickIntent('talento')" class="ev-chip whitespace-nowrap"><i class="fas fa-users text-brandGreen"></i> Talento Humano</button>
             <button onclick="triggerQuickIntent('seguridad')" class="ev-chip whitespace-nowrap"><i class="fas fa-hard-hat text-brandGreen"></i> SSO / EPPs / Matriz Riesgos</button>
             <button onclick="triggerQuickIntent('agro')" class="ev-chip whitespace-nowrap"><i class="fas fa-seedling text-brandGreen"></i> Agroindustria</button>
             <button onclick="triggerQuickIntent('ambiental')" class="ev-chip whitespace-nowrap"><i class="fas fa-leaf text-brandGreen"></i> Ing. Ambiental</button>
             <button onclick="triggerQuickIntent('emprendedor')" class="ev-chip whitespace-nowrap"><i class="fas fa-rocket text-brandGreen"></i> Emprendedores</button>
-            <button onclick="triggerQuickIntent('agendar')" class="ev-chip whitespace-nowrap"><i class="fab fa-whatsapp text-brandGreen"></i> Agendar Cita</button>
         </div>
 
         <!-- Input de Chat -->
@@ -1021,12 +1024,13 @@
 
     <script>
         // ==========================================
-        // 1. LÓGICA DE MOVIMIENTO EV (CON LÍMITES SEGUROS)
+        // 1. LÓGICA DE MOVIMIENTO EV (60 FPS + FLUIDEZ Y AUTO-AJUSTE)
         // ==========================================
         const evContainer = document.getElementById('ev-floating-container');
         let isDragging = false;
         let startX, startY, initialX, initialY;
         let hasMoved = false;
+        let dragRafId = null;
 
         evContainer.addEventListener('mousedown', startDragging);
         document.addEventListener('mousemove', drag);
@@ -1042,6 +1046,7 @@
             startY = e.clientY;
             initialX = evContainer.offsetLeft;
             initialY = evContainer.offsetTop;
+            evContainer.style.transition = 'none';
         }
 
         function drag(e) {
@@ -1053,20 +1058,58 @@
             }
             if (!hasMoved) return;
 
-            const maxX = window.innerWidth - evContainer.offsetWidth - 10;
-            const maxY = window.innerHeight - evContainer.offsetHeight - 10;
-            const newX = Math.max(10, Math.min(initialX + dx, maxX));
-            const newY = Math.max(10, Math.min(initialY + dy, maxY));
+            if (dragRafId) cancelAnimationFrame(dragRafId);
+            dragRafId = requestAnimationFrame(() => {
+                const maxX = window.innerWidth - evContainer.offsetWidth - 10;
+                const maxY = window.innerHeight - evContainer.offsetHeight - 10;
+                const newX = Math.max(10, Math.min(initialX + dx, maxX));
+                const newY = Math.max(10, Math.min(initialY + dy, maxY));
 
-            evContainer.style.left = newX + 'px';
-            evContainer.style.top = newY + 'px';
-            evContainer.style.bottom = 'auto';
-            evContainer.style.right = 'auto';
+                evContainer.style.left = newX + 'px';
+                evContainer.style.top = newY + 'px';
+                evContainer.style.bottom = 'auto';
+                evContainer.style.right = 'auto';
+            });
         }
 
         function stopDragging() {
+            if (!isDragging) return;
             isDragging = false;
+            evContainer.style.transition = 'all 0.25s cubic-bezier(0.22, 1, 0.36, 1)';
         }
+
+        window.addEventListener('resize', () => {
+            if (evContainer.style.left && evContainer.style.left !== 'auto') {
+                const maxX = window.innerWidth - evContainer.offsetWidth - 10;
+                const maxY = window.innerHeight - evContainer.offsetHeight - 10;
+                evContainer.style.left = Math.max(10, Math.min(evContainer.offsetLeft, maxX)) + 'px';
+                evContainer.style.top = Math.max(10, Math.min(evContainer.offsetTop, maxY)) + 'px';
+            }
+        });
+
+        // Mensajes dinámicos inteligentes en el globo de Ev
+        const evRotatingGreetings = [
+            "¡Hola! Soy Ev. ¿Hablamos?",
+            "💬 ¿Cotizamos tu proyecto?",
+            "🦺 Decreto 2025-006 y EPPs",
+            "👥 Formador de Formadores",
+            "🌾 Permisos ARCSA / BPA",
+            "📅 Agenda una cita hoy"
+        ];
+        let evGreetingIdx = 0;
+        setInterval(() => {
+            const win = document.getElementById('ai-chat-window');
+            const bubbleText = document.getElementById('ev-bubble-text');
+            if (bubbleText && win && win.classList.contains('hidden')) {
+                evGreetingIdx = (evGreetingIdx + 1) % evRotatingGreetings.length;
+                bubbleText.style.opacity = '0';
+                setTimeout(() => {
+                    bubbleText.innerText = evRotatingGreetings[evGreetingIdx];
+                    bubbleText.style.transition = 'opacity 0.3s ease';
+                    bubbleText.style.opacity = '1';
+                }, 250);
+            }
+        }, 7000);
 
         document.getElementById('ev-avatar-trigger').onclick = () => {
             if (!hasMoved) toggleChat();
@@ -1282,17 +1325,50 @@
                 ]
             },
             cotizar: {
-                text: `"En <strong>EvoluSer</strong> diseñamos cada propuesta a la medida de la envergadura de tu organización o emprendimiento para garantizarte el máximo retorno de inversión.<br><br>Puedes solicitar tu diagnóstico sin costo por <strong>WhatsApp Directo</strong> o registrar tu requerimiento en nuestra <strong>Oficina Virtual</strong>."`,
+                text: `"En <strong>EvoluSer</strong> diseñamos cada propuesta a la medida de tu organización para garantizarte el máximo retorno de inversión.<br><br><strong>¿De qué tamaño es tu empresa o proyecto?</strong> Selecciónalo para darte una recomendación normativa y cotización exacta:"`,
                 actions: [
-                    { label: "📲 Cotizar por WhatsApp (+593 98 390 0050)", url: "https://wa.me/593983900050?text=Hola%20EvoluSer,%20deseo%20solicitar%20una%20cotizaci%C3%B3n%20personalizada" },
-                    { label: "🖥️ Ir a Oficina Virtual", action: "setSegment('oficina'); toggleChat();" },
-                    { label: "📞 Llamar (+593 98 700 3357)", url: "tel:+593987003357" }
+                    { label: "🏢 Pyme / Micro (1 a 19 colaboradores)", intent: "cotizar_pyme" },
+                    { label: "🏭 Mediana Empresa (20 a 99 colaboradores)", intent: "cotizar_mediana" },
+                    { label: "🏙️ Corporativo (+100 colaboradores)", intent: "cotizar_corporativo" },
+                    { label: "🚀 Emprendimiento / Nuevo Producto", intent: "emprendedor" },
+                    { label: "📲 Cotizar Directo en WhatsApp", url: "https://wa.me/593983900050?text=Hola%20EvoluSer,%20deseo%20solicitar%20una%20cotizaci%C3%B3n%20personalizada" },
+                    { label: "🖥️ Ir a Oficina Virtual", action: "setSegment('oficina'); toggleChat();" }
+                ]
+            },
+            cotizar_pyme: {
+                text: `"Para empresas de <strong>1 a 19 colaboradores</strong> recomendamos nuestro paquete ágil de blindaje y crecimiento:<br><br>• <strong>SSO y Decreto 2025-006:</strong> Matriz de Riesgos, Plan de Emergencia y control de entrega de EPPs.<br>• <strong>Talento Humano:</strong> Contratos legalizados, Reglamento Interno y capacitación con aval de <strong>Formador de Formadores</strong>.<br><br>¿Deseas recibir la propuesta económica para tu Pyme por WhatsApp?"`,
+                actions: [
+                    { label: "📲 Recibir Cotización Pyme (1-19 colab.)", url: "https://wa.me/593983900050?text=Hola%20EvoluSer,%20habl%C3%A9%20con%20Ev%20y%20deseo%20cotizar%20servicios%20para%20mi%20empresa%20(1%20a%2019%20colaboradores)" },
+                    { label: "📅 Agendar Diagnóstico sin Costo", intent: "agendar" }
+                ]
+            },
+            cotizar_mediana: {
+                text: `"Para una <strong>Mediana Empresa (20 a 99 colaboradores)</strong> implementamos un sistema integral de alto impacto:<br><br>• <strong>SSO Integral:</strong> Diseño de Matriz de Riesgos por puesto, Sistema de Inventario de EPPs por área/encargado, Planes de Emergencia y Comité Paritario.<br>• <strong>Talento y Clima:</strong> Evaluación 360°, Diagnóstico de Clima Laboral y Formación Certificada.<br>• <strong>Ambiental / Agro:</strong> Licenciamiento ambiental, BPM y HACCP.<br><br>Solicita tu diagnóstico técnico sin costo:"`,
+                actions: [
+                    { label: "📲 Cotizar Mediana Empresa (20-99 colab.)", url: "https://wa.me/593983900050?text=Hola%20EvoluSer,%20habl%C3%A9%20con%20Ev%20y%20deseo%20cotizar%20consultor%C3%ADa%20para%20Mediana%20Empresa%20(20%20a%2099%20colaboradores)" },
+                    { label: "📅 Agendar Reunión con Director", intent: "agendar" }
+                ]
+            },
+            cotizar_corporativo: {
+                text: `"Para <strong>Corporaciones (+100 colaboradores)</strong> asignamos una mesa directiva multidisciplinaria liderada por <strong>Christian Ortega, Nury Echeverría y Lilian Eras</strong>:<br><br>• <strong>Auditoría y Blindaje 360°</strong> en Seguridad Industrial (Decreto 2025-006), Gestión automatizada de EPPs y Matrices.<br>• <strong>Escuelas de Liderazgo y Cultura Corporativa</strong> con certificación de Formador de Formadores.<br>• <strong>Sostenibilidad, Huella de Carbono y Certificaciones Internacionales</strong>.<br><br>Coordinemos una sesión ejecutiva:"`,
+                actions: [
+                    { label: "📲 Atención Corporativa VIP en WhatsApp", url: "https://wa.me/593983900050?text=Hola%20EvoluSer,%20habl%C3%A9%20con%20Ev%20y%20requiero%20atenci%C3%B3n%20corporativa%20para%20una%20organizaci%C3%B3n%20de%20m%C3%A1s%20de%20100%20colaboradores" },
+                    { label: "🖥️ Dejar Requerimiento en Oficina Virtual", action: "setSegment('oficina'); toggleChat();" }
+                ]
+            },
+            faq: {
+                text: `"Aquí tienes las respuestas a nuestras <strong>Preguntas Frecuentes (FAQ)</strong>:<br><br>1️⃣ <strong>¿Atienden en todo el Ecuador?</strong> Sí, operamos en Quito y a nivel nacional de forma presencial, in-company y virtual.<br>2️⃣ <strong>¿Las capacitaciones son certificadas?</strong> Sí, cuentan con el respaldo de <strong>Formador de Formadores</strong> (Dir. Nury Echeverría).<br>3️⃣ <strong>¿En cuánto tiempo entregan Matrices de Riesgos, Planes de Emergencia o registros ARCSA?</strong> Realizamos un diagnóstico inmediato y entregables ágiles adaptados a inspecciones del MDT, Bomberos o ARCSA.<br>4️⃣ <strong>¿El diagnóstico inicial tiene costo?</strong> ¡Tu primera reunión de diagnóstico con nuestros directores no tiene costo!"`,
+                actions: [
+                    { label: "💰 Calcular Cotización para mi Empresa", intent: "cotizar" },
+                    { label: "📅 Agendar Diagnóstico Gratuito", intent: "agendar" },
+                    { label: "📲 Hacer otra pregunta por WhatsApp", url: "https://wa.me/593983900050?text=Hola%20EvoluSer,%20tengo%20una%20consulta%20espec%C3%ADfica%20sobre%20sus%20servicios" }
                 ]
             },
             agendar: {
-                text: `"¡Con todo gusto! Nuestros directores están listos para atenderte en <strong>Quito y todo el Ecuador</strong>:<br><br>• <strong>WhatsApp Directo:</strong> +593 98 390 0050<br>• <strong>Llamadas:</strong> +593 98 700 3357<br>• <strong>Email:</strong> evoluserec@gmail.com<br><br>Selecciona el canal que prefieras para agendar tu sesión hoy mismo:"`,
+                text: `"¡Con todo gusto! Nuestros directores están listos para atenderte en <strong>Quito y todo el Ecuador</strong>:<br><br>• <strong>WhatsApp Directo:</strong> +593 98 390 0050<br>• <strong>Llamadas:</strong> +593 98 700 3357<br>• <strong>Email:</strong> evoluserec@gmail.com<br><br>Selecciona el área o canal para agendar tu sesión hoy mismo:"`,
                 actions: [
                     { label: "💬 Agendar por WhatsApp Ahora", url: "https://wa.me/593983900050?text=Hola%20EvoluSer,%20convers%C3%A9%20con%20Ev%20y%20deseo%20agendar%20una%20reuni%C3%B3n%20con%20un%20director" },
+                    { label: "📞 Llamar Ahora (+593 98 700 3357)", url: "tel:+593987003357" },
                     { label: "🖥️ Dejar Ticket en Oficina Virtual", action: "setSegment('oficina'); toggleChat();" },
                     { label: "👔 Conocer al Directorio", action: "openModal('equipo')" }
                 ]
@@ -1306,41 +1382,77 @@
             }
         };
 
+        function escapeEvHTML(str) {
+            return String(str).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+        }
+
         function detectEvIntent(rawText) {
             const text = rawText.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+            const safeRaw = escapeEvHTML(rawText);
 
-            if (/(decreto|2025-006|2025|006|seguridad|sso|riesgo|matriz|matrices|epp|epps|inventario|proteccion personal|salud ocupacional|emergencia|vigilancia medica|accidente|ministerio de trabajo|christian|industrial|certificacion|normativ)/.test(text)) {
-                return evKnowledgeBase.seguridad;
+            // Detección inteligente multi-intención (si el usuario pregunta por varias áreas a la vez)
+            const matchedIntents = [];
+            if (/(decreto|2025-006|2025|006|seguridad|sso|riesgo|matriz|matrices|epp|epps|inventario|proteccion personal|salud ocupacional|emergencia|vigilancia medica|accidente|ministerio de trabajo|mdt|sut|christian|industrial|normativ|reglamento|comite paritario)/.test(text)) {
+                matchedIntents.push("seguridad");
             }
-            if (/(talento|rrhh|recursos humanos|clima|cultura|headhunting|seleccion|personal|nury|evaluacion 360|liderazgo|equipo|formador|formadores|capacitacion)/.test(text)) {
-                return evKnowledgeBase.talento;
+            if (/(talento|rrhh|recursos humanos|clima|cultura|headhunting|seleccion|personal|nury|evaluacion 360|liderazgo|equipo|formador|formadores|capacitacion|taller|nomina|desempeno)/.test(text)) {
+                matchedIntents.push("talento");
             }
-            if (/(agro|alimento|planta|bpa|bpm|haccp|inocuidad|nutricional|vida util|sanitaria|arcsa|lilian|exportacion)/.test(text)) {
-                return evKnowledgeBase.agro;
+            if (/(agro|alimento|planta|bpa|bpm|haccp|inocuidad|nutricional|vida util|sanitaria|arcsa|lilian|exportacion|etiquetado)/.test(text)) {
+                matchedIntents.push("agro");
             }
-            if (/(ambiental|ambiente|licencia|carbono|desecho|residuo|sostenible|sostenibilidad|ecologi|verde)/.test(text)) {
-                return evKnowledgeBase.ambiental;
+            if (/(ambiental|ambiente|licencia|carbono|desecho|residuo|sostenible|sostenibilidad|ecologi|verde|maate)/.test(text)) {
+                matchedIntents.push("ambiental");
             }
-            if (/(emprend|startup|ruc|constituir|compania|estatuto|legaliza|permiso|bombero|iess|contrato|pyme|negocio|empezar)/.test(text)) {
-                return evKnowledgeBase.emprendedor;
+            if (/(emprend|startup|ruc|constituir|compania|estatuto|legaliza|permiso|bombero|iess|contrato|pyme|negocio|empezar|marca)/.test(text)) {
+                matchedIntents.push("emprendedor");
             }
-            if (/(precio|costo|cuanto|cotiza|presupuesto|tarifa|paquete|valor|inversion)/.test(text)) {
+
+            if (matchedIntents.length > 1) {
+                const areaNames = {
+                    seguridad: "<strong>Seguridad y Salud Ocupacional (SSO, Matrices, EPPs y Decreto 2025-006)</strong>",
+                    talento: "<strong>Gestión de Talento Humano y Capacitación Certificada (Formador de Formadores)</strong>",
+                    agro: "<strong>Ingeniería Agroindustrial y ARCSA/BPM</strong>",
+                    ambiental: "<strong>Ingeniería y Licenciamiento Ambiental</strong>",
+                    emprendedor: "<strong>Pack Startup y Formalización</strong>"
+                };
+                const combinedList = matchedIntents.map(k => "• " + areaNames[k]).join("<br>");
+                const combinedActions = matchedIntents.map(k => evKnowledgeBase[k].actions[0]);
+                combinedActions.push({
+                    label: "📲 Cotizar Solución Integrada en WhatsApp",
+                    url: `https://wa.me/593983900050?text=${encodeURIComponent('Hola EvoluSer, conversé con Ev sobre una solución integrada (' + rawText + ') y deseo asesoría.')}`
+                });
+                return {
+                    text: `"¡Excelente visión integral! Veo que tu consulta combina varias de nuestras especialidades clave en <strong>EvoluSer</strong>:<br><br>${combinedList}<br><br>Podemos armar un <strong>Plan Corporativo Integrado</strong> con nuestros directores para cubrir todas estas áreas en tu organización:"`,
+                    actions: combinedActions
+                };
+            }
+
+            if (matchedIntents.length === 1) {
+                return evKnowledgeBase[matchedIntents[0]];
+            }
+
+            if (/(pregunta|frecuente|faq|duda|tiempo|demora|nacional|ciudad|garantia|certificado|validez|multa|inspeccion)/.test(text)) {
+                return evKnowledgeBase.faq;
+            }
+            if (/(precio|costo|cuanto|cotiza|presupuesto|tarifa|paquete|valor|inversion|proforma)/.test(text)) {
                 return evKnowledgeBase.cotizar;
             }
-            if (/(agenda|cita|reunion|contacto|telefono|whatsapp|correo|email|ubicacion|quito|ecuador|llamar|director|asesor)/.test(text)) {
+            if (/(agenda|cita|reunion|contacto|telefono|whatsapp|correo|email|ubicacion|quito|guayaquil|cuenca|ecuador|llamar|director|asesor|horario)/.test(text)) {
                 return evKnowledgeBase.agendar;
             }
             if (/(filosofia|mision|vision|quienes son|evoluser|historia|valores)/.test(text)) {
                 return evKnowledgeBase.filosofia;
             }
-            if (/(hola|buenos dias|buenas tardes|buenas noches|saludos|hey|que tal|quien eres)/.test(text)) {
+            if (/(hola|buenos dias|buenas tardes|buenas noches|saludos|hey|que tal|quien eres|ayuda)/.test(text)) {
                 return {
                     text: `"¡Hola! Qué gusto saludarte. Soy <strong>Ev</strong>, tu consultora virtual de <strong>EvoluSer</strong>. Estoy entrenada para guiarte en <strong>Talento Humano (Formador de Formadores), Seguridad y Salud Ocupacional (Planes de Emergencia, Matrices de Riesgos, Gestión de EPPs y Decreto 2025-006), Ingeniería Agroindustrial, Ingeniería Ambiental</strong> y nuestro <strong>Pack Startup</strong>.<br><br>Cuéntame, ¿buscas soluciones para una <strong>Empresa consolidada</strong> o para un <strong>Emprendimiento</strong>?"`,
                     actions: [
-                        { label: "🏢 Tengo una Empresa / Corporación", intent: "seguridad" },
+                        { label: "🏢 Tengo una Empresa / Corporación", intent: "cotizar" },
                         { label: "🚀 Soy Emprendedor / Pyme", intent: "emprendedor" },
-                        { label: "👥 Busco Talento Humano", intent: "talento" },
-                        { label: "🌾 Agroindustria / Ambiental", intent: "agro" }
+                        { label: "🦺 Seguridad SSO y EPPs", intent: "seguridad" },
+                        { label: "👥 Talento Humano", intent: "talento" },
+                        { label: "📅 Agendar Cita Directa", intent: "agendar" }
                     ]
                 };
             }
@@ -1354,15 +1466,15 @@
                 };
             }
 
-            // Respuesta consultiva inteligente para consultas personalizadas abiertas
+            // Respuesta consultiva inteligente para consultas personalizadas abiertas (sanitizada contra XSS)
             return {
-                text: `"Gracias por detallarme tu requerimiento sobre: <em>'${rawText}'</em>.<br><br>En <strong>EvoluSer</strong> abordamos cada caso de forma integral combinando ingeniería técnica, normativa legal y gestión humana. ¿Te gustaría que te conecte directamente con el director del área por WhatsApp con tu consulta ya lista, o prefieres explorar nuestras divisiones?"`,
+                text: `"Gracias por detallarme tu requerimiento sobre: <em>'${safeRaw}'</em>.<br><br>En <strong>EvoluSer</strong> abordamos cada caso de forma integral combinando ingeniería técnica, normativa legal y gestión humana. ¿Te gustaría que te conecte directamente con el director del área por WhatsApp con tu consulta ya lista, o prefieres calcular tu cotización?"`,
                 actions: [
                     { label: "📲 Enviar esta consulta por WhatsApp", url: `https://wa.me/593983900050?text=${encodeURIComponent('Hola EvoluSer, conversé con Ev sobre mi requerimiento: "' + rawText + '" y deseo atención especializada.')}` },
+                    { label: "💰 Cotizar según tamaño de empresa", intent: "cotizar" },
+                    { label: "📅 Agendar Cita con Director", intent: "agendar" },
                     { label: "👥 Talento Humano", intent: "talento" },
-                    { label: "🦺 Seguridad SSO", intent: "seguridad" },
-                    { label: "🌾 Agro / 🌿 Ambiental", intent: "agro" },
-                    { label: "🚀 Pack Startup", intent: "emprendedor" }
+                    { label: "🦺 Seguridad SSO", intent: "seguridad" }
                 ]
             };
         }
@@ -1440,7 +1552,11 @@
                 agro: "Deseo asesoría en Ingeniería Agroindustrial",
                 ambiental: "Consultoría en Ingeniería Ambiental",
                 emprendedor: "Soy emprendedor, quiero conocer el Pack Startup",
-                cotizar: "Deseo solicitar una cotización",
+                cotizar: "Deseo solicitar una cotización personalizada",
+                cotizar_pyme: "Cotizar para Pyme / Micro (1 a 19 colaboradores)",
+                cotizar_mediana: "Cotizar para Mediana Empresa (20 a 99 colaboradores)",
+                cotizar_corporativo: "Cotizar para Corporación (+100 colaboradores)",
+                faq: "Ver Preguntas Frecuentes (FAQ)",
                 agendar: "Quiero agendar una cita con un Director"
             };
             appendUserMessage(labels[intentKey] || intentKey);
