@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EvoluSer - Consultoría Premium e IA</title>
-    <meta name="theme-color" content="#ffffff">
+    <meta name="description" content="EvoluSer - Aliado estratégico líder en Talento Humano, Seguridad y Salud Ocupacional ISO 45001, Ingeniería Agroindustrial, Ingeniería Ambiental y Legalización de Emprendimientos en Ecuador.">
+    <meta name="theme-color" content="#13293D">
     
     <!-- Librerías -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&family=Mulish:wght@300;400;600;700;800&display=swap" rel="stylesheet">
@@ -22,6 +23,7 @@
                         colors: {
                             // PALETA EXACTA DEL LOGO EVOLUSER (Extraída de la imagen)
                             brandBlue: '#13293D',      // Azul Marino Profundo ("Evolu")
+                            brandBlueDark: '#0B1A26',  // Azul Marino Oscuro para contraste profundo
                             brandGreen: '#3E8E8E',     // Turquesa Petróleo ("Ser" e Isotipo)
                             
                             brandGray: '#F7F9FC',
@@ -35,7 +37,8 @@
                             'card': '0 4px 20px rgba(0,0,0,0.06)',
                             'brand': '0 10px 40px rgba(62, 142, 142, 0.25)', 
                             'neon-light': '0 0 15px rgba(62, 142, 142, 0.5), 0 0 30px rgba(255, 255, 255, 0.4)',
-                            'hover': '0 20px 40px rgba(19, 41, 61, 0.12)'
+                            'hover': '0 20px 40px rgba(19, 41, 61, 0.12)',
+                            'glass': '0 8px 32px 0 rgba(19, 41, 61, 0.18)'
                         },
                         animation: {
                             'pop-in': 'popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards',
@@ -75,9 +78,15 @@
     </script>
 
     <style>
-        /* Ocultar cursor por defecto */
-        body, a, button, input, textarea, select { cursor: none !important; }
-        body { background-color: #ffffff; color: #333; scroll-behavior: smooth; }
+        /* Ocultar cursor por defecto solo en dispositivos con mouse preciso */
+        @media (pointer: fine) {
+            body, a, button, input, textarea, select { cursor: none !important; }
+        }
+        @media (pointer: coarse) {
+            #custom-cursor { display: none !important; }
+        }
+
+        body { background-color: #ffffff; color: #333; scroll-behavior: smooth; overflow-x: hidden; }
 
         /* CURSOR 3D HOJA EVOLUSER - DISEÑO EXACTO */
         #custom-cursor {
@@ -100,11 +109,10 @@
 
         /* Estado Hover: La hoja crece un poco para indicar acción */
         #custom-cursor.hovering {
-            transform: translate(-50%, -5px) scale(1.2);
-            filter: drop-shadow(0 0 10px rgba(62, 142, 142, 0.8)); /* Glow Turquesa */
+            transform: translate(-50%, -5px) scale(1.22) rotate(-4deg);
+            filter: drop-shadow(0 0 12px rgba(62, 142, 142, 0.85)); /* Glow Turquesa */
         }
 
-        
         /* Navegación */
         .nav-link { position: relative; color: #555; font-weight: 700; transition: color 0.3s; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px; }
         .nav-link:hover { color: #3E8E8E; }
@@ -113,48 +121,53 @@
         .nav-link.active::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 4px; background: linear-gradient(90deg, #3E8E8E, #13293D); border-radius: 2px 2px 0 0; }
         
         /* IMPACT CARDS */
-        .impact-card { position: relative; overflow: hidden; border-radius: 12px; background: #000; height: 100%; min-height: 280px; }
-        .impact-card img { width: 100%; height: 100%; object-fit: cover; opacity: 0.7; transition: transform 0.8s ease; }
-        .impact-card:hover img { transform: scale(1.08); opacity: 0.85; }
-        .impact-content { position: absolute; inset: 0; padding: 2.5rem; display: flex; flex-direction: column; justify-content: flex-end; background: linear-gradient(to top, rgba(19, 41, 61, 0.95) 0%, transparent 70%); z-index: 10; }
+        .impact-card { position: relative; overflow: hidden; border-radius: 16px; background: #0B1A26; height: 100%; min-height: 280px; box-shadow: 0 12px 30px rgba(19, 41, 61, 0.12); transition: box-shadow 0.4s ease, transform 0.4s ease; }
+        .impact-card:hover { box-shadow: 0 20px 45px rgba(62, 142, 142, 0.25); transform: translateY(-4px); }
+        .impact-card img { width: 100%; height: 100%; object-fit: cover; opacity: 0.72; transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease; }
+        .impact-card:hover img { transform: scale(1.08); opacity: 0.88; }
+        .impact-content { position: absolute; inset: 0; padding: 2.5rem; display: flex; flex-direction: column; justify-content: flex-end; background: linear-gradient(to top, rgba(19, 41, 61, 0.96) 0%, rgba(19, 41, 61, 0.4) 55%, transparent 100%); z-index: 10; }
         
         /* Botones Principales - Degradado Marca */
         .btn-brand-gradient {
             background: linear-gradient(135deg, #13293D 0%, #3E8E8E 100%);
-            color: white; padding: 0.75rem 1.5rem; border-radius: 999px; 
+            color: white; padding: 0.85rem 1.75rem; border-radius: 999px; 
             font-weight: 800; font-size: 0.75rem; text-transform: uppercase;
             letter-spacing: 1px; display: inline-block; transition: all 0.3s ease; 
-            box-shadow: 0 4px 15px rgba(19, 41, 61, 0.2);
-            border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 6px 20px rgba(19, 41, 61, 0.22);
+            border: 1px solid rgba(255,255,255,0.15);
         }
         .btn-brand-gradient:hover {
-            box-shadow: 0 0 20px rgba(62, 142, 142, 0.5); /* Glow Turquesa */
+            box-shadow: 0 0 25px rgba(62, 142, 142, 0.6); /* Glow Turquesa */
             transform: translateY(-2px);
             background: linear-gradient(135deg, #1A3650 0%, #4CA3A3 100%);
         }
 
         /* Botón "Más información" */
         .more-info-brand {
-            border: 1px solid white; color: white; padding: 0.5rem 1.2rem; 
+            border: 1px solid rgba(255,255,255,0.8); color: white; padding: 0.55rem 1.3rem; 
             border-radius: 999px; font-weight: 700; text-transform: uppercase; 
             font-size: 0.75rem; letter-spacing: 1px; display: inline-block; 
-            transition: all 0.3s; margin-top: 1rem; backdrop-filter: blur(5px);
+            transition: all 0.3s; margin-top: 1rem; backdrop-filter: blur(6px);
+            background: rgba(255,255,255,0.08);
+            width: fit-content;
         }
-        .more-info-brand:hover { 
+        .more-info-brand:hover, .impact-card:hover .more-info-brand { 
             background: #3E8E8E; 
             border-color: #3E8E8E; 
             color: white; 
-            box-shadow: 0 0 15px rgba(255,255,255,0.4);
+            box-shadow: 0 0 15px rgba(62, 142, 142, 0.6);
         }
 
         /* Listas Mapfre */
-        .mapfre-list-card { background: #FFFFFF; padding: 2.5rem 2rem; border-radius: 12px; transition: all 0.3s ease; border: 1px solid #f0f0f0; height: 100%; display: flex; flex-direction: column; justify-content: space-between; }
-        .mapfre-list-card:hover { background: white; box-shadow: 0 25px 50px rgba(62, 142, 142, 0.15); transform: translateY(-5px); border-color: #3E8E8E; }
-        .check-list li { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 12px; font-size: 0.9rem; color: #444; }
+        .mapfre-list-card { background: #FFFFFF; padding: 2.5rem 2rem; border-radius: 16px; transition: all 0.35s ease; border: 1px solid #edf2f7; height: 100%; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 4px 15px rgba(19, 41, 61, 0.03); position: relative; overflow: hidden; }
+        .mapfre-list-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px; background: linear-gradient(90deg, #13293D, #3E8E8E); opacity: 0; transition: opacity 0.3s ease; }
+        .mapfre-list-card:hover { background: white; box-shadow: 0 25px 50px rgba(62, 142, 142, 0.16); transform: translateY(-6px); border-color: rgba(62, 142, 142, 0.4); }
+        .mapfre-list-card:hover::before { opacity: 1; }
+        .check-list li { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 14px; font-size: 0.92rem; color: #444; font-weight: 600; }
         .check-list i { color: #3E8E8E; margin-top: 4px; }
         
         .link-elegant { color: #13293D; font-weight: 800; font-size: 0.85rem; display: inline-flex; align-items: center; gap: 6px; margin-top: 1.5rem; transition: all 0.3s; cursor: pointer; text-transform: uppercase; }
-        .link-elegant:hover { color: #3E8E8E; }
+        .link-elegant:hover { color: #3E8E8E; gap: 10px; }
 
         /* Slogan mejorado */
         .premium-quote {
@@ -177,21 +190,25 @@
         .hover-facebook:hover, .hover-facebook:hover i { color: #1877f2 !important; }
         .hover-instagram:hover, .hover-instagram:hover i { color: #E4405F !important; }
         .hover-youtube:hover, .hover-youtube:hover i { color: #FF0000 !important; }
-        .hover-tiktok:hover, .hover-tiktok:hover i { color: #000000 !important; }
-        .hover-x:hover, .hover-x:hover i { color: #000000 !important; }
+        .hover-tiktok:hover, .hover-tiktok:hover i { color: #00f2fe !important; }
+        .hover-x:hover, .hover-x:hover i { color: #3E8E8E !important; }
 
         /* Home Cards */
-        .image-card { border-radius: 20px; overflow: hidden; background: white; transition: all 0.4s ease; border: 1px solid #f3f3f3; height: 100%; display: flex; flex-direction: column; position: relative; }
-        .image-card:hover { transform: translateY(-10px); box-shadow: 0 30px 60px rgba(62, 142, 142, 0.15); border-color: rgba(62, 142, 142, 0.2); }
-        .card-tag { position: absolute; top: 1.2rem; left: 1.2rem; padding: 0.4rem 1rem; border-radius: 999px; font-size: 0.65rem; font-weight: 800; text-transform: uppercase; color: white; z-index: 10; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
+        .image-card { border-radius: 20px; overflow: hidden; background: white; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); border: 1px solid #f0f4f8; height: 100%; display: flex; flex-direction: column; position: relative; box-shadow: 0 8px 25px rgba(19, 41, 61, 0.05); }
+        .image-card:hover { transform: translateY(-10px); box-shadow: 0 30px 60px rgba(62, 142, 142, 0.18); border-color: rgba(62, 142, 142, 0.35); }
+        .image-card .image-zoom { transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1); }
+        .image-card:hover .image-zoom { transform: scale(1.08); }
+        .card-tag { position: absolute; top: 1.2rem; left: 1.2rem; padding: 0.4rem 1rem; border-radius: 999px; font-size: 0.65rem; font-weight: 800; text-transform: uppercase; color: white; z-index: 10; box-shadow: 0 4px 12px rgba(0,0,0,0.3); letter-spacing: 0.5px; backdrop-filter: blur(4px); }
 
         /* Validación */
-        .validation-card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.05); transition: all 0.3s ease; height: 100%; display: flex; flex-direction: column; }
-        .validation-card:hover { transform: translateY(-5px); box-shadow: 0 15px 35px rgba(62, 142, 142, 0.15); border-bottom: 4px solid #3E8E8E; }
-        .validation-card img { transition: transform 0.5s ease; width: 100%; height: 200px; object-fit: cover; }
+        .validation-card { background: white; border-radius: 16px; overflow: hidden; box-shadow: 0 6px 20px rgba(19, 41, 61, 0.06); transition: all 0.35s ease; height: 100%; display: flex; flex-direction: column; border: 1px solid #f0f4f8; border-bottom: 4px solid transparent; }
+        .validation-card:hover { transform: translateY(-6px); box-shadow: 0 20px 40px rgba(62, 142, 142, 0.16); border-bottom: 4px solid #3E8E8E; }
+        .validation-card img { transition: transform 0.6s ease; width: 100%; height: 200px; object-fit: cover; }
+        .validation-card:hover img { transform: scale(1.06); }
 
         .philosophy-block { border-left: 4px solid #3E8E8E; padding-left: 1.5rem; margin-bottom: 2.5rem; transition: transform 0.3s; }
-        .ov-login-container { background-color: white; border-radius: 12px; box-shadow: 0 20px 50px rgba(19, 41, 61, 0.1); max-width: 500px; width: 100%; overflow: hidden; border: 1px solid #eee; }
+        .ov-login-container { background-color: white; border-radius: 16px; box-shadow: 0 20px 50px rgba(19, 41, 61, 0.12); max-width: 500px; width: 100%; overflow: hidden; border: 1px solid #edf2f7; }
+        .ov-header { padding: 2rem 2.5rem 1.25rem; border-bottom: 1px solid #f0f4f8; background: linear-gradient(to right, #f8fafc, #ffffff); }
         .fade-in { animation: fadeIn 0.6s ease-out forwards; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
         .scrollbar-hide::-webkit-scrollbar { display: none; }
@@ -203,16 +220,16 @@
             -webkit-backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.3);
             box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
-            width: 60px; height: 60px;
+            width: 56px; height: 56px;
             border-radius: 50%;
             display: flex; align-items: center; justify-content: center;
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             transform-style: preserve-3d;
-            cursor: pointer; z-index: 50;
+            cursor: pointer; z-index: 30;
             color: white;
         }
         .glass-3d-arrow:hover {
-            background: rgba(62, 142, 142, 0.2); 
+            background: rgba(62, 142, 142, 0.35); 
             transform: translateY(-50%) scale(1.15) perspective(500px) translateZ(10px);
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3), 0 0 20px rgba(255, 255, 255, 0.5), 0 0 10px rgba(62, 142, 142, 0.5);
             border-color: rgba(255, 255, 255, 0.9);
@@ -220,19 +237,19 @@
         }
         .glass-3d-arrow:active { transform: translateY(-50%) scale(0.95); }
         
-        .carousel-slide { position: absolute; inset: 0; opacity: 0; transition: opacity 1s ease-in-out; background-size: cover; background-position: center; }
-        .carousel-slide.active { opacity: 1; z-index: 10; }
+        .carousel-slide { position: absolute; inset: 0; opacity: 0; transition: opacity 1s ease-in-out, transform 6s ease-out; background-size: cover; background-position: center; transform: scale(1.04); }
+        .carousel-slide.active { opacity: 1; z-index: 10; transform: scale(1); }
         
-        .carousel-text-content { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; transition-delay: 0.3s; }
+        .carousel-text-content { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; transition-delay: 0.25s; }
         .carousel-slide.active .carousel-text-content { opacity: 1; transform: translateY(0); }
 
         @keyframes spinLetters {
             0%, 85% { transform: rotateY(0deg); color: inherit; text-shadow: none; }
-            92% { transform: rotateY(180deg); color: #3E8E8E; text-shadow: 0 0 15px rgba(255, 255, 255, 0.9); }
+            92% { transform: rotateY(180deg); color: #3E8E8E; text-shadow: 0 0 15px rgba(62, 142, 142, 0.4); }
             100% { transform: rotateY(360deg); color: inherit; text-shadow: none; }
         }
 
-        /* ESTILO MENÚ HAMBURGUESA FOOTER (GLASS PREMUM) */
+        /* ESTILO MENÚ HAMBURGUESA FOOTER (GLASS PREMIUM) */
         .footer-menu-trigger {
             background: rgba(255, 255, 255, 0.08);
             backdrop-filter: blur(10px);
@@ -252,12 +269,12 @@
         }
         .footer-menu-content {
             position: absolute; bottom: 60px; right: 0;
-            background: rgba(19, 41, 61, 0.95);
+            background: rgba(19, 41, 61, 0.96);
             backdrop-filter: blur(12px);
             border: 1px solid rgba(62, 142, 142, 0.4);
             border-radius: 16px;
             padding: 1rem;
-            width: 200px;
+            width: 210px;
             transform-origin: bottom right;
             transform: scale(0); opacity: 0;
             transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
@@ -266,6 +283,44 @@
         }
         .footer-menu-wrapper:hover .footer-menu-content {
             transform: scale(1); opacity: 1;
+        }
+
+        /* Animación de escritura para EV Bot */
+        .typing-dot {
+            width: 6px; height: 6px;
+            background-color: #3E8E8E;
+            border-radius: 50%;
+            display: inline-block;
+            animation: typingBounce 1.4s infinite ease-in-out both;
+        }
+        .typing-dot:nth-child(1) { animation-delay: -0.32s; }
+        .typing-dot:nth-child(2) { animation-delay: -0.16s; }
+        @keyframes typingBounce {
+            0%, 80%, 100% { transform: scale(0); opacity: 0.4; }
+            40% { transform: scale(1); opacity: 1; }
+        }
+
+        /* Chips interactivos del Chat de EV */
+        .ev-chip {
+            background: #f0f7f7;
+            color: #13293D;
+            border: 1px solid rgba(62, 142, 142, 0.35);
+            padding: 0.4rem 0.75rem;
+            border-radius: 999px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            transition: all 0.25s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            text-align: left;
+        }
+        .ev-chip:hover {
+            background: linear-gradient(135deg, #13293D 0%, #3E8E8E 100%);
+            color: #ffffff;
+            border-color: transparent;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(62, 142, 142, 0.25);
         }
     </style>
 </head>
@@ -277,17 +332,17 @@
     <div class="bg-brandBlue py-2 hidden md:block border-b border-white/10 shadow-lg relative overflow-hidden">
         <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent pointer-events-none"></div>
         <div class="container mx-auto px-6 flex justify-between items-center text-[10px] font-extrabold text-white uppercase tracking-widest relative z-10">
-            <div class="flex gap-6">
+            <div class="flex gap-6 items-center">
                 <!-- Número de Llamadas -->
-                <a href="tel:+593987003357" class="hover:text-brandGreen transition flex items-center gap-2 hover:drop-shadow-[0_0_5px_rgba(255,255,255,0.8)]"><i class="fas fa-phone-alt"></i> +593 98 700 3357</a>
-                <a href="mailto:evoluserec@gmail.com" class="hover:text-brandGreen transition flex items-center gap-2 lowercase hover:drop-shadow-[0_0_5px_rgba(255,255,255,0.8)]"><i class="fas fa-envelope text-[10px]"></i> evoluserec@gmail.com</a>
+                <a href="tel:+593987003357" class="hover:text-brandGreen transition flex items-center gap-2 hover:drop-shadow-[0_0_5px_rgba(255,255,255,0.8)]"><i class="fas fa-phone-alt text-brandGreen"></i> +593 98 700 3357</a>
+                <a href="mailto:evoluserec@gmail.com" class="hover:text-brandGreen transition flex items-center gap-2 lowercase hover:drop-shadow-[0_0_5px_rgba(255,255,255,0.8)]"><i class="fas fa-envelope text-[10px] text-brandGreen"></i> evoluserec@gmail.com</a>
                 <div class="flex gap-4 border-l border-white/20 pl-6 ml-2">
-                    <a href="#" class="social-icon hover-linkedin transition"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="#" class="social-icon hover-facebook transition"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" class="social-icon hover-instagram transition"><i class="fab fa-instagram"></i></a>
-                    <a href="#" class="social-icon hover-youtube transition"><i class="fab fa-youtube"></i></a>
-                    <a href="#" class="social-icon hover-tiktok transition"><i class="fab fa-tiktok"></i></a>
-                    <a href="#" class="social-icon hover-x transition"><i class="fab fa-x-twitter"></i></a>
+                    <a href="#" class="social-icon hover-linkedin transition" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="social-icon hover-facebook transition" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-icon hover-instagram transition" title="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-icon hover-youtube transition" title="YouTube"><i class="fab fa-youtube"></i></a>
+                    <a href="#" class="social-icon hover-tiktok transition" title="TikTok"><i class="fab fa-tiktok"></i></a>
+                    <a href="#" class="social-icon hover-x transition" title="X"><i class="fab fa-x-twitter"></i></a>
                 </div>
             </div>
             <div class="flex gap-6 items-center">
@@ -302,13 +357,13 @@
     </div>
 
     <!-- NAVBAR PRINCIPAL -->
-    <header class="bg-white sticky top-0 z-50 border-b border-gray-100 shadow-sm">
+    <header class="bg-white/95 backdrop-blur-md sticky top-0 z-50 border-b border-gray-100 shadow-sm transition-all">
         <div class="container mx-auto px-4 h-24 flex items-center justify-between">
-            <div class="flex items-center gap-3 cursor-pointer" onclick="window.location.reload()">
+            <div class="flex items-center gap-3 cursor-pointer" onclick="setSegment('soluciones')">
                 <!-- LOGO -->
                 <img src="https://raw.githubusercontent.com/direccioncomercial/evoluser-web/1b862973e8003850daadd6a47bffd5b6cf04b2f6/logo.png" 
                      alt="EvoluSer" 
-                     class="h-20 w-auto object-contain drop-shadow-md transition-all duration-500 hover:scale-105 hover:drop-shadow-xl filter">
+                     class="h-16 md:h-20 w-auto object-contain drop-shadow-md transition-all duration-500 hover:scale-105 hover:drop-shadow-xl filter">
             </div>
             <div class="hidden md:flex gap-10 h-full items-center">
                 <button onclick="setSegment('soluciones')" id="nav-soluciones" class="nav-link active h-full flex items-center">Soluciones</button>
@@ -316,9 +371,29 @@
                 <button onclick="setSegment('emprendedores')" id="nav-emprendedores" class="nav-link h-full flex items-center">Emprendedores</button>
                 <button onclick="openModal('filosofia_premium')" class="nav-link h-full flex items-center text-nowrap">Filosofía</button>
             </div>
-            <div class="flex items-center gap-4">
-                <a href="https://wa.me/593983900050?text=Hola%20EvoluSer,%20deseo%20una%20consultoría%20experta%20en..." target="_blank" class="hidden lg:block px-8 py-3 bg-gradient-to-r from-brandBlue to-brandGreen text-white font-extrabold rounded-full hover:shadow-neon-light transition uppercase text-xs tracking-wider border border-white/20">WhatsApp Directo</a>
-                <button onclick="openModal('equipo')" class="bg-white border-2 border-brandBlue text-brandBlue px-6 py-2.5 rounded-full font-bold text-[10px] shadow-sm hover:bg-brandBlue hover:text-white transition uppercase tracking-tighter">Directorio</button>
+            <div class="flex items-center gap-3 md:gap-4">
+                <a href="https://wa.me/593983900050?text=Hola%20EvoluSer,%20deseo%20una%20consultoría%20experta%20en..." target="_blank" class="hidden lg:inline-flex items-center gap-2 px-7 py-3 bg-gradient-to-r from-brandBlue to-brandGreen text-white font-extrabold rounded-full hover:shadow-neon-light transition uppercase text-xs tracking-wider border border-white/20">
+                    <i class="fab fa-whatsapp text-sm"></i> WhatsApp Directo
+                </a>
+                <button onclick="openModal('equipo')" class="bg-white border-2 border-brandBlue text-brandBlue px-5 md:px-6 py-2.5 rounded-full font-bold text-[10px] shadow-sm hover:bg-brandBlue hover:text-white transition uppercase tracking-tighter">Directorio</button>
+                <!-- Botón Menú Móvil para UX Responsive -->
+                <button onclick="toggleMobileMenu()" class="md:hidden w-10 h-10 rounded-xl bg-brandGray text-brandBlue flex items-center justify-center border border-gray-200 hover:bg-brandBlue hover:text-white transition" aria-label="Menú">
+                    <i id="mobile-menu-icon" class="fas fa-bars text-lg"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Menú Desplegable Móvil (Mobile First UX) -->
+        <div id="mobile-nav-drawer" class="hidden md:hidden bg-white border-b border-gray-200 px-6 py-5 space-y-3 shadow-xl animate-pop-in">
+            <div class="grid grid-cols-2 gap-2">
+                <button onclick="setSegment('soluciones'); toggleMobileMenu();" class="text-left px-4 py-3 rounded-xl bg-brandGray font-extrabold text-xs uppercase text-brandBlue hover:bg-brandGreen hover:text-white transition"><i class="fas fa-layer-group mr-2 text-brandGreen"></i> Soluciones</button>
+                <button onclick="setSegment('empresas'); toggleMobileMenu();" class="text-left px-4 py-3 rounded-xl bg-brandGray font-extrabold text-xs uppercase text-brandBlue hover:bg-brandGreen hover:text-white transition"><i class="fas fa-building mr-2 text-brandGreen"></i> Empresas</button>
+                <button onclick="setSegment('emprendedores'); toggleMobileMenu();" class="text-left px-4 py-3 rounded-xl bg-brandGray font-extrabold text-xs uppercase text-brandBlue hover:bg-brandGreen hover:text-white transition"><i class="fas fa-rocket mr-2 text-brandGreen"></i> Emprendedores</button>
+                <button onclick="openModal('filosofia_premium'); toggleMobileMenu();" class="text-left px-4 py-3 rounded-xl bg-brandGray font-extrabold text-xs uppercase text-brandBlue hover:bg-brandGreen hover:text-white transition"><i class="fas fa-compass mr-2 text-brandGreen"></i> Filosofía</button>
+            </div>
+            <div class="pt-2 flex gap-2">
+                <button onclick="setSegment('oficina'); toggleMobileMenu();" class="flex-1 py-3 rounded-xl border border-brandBlue text-brandBlue font-extrabold text-xs uppercase text-center">Oficina Virtual</button>
+                <a href="https://wa.me/593983900050?text=Hola%20EvoluSer,%20deseo%20una%20consultoría%20experta%20en..." target="_blank" class="flex-1 py-3 rounded-xl bg-gradient-to-r from-brandBlue to-brandGreen text-white font-extrabold text-xs uppercase text-center"><i class="fab fa-whatsapp mr-1"></i> WhatsApp</a>
             </div>
         </div>
     </header>
@@ -329,80 +404,109 @@
         <div id="segment-soluciones" class="fade-in pb-24">
             
             <!-- NUEVO CARRUSEL PREMIUM -->
-            <div id="hero-carousel" class="relative w-full h-[500px] md:h-[650px] overflow-hidden group bg-brandBlue">
+            <div id="hero-carousel" class="relative w-full h-[520px] md:h-[650px] overflow-hidden group bg-brandBlue">
                 <!-- Slides Container -->
                 <div id="carousel-slides" class="relative w-full h-full">
                     <!-- Slide 1: Talento -->
                     <div class="carousel-slide active" style="background-image: url('https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=1600&q=80');">
-                        <div class="absolute inset-0 bg-gradient-to-r from-brandBlue/95 via-brandBlue/60 to-transparent"></div>
-                        <div class="absolute inset-0 flex items-center container mx-auto px-6">
+                        <div class="absolute inset-0 bg-gradient-to-r from-brandBlue/95 via-brandBlue/65 to-transparent"></div>
+                        <div class="absolute inset-0 flex items-center container mx-auto px-6 md:px-16">
                             <div class="max-w-2xl carousel-text-content">
                                 <span class="text-brandGreen font-extrabold tracking-[0.4em] text-xs uppercase mb-4 block drop-shadow-[0_0_5px_rgba(0,0,0,0.5)]">Evolución Corporativa</span>
-                                <h2 class="text-4xl md:text-6xl font-extrabold text-white mb-6 leading-tight drop-shadow-lg">Talento Humano de <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-white to-brandGreen">Alto Impacto</span></h2>
-                                <p class="text-white text-lg font-light border-l-4 border-brandGreen pl-6 drop-shadow-md">Transformamos equipos ordinarios en fuerzas de alto rendimiento mediante cultura y estrategia.</p>
+                                <h2 class="text-4xl md:text-6xl font-extrabold text-white mb-6 leading-tight drop-shadow-lg font-heading">Talento Humano de <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-white to-brandGreen">Alto Impacto</span></h2>
+                                <p class="text-white text-lg font-light border-l-4 border-brandGreen pl-6 drop-shadow-md mb-8">Transformamos equipos ordinarios en fuerzas de alto rendimiento mediante cultura y estrategia.</p>
+                                <div class="flex flex-wrap gap-4">
+                                    <button onclick="openModal('humano')" class="btn-brand-gradient">Explorar División <i class="fas fa-arrow-right ml-2"></i></button>
+                                    <button onclick="askEvFromPage('Quiero potenciar el Talento Humano de mi empresa')" class="more-info-brand !mt-0"><i class="fas fa-robot mr-2"></i> Consultar a Ev</button>
+                                </div>
                             </div>
                         </div>
                     </div>
                     <!-- Slide 2: Seguridad -->
                     <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=1600&q=80');">
-                        <div class="absolute inset-0 bg-gradient-to-r from-brandBlue/95 via-brandBlue/60 to-transparent"></div>
-                        <div class="absolute inset-0 flex items-center container mx-auto px-6">
+                        <div class="absolute inset-0 bg-gradient-to-r from-brandBlue/95 via-brandBlue/65 to-transparent"></div>
+                        <div class="absolute inset-0 flex items-center container mx-auto px-6 md:px-16">
                             <div class="max-w-2xl carousel-text-content">
                                 <span class="text-brandGreen font-extrabold tracking-[0.4em] text-xs uppercase mb-4 block drop-shadow-md">Blindaje Técnico</span>
-                                <h2 class="text-4xl md:text-6xl font-extrabold text-white mb-6 leading-tight drop-shadow-lg">Seguridad y Salud <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-white to-brandGreen">Ocupacional</span></h2>
-                                <p class="text-white text-lg font-light border-l-4 border-brandGreen pl-6 drop-shadow-md">Cumplimiento ISO 45001 y protección integral para salvaguardar el activo más valioso: la vida.</p>
+                                <h2 class="text-4xl md:text-6xl font-extrabold text-white mb-6 leading-tight drop-shadow-lg font-heading">Seguridad y Salud <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-white to-brandGreen">Ocupacional</span></h2>
+                                <p class="text-white text-lg font-light border-l-4 border-brandGreen pl-6 drop-shadow-md mb-8">Cumplimiento ISO 45001 y protección integral para salvaguardar el activo más valioso: la vida.</p>
+                                <div class="flex flex-wrap gap-4">
+                                    <button onclick="openModal('seguro')" class="btn-brand-gradient">Blindar mi Empresa <i class="fas fa-shield-alt ml-2"></i></button>
+                                    <button onclick="askEvFromPage('Necesito asesoría en Seguridad y Salud Ocupacional ISO 45001')" class="more-info-brand !mt-0"><i class="fas fa-robot mr-2"></i> Consultar a Ev</button>
+                                </div>
                             </div>
                         </div>
                     </div>
                     <!-- Slide 3: Agro -->
                     <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1625246333195-78d9c38ad449?auto=format&fit=crop&w=1600&q=80');">
-                        <div class="absolute inset-0 bg-gradient-to-r from-brandGreen/90 via-brandGreen/50 to-transparent"></div>
-                        <div class="absolute inset-0 flex items-center container mx-auto px-6">
+                        <div class="absolute inset-0 bg-gradient-to-r from-brandGreen/90 via-brandBlue/60 to-transparent"></div>
+                        <div class="absolute inset-0 flex items-center container mx-auto px-6 md:px-16">
                             <div class="max-w-2xl carousel-text-content">
                                 <span class="text-white font-extrabold tracking-[0.4em] text-xs uppercase mb-4 block drop-shadow-md">Calidad Global</span>
-                                <h2 class="text-4xl md:text-6xl font-extrabold text-white mb-6 leading-tight drop-shadow-lg">Ingeniería <br><span class="text-brandBlue underline decoration-white">Agroindustrial</span></h2>
-                                <p class="text-white text-lg font-light border-l-4 border-white pl-6 drop-shadow-md">Estándares internacionales de inocuidad y producción responsable para mercados exigentes.</p>
+                                <h2 class="text-4xl md:text-6xl font-extrabold text-white mb-6 leading-tight drop-shadow-lg font-heading">Ingeniería <br><span class="text-brandBlue underline decoration-white">Agroindustrial</span></h2>
+                                <p class="text-white text-lg font-light border-l-4 border-white pl-6 drop-shadow-md mb-8">Estándares internacionales de inocuidad y producción responsable para mercados exigentes.</p>
+                                <div class="flex flex-wrap gap-4">
+                                    <button onclick="openModal('agro')" class="btn-brand-gradient">Ver Soluciones Agro <i class="fas fa-seedling ml-2"></i></button>
+                                    <button onclick="askEvFromPage('Busco asesoría en Ingeniería Agroindustrial y certificaciones BPM/HACCP')" class="more-info-brand !mt-0"><i class="fas fa-robot mr-2"></i> Consultar a Ev</button>
+                                </div>
                             </div>
                         </div>
                     </div>
                     <!-- Slide 4: Ambiente -->
                     <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1473448912268-2022ce9509d8?auto=format&fit=crop&w=1600&q=80');">
-                        <div class="absolute inset-0 bg-gradient-to-r from-brandGreen/90 via-brandGreen/50 to-transparent"></div>
-                        <div class="absolute inset-0 flex items-center container mx-auto px-6">
+                        <div class="absolute inset-0 bg-gradient-to-r from-brandGreen/90 via-brandBlue/60 to-transparent"></div>
+                        <div class="absolute inset-0 flex items-center container mx-auto px-6 md:px-16">
                             <div class="max-w-2xl carousel-text-content">
                                 <span class="text-white font-extrabold tracking-[0.4em] text-xs uppercase mb-4 block drop-shadow-md">Futuro Sostenible</span>
-                                <h2 class="text-4xl md:text-6xl font-extrabold text-white mb-6 leading-tight drop-shadow-lg">Ingeniería <br><span class="text-brandBlue underline decoration-white">Ambiental</span></h2>
-                                <p class="text-white text-lg font-light border-l-4 border-white pl-6 drop-shadow-md">Soluciones integrales en licencias y manejo de recursos para una industria limpia.</p>
+                                <h2 class="text-4xl md:text-6xl font-extrabold text-white mb-6 leading-tight drop-shadow-lg font-heading">Ingeniería <br><span class="text-brandBlue underline decoration-white">Ambiental</span></h2>
+                                <p class="text-white text-lg font-light border-l-4 border-white pl-6 drop-shadow-md mb-8">Soluciones integrales en licencias y manejo de recursos para una industria limpia.</p>
+                                <div class="flex flex-wrap gap-4">
+                                    <button onclick="openModal('sostenible')" class="btn-brand-gradient">Gestión Ambiental <i class="fas fa-leaf ml-2"></i></button>
+                                    <button onclick="askEvFromPage('Quiero información sobre Licencias e Ingeniería Ambiental')" class="more-info-brand !mt-0"><i class="fas fa-robot mr-2"></i> Consultar a Ev</button>
+                                </div>
                             </div>
                         </div>
                     </div>
                     <!-- Slide 5: Pymes -->
                     <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1559136555-9303baea8ebd?auto=format&fit=crop&w=1600&q=80');">
-                        <div class="absolute inset-0 bg-gradient-to-r from-brandBlue/95 via-brandBlue/60 to-transparent"></div>
-                        <div class="absolute inset-0 flex items-center container mx-auto px-6">
+                        <div class="absolute inset-0 bg-gradient-to-r from-brandBlue/95 via-brandBlue/65 to-transparent"></div>
+                        <div class="absolute inset-0 flex items-center container mx-auto px-6 md:px-16">
                             <div class="max-w-2xl carousel-text-content">
                                 <span class="text-brandGreen font-extrabold tracking-[0.4em] text-xs uppercase mb-4 block drop-shadow-md">Crecimiento Pyme</span>
-                                <h2 class="text-4xl md:text-6xl font-extrabold text-white mb-6 leading-tight drop-shadow-lg">Tu Visión, Nuestra <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-white to-brandGreen">Misión</span></h2>
-                                <p class="text-white text-lg font-light border-l-4 border-brandGreen pl-6 drop-shadow-md">Acompañamiento experto para formalizar y escalar tu emprendimiento con seguridad.</p>
+                                <h2 class="text-4xl md:text-6xl font-extrabold text-white mb-6 leading-tight drop-shadow-lg font-heading">Tu Visión, Nuestra <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-white to-brandGreen">Misión</span></h2>
+                                <p class="text-white text-lg font-light border-l-4 border-brandGreen pl-6 drop-shadow-md mb-8">Acompañamiento experto para formalizar y escalar tu emprendimiento con seguridad.</p>
+                                <div class="flex flex-wrap gap-4">
+                                    <button onclick="setSegment('emprendedores')" class="btn-brand-gradient">Ir a EvoluSer Startup <i class="fas fa-rocket ml-2"></i></button>
+                                    <button onclick="askEvFromPage('Soy emprendedor y quiero formalizar y escalar mi negocio')" class="more-info-brand !mt-0"><i class="fas fa-robot mr-2"></i> Consultar a Ev</button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 
                 <!-- Botones de Cristal 3D -->
-                <button onclick="prevSlide()" class="absolute left-4 md:left-10 top-1/2 -translate-y-1/2 glass-3d-arrow group-hover:opacity-100 opacity-70">
-                    <i class="fas fa-chevron-left text-2xl drop-shadow-md"></i>
+                <button onclick="prevSlide()" class="absolute left-4 md:left-6 top-1/2 -translate-y-1/2 glass-3d-arrow group-hover:opacity-100 opacity-70" aria-label="Anterior">
+                    <i class="fas fa-chevron-left text-xl drop-shadow-md"></i>
                 </button>
-                <button onclick="nextSlide()" class="absolute right-4 md:right-10 top-1/2 -translate-y-1/2 glass-3d-arrow group-hover:opacity-100 opacity-70">
-                    <i class="fas fa-chevron-right text-2xl drop-shadow-md"></i>
+                <button onclick="nextSlide()" class="absolute right-4 md:right-6 top-1/2 -translate-y-1/2 glass-3d-arrow group-hover:opacity-100 opacity-70" aria-label="Siguiente">
+                    <i class="fas fa-chevron-right text-xl drop-shadow-md"></i>
                 </button>
+
+                <!-- Indicadores de Slide Interactivos -->
+                <div class="absolute bottom-6 left-1/2 -translate-x-1/2 z-30 flex items-center gap-3 bg-brandBlue/40 backdrop-blur-md px-4 py-2 rounded-full border border-white/15">
+                    <button onclick="goToSlide(0)" class="carousel-dot w-8 h-2 rounded-full bg-brandGreen transition-all duration-300" aria-label="Slide 1"></button>
+                    <button onclick="goToSlide(1)" class="carousel-dot w-2.5 h-2 rounded-full bg-white/50 hover:bg-white transition-all duration-300" aria-label="Slide 2"></button>
+                    <button onclick="goToSlide(2)" class="carousel-dot w-2.5 h-2 rounded-full bg-white/50 hover:bg-white transition-all duration-300" aria-label="Slide 3"></button>
+                    <button onclick="goToSlide(3)" class="carousel-dot w-2.5 h-2 rounded-full bg-white/50 hover:bg-white transition-all duration-300" aria-label="Slide 4"></button>
+                    <button onclick="goToSlide(4)" class="carousel-dot w-2.5 h-2 rounded-full bg-white/50 hover:bg-white transition-all duration-300" aria-label="Slide 5"></button>
+                </div>
             </div>
 
             <!-- TEXTO ORIGINAL REUBICADO -->
             <div class="bg-gradient-to-b from-[#F0F4F8] to-white border-b border-gray-100 mt-0">
                 <div class="container mx-auto px-4 py-20 text-center">
                     <span class="text-brandGreen font-extrabold tracking-[0.3em] text-[10px] uppercase mb-4 block animate-pulse">Liderazgo y Evolución</span>
-                    <h1 class="text-4xl md:text-6xl font-extrabold text-brandBlue mb-6 tracking-tight">Potenciamos el <span class="text-brandGreen">Ser.</span></h1>
+                    <h1 class="text-4xl md:text-6xl font-extrabold text-brandBlue mb-6 tracking-tight font-heading">Potenciamos el <span class="text-brandGreen">Ser.</span></h1>
                     <!-- APLICADO ID PARA EL EFECTO -->
                     <p id="slogan-animado" class="text-gray-500 text-lg mb-10 max-w-2xl mx-auto font-medium perspective-1000">Aliado estratégico líder para el desarrollo integral de tu organización en la región.</p>
                 </div>
@@ -411,48 +515,48 @@
             <div class="container mx-auto px-4 mt-16">
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
                     <div onclick="openModal('humano')" class="image-card group cursor-pointer">
-                        <div class="h-64 overflow-hidden relative"><img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover image-zoom"><span class="card-tag bg-brandBlue">Gestión Humana</span></div>
-                        <div class="p-8 flex flex-col flex-1"><h4 class="text-2xl font-extrabold text-brandBlue mb-3 group-hover:text-brandGreen transition uppercase tracking-tighter">Talento Humano</h4><p class="text-gray-500 text-sm mb-6 leading-relaxed">Equipos de alto rendimiento y mejora del clima laboral.</p><span class="text-brandBlue font-extrabold text-xs uppercase group-hover:text-brandGreen transition">Ver más <i class="fas fa-arrow-right ml-2"></i></span></div>
+                        <div class="h-64 overflow-hidden relative"><img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=800&q=80" alt="Talento Humano" loading="lazy" class="w-full h-full object-cover image-zoom"><span class="card-tag bg-brandBlue">Gestión Humana</span></div>
+                        <div class="p-8 flex flex-col flex-1"><h4 class="text-2xl font-extrabold text-brandBlue mb-3 group-hover:text-brandGreen transition uppercase tracking-tighter">Talento Humano</h4><p class="text-gray-500 text-sm mb-6 leading-relaxed">Equipos de alto rendimiento y mejora del clima laboral.</p><span class="text-brandBlue font-extrabold text-xs uppercase mt-auto group-hover:text-brandGreen transition flex items-center">Ver más <i class="fas fa-arrow-right ml-2 transform group-hover:translate-x-1 transition"></i></span></div>
                     </div>
                     <div onclick="openModal('seguro')" class="image-card group cursor-pointer">
-                        <div class="h-64 overflow-hidden relative"><img src="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover image-zoom"><span class="card-tag bg-brandBlueDark">Seguridad Industrial</span></div>
-                        <div class="p-8 flex flex-col flex-1"><h4 class="text-2xl font-extrabold text-brandBlue mb-3 group-hover:text-brandGreen transition uppercase tracking-tighter">Seguridad y Salud Ocupacional</h4><p class="text-gray-500 text-sm mb-6 leading-relaxed">Cumplimiento ISO 45001 y blindaje normativo legal.</p><span class="text-brandBlue font-extrabold text-xs uppercase group-hover:text-brandGreen transition">Ver más <i class="fas fa-arrow-right ml-2"></i></span></div>
+                        <div class="h-64 overflow-hidden relative"><img src="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=800&q=80" alt="Seguridad Industrial" loading="lazy" class="w-full h-full object-cover image-zoom"><span class="card-tag bg-brandBlueDark">Seguridad Industrial</span></div>
+                        <div class="p-8 flex flex-col flex-1"><h4 class="text-2xl font-extrabold text-brandBlue mb-3 group-hover:text-brandGreen transition uppercase tracking-tighter">Seguridad y Salud Ocupacional</h4><p class="text-gray-500 text-sm mb-6 leading-relaxed">Cumplimiento ISO 45001 y blindaje normativo legal.</p><span class="text-brandBlue font-extrabold text-xs uppercase mt-auto group-hover:text-brandGreen transition flex items-center">Ver más <i class="fas fa-arrow-right ml-2 transform group-hover:translate-x-1 transition"></i></span></div>
                     </div>
                     <!-- CARD ACTUALIZADA: INGENIERÍA AGROINDUSTRIAL -->
                     <div onclick="openModal('agro')" class="image-card group cursor-pointer">
-                        <div class="h-64 overflow-hidden relative"><img src="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?auto=format&fit=crop&w=1200&q=80" class="w-full h-full object-cover image-zoom"><span class="card-tag bg-brandGreen">Agroindustria</span></div>
-                        <div class="p-8 flex flex-col flex-1"><h4 class="text-2xl font-extrabold text-brandBlue mb-3 group-hover:text-brandGreen transition uppercase tracking-tighter">Ingeniería Agroindustrial</h4><p class="text-gray-500 text-sm mb-6 leading-relaxed">Inocuidad alimentaria y estándares de exportación globales.</p><span class="text-brandBlue font-extrabold text-xs uppercase group-hover:text-brandGreen transition">Ver más <i class="fas fa-arrow-right ml-2"></i></span></div>
+                        <div class="h-64 overflow-hidden relative"><img src="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?auto=format&fit=crop&w=1200&q=80" alt="Ingeniería Agroindustrial" loading="lazy" class="w-full h-full object-cover image-zoom"><span class="card-tag bg-brandGreen">Agroindustria</span></div>
+                        <div class="p-8 flex flex-col flex-1"><h4 class="text-2xl font-extrabold text-brandBlue mb-3 group-hover:text-brandGreen transition uppercase tracking-tighter">Ingeniería Agroindustrial</h4><p class="text-gray-500 text-sm mb-6 leading-relaxed">Inocuidad alimentaria y estándares de exportación globales.</p><span class="text-brandBlue font-extrabold text-xs uppercase mt-auto group-hover:text-brandGreen transition flex items-center">Ver más <i class="fas fa-arrow-right ml-2 transform group-hover:translate-x-1 transition"></i></span></div>
                     </div>
-                    <div class="image-card group cursor-pointer">
-                        <div class="h-64 overflow-hidden relative"><img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover image-zoom"><span class="card-tag bg-brandBlue">Insight</span></div>
-                        <div class="p-8 flex flex-col flex-1"><h4 class="text-xl font-bold text-gray-800 mb-3 group-hover:text-brandGreen transition">Clima Laboral 2026</h4><p class="text-gray-500 text-sm mb-6 leading-relaxed">Tendencias de bienestar en la era digital.</p><span class="text-brandBlue font-extrabold text-xs uppercase mt-auto group-hover:text-brandGreen transition">Leer Más</span></div>
+                    <div onclick="openModal('clima_2026')" class="image-card group cursor-pointer">
+                        <div class="h-64 overflow-hidden relative"><img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80" alt="Clima Laboral 2026" loading="lazy" class="w-full h-full object-cover image-zoom"><span class="card-tag bg-brandBlue">Insight</span></div>
+                        <div class="p-8 flex flex-col flex-1"><h4 class="text-xl font-bold text-gray-800 mb-3 group-hover:text-brandGreen transition">Clima Laboral 2026</h4><p class="text-gray-500 text-sm mb-6 leading-relaxed">Tendencias de bienestar en la era digital.</p><span class="text-brandBlue font-extrabold text-xs uppercase mt-auto group-hover:text-brandGreen transition flex items-center">Leer Más <i class="fas fa-arrow-right ml-2 transform group-hover:translate-x-1 transition"></i></span></div>
                     </div>
-                    <div class="image-card group cursor-pointer">
-                        <div class="h-64 overflow-hidden relative"><img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover image-zoom"><span class="card-tag bg-brandBlue">Cumplimiento</span></div>
-                        <div class="p-8 flex flex-col flex-1"><h4 class="text-xl font-bold text-gray-800 mb-3 group-hover:text-brandGreen transition">ISO 45001: Ventaja Real</h4><p class="text-gray-500 text-sm mb-6 leading-relaxed">El escudo legal de tu organización.</p><span class="text-brandBlue font-extrabold text-xs uppercase mt-auto group-hover:text-brandGreen transition">Leer Más</span></div>
+                    <div onclick="openModal('iso_ventaja')" class="image-card group cursor-pointer">
+                        <div class="h-64 overflow-hidden relative"><img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=800&q=80" alt="ISO 45001: Ventaja Real" loading="lazy" class="w-full h-full object-cover image-zoom"><span class="card-tag bg-brandBlue">Cumplimiento</span></div>
+                        <div class="p-8 flex flex-col flex-1"><h4 class="text-xl font-bold text-gray-800 mb-3 group-hover:text-brandGreen transition">ISO 45001: Ventaja Real</h4><p class="text-gray-500 text-sm mb-6 leading-relaxed">El escudo legal de tu organización.</p><span class="text-brandBlue font-extrabold text-xs uppercase mt-auto group-hover:text-brandGreen transition flex items-center">Leer Más <i class="fas fa-arrow-right ml-2 transform group-hover:translate-x-1 transition"></i></span></div>
                     </div>
                     <!-- CARD ACTUALIZADA: INGENIERÍA AMBIENTAL -->
                     <div onclick="openModal('sostenible')" class="image-card group cursor-pointer">
-                        <div class="h-64 overflow-hidden relative"><img src="https://images.unsplash.com/photo-1473448912268-2022ce9509d8?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover image-zoom"><span class="card-tag bg-brandGreen">Ambiente</span></div>
-                        <div class="p-8 flex flex-col flex-1"><h4 class="text-2xl font-extrabold text-brandBlue mb-3 group-hover:text-brandGreen transition uppercase tracking-tighter">Ingeniería Ambiental</h4><p class="text-gray-500 text-sm mb-6 leading-relaxed">Licencias y planes de manejo responsable.</p><span class="text-brandBlue font-extrabold text-xs uppercase cursor-pointer group-hover:text-brandGreen transition">Ver más <i class="fas fa-arrow-right ml-2"></i></span></div>
+                        <div class="h-64 overflow-hidden relative"><img src="https://images.unsplash.com/photo-1473448912268-2022ce9509d8?auto=format&fit=crop&w=800&q=80" alt="Ingeniería Ambiental" loading="lazy" class="w-full h-full object-cover image-zoom"><span class="card-tag bg-brandGreen">Ambiente</span></div>
+                        <div class="p-8 flex flex-col flex-1"><h4 class="text-2xl font-extrabold text-brandBlue mb-3 group-hover:text-brandGreen transition uppercase tracking-tighter">Ingeniería Ambiental</h4><p class="text-gray-500 text-sm mb-6 leading-relaxed">Licencias y planes de manejo responsable.</p><span class="text-brandBlue font-extrabold text-xs uppercase mt-auto cursor-pointer group-hover:text-brandGreen transition flex items-center">Ver más <i class="fas fa-arrow-right ml-2 transform group-hover:translate-x-1 transition"></i></span></div>
                     </div>
                 </div>
             </div>
 
             <!-- Validación Final -->
             <div class="container mx-auto px-4 py-24">
-                <h3 class="text-3xl font-extrabold text-gray-900 mb-12 text-center uppercase tracking-widest">NUESTRO COMPROMISO</h3>
+                <h3 class="text-3xl font-extrabold text-gray-900 mb-12 text-center uppercase tracking-widest font-heading">NUESTRO COMPROMISO</h3>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
                     <div class="validation-card group cursor-pointer" onclick="openModal('filosofia_premium')">
-                        <div class="overflow-hidden h-56"><img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=800&q=80" alt="Aliado"></div>
+                        <div class="overflow-hidden h-56"><img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=800&q=80" alt="Aliado" loading="lazy"></div>
                         <div class="p-10 flex-1 flex flex-col"><h4 class="text-xl font-bold text-brandBlue mb-4 group-hover:text-brandGreen transition">Aliado Estratégico</h4><p class="text-gray-500 text-sm mb-6 leading-relaxed text-justify">Delegar su cumplimiento legal es la inversión más rentable para su patrimonio.</p><span class="link-elegant mt-auto !text-brandBlue font-bold underline">Leer más <i class="fas fa-arrow-right ml-2"></i></span></div>
                     </div>
                     <div class="validation-card group cursor-pointer" onclick="openModal('seguro')">
-                        <div class="overflow-hidden h-56"><img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=800&q=80" alt="Bienestar"></div>
+                        <div class="overflow-hidden h-56"><img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=800&q=80" alt="Bienestar" loading="lazy"></div>
                         <div class="p-10 flex-1 flex flex-col"><h4 class="text-xl font-bold text-brandBlue mb-4 group-hover:text-brandGreen transition">Tranquilidad Total</h4><p class="text-gray-500 text-sm mb-6 leading-relaxed text-justify">Protección activa de su equipo humano ante cualquier riesgo operacional.</p><span class="link-elegant mt-auto !text-brandBlue font-bold underline">Explorar <i class="fas fa-arrow-right ml-2"></i></span></div>
                     </div>
                     <div class="validation-card group cursor-pointer" onclick="openModal('sostenible')">
-                        <div class="overflow-hidden h-56"><img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=800&q=80" alt="Auditoría"></div>
+                        <div class="overflow-hidden h-56"><img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=800&q=80" alt="Auditoría" loading="lazy"></div>
                         <div class="p-10 flex-1 flex flex-col"><h4 class="text-xl font-bold text-brandBlue mb-4 group-hover:text-brandGreen transition">Avance Seguro</h4><p class="text-gray-500 text-sm mb-6 leading-relaxed text-justify">Validación técnica ante autoridades regionales. Avance sobre bases firmes.</p><span class="link-elegant mt-auto !text-brandBlue font-bold underline">Validar <i class="fas fa-arrow-right ml-2"></i></span></div>
                     </div>
                 </div>
@@ -465,34 +569,37 @@
                 <div class="container mx-auto px-4 flex flex-col md:flex-row items-center gap-16">
                     <div class="w-full md:w-1/2 space-y-8">
                         <span class="text-brandGreen font-bold tracking-widest text-sm uppercase flex items-center gap-2"><i class="fas fa-star"></i> EvoluSer Corporativo</span>
-                        <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 leading-tight">Soluciones que <br><span class="text-brandBlue">blindan tu éxito.</span></h1>
+                        <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 leading-tight font-heading">Soluciones que <br><span class="text-brandBlue">blindan tu éxito.</span></h1>
                         <p class="text-xl text-gray-600 font-light font-medium leading-relaxed text-justify">Garantizamos seguridad técnica y bienestar humano en cada rincón de su organización.</p>
-                        <button onclick="setSegment('oficina')" class="btn-brand-gradient shadow-brand uppercase text-[10px] tracking-widest font-extrabold">Solicitar Diagnóstico</button>
+                        <div class="flex flex-wrap gap-4">
+                            <button onclick="setSegment('oficina')" class="btn-brand-gradient shadow-brand uppercase text-[10px] tracking-widest font-extrabold">Solicitar Diagnóstico</button>
+                            <button onclick="askEvFromPage('Deseo un diagnóstico corporativo para mi empresa')" class="bg-white border-2 border-brandBlue text-brandBlue px-6 py-3 rounded-full font-extrabold text-[10px] uppercase tracking-widest hover:bg-brandBlue hover:text-white transition"><i class="fas fa-robot mr-2 text-brandGreen"></i> Diagnóstico con Ev</button>
+                        </div>
                     </div>
                     <!-- AJUSTE VIDEO VERTICAL (TIKTOK STYLE) -->
                     <div class="w-full md:w-1/2 flex justify-center">
                         <div class="relative w-full max-w-[320px] aspect-[9/16] bg-black rounded-3xl overflow-hidden shadow-2xl border-[8px] border-white ring-1 ring-gray-200">
-                            <iframe class="w-full h-full absolute inset-0" src="https://www.youtube.com/embed/VfmFZdAbAyQ?rel=0&autoplay=0" frameborder="0" allowfullscreen></iframe>
+                            <iframe class="w-full h-full absolute inset-0" src="https://www.youtube.com/embed/VfmFZdAbAyQ?rel=0&autoplay=0" title="EvoluSer Corporativo" frameborder="0" allowfullscreen></iframe>
                         </div>
                     </div>
                 </div>
             </div>
 
             <div class="container mx-auto px-4 py-20">
-                <h3 class="text-3xl font-extrabold text-gray-900 mb-12 border-l-8 border-brandGreen pl-6 uppercase tracking-tighter">DIVISIONES EMPRESARIALES</h3>
+                <h3 class="text-3xl font-extrabold text-gray-900 mb-12 border-l-8 border-brandGreen pl-6 uppercase tracking-tighter font-heading">DIVISIONES EMPRESARIALES</h3>
                 <div class="grid grid-cols-1 md:grid-cols-12 gap-8 h-full">
                     <div class="md:col-span-8">
                         <div class="impact-card group cursor-pointer" onclick="openModal('agro')">
-                            <img src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?auto=format&fit=crop&w=1200&q=80" alt="Industria">
+                            <img src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?auto=format&fit=crop&w=1200&q=80" alt="Industria" loading="lazy">
                             <div class="impact-content"><h3 class="text-5xl font-extrabold text-white mb-3 uppercase tracking-tighter">Industria</h3><p class="text-white/80 text-xl max-w-lg font-light text-justify">Seguridad industrial y cumplimiento técnico de alta complejidad.</p><span class="more-info-brand">Más información</span></div>
                         </div>
                     </div>
                     <div class="md:col-span-4 flex flex-col gap-8">
                         <div class="impact-card group cursor-pointer flex-1" onclick="openModal('empresas_info')">
-                            <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=800&q=80" alt="PYMES"><div class="impact-content p-8"><h3 class="text-2xl font-extrabold text-white mb-1 uppercase text-nowrap">Pymes</h3><span class="more-info-brand !py-2 !px-5 !text-[0.7rem]">Más información</span></div>
+                            <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=800&q=80" alt="PYMES" loading="lazy"><div class="impact-content p-8"><h3 class="text-2xl font-extrabold text-white mb-1 uppercase text-nowrap">Pymes</h3><span class="more-info-brand !py-2 !px-5 !text-[0.7rem]">Más información</span></div>
                         </div>
                         <div class="impact-card group cursor-pointer flex-1" onclick="openModal('humano')">
-                            <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80" alt="Corporativo"><div class="impact-content p-8"><h3 class="text-2xl font-extrabold text-white mb-1 uppercase text-nowrap">Corporativo</h3><span class="more-info-brand !py-2 !px-5 !text-[0.7rem]">Más información</span></div>
+                            <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80" alt="Corporativo" loading="lazy"><div class="impact-content p-8"><h3 class="text-2xl font-extrabold text-white mb-1 uppercase text-nowrap">Corporativo</h3><span class="more-info-brand !py-2 !px-5 !text-[0.7rem]">Más información</span></div>
                         </div>
                     </div>
                 </div>
@@ -512,18 +619,18 @@
 
             <!-- Validación Final -->
             <div class="container mx-auto px-4 py-24">
-                <h3 class="text-3xl font-extrabold text-gray-900 mb-12 text-center uppercase tracking-widest">NUESTRO COMPROMISO</h3>
+                <h3 class="text-3xl font-extrabold text-gray-900 mb-12 text-center uppercase tracking-widest font-heading">NUESTRO COMPROMISO</h3>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
                     <div class="validation-card group cursor-pointer" onclick="openModal('filosofia_premium')">
-                        <div class="overflow-hidden h-56"><img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=800&q=80" alt="Aliado"></div>
+                        <div class="overflow-hidden h-56"><img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=800&q=80" alt="Aliado" loading="lazy"></div>
                         <div class="p-10 flex-1 flex flex-col"><h4 class="text-xl font-bold text-brandBlue mb-4 group-hover:text-brandGreen transition">Aliado Estratégico</h4><p class="text-gray-500 text-sm mb-6 leading-relaxed text-justify">Delegar su cumplimiento legal es la inversión más rentable para su patrimonio.</p><span class="link-elegant mt-auto !text-brandBlue font-bold underline">Leer más <i class="fas fa-arrow-right ml-2"></i></span></div>
                     </div>
                     <div class="validation-card group cursor-pointer" onclick="openModal('seguro')">
-                        <div class="overflow-hidden h-56"><img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=800&q=80" alt="Bienestar"></div>
+                        <div class="overflow-hidden h-56"><img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=800&q=80" alt="Bienestar" loading="lazy"></div>
                         <div class="p-10 flex-1 flex flex-col"><h4 class="text-xl font-bold text-brandBlue mb-4 group-hover:text-brandGreen transition">Tranquilidad Total</h4><p class="text-gray-500 text-sm mb-6 leading-relaxed text-justify">Protección activa de su equipo humano ante cualquier riesgo operacional.</p><span class="link-elegant mt-auto !text-brandBlue font-bold underline">Explorar <i class="fas fa-arrow-right ml-2"></i></span></div>
                     </div>
                     <div class="validation-card group cursor-pointer" onclick="openModal('sostenible')">
-                        <div class="overflow-hidden h-56"><img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=800&q=80" alt="Auditoría"></div>
+                        <div class="overflow-hidden h-56"><img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=800&q=80" alt="Auditoría" loading="lazy"></div>
                         <div class="p-10 flex-1 flex flex-col"><h4 class="text-xl font-bold text-brandBlue mb-4 group-hover:text-brandGreen transition">Avance Seguro</h4><p class="text-gray-500 text-sm mb-6 leading-relaxed text-justify">Validación técnica ante autoridades regionales. Avance sobre bases firmes.</p><span class="link-elegant mt-auto !text-brandBlue font-bold underline">Validar <i class="fas fa-arrow-right ml-2"></i></span></div>
                     </div>
                 </div>
@@ -536,13 +643,16 @@
                 <div class="container mx-auto px-4 flex flex-col md:flex-row items-center gap-16">
                     <div class="w-full md:w-1/2 space-y-8">
                         <span class="text-brandGreen font-bold tracking-widest text-sm uppercase">EvoluSer Startup</span>
-                        <h2 class="text-4xl md:text-5xl font-extrabold text-brandBlue leading-tight">Tu socio de despegue <br><span class="text-brandGreen">desde el día uno.</span></h2>
+                        <h2 class="text-4xl md:text-5xl font-extrabold text-brandBlue leading-tight font-heading">Tu socio de despegue <br><span class="text-brandGreen">desde el día uno.</span></h2>
                         <p class="text-xl text-gray-600 leading-relaxed font-light font-medium">Formaliza tu empresa con agilidad. Asesoría en RUC, estatutos, permisos y tu primer equipo de trabajo.</p>
-                        <button onclick="setSegment('oficina')" class="btn-brand-gradient shadow-brand text-[10px] tracking-widest uppercase font-extrabold">Ver Paquetes</button>
+                        <div class="flex flex-wrap gap-4">
+                            <button onclick="setSegment('oficina')" class="btn-brand-gradient shadow-brand text-[10px] tracking-widest uppercase font-extrabold">Ver Paquetes</button>
+                            <button onclick="askEvFromPage('Quiero conocer el Pack Startup para formalizar mi emprendimiento')" class="bg-white border-2 border-brandGreen text-brandBlue px-6 py-3 rounded-full font-extrabold text-[10px] uppercase tracking-widest hover:bg-brandGreen hover:text-white transition"><i class="fas fa-comments mr-2 text-brandGreen"></i> Hablar con Ev</button>
+                        </div>
                     </div>
                     
                     <!-- NUEVO CONTENEDOR EV CON FONDO PREMIUM -->
-                    <div class="w-full md:w-1/2 relative min-h-[400px] flex items-center justify-center rounded-3xl overflow-hidden shadow-2xl group">
+                    <div onclick="askEvFromPage('Hola Ev, soy emprendedor y quiero despegar mi negocio')" class="w-full md:w-1/2 relative min-h-[400px] flex items-center justify-center rounded-3xl overflow-hidden shadow-2xl group cursor-pointer" title="Haz clic para conversar con Ev">
                         <!-- Fondo: Imagen Abstracta Tech/Futuro -->
                         <div class="absolute inset-0 bg-cover bg-center transition-transform duration-1000 group-hover:scale-110" 
                              style="background-image: url('https://images.unsplash.com/photo-1639322537228-f710d846310a?auto=format&fit=crop&w=800&q=80'); opacity: 0.9;">
@@ -557,7 +667,13 @@
 
                         <!-- Avatar EV -->
                         <img src="https://raw.githubusercontent.com/direccioncomercial/evoluser-web/1b862973e8003850daadd6a47bffd5b6cf04b2f6/imagen6.png" 
+                             alt="Ev Startup Mentor"
                              class="h-96 object-contain ev-free-avatar relative z-10 animate-float drop-shadow-2xl filter brightness-110">
+                        
+                        <!-- Badge Interactivo en Hover -->
+                        <div class="absolute bottom-6 z-20 bg-brandBlue/90 backdrop-blur-md text-white px-5 py-2 rounded-full text-xs font-extrabold uppercase tracking-wider border border-brandGreen/50 shadow-lg group-hover:bg-brandGreen transition">
+                            <i class="fas fa-sparkles mr-2"></i> Clic para mentoría con Ev
+                        </div>
                     </div>
                 </div>
             </div>
@@ -567,14 +683,14 @@
                 <div class="grid grid-cols-1 md:grid-cols-12 gap-8 h-full">
                     <div class="md:col-span-8">
                         <div class="impact-card group cursor-pointer" onclick="openModal('emprendedores_info')">
-                            <img src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?auto=format&fit=crop&w=1200&q=80" alt="Legalización">
-                            <div class="impact-content"><h3 class="text-5xl font-extrabold text-white mb-3 uppercase tracking-tighter text-nowrap">Legalización Total</h3><p class="text-white/80 text-xl max-w-lg font-light text-justify">Constitución de compañía y RUC en tiempo récord para que empieces a facturar.</p><span class="more-info-brand">Ver más</span></div>
+                            <img src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?auto=format&fit=crop&w=1200&q=80" alt="Legalización" loading="lazy">
+                            <div class="impact-content"><h3 class="text-3xl md:text-5xl font-extrabold text-white mb-3 uppercase tracking-tighter">Legalización Total</h3><p class="text-white/80 text-xl max-w-lg font-light text-justify">Constitución de compañía y RUC en tiempo récord para que empieces a facturar.</p><span class="more-info-brand">Ver más</span></div>
                         </div>
                     </div>
                     <div class="md:col-span-4 flex flex-col gap-8">
-                        <div class="impact-card group cursor-pointer flex-1"><img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=800&q=80" alt="Permisos"><div class="impact-content p-8"><h3 class="text-2xl font-extrabold text-white mb-1 uppercase">Permisos</h3><span class="more-info-brand !py-2 !px-5 !text-[0.7rem]">Ver guía</span></div></div>
+                        <div class="impact-card group cursor-pointer flex-1" onclick="openModal('emprendedores_info')"><img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=800&q=80" alt="Permisos" loading="lazy"><div class="impact-content p-8"><h3 class="text-2xl font-extrabold text-white mb-1 uppercase">Permisos</h3><span class="more-info-brand !py-2 !px-5 !text-[0.7rem]">Ver guía</span></div></div>
                         <!-- IMAGEN CORREGIDA: Tu Equipo (Ambiente Startup Latino) -->
-                        <div class="impact-card group cursor-pointer flex-1" onclick="openModal('equipo')"><img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=800&q=80" alt="Equipo"><div class="impact-content p-8"><h3 class="text-2xl font-extrabold text-white mb-1 uppercase text-nowrap">Tu Equipo</h3><span class="more-info-brand !py-2 !px-5 !text-[0.7rem]">Ver servicios</span></div></div>
+                        <div class="impact-card group cursor-pointer flex-1" onclick="openModal('equipo')"><img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=800&q=80" alt="Equipo" loading="lazy"><div class="impact-content p-8"><h3 class="text-2xl font-extrabold text-white mb-1 uppercase text-nowrap">Tu Equipo</h3><span class="more-info-brand !py-2 !px-5 !text-[0.7rem]">Ver servicios</span></div></div>
                     </div>
                 </div>
             </div>
@@ -584,9 +700,9 @@
                 <div class="container mx-auto px-4">
                     <!-- GRID A 4 COLUMNAS -->
                     <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8">
-                        <div class="mapfre-list-card"><div><h4 class="text-2xl font-extrabold text-brandBlue mb-8 uppercase tracking-tighter">Bases Legales</h4><ul class="check-list"><li><i class="fas fa-check-circle text-brandGreen"></i> Estatutos Personalizados</li><li><i class="fas fa-check-circle text-brandGreen"></i> Registro Mercantil</li></ul></div><span class="link-elegant">Detalles <i class="fas fa-chevron-right text-xs"></i></span></div>
-                        <div class="mapfre-list-card"><div><h4 class="text-2xl font-extrabold text-brandBlue mb-8 uppercase tracking-tighter text-nowrap">RRHH Inicial</h4><ul class="check-list"><li><i class="fas fa-check-circle text-brandGreen"></i> Contratos de Trabajo</li><li><i class="fas fa-check-circle text-brandGreen"></i> Afiliación IESS</li></ul></div><span class="link-elegant">Detalles <i class="fas fa-chevron-right text-xs"></i></span></div>
-                        <div class="mapfre-list-card"><div><h4 class="text-2xl font-extrabold text-brandBlue mb-8 uppercase tracking-tighter text-nowrap">Regulatorio</h4><ul class="check-list"><li><i class="fas fa-check-circle text-brandBlue"></i> Permisos Bomberos</li><li><i class="fas fa-check-circle text-brandBlue"></i> Notificación ARCSA</li></ul></div><span class="link-elegant">Detalles <i class="fas fa-chevron-right text-xs"></i></span></div>
+                        <div class="mapfre-list-card"><div><h4 class="text-2xl font-extrabold text-brandBlue mb-8 uppercase tracking-tighter">Bases Legales</h4><ul class="check-list"><li><i class="fas fa-check-circle text-brandGreen"></i> Estatutos Personalizados</li><li><i class="fas fa-check-circle text-brandGreen"></i> Registro Mercantil</li></ul></div><span class="link-elegant" onclick="openModal('emprendedores_info')">Detalles <i class="fas fa-chevron-right text-xs"></i></span></div>
+                        <div class="mapfre-list-card"><div><h4 class="text-2xl font-extrabold text-brandBlue mb-8 uppercase tracking-tighter text-nowrap">RRHH Inicial</h4><ul class="check-list"><li><i class="fas fa-check-circle text-brandGreen"></i> Contratos de Trabajo</li><li><i class="fas fa-check-circle text-brandGreen"></i> Afiliación IESS</li></ul></div><span class="link-elegant" onclick="openModal('humano')">Detalles <i class="fas fa-chevron-right text-xs"></i></span></div>
+                        <div class="mapfre-list-card"><div><h4 class="text-2xl font-extrabold text-brandBlue mb-8 uppercase tracking-tighter text-nowrap">Regulatorio</h4><ul class="check-list"><li><i class="fas fa-check-circle text-brandBlue"></i> Permisos Bomberos</li><li><i class="fas fa-check-circle text-brandBlue"></i> Notificación ARCSA</li></ul></div><span class="link-elegant" onclick="openModal('emprendedores_info')">Detalles <i class="fas fa-chevron-right text-xs"></i></span></div>
                         <div class="mapfre-list-card"><div><h4 class="text-2xl font-extrabold text-brandBlue mb-8 uppercase tracking-tighter">Agro Emprendedor</h4><ul class="check-list"><li><i class="fas fa-check-circle text-brandGreen"></i> Notificación Sanitaria</li><li><i class="fas fa-check-circle text-brandGreen"></i> Tabla Nutricional</li><li><i class="fas fa-check-circle text-brandGreen"></i> Vida Útil</li></ul></div><span class="link-elegant" onclick="openModal('agro')">Detalles <i class="fas fa-chevron-right text-xs"></i></span></div>
                     </div>
                 </div>
@@ -594,18 +710,18 @@
 
             <!-- Validación Emprendedores -->
             <div class="container mx-auto px-4 py-24">
-                <h3 class="text-3xl font-extrabold text-gray-900 mb-12 text-center uppercase tracking-widest">ÉXITO GARANTIZADO</h3>
+                <h3 class="text-3xl font-extrabold text-gray-900 mb-12 text-center uppercase tracking-widest font-heading">ÉXITO GARANTIZADO</h3>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
                     <div class="validation-card group cursor-pointer" onclick="openModal('emprendedores_info')">
-                        <div class="overflow-hidden h-56"><img src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=800&q=80" alt="Ahorro"></div>
+                        <div class="overflow-hidden h-56"><img src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=800&q=80" alt="Ahorro" loading="lazy"></div>
                         <div class="p-10 flex-1 flex flex-col"><h4 class="text-xl font-bold text-brandBlue mb-4 group-hover:text-brandGreen transition italic">Empezar bien es ahorrar</h4><p class="text-gray-500 text-sm mb-6 leading-relaxed text-justify">Evita multas futuras con blindaje legal desde el día 1.</p><span class="link-elegant mt-auto !text-brandBlue font-bold underline">Leer más <i class="fas fa-arrow-right ml-2"></i></span></div>
                     </div>
                     <div class="validation-card group cursor-pointer" onclick="openModal('emprendedores_info')">
-                        <div class="overflow-hidden h-56"><img src="https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&w=800&q=80" alt="Delegación"></div>
+                        <div class="overflow-hidden h-56"><img src="https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&w=800&q=80" alt="Delegación" loading="lazy"></div>
                         <div class="p-10 flex-1 flex flex-col"><h4 class="text-xl font-bold text-brandBlue mb-4 group-hover:text-brandGreen transition italic text-nowrap">Enfócate en vender</h4><p class="text-gray-500 text-sm mb-6 leading-relaxed text-justify">Gestionamos tu back-office legal mientras tú escalas tu negocio.</p><span class="link-elegant mt-auto !text-brandBlue font-bold underline">Explorar <i class="fas fa-arrow-right ml-2"></i></span></div>
                     </div>
                     <div class="validation-card group cursor-pointer" onclick="openModal('equipo')">
-                        <div class="overflow-hidden h-56"><img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=800&q=80" alt="Socio"></div>
+                        <div class="overflow-hidden h-56"><img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=800&q=80" alt="Socio" loading="lazy"></div>
                         <div class="p-10 flex-1 flex flex-col"><h4 class="text-xl font-bold text-brandBlue mb-4 group-hover:text-brandGreen transition italic text-nowrap">Tu socio en el tiempo</h4><p class="text-gray-500 text-sm mb-6 leading-relaxed text-justify">Evolucionamos contigo desde tu primera factura hasta tu consolidación.</p><span class="link-elegant mt-auto !text-brandBlue font-bold underline">Validar <i class="fas fa-arrow-right ml-2"></i></span></div>
                     </div>
                 </div>
@@ -615,28 +731,37 @@
         <!-- SECCIÓN 4: OFICINA VIRTUAL -->
         <div id="segment-oficina" class="hidden fade-in min-h-[80vh] flex flex-col md:flex-row">
             <div class="hidden md:block w-full md:w-3/5 bg-cover bg-center relative" style="background-image: url('https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=1200&q=80');">
-                <div class="absolute inset-0 bg-brandBlue/30"></div>
+                <div class="absolute inset-0 bg-gradient-to-t from-brandBlue/90 via-brandBlue/40 to-transparent"></div>
                 <div class="absolute bottom-20 left-20 text-white max-w-lg">
-                    <h2 class="text-4xl font-extrabold mb-6 uppercase tracking-tighter">Gestión Digital</h2>
+                    <span class="text-brandGreen font-extrabold uppercase tracking-widest text-xs block mb-2">Atención Prioritaria</span>
+                    <h2 class="text-4xl font-extrabold mb-6 uppercase tracking-tighter font-heading">Gestión Digital</h2>
                     <p class="text-xl font-light border-l-4 border-brandGreen pl-6 italic">Atención ágil para el crecimiento organizacional.</p>
                 </div>
             </div>
             <div class="w-full md:w-2/5 flex items-center justify-center bg-gray-50 p-6 md:p-12">
                 <div class="ov-login-container">
-                    <div class="ov-header"><h2 class="uppercase tracking-widest text-xl text-brandBlue">Acceso</h2><p class="text-[10px] text-gray-400 font-bold uppercase mt-1 tracking-widest tracking-tighter text-nowrap">Mesa de Ayuda EvoluSer</p></div>
-                    <form id="ov-form" class="p-10 space-y-5" onsubmit="handleOfficeSubmit(event)">
+                    <div class="ov-header">
+                        <h2 class="uppercase tracking-widest text-xl font-extrabold text-brandBlue">Acceso</h2>
+                        <p class="text-[10px] text-brandGreen font-extrabold uppercase mt-1 tracking-widest text-nowrap">Mesa de Ayuda EvoluSer</p>
+                    </div>
+                    <form id="ov-form" class="p-8 md:p-10 space-y-5" onsubmit="handleOfficeSubmit(event)">
                         <div class="grid grid-cols-2 gap-4">
-                            <div class="col-span-2 sm:col-span-1"><label class="block text-[10px] font-bold text-gray-500 uppercase mb-2">Identificación:</label><select id="ov-type" class="w-full border border-gray-300 rounded p-3 text-sm outline-none"><option>Cédula</option><option>RUC</option></select></div>
-                            <div class="col-span-2 sm:col-span-1"><label class="block text-[10px] font-bold text-gray-500 uppercase mb-2">Número:</label><input id="ov-id" type="text" placeholder="171..." class="w-full border border-gray-300 rounded p-3 text-sm focus:border-brandGreen outline-none"></div>
+                            <div class="col-span-2 sm:col-span-1"><label class="block text-[10px] font-bold text-gray-500 uppercase mb-2">Identificación:</label><select id="ov-type" class="w-full border border-gray-300 rounded-lg p-3 text-sm outline-none focus:border-brandGreen transition bg-white"><option>Cédula</option><option>RUC</option></select></div>
+                            <div class="col-span-2 sm:col-span-1"><label class="block text-[10px] font-bold text-gray-500 uppercase mb-2">Número:</label><input id="ov-id" type="text" required placeholder="171..." class="w-full border border-gray-300 rounded-lg p-3 text-sm focus:border-brandGreen outline-none transition"></div>
                         </div>
                         <div class="grid grid-cols-2 gap-4">
-                            <div class="col-span-2 sm:col-span-1"><label class="block text-[10px] font-bold text-gray-500 uppercase mb-2">Teléfono:</label><input id="ov-phone" type="tel" placeholder="098..." class="w-full border border-gray-300 rounded p-3 text-sm focus:border-brandGreen outline-none"></div>
-                            <div class="col-span-2 sm:col-span-1"><label class="block text-[10px] font-bold text-gray-500 uppercase mb-2">Ciudad:</label><input id="ov-city" type="text" placeholder="Quito" class="w-full border border-gray-300 rounded p-3 text-sm focus:border-brandGreen outline-none"></div>
+                            <div class="col-span-2 sm:col-span-1"><label class="block text-[10px] font-bold text-gray-500 uppercase mb-2">Teléfono:</label><input id="ov-phone" type="tel" required placeholder="098..." class="w-full border border-gray-300 rounded-lg p-3 text-sm focus:border-brandGreen outline-none transition"></div>
+                            <div class="col-span-2 sm:col-span-1"><label class="block text-[10px] font-bold text-gray-500 uppercase mb-2">Ciudad:</label><input id="ov-city" type="text" placeholder="Quito" class="w-full border border-gray-300 rounded-lg p-3 text-sm focus:border-brandGreen outline-none transition"></div>
                         </div>
-                        <div><label class="block text-[10px] font-bold text-gray-500 uppercase mb-2 text-nowrap">¿Qué necesitas?</label><textarea id="ov-message" rows="3" placeholder="Describe tu requerimiento..." class="w-full border border-gray-300 rounded p-3 text-sm focus:border-brandGreen outline-none"></textarea></div>
-                        <button type="submit" class="w-full btn-brand-gradient shadow-brand text-white font-extrabold py-4 rounded transition uppercase text-xs tracking-widest">Enviar Solicitud</button>
+                        <div><label class="block text-[10px] font-bold text-gray-500 uppercase mb-2 text-nowrap">¿Qué necesitas?</label><textarea id="ov-message" rows="3" required placeholder="Describe tu requerimiento..." class="w-full border border-gray-300 rounded-lg p-3 text-sm focus:border-brandGreen outline-none transition"></textarea></div>
+                        <button type="submit" class="w-full btn-brand-gradient shadow-brand text-white font-extrabold py-4 rounded-xl transition uppercase text-xs tracking-widest">Enviar Solicitud</button>
                     </form>
-                    <div id="ov-success" class="hidden p-10 text-center animate-pop-in"><div class="w-20 h-20 bg-brandGreen/10 rounded-full flex items-center justify-center mx-auto mb-6"><i class="fas fa-check text-brandGreen text-3xl"></i></div><h3 class="text-xl font-bold text-brandBlue mb-2">¡Recibido!</h3><p class="text-sm text-gray-500">Un consultor especializado revisará su solicitud pronto.</p></div>
+                    <div id="ov-success" class="hidden p-10 text-center animate-pop-in">
+                        <div class="w-20 h-20 bg-brandGreen/10 rounded-full flex items-center justify-center mx-auto mb-6"><i class="fas fa-check text-brandGreen text-3xl"></i></div>
+                        <h3 class="text-xl font-bold text-brandBlue mb-2">¡Recibido!</h3>
+                        <p class="text-sm text-gray-500 mb-6">Un consultor especializado revisará su solicitud pronto.</p>
+                        <button onclick="resetOfficeForm()" class="text-xs font-extrabold text-brandGreen uppercase tracking-widest underline hover:text-brandBlue transition">Enviar otra solicitud</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -649,7 +774,7 @@
             
             <!-- Columna 1: Logo (4 espacios) -->
             <div class="md:col-span-4">
-                <img src="https://raw.githubusercontent.com/direccioncomercial/evoluser-web/1b862973e8003850daadd6a47bffd5b6cf04b2f6/logo.png" class="h-14 mb-6 brightness-0 invert opacity-90">
+                <img src="https://raw.githubusercontent.com/direccioncomercial/evoluser-web/1b862973e8003850daadd6a47bffd5b6cf04b2f6/logo.png" alt="EvoluSer" class="h-14 mb-6 brightness-0 invert opacity-90">
                 <p class="text-white/60 leading-relaxed font-light text-justify text-sm">Potenciamos el ser, protegemos la vida. Aliado estratégico líder en la región para la evolución empresarial sostenible.</p>
             </div>
 
@@ -668,18 +793,18 @@
             <div class="md:col-span-4">
                 <h5 class="font-bold mb-6 uppercase tracking-widest text-brandGreen text-sm text-nowrap">Síguenos</h5>
                 <div class="flex gap-4 text-xl">
-                    <a href="#" class="social-icon hover-linkedin transition p-2 rounded-full border border-white/10 hover:border-brandGreen/50"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="#" class="social-icon hover-facebook transition p-2 rounded-full border border-white/10 hover:border-brandGreen/50"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" class="social-icon hover-instagram transition p-2 rounded-full border border-white/10 hover:border-brandGreen/50"><i class="fab fa-instagram"></i></a>
-                    <a href="#" class="social-icon hover-youtube transition p-2 rounded-full border border-white/10 hover:border-brandGreen/50"><i class="fab fa-youtube"></i></a>
-                    <a href="#" class="social-icon hover-tiktok transition p-2 rounded-full border border-white/10 hover:border-brandGreen/50"><i class="fab fa-tiktok"></i></a>
+                    <a href="#" class="social-icon hover-linkedin transition p-2.5 rounded-full border border-white/10 hover:border-brandGreen/50"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="social-icon hover-facebook transition p-2.5 rounded-full border border-white/10 hover:border-brandGreen/50"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-icon hover-instagram transition p-2.5 rounded-full border border-white/10 hover:border-brandGreen/50"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-icon hover-youtube transition p-2.5 rounded-full border border-white/10 hover:border-brandGreen/50"><i class="fab fa-youtube"></i></a>
+                    <a href="#" class="social-icon hover-tiktok transition p-2.5 rounded-full border border-white/10 hover:border-brandGreen/50"><i class="fab fa-tiktok"></i></a>
                 </div>
             </div>
         </div>
 
         <!-- BOTÓN DE MENÚ HAMBURGUESA FLOTANTE EN EL FOOTER (POSICIÓN SUPERIOR DERECHA) -->
         <div class="absolute top-10 right-4 md:right-10 z-20 footer-menu-wrapper">
-            <button class="footer-menu-trigger group">
+            <button class="footer-menu-trigger group" aria-label="Menú de pie de página">
                 <i class="fas fa-bars group-hover:text-brandGreen transition"></i>
             </button>
             <!-- Menú Desplegable -->
@@ -688,6 +813,7 @@
                 <ul class="space-y-3 text-white text-sm">
                     <li><button onclick="setSegment('soluciones')" class="hover:text-brandGreen transition flex items-center w-full text-left"><i class="fas fa-chevron-right text-xs mr-2 text-brandGreen/50"></i> Soluciones</button></li>
                     <li><button onclick="setSegment('empresas')" class="hover:text-brandGreen transition flex items-center w-full text-left"><i class="fas fa-chevron-right text-xs mr-2 text-brandGreen/50"></i> Empresas</button></li>
+                    <li><button onclick="setSegment('emprendedores')" class="hover:text-brandGreen transition flex items-center w-full text-left"><i class="fas fa-chevron-right text-xs mr-2 text-brandGreen/50"></i> Emprendedores</button></li>
                     <li><button onclick="setSegment('oficina')" class="hover:text-brandGreen transition flex items-center w-full text-left"><i class="fas fa-chevron-right text-xs mr-2 text-brandGreen/50"></i> Oficina Virtual</button></li>
                 </ul>
             </div>
@@ -695,10 +821,11 @@
     </footer>
 
     <!-- EV MOVIBLE Y FUTURISTA -->
-    <div id="ev-floating-container" class="fixed z-[80] flex flex-col items-center cursor-pointer group select-none touch-none" style="bottom: 40px; right: 40px;">
-        <!-- Globo de Texto Superior -->
-        <div class="bg-white px-4 py-2 rounded-xl shadow-neon-light border-b-2 border-brandBlue mb-2 animate-bounce whitespace-nowrap">
-           <span class="text-xs font-extrabold text-brandBlue uppercase tracking-wider">
+    <div id="ev-floating-container" class="fixed z-[80] flex flex-col items-center cursor-pointer group select-none touch-none" style="bottom: 30px; right: 30px;">
+        <!-- Globo de Texto Superior Dinámico -->
+        <div id="ev-speech-bubble" onclick="if(!hasMoved) toggleChat();" class="bg-white px-4 py-2 rounded-xl shadow-neon-light border-b-2 border-brandBlue mb-2 animate-bounce whitespace-nowrap relative flex items-center gap-2">
+           <span class="w-2 h-2 rounded-full bg-brandGreen animate-ping"></span>
+           <span id="ev-bubble-text" class="text-xs font-extrabold text-brandBlue uppercase tracking-wider">
              ¡Hola! Soy Ev. ¿Hablamos?
            </span>
         </div>
@@ -709,73 +836,192 @@
            <img 
              src="https://raw.githubusercontent.com/direccioncomercial/evoluser-web/1b862973e8003850daadd6a47bffd5b6cf04b2f6/imagen6.png" 
              id="ev-avatar-trigger"
-             class="w-full h-full object-contain drop-shadow-2xl transition-transform duration-300 animate-float" 
+             class="w-full h-full object-contain drop-shadow-2xl transition-transform duration-300 animate-float group-hover:scale-105" 
              alt="Consultora IA Ev" 
            >
         </div>
     </div>
 
-    <!-- CHATBOT WINDOW -->
-    <div id="ai-chat-window" class="fixed bottom-24 right-6 w-80 md:w-96 bg-white rounded-2xl shadow-2xl flex flex-col transition-all duration-500 transform scale-0 origin-bottom-right z-[90] hidden border border-gray-100 overflow-hidden" style="height: 500px;">
-        <div class="bg-gradient-to-r from-brandBlue to-brandGreen p-6 flex justify-between items-center border-b-4 border-white/20">
-            <div class="flex items-center gap-4">
-                <img src="https://raw.githubusercontent.com/direccioncomercial/evoluser-web/1b862973e8003850daadd6a47bffd5b6cf04b2f6/imagen6.png" class="w-12 h-12 object-contain ev-free-avatar">
-                <div><h4 class="text-white font-bold text-sm text-nowrap">Consultora Ev</h4><p class="text-[10px] text-white/80 font-bold uppercase tracking-widest leading-none">Inteligencia Estratégica</p></div>
+    <!-- CHATBOT WINDOW MEJORADO CON MOTOR CONVERSACIONAL EV -->
+    <div id="ai-chat-window" class="fixed bottom-24 right-4 md:right-8 w-[92vw] max-w-[400px] bg-white rounded-3xl shadow-2xl flex flex-col transition-all duration-300 transform scale-0 origin-bottom-right z-[95] hidden border border-brandGreen/30 overflow-hidden" style="height: 560px; max-height: 82vh;">
+        <!-- Cabecera de Ev -->
+        <div class="bg-gradient-to-r from-brandBlue via-brandBlue to-brandGreen p-4 px-5 flex justify-between items-center border-b-2 border-white/20">
+            <div class="flex items-center gap-3">
+                <div class="relative">
+                    <img src="https://raw.githubusercontent.com/direccioncomercial/evoluser-web/1b862973e8003850daadd6a47bffd5b6cf04b2f6/imagen6.png" alt="Ev Avatar" class="w-12 h-12 object-contain rounded-full bg-white/10 p-0.5 border border-white/30">
+                    <span class="absolute bottom-0 right-0 w-3 h-3 bg-emerald-400 border-2 border-brandBlue rounded-full" title="En línea"></span>
+                </div>
+                <div>
+                    <div class="flex items-center gap-2">
+                        <h4 class="text-white font-extrabold text-sm text-nowrap">Consultora Ev</h4>
+                        <span class="bg-white/20 text-white text-[9px] font-extrabold px-2 py-0.5 rounded-full uppercase">IA Activa</span>
+                    </div>
+                    <p class="text-[10px] text-white/80 font-bold uppercase tracking-widest leading-none mt-1">Inteligencia Estratégica EvoluSer</p>
+                </div>
             </div>
-            <button onclick="toggleChat()" class="text-white/50 hover:text-white transition"><i class="fas fa-times text-xl"></i></button>
+            <div class="flex items-center gap-2">
+                <button onclick="resetEvChat()" class="text-white/60 hover:text-white transition p-1.5" title="Reiniciar conversación"><i class="fas fa-rotate-right text-sm"></i></button>
+                <button onclick="toggleChat()" class="text-white/70 hover:text-white transition p-1.5" title="Cerrar"><i class="fas fa-times text-lg"></i></button>
+            </div>
         </div>
-        <ul id="chat-box" class="flex-1 overflow-y-auto p-6 space-y-4 bg-gray-50/50 scrollbar-hide"><li class="flex justify-start"><div class="bg-white text-gray-700 p-4 rounded-2xl rounded-tl-none shadow-sm text-sm border border-gray-100 max-w-[85%] italic">"Bienvenido Evonauta. Soy Ev, tu consultora experta. ¿Deseas optimizar hoy tu equipo, tu seguridad o tu cumplimiento ambiental?"</div></li></ul>
-        <div class="p-4 bg-white border-t border-gray-100"><div class="flex items-center gap-3 bg-gray-50 rounded-full px-5 py-3 border border-gray-200 focus-within:border-brandBlue transition-all"><input id="chat-input" class="flex-1 bg-transparent border-none outline-none text-sm font-medium" placeholder="Consulta estratégica..."> <button onclick="handleChat()" class="text-brandBlue hover:text-brandGreen transition transform hover:scale-110"><i class="fas fa-paper-plane text-lg"></i></button></div></div>
+
+        <!-- Historial de Mensajes -->
+        <ul id="chat-box" class="flex-1 overflow-y-auto p-5 space-y-4 bg-gradient-to-b from-[#F7F9FC] to-white scrollbar-hide">
+            <!-- El contenido inicial se inyecta dinámicamente con bienvenida y botones rápidos -->
+        </ul>
+
+        <!-- Barra de Sugerencias Rápidas Persistentes -->
+        <div class="px-4 py-2 bg-gray-50 border-t border-gray-100 flex gap-2 overflow-x-auto scrollbar-hide">
+            <button onclick="triggerQuickIntent('talento')" class="ev-chip whitespace-nowrap"><i class="fas fa-users text-brandGreen"></i> Talento Humano</button>
+            <button onclick="triggerQuickIntent('seguridad')" class="ev-chip whitespace-nowrap"><i class="fas fa-hard-hat text-brandGreen"></i> SSO / ISO 45001</button>
+            <button onclick="triggerQuickIntent('agro')" class="ev-chip whitespace-nowrap"><i class="fas fa-seedling text-brandGreen"></i> Agroindustria</button>
+            <button onclick="triggerQuickIntent('ambiental')" class="ev-chip whitespace-nowrap"><i class="fas fa-leaf text-brandGreen"></i> Ing. Ambiental</button>
+            <button onclick="triggerQuickIntent('emprendedor')" class="ev-chip whitespace-nowrap"><i class="fas fa-rocket text-brandGreen"></i> Emprendedores</button>
+            <button onclick="triggerQuickIntent('agendar')" class="ev-chip whitespace-nowrap"><i class="fab fa-whatsapp text-brandGreen"></i> Agendar Cita</button>
+        </div>
+
+        <!-- Input de Chat -->
+        <div class="p-3.5 bg-white border-t border-gray-100">
+            <form onsubmit="event.preventDefault(); handleChat();" class="flex items-center gap-2 bg-gray-50 rounded-full px-4 py-2.5 border border-gray-200 focus-within:border-brandGreen focus-within:ring-2 focus-within:ring-brandGreen/20 transition-all">
+                <input id="chat-input" type="text" autocomplete="off" class="flex-1 bg-transparent border-none outline-none text-sm font-medium text-gray-700" placeholder="Escribe tu consulta a Ev...">
+                <button type="submit" class="w-9 h-9 rounded-full bg-gradient-to-r from-brandBlue to-brandGreen text-white flex items-center justify-center hover:shadow-md transition transform hover:scale-105" aria-label="Enviar">
+                    <i class="fas fa-paper-plane text-xs"></i>
+                </button>
+            </form>
+        </div>
     </div>
 
     <!-- MODAL UNIVERSAL -->
-    <div id="service-modal" class="fixed inset-0 z-[100] hidden items-center justify-center bg-brandBlue/90 backdrop-blur-md p-4">
+    <div id="service-modal" onclick="if(event.target === this) closeModal()" class="fixed inset-0 z-[100] hidden items-center justify-center bg-brandBlue/90 backdrop-blur-md p-4">
         <div class="bg-white rounded-2xl shadow-2xl max-w-5xl w-full max-h-[90vh] overflow-y-auto relative animate-pop-in flex flex-col md:flex-row overflow-hidden">
-            <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-400 hover:text-brandBlue z-20 bg-white/80 rounded-full p-2 transition"><i class="fas fa-times text-2xl"></i></button>
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-400 hover:text-brandBlue z-20 bg-white/80 rounded-full w-10 h-10 flex items-center justify-center transition shadow-sm"><i class="fas fa-times text-xl"></i></button>
             <!-- CONTENEDOR IZQUIERDO CON ID PARA MANIPULACIÓN -->
             <div id="modal-left-container" class="w-full md:w-2/5 h-64 md:h-auto bg-gray-50 relative flex items-center justify-center border-r border-gray-100 overflow-hidden">
-                <img id="modal-image" src="" class="w-full h-full object-cover object-top">
+                <img id="modal-image" src="" alt="EvoluSer Modal" class="w-full h-full object-cover object-top">
             </div>
-            <div class="w-full md:w-3/5 p-10 md:p-14 flex flex-col justify-center"><div id="modal-content" class="scrollbar-hide overflow-y-auto max-h-[60vh]"></div><button onclick="closeModal()" class="mt-10 w-full bg-gray-100 hover:bg-brandBlue hover:text-white text-gray-500 font-extrabold py-4 rounded-xl transition uppercase text-xs tracking-[0.2em]">Cerrar</button></div>
+            <div class="w-full md:w-3/5 p-8 md:p-14 flex flex-col justify-center">
+                <div id="modal-content" class="scrollbar-hide overflow-y-auto max-h-[62vh]"></div>
+                <button onclick="closeModal()" class="mt-8 w-full bg-gray-100 hover:bg-brandBlue hover:text-white text-gray-600 font-extrabold py-4 rounded-xl transition uppercase text-xs tracking-[0.2em]">Cerrar</button>
+            </div>
         </div>
     </div>
 
     <script>
-        // Lógica de Movimiento EV
+        // ==========================================
+        // 1. LÓGICA DE MOVIMIENTO EV (CON LÍMITES SEGUROS)
+        // ==========================================
         const evContainer = document.getElementById('ev-floating-container');
-        let isDragging = false; let startX, startY, initialX, initialY; let hasMoved = false;
+        let isDragging = false;
+        let startX, startY, initialX, initialY;
+        let hasMoved = false;
 
         evContainer.addEventListener('mousedown', startDragging);
         document.addEventListener('mousemove', drag);
         document.addEventListener('mouseup', stopDragging);
-        evContainer.addEventListener('touchstart', (e) => startDragging(e.touches[0]));
-        document.addEventListener('touchmove', (e) => drag(e.touches[0]));
+        evContainer.addEventListener('touchstart', (e) => startDragging(e.touches[0]), { passive: true });
+        document.addEventListener('touchmove', (e) => drag(e.touches[0]), { passive: true });
         document.addEventListener('touchend', stopDragging);
 
-        function startDragging(e) { isDragging = true; hasMoved = false; startX = e.clientX; startY = e.clientY; initialX = evContainer.offsetLeft; initialY = evContainer.offsetTop; }
-        function drag(e) { if (!isDragging) return; hasMoved = true; const dx = e.clientX - startX; const dy = e.clientY - startY; evContainer.style.left = (initialX + dx) + 'px'; evContainer.style.top = (initialY + dy) + 'px'; evContainer.style.bottom = 'auto'; evContainer.style.right = 'auto'; }
-        function stopDragging() { isDragging = false; }
-        document.getElementById('ev-avatar-trigger').onclick = () => { if (!hasMoved) toggleChat(); };
+        function startDragging(e) {
+            isDragging = true;
+            hasMoved = false;
+            startX = e.clientX;
+            startY = e.clientY;
+            initialX = evContainer.offsetLeft;
+            initialY = evContainer.offsetTop;
+        }
+
+        function drag(e) {
+            if (!isDragging) return;
+            const dx = e.clientX - startX;
+            const dy = e.clientY - startY;
+            if (Math.abs(dx) > 5 || Math.abs(dy) > 5) {
+                hasMoved = true;
+            }
+            if (!hasMoved) return;
+
+            const maxX = window.innerWidth - evContainer.offsetWidth - 10;
+            const maxY = window.innerHeight - evContainer.offsetHeight - 10;
+            const newX = Math.max(10, Math.min(initialX + dx, maxX));
+            const newY = Math.max(10, Math.min(initialY + dy, maxY));
+
+            evContainer.style.left = newX + 'px';
+            evContainer.style.top = newY + 'px';
+            evContainer.style.bottom = 'auto';
+            evContainer.style.right = 'auto';
+        }
+
+        function stopDragging() {
+            isDragging = false;
+        }
+
+        document.getElementById('ev-avatar-trigger').onclick = () => {
+            if (!hasMoved) toggleChat();
+        };
+
+        // ==========================================
+        // 2. NAVEGACIÓN DE SEGMENTOS Y MENÚ MÓVIL
+        // ==========================================
+        function toggleMobileMenu() {
+            const drawer = document.getElementById('mobile-nav-drawer');
+            const icon = document.getElementById('mobile-menu-icon');
+            drawer.classList.toggle('hidden');
+            icon.className = drawer.classList.contains('hidden') ? 'fas fa-bars text-lg' : 'fas fa-times text-lg';
+        }
 
         function setSegment(segment) {
             document.querySelectorAll('.nav-link').forEach(btn => btn.classList.remove('active'));
-            if(document.getElementById('nav-' + segment)) document.getElementById('nav-' + segment).classList.add('active');
-            ['soluciones', 'empresas', 'emprendedores', 'oficina'].forEach(s => { const el = document.getElementById('segment-' + s); if(el) el.classList.add('hidden'); });
-            const target = document.getElementById('segment-' + segment); if(target) target.classList.remove('hidden');
-            window.scrollTo({top: 0, behavior: 'smooth'});
+            if (document.getElementById('nav-' + segment)) {
+                document.getElementById('nav-' + segment).classList.add('active');
+            }
+            ['soluciones', 'empresas', 'emprendedores', 'oficina'].forEach(s => {
+                const el = document.getElementById('segment-' + s);
+                if (el) el.classList.add('hidden');
+            });
+            const target = document.getElementById('segment-' + segment);
+            if (target) target.classList.remove('hidden');
+
+            // Actualizar mensaje contextual del globo de Ev según la sección
+            const bubbleText = document.getElementById('ev-bubble-text');
+            if (bubbleText) {
+                const sectionPrompts = {
+                    soluciones: '¡Hola! Soy Ev. ¿Hablamos?',
+                    empresas: '¿Blindamos tu empresa hoy?',
+                    emprendedores: '¿Despegamos tu Startup?',
+                    oficina: '¿Te ayudo con tu solicitud?'
+                };
+                bubbleText.innerText = sectionPrompts[segment] || '¡Hola! Soy Ev. ¿Hablamos?';
+            }
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
+        // ==========================================
+        // 3. OFICINA VIRTUAL
+        // ==========================================
         function handleOfficeSubmit(e) {
             e.preventDefault();
-            const id = document.getElementById('ov-id').value; const phone = document.getElementById('ov-phone').value; const city = document.getElementById('ov-city').value; const message = document.getElementById('ov-message').value;
-            if(!id || !phone || !message) return;
-            const body = encodeURIComponent(`ID: ${id}\nTel: ${phone}\nCiudad: ${city}\n\nMensaje:\n${message}`);
+            const type = document.getElementById('ov-type').value;
+            const id = document.getElementById('ov-id').value;
+            const phone = document.getElementById('ov-phone').value;
+            const city = document.getElementById('ov-city').value;
+            const message = document.getElementById('ov-message').value;
+            if (!id || !phone || !message) return;
+            const body = encodeURIComponent(`Tipo ID: ${type}\nNúmero: ${id}\nTel: ${phone}\nCiudad: ${city}\n\nMensaje:\n${message}`);
             window.location.href = `mailto:evoluserec@gmail.com?subject=Solicitud Oficina Virtual&body=${body}`;
-            document.getElementById('ov-form').classList.add('hidden'); document.getElementById('ov-success').classList.remove('hidden');
+            document.getElementById('ov-form').classList.add('hidden');
+            document.getElementById('ov-success').classList.remove('hidden');
         }
 
-        function resetOfficeForm() { document.getElementById('ov-form').classList.remove('hidden'); document.getElementById('ov-success').classList.add('hidden'); document.getElementById('ov-form').reset(); }
+        function resetOfficeForm() {
+            document.getElementById('ov-form').classList.remove('hidden');
+            document.getElementById('ov-success').classList.add('hidden');
+            document.getElementById('ov-form').reset();
+        }
 
+        // ==========================================
+        // 4. DATOS DE MODALES (CONTENIDO INTACTO + INSIGHTS ACTIVOS)
+        // ==========================================
         const contentData = {
             filosofia_premium: {
                 title: "Filosofía EvoluSer",
@@ -803,11 +1049,14 @@
             sostenible: { title: "Ingeniería Ambiental", image: "https://raw.githubusercontent.com/direccioncomercial/evoluser-web/1b862973e8003850daadd6a47bffd5b6cf04b2f6/imagen3.png", leader: "Christian Ortega", role: "Director Sostenibilidad", desc: "Convertimos la responsabilidad ambiental en rentabilidad real.", list: ["Licencias Verdes", "Huella de Carbono", "Manejo de Desechos"] },
             empresas_info: { title: "Consultoría 360°", image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80", desc: "Soluciones corporativas de alto impacto estratégico.", list: ["Outsourcing RRHH", "Auditorías ISO", "Plan Estratégico"] },
             emprendedores_info: { title: "Pack Startup", image: "https://raw.githubusercontent.com/direccioncomercial/evoluser-web/1b862973e8003850daadd6a47bffd5b6cf04b2f6/imagen6.png", desc: "Formalización ágil de tu idea de negocio en tiempo récord.", list: ["Constitución Empresa", "Permisos ARCSA", "Imagen Inicial"] },
-            equipo: { title: "Directorio", image: "https://raw.githubusercontent.com/direccioncomercial/evoluser-web/1b862973e8003850daadd6a47bffd5b6cf04b2f6/imagen7.jpeg", desc: "Liderazgo multidisciplinario comprometido con la excelencia.", list: ["Dirección Estratégica", "Calidad", "Innovación"] }
+            equipo: { title: "Directorio", image: "https://raw.githubusercontent.com/direccioncomercial/evoluser-web/1b862973e8003850daadd6a47bffd5b6cf04b2f6/imagen7.jpeg", desc: "Liderazgo multidisciplinario comprometido con la excelencia.", list: ["Dirección Estratégica", "Calidad", "Innovación"] },
+            clima_2026: { title: "Clima Laboral 2026", image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80", leader: "Nury Echeverria", role: "Directora de Talento", desc: "Tendencias de bienestar en la era digital: medimos y transformamos el compromiso de tus equipos para reducir la rotación y elevar la productividad.", list: ["Diagnóstico de Clima y Cultura", "Liderazgo Consciente y Empático", "Programas de Bienestar Integral"] },
+            iso_ventaja: { title: "ISO 45001: Ventaja Real", image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=800&q=80", leader: "Christian Ortega", role: "Director Técnico", desc: "El escudo legal de tu organización: implementar ISO 45001 protege la vida de tus colaboradores, evita sanciones legales y abre puertas a licitaciones corporativas.", list: ["Matrices de Riesgos Laborales", "Auditorías de Cumplimiento Legal", "Prevención de Accidentes y Enfermedades"] }
         };
 
         function openModal(type) {
-            const data = contentData[type]; if(!data) return;
+            const data = contentData[type];
+            if (!data) return;
             const container = document.getElementById('modal-left-container');
             
             // Lógica Especial para Filosofía (Logo Vertical + Fondo Transparente)
@@ -827,38 +1076,322 @@
                 if (['equipo', 'emprendedores_info', 'humano', 'seguro', 'sostenible', 'agro'].includes(type)) { 
                     imgClass = "w-full h-full object-contain bg-gray-50"; 
                 }
-                container.innerHTML = `<img id="modal-image" src="${data.image}" class="${imgClass}">`;
+                container.innerHTML = `<img id="modal-image" src="${data.image}" alt="${data.title}" class="${imgClass}">`;
             }
 
-            let html = `<h3 class="text-3xl font-extrabold text-brandBlue mb-4 uppercase tracking-tighter text-nowrap">${data.title}</h3>`;
-            if(data.customHTML) { html += data.customHTML; } else {
-                if(data.leader) html += `<div class="mb-6 p-4 bg-gray-50 border-l-4 border-brandGreen font-bold text-sm text-nowrap"><span class="text-gray-800">${data.leader}</span> | <span class="text-brandBlue">${data.role}</span></div>`;
+            let html = `<h3 class="text-2xl md:text-3xl font-extrabold text-brandBlue mb-4 uppercase tracking-tighter">${data.title}</h3>`;
+            if (data.customHTML) {
+                html += data.customHTML;
+            } else {
+                if (data.leader) html += `<div class="mb-6 p-4 bg-gray-50 border-l-4 border-brandGreen font-bold text-sm"><span class="text-gray-800">${data.leader}</span> | <span class="text-brandBlue">${data.role}</span></div>`;
                 html += `<p class="text-gray-600 mb-8 leading-relaxed font-bold text-justify text-sm">${data.desc}</p>`;
-                if(data.list) { html += `<ul class="space-y-4">`; data.list.forEach(item => html += `<li class="flex items-center text-xs font-extrabold text-gray-700 uppercase tracking-tighter"><i class="fas fa-check-circle text-brandGreen mr-3 text-lg"></i>${item}</li>`); html += `</ul>`; }
-                html += `<div class="mt-10"><a href="https://wa.me/593983900050" target="_blank" class="inline-block bg-brandGreen text-white px-10 py-4 rounded-full font-extrabold shadow-brand transition w-full text-center uppercase tracking-widest text-xs">Agendar Consulta</a></div>`;
+                if (data.list) {
+                    html += `<ul class="space-y-4">`;
+                    data.list.forEach(item => html += `<li class="flex items-center text-xs font-extrabold text-gray-700 uppercase tracking-tighter"><i class="fas fa-check-circle text-brandGreen mr-3 text-lg"></i>${item}</li>`);
+                    html += `</ul>`;
+                }
+                html += `
+                    <div class="mt-10 flex flex-col sm:flex-row gap-3">
+                        <a href="https://wa.me/593983900050?text=${encodeURIComponent('Hola EvoluSer, deseo agendar una consulta sobre ' + data.title)}" target="_blank" class="flex-1 bg-brandGreen hover:bg-brandBlue text-white px-8 py-4 rounded-full font-extrabold shadow-brand transition text-center uppercase tracking-widest text-xs"><i class="fab fa-whatsapp mr-2"></i> Agendar Consulta</a>
+                        <button onclick="closeModal(); askEvFromPage('Quiero más detalles sobre ${data.title}');" class="px-6 py-4 rounded-full border-2 border-brandBlue text-brandBlue hover:bg-brandBlue hover:text-white font-extrabold transition uppercase tracking-widest text-xs"><i class="fas fa-robot mr-1"></i> Preguntar a Ev</button>
+                    </div>
+                `;
             }
             document.getElementById('modal-content').innerHTML = html;
-            document.getElementById('service-modal').classList.remove('hidden'); document.getElementById('service-modal').classList.add('flex');
-        }
-        function closeModal() { document.getElementById('service-modal').classList.add('hidden'); }
-        function toggleChat() { const win = document.getElementById('ai-chat-window'); if(win.classList.contains('hidden')) { win.classList.remove('hidden'); setTimeout(()=>win.classList.remove('scale-0'),10); } else { win.classList.add('scale-0'); setTimeout(()=>win.classList.add('hidden'),300); } }
-        async function handleChat() { 
-            const input = document.getElementById('chat-input'); const text = input.value; if(!text) return;
-            const chatBox = document.getElementById('chat-box'); chatBox.innerHTML += `<li class="flex justify-end"><div class="bg-brandBlue text-white p-3 rounded-2xl rounded-tr-none text-sm font-bold">${text}</div></li>`;
-            input.value = ''; chatBox.scrollTop = chatBox.scrollHeight;
-            setTimeout(() => { chatBox.innerHTML += `<li class="flex justify-start"><div class="bg-white text-gray-700 p-4 rounded-2xl rounded-tl-none shadow-md text-sm border border-gray-100 italic font-medium leading-relaxed font-bold">"Soy Ev. Mi consejo hoy: la inversión en talento y seguridad es el único camino real hacia la rentabilidad infinita. ¿Deseas que agendemos con un director?"</div></li>`; chatBox.scrollTop = chatBox.scrollHeight; }, 1000);
+            document.getElementById('service-modal').classList.remove('hidden');
+            document.getElementById('service-modal').classList.add('flex');
         }
 
-        // --- Lógica del Carrusel (Añadida) ---
+        function closeModal() {
+            document.getElementById('service-modal').classList.add('hidden');
+            document.getElementById('service-modal').classList.remove('flex');
+        }
+
+        // ==========================================
+        // 5. MOTOR CONVERSACIONAL INTELIGENTE DE "EV"
+        // ==========================================
+        const evKnowledgeBase = {
+            welcome: {
+                text: `"¡Bienvenido Evonauta! Soy <strong>Ev</strong>, tu consultora estratégica en <strong>EvoluSer</strong>. Potenciamos el Ser y protegemos la vida en tu organización.<br><br>¿En qué área estratégica deseas que te asesore hoy?"`,
+                actions: [
+                    { label: "👥 Talento Humano", intent: "talento" },
+                    { label: "🦺 Seguridad SSO / ISO 45001", intent: "seguridad" },
+                    { label: "🌾 Ing. Agroindustrial", intent: "agro" },
+                    { label: "🌿 Ing. Ambiental", intent: "ambiental" },
+                    { label: "🚀 Soy Emprendedor / Startup", intent: "emprendedor" },
+                    { label: "📋 Ver Directorio de Expertos", action: "openModal('equipo')" }
+                ]
+            },
+            talento: {
+                text: `"Excelente elección. En nuestra división de <strong>Gestión de Talento Humano</strong>, liderada por <strong>Nury Echeverría</strong>, transformamos grupos de trabajo en equipos de alto rendimiento:<br><br>• <strong>Headhunting Senior</strong> y selección especializada.<br>• Diagnóstico y mejora de <strong>Clima y Cultura Laboral</strong>.<br>• <strong>Evaluación 360°</strong> y talleres directivos.<br>• RRHH inicial (Contratos y afiliación IESS).<br><br>¿Cómo te gustaría avanzar?"`,
+                actions: [
+                    { label: "🔍 Ver Ficha de Talento Humano", action: "openModal('humano')" },
+                    { label: "📲 Hablar con Nury por WhatsApp", url: "https://wa.me/593983900050?text=Hola%20EvoluSer,%20vengo%20del%20chat%20con%20Ev%20y%20deseo%20asesor%C3%ADa%20en%20Talento%20Humano" },
+                    { label: "💰 Solicitar Cotización", intent: "cotizar" }
+                ]
+            },
+            seguridad: {
+                text: `"El blindaje normativo protege la vida de tu equipo y el patrimonio de tu empresa. Con nuestro Director Técnico <strong>Christian Ortega</strong> en <strong>Seguridad y Salud Ocupacional (SSO)</strong>, cubrimos:<br><br>• Implementación y Auditorías <strong>ISO 45001</strong>.<br>• <strong>Planes de Emergencia</strong> y matrices de riesgos técnicos.<br>• <strong>Vigilancia Médica</strong> ocupacional y cumplimiento ante el MDT/IESS.<br><br>¿Deseas evaluar el nivel de cumplimiento de tu empresa?"`,
+                actions: [
+                    { label: "🛡️ Ver Ficha de Seguridad SSO", action: "openModal('seguro')" },
+                    { label: "📲 Agendar Diagnóstico SSO", url: "https://wa.me/593983900050?text=Hola%20EvoluSer,%20habl%C3%A9%20con%20Ev%20y%20necesito%20un%20diagn%C3%B3stico%20en%20Seguridad%20y%20Salud%20Ocupacional%20/%20ISO%2045001" },
+                    { label: "🏢 Ir a Sección Empresas", action: "setSegment('empresas')" }
+                ]
+            },
+            agro: {
+                text: `"En <strong>Ingeniería Agroindustrial</strong>, bajo el liderazgo de la Ing. <strong>Lilian Eras</strong>, llevamos tus productos a estándares nacionales y de exportación:<br><br>• Diseño de plantas y optimización de procesos productivos.<br>• Certificaciones <strong>BPM, BPA y HACCP</strong>.<br>• <strong>Notificación Sanitaria (ARCSA)</strong>, tablas nutricionales y estudios de vida útil.<br><br>¿Tienes un proyecto agroindustrial o de alimentos en marcha?"`,
+                actions: [
+                    { label: "🌾 Ver Ficha Agroindustrial", action: "openModal('agro')" },
+                    { label: "📲 Consultar con Ing. Lilian Eras", url: "https://wa.me/593983900050?text=Hola%20EvoluSer,%20convers%C3%A9%20con%20Ev%20y%20requiero%20asesor%C3%ADa%20en%20Ingenier%C3%ADa%20Agroindustrial%20/%20ARCSA" },
+                    { label: "💰 Cotizar Proyecto", intent: "cotizar" }
+                ]
+            },
+            ambiental: {
+                text: `"Convertimos la responsabilidad ecológica en rentabilidad y cumplimiento legal. Nuestra división de <strong>Ingeniería Ambiental</strong> (Dir. <strong>Christian Ortega</strong>) gestiona:<br><br>• <strong>Licencias y Permisos Ambientales</strong>.<br>• Medición y reducción de <strong>Huella de Carbono</strong>.<br>• Planes de manejo ambiental y gestión integral de desechos.<br><br>¿Necesitas regularizar un proyecto o auditar tu gestión ambiental?"`,
+                actions: [
+                    { label: "🌿 Ver Ficha Ambiental", action: "openModal('sostenible')" },
+                    { label: "📲 Consulta Ambiental en WhatsApp", url: "https://wa.me/593983900050?text=Hola%20EvoluSer,%20vengo%20de%20hablar%20con%20Ev%20sobre%20Ingenier%C3%ADa%20y%20Licencias%20Ambientales" }
+                ]
+            },
+            emprendedor: {
+                text: `"¡Me encanta impulsar nuevas visiones! Con <strong>EvoluSer Startup</strong> somos tu socio desde el día uno para que te enfoques en vender mientras nosotros armamos tu base legal y técnica:<br><br>• <strong>Legalización Total:</strong> Constitución de compañía, estatutos, Registro Mercantil y RUC.<br>• <strong>Regulatorio:</strong> Permisos de Bomberos, ARCSA y Notificación Sanitaria.<br>• <strong>Tu Primer Equipo:</strong> Contratos de trabajo y afiliación al IESS.<br><br>¿En qué etapa está tu emprendimiento?"`,
+                actions: [
+                    { label: "🚀 Ver Pack Startup", action: "openModal('emprendedores_info')" },
+                    { label: "✨ Ir a Sección Emprendedores", action: "setSegment('emprendedores')" },
+                    { label: "📲 Cotizar Pack Startup en WhatsApp", url: "https://wa.me/593983900050?text=Hola%20EvoluSer,%20habl%C3%A9%20con%20Ev%20y%20quiero%20informaci%C3%B3n%20sobre%20el%20Pack%20Startup%20para%20emprendedores" }
+                ]
+            },
+            cotizar: {
+                text: `"En <strong>EvoluSer</strong> diseñamos cada propuesta a la medida de la envergadura de tu organización o emprendimiento para garantizarte el máximo retorno de inversión.<br><br>Puedes solicitar tu diagnóstico sin costo por <strong>WhatsApp Directo</strong> o registrar tu requerimiento en nuestra <strong>Oficina Virtual</strong>."`,
+                actions: [
+                    { label: "📲 Cotizar por WhatsApp (+593 98 390 0050)", url: "https://wa.me/593983900050?text=Hola%20EvoluSer,%20deseo%20solicitar%20una%20cotizaci%C3%B3n%20personalizada" },
+                    { label: "🖥️ Ir a Oficina Virtual", action: "setSegment('oficina'); toggleChat();" },
+                    { label: "📞 Llamar (+593 98 700 3357)", url: "tel:+593987003357" }
+                ]
+            },
+            agendar: {
+                text: `"¡Con todo gusto! Nuestros directores están listos para atenderte en <strong>Quito y todo el Ecuador</strong>:<br><br>• <strong>WhatsApp Directo:</strong> +593 98 390 0050<br>• <strong>Llamadas:</strong> +593 98 700 3357<br>• <strong>Email:</strong> evoluserec@gmail.com<br><br>Selecciona el canal que prefieras para agendar tu sesión hoy mismo:"`,
+                actions: [
+                    { label: "💬 Agendar por WhatsApp Ahora", url: "https://wa.me/593983900050?text=Hola%20EvoluSer,%20convers%C3%A9%20con%20Ev%20y%20deseo%20agendar%20una%20reuni%C3%B3n%20con%20un%20director" },
+                    { label: "🖥️ Dejar Ticket en Oficina Virtual", action: "setSegment('oficina'); toggleChat();" },
+                    { label: "👔 Conocer al Directorio", action: "openModal('equipo')" }
+                ]
+            },
+            filosofia: {
+                text: `"Nuestra filosofía se resume en nuestro lema: <strong>'Potenciamos el Ser, Protegemos la Vida'</strong>. Creemos firmemente que una organización exitosa del siglo XXI debe ser <strong>Humana, Segura, Sostenible y Productiva</strong>."`,
+                actions: [
+                    { label: "📖 Leer Carta y Filosofía EvoluSer", action: "openModal('filosofia_premium')" },
+                    { label: "👔 Ver Directorio de Líderes", action: "openModal('equipo')" }
+                ]
+            }
+        };
+
+        function detectEvIntent(rawText) {
+            const text = rawText.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+
+            if (/(talento|rrhh|recursos humanos|clima|cultura|headhunting|seleccion|personal|nury|evaluacion 360|liderazgo|equipo)/.test(text)) {
+                return evKnowledgeBase.talento;
+            }
+            if (/(seguridad|sso|iso 45001|iso|riesgo|salud ocupacional|emergencia|vigilancia medica|accidente|ministerio de trabajo|christian|industrial)/.test(text)) {
+                return evKnowledgeBase.seguridad;
+            }
+            if (/(agro|alimento|planta|bpa|bpm|haccp|inocuidad|nutricional|vida util|sanitaria|arcsa|lilian|exportacion)/.test(text)) {
+                return evKnowledgeBase.agro;
+            }
+            if (/(ambiental|ambiente|licencia|carbono|desecho|residuo|sostenible|sostenibilidad|ecologi|verde)/.test(text)) {
+                return evKnowledgeBase.ambiental;
+            }
+            if (/(emprend|startup|ruc|constituir|compania|estatuto|legaliza|permiso|bombero|iess|contrato|pyme|negocio|empezar)/.test(text)) {
+                return evKnowledgeBase.emprendedor;
+            }
+            if (/(precio|costo|cuanto|cotiza|presupuesto|tarifa|paquete|valor|inversion)/.test(text)) {
+                return evKnowledgeBase.cotizar;
+            }
+            if (/(agenda|cita|reunion|contacto|telefono|whatsapp|correo|email|ubicacion|quito|ecuador|llamar|director|asesor)/.test(text)) {
+                return evKnowledgeBase.agendar;
+            }
+            if (/(filosofia|mision|vision|quienes son|evoluser|historia|valores)/.test(text)) {
+                return evKnowledgeBase.filosofia;
+            }
+            if (/(hola|buenos dias|buenas tardes|buenas noches|saludos|hey|que tal|quien eres)/.test(text)) {
+                return {
+                    text: `"¡Hola! Qué gusto saludarte. Soy <strong>Ev</strong>, tu consultora virtual de <strong>EvoluSer</strong>. Estoy entrenada para guiarte en <strong>Talento Humano, Seguridad Industrial (ISO 45001), Ingeniería Agroindustrial, Ingeniería Ambiental</strong> y nuestro <strong>Pack Startup</strong>.<br><br>Cuéntame, ¿buscas soluciones para una <strong>Empresa consolidada</strong> o para un <strong>Emprendimiento</strong>?"`,
+                    actions: [
+                        { label: "🏢 Tengo una Empresa / Corporación", intent: "seguridad" },
+                        { label: "🚀 Soy Emprendedor / Pyme", intent: "emprendedor" },
+                        { label: "👥 Busco Talento Humano", intent: "talento" },
+                        { label: "🌾 Agroindustria / Ambiental", intent: "agro" }
+                    ]
+                };
+            }
+            if (/(gracias|perfecto|excelente|genial|ok|listo)/.test(text)) {
+                return {
+                    text: `"¡Es un verdadero placer acompañarte en tu evolución empresarial! Recuerda que siempre estaré aquí si necesitas validar otro servicio o conectar con nuestros directores. ¿Deseas dar el siguiente paso por WhatsApp?"`,
+                    actions: [
+                        { label: "📲 Ir a WhatsApp Directo", url: "https://wa.me/593983900050?text=Hola%20EvoluSer,%20estuve%20conversando%20con%20Ev%20y%20deseo%20asesor%C3%ADa" },
+                        { label: "🔄 Ver todas las especialidades", intent: "welcome" }
+                    ]
+                };
+            }
+
+            // Respuesta consultiva inteligente para consultas personalizadas abiertas
+            return {
+                text: `"Gracias por detallarme tu requerimiento sobre: <em>'${rawText}'</em>.<br><br>En <strong>EvoluSer</strong> abordamos cada caso de forma integral combinando ingeniería técnica, normativa legal y gestión humana. ¿Te gustaría que te conecte directamente con el director del área por WhatsApp con tu consulta ya lista, o prefieres explorar nuestras divisiones?"`,
+                actions: [
+                    { label: "📲 Enviar esta consulta por WhatsApp", url: `https://wa.me/593983900050?text=${encodeURIComponent('Hola EvoluSer, conversé con Ev sobre mi requerimiento: "' + rawText + '" y deseo atención especializada.')}` },
+                    { label: "👥 Talento Humano", intent: "talento" },
+                    { label: "🦺 Seguridad SSO", intent: "seguridad" },
+                    { label: "🌾 Agro / 🌿 Ambiental", intent: "agro" },
+                    { label: "🚀 Pack Startup", intent: "emprendedor" }
+                ]
+            };
+        }
+
+        function renderEvMessage(responseObj) {
+            const chatBox = document.getElementById('chat-box');
+            let actionsHTML = '';
+            if (responseObj.actions && responseObj.actions.length > 0) {
+                actionsHTML = `<div class="mt-3 pt-3 border-t border-gray-100 flex flex-wrap gap-1.5">`;
+                responseObj.actions.forEach(act => {
+                    if (act.intent) {
+                        actionsHTML += `<button onclick="triggerQuickIntent('${act.intent}')" class="ev-chip">${act.label}</button>`;
+                    } else if (act.action) {
+                        actionsHTML += `<button onclick="${act.action}" class="ev-chip">${act.label}</button>`;
+                    } else if (act.url) {
+                        actionsHTML += `<a href="${act.url}" target="_blank" class="ev-chip !bg-brandGreen !text-white !border-brandGreen hover:!bg-brandBlue">${act.label}</a>`;
+                    }
+                });
+                actionsHTML += `</div>`;
+            }
+
+            const li = document.createElement('li');
+            li.className = 'flex justify-start items-end gap-2 animate-pop-in';
+            li.innerHTML = `
+                <img src="https://raw.githubusercontent.com/direccioncomercial/evoluser-web/1b862973e8003850daadd6a47bffd5b6cf04b2f6/imagen6.png" alt="Ev" class="w-7 h-7 rounded-full object-contain bg-brandBlue/10 p-0.5 flex-shrink-0 mb-1">
+                <div class="bg-white text-gray-700 p-4 rounded-2xl rounded-bl-none shadow-sm text-xs md:text-sm border border-gray-100 max-w-[88%] leading-relaxed">
+                    <div>${responseObj.text}</div>
+                    ${actionsHTML}
+                </div>
+            `;
+            chatBox.appendChild(li);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        function showEvTypingAndReply(responseObj) {
+            const chatBox = document.getElementById('chat-box');
+            const typingId = 'ev-typing-' + Date.now();
+            const typingLi = document.createElement('li');
+            typingLi.id = typingId;
+            typingLi.className = 'flex justify-start items-center gap-2';
+            typingLi.innerHTML = `
+                <img src="https://raw.githubusercontent.com/direccioncomercial/evoluser-web/1b862973e8003850daadd6a47bffd5b6cf04b2f6/imagen6.png" alt="Ev" class="w-7 h-7 rounded-full object-contain bg-brandBlue/10 p-0.5">
+                <div class="bg-white px-4 py-3 rounded-2xl rounded-bl-none shadow-sm border border-gray-100 flex items-center gap-1.5">
+                    <span class="typing-dot"></span>
+                    <span class="typing-dot"></span>
+                    <span class="typing-dot"></span>
+                    <span class="text-[10px] text-gray-400 font-bold ml-1">Ev está analizando...</span>
+                </div>
+            `;
+            chatBox.appendChild(typingLi);
+            chatBox.scrollTop = chatBox.scrollHeight;
+
+            setTimeout(() => {
+                const el = document.getElementById(typingId);
+                if (el) el.remove();
+                renderEvMessage(responseObj);
+            }, 650);
+        }
+
+        function appendUserMessage(text) {
+            const chatBox = document.getElementById('chat-box');
+            const li = document.createElement('li');
+            li.className = 'flex justify-end animate-pop-in';
+            const safeText = text.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+            li.innerHTML = `<div class="bg-gradient-to-r from-brandBlue to-brandGreen text-white px-4 py-3 rounded-2xl rounded-br-none text-xs md:text-sm font-bold shadow-sm max-w-[82%]">${safeText}</div>`;
+            chatBox.appendChild(li);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        function triggerQuickIntent(intentKey) {
+            const labels = {
+                welcome: "Ver menú principal de soluciones",
+                talento: "Quiero información sobre Talento Humano",
+                seguridad: "Me interesa Seguridad y Salud Ocupacional (ISO 45001)",
+                agro: "Deseo asesoría en Ingeniería Agroindustrial",
+                ambiental: "Consultoría en Ingeniería Ambiental",
+                emprendedor: "Soy emprendedor, quiero conocer el Pack Startup",
+                cotizar: "Deseo solicitar una cotización",
+                agendar: "Quiero agendar una cita con un Director"
+            };
+            appendUserMessage(labels[intentKey] || intentKey);
+            const response = evKnowledgeBase[intentKey] || evKnowledgeBase.welcome;
+            showEvTypingAndReply(response);
+        }
+
+        function askEvFromPage(questionText) {
+            const win = document.getElementById('ai-chat-window');
+            if (win.classList.contains('hidden')) {
+                toggleChat();
+            }
+            setTimeout(() => {
+                appendUserMessage(questionText);
+                const reply = detectEvIntent(questionText);
+                showEvTypingAndReply(reply);
+            }, 250);
+        }
+
+        function resetEvChat() {
+            const chatBox = document.getElementById('chat-box');
+            chatBox.innerHTML = '';
+            renderEvMessage(evKnowledgeBase.welcome);
+        }
+
+        function toggleChat() {
+            const win = document.getElementById('ai-chat-window');
+            if (win.classList.contains('hidden')) {
+                win.classList.remove('hidden');
+                const chatBox = document.getElementById('chat-box');
+                if (chatBox.children.length === 0) {
+                    renderEvMessage(evKnowledgeBase.welcome);
+                }
+                setTimeout(() => {
+                    win.classList.remove('scale-0');
+                    document.getElementById('chat-input').focus();
+                }, 15);
+            } else {
+                win.classList.add('scale-0');
+                setTimeout(() => win.classList.add('hidden'), 300);
+            }
+        }
+
+        async function handleChat() {
+            const input = document.getElementById('chat-input');
+            const text = input.value.trim();
+            if (!text) return;
+            appendUserMessage(text);
+            input.value = '';
+            const reply = detectEvIntent(text);
+            showEvTypingAndReply(reply);
+        }
+
+        // ==========================================
+        // 6. CARRUSEL CON INDICADORES Y AUTOPLAY CONTROLADO
+        // ==========================================
         let currentSlide = 0;
         const slides = document.querySelectorAll('.carousel-slide');
+        const dots = document.querySelectorAll('.carousel-dot');
         const totalSlides = slides.length;
+        let carouselInterval;
 
         function showSlide(index) {
             slides.forEach((slide, i) => {
-                slide.classList.remove('active');
+                slide.classList.toggle('active', i === index);
+            });
+            dots.forEach((dot, i) => {
                 if (i === index) {
-                    slide.classList.add('active');
+                    dot.className = 'carousel-dot w-8 h-2 rounded-full bg-brandGreen transition-all duration-300';
+                } else {
+                    dot.className = 'carousel-dot w-2.5 h-2 rounded-full bg-white/50 hover:bg-white transition-all duration-300';
                 }
             });
         }
@@ -866,57 +1399,73 @@
         function nextSlide() {
             currentSlide = (currentSlide + 1) % totalSlides;
             showSlide(currentSlide);
+            resetCarouselTimer();
         }
 
         function prevSlide() {
             currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
             showSlide(currentSlide);
+            resetCarouselTimer();
         }
 
-        // Auto-play opcional (comenta esta línea si prefieres solo manual)
-        setInterval(nextSlide, 6000);
+        function goToSlide(index) {
+            currentSlide = index;
+            showSlide(currentSlide);
+            resetCarouselTimer();
+        }
 
-        // --- Efecto Letras Giratorias (Slogan) ---
+        function resetCarouselTimer() {
+            clearInterval(carouselInterval);
+            carouselInterval = setInterval(() => {
+                currentSlide = (currentSlide + 1) % totalSlides;
+                showSlide(currentSlide);
+            }, 6500);
+        }
+
+        // ==========================================
+        // 7. INICIALIZACIÓN: SLOGAN 3D, CHAT EV & CURSOR HOJA
+        // ==========================================
         document.addEventListener('DOMContentLoaded', () => {
+            // Iniciar bienvenida de Ev en el contenedor del chat
+            renderEvMessage(evKnowledgeBase.welcome);
+
+            // Iniciar autoplay del carrusel
+            resetCarouselTimer();
+
+            // Efecto Letras Giratorias (Slogan) agrupando por palabras para no cortar líneas a la mitad
             const slogan = document.getElementById('slogan-animado');
-            if(slogan) {
+            if (slogan) {
                 const text = slogan.innerText;
-                // Dividimos por letras pero respetamos espacios para el responsive
-                slogan.innerHTML = text.split('').map((char, i) => {
-                    if (char === ' ') return ' '; 
-                    return `<span class="inline-block" style="animation: spinLetters 8s ease-in-out infinite; animation-delay: ${i * 0.03}s; transform-style: preserve-3d; backface-visibility: hidden;">${char}</span>`;
-                }).join('');
+                let charIndex = 0;
+                slogan.innerHTML = text.split(' ').map(word => {
+                    const letters = word.split('').map(char => {
+                        const delay = (charIndex++ * 0.03).toFixed(2);
+                        return `<span class="inline-block" style="animation: spinLetters 8s ease-in-out infinite; animation-delay: ${delay}s; transform-style: preserve-3d; backface-visibility: hidden;">${char}</span>`;
+                    }).join('');
+                    return `<span class="inline-block whitespace-nowrap mr-1.5">${letters}</span>`;
+                }).join(' ');
             }
         });
-        
-        // --- JS para el Cursor Personalizado ---
+
+        // JS para el Cursor Personalizado
         const cursor = document.getElementById('custom-cursor');
-        
-        // Mover cursor
+
         document.addEventListener('mousemove', (e) => {
             cursor.style.left = e.clientX + 'px';
             cursor.style.top = e.clientY + 'px';
         });
 
-        // Efecto Hover en elementos interactivos
-        const interactables = document.querySelectorAll('a, button, input, textarea, select, .cursor-pointer');
-        interactables.forEach(el => {
-            el.addEventListener('mouseenter', () => cursor.classList.add('hovering'));
-            el.addEventListener('mouseleave', () => cursor.classList.remove('hovering'));
+        // Delegación eficiente de eventos para el estado Hover del cursor en elementos dinámicos y estáticos
+        document.addEventListener('mouseover', (e) => {
+            if (e.target.closest('a, button, input, textarea, select, .cursor-pointer, .ev-chip')) {
+                cursor.classList.add('hovering');
+            }
         });
-        
-        // Re-aplicar listeners cuando se abren modales o cambia contenido dinámico
-        const observer = new MutationObserver((mutations) => {
-             const newInteractables = document.querySelectorAll('a, button, input, textarea, select, .cursor-pointer');
-             newInteractables.forEach(el => {
-                el.removeEventListener('mouseenter', () => cursor.classList.add('hovering'));
-                el.removeEventListener('mouseleave', () => cursor.classList.remove('hovering'));
-                el.addEventListener('mouseenter', () => cursor.classList.add('hovering'));
-                el.addEventListener('mouseleave', () => cursor.classList.remove('hovering'));
-            });
+        document.addEventListener('mouseout', (e) => {
+            if (e.target.closest('a, button, input, textarea, select, .cursor-pointer, .ev-chip')) {
+                cursor.classList.remove('hovering');
+            }
         });
-        observer.observe(document.body, { childList: true, subtree: true });
-
     </script>
 </body>
 </html>
