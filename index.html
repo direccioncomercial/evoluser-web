@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EvoluSer - Consultoría Premium e IA</title>
-    <meta name="description" content="EvoluSer - Aliado estratégico líder en Talento Humano, Seguridad y Salud Ocupacional ISO 45001, Ingeniería Agroindustrial, Ingeniería Ambiental y Legalización de Emprendimientos en Ecuador.">
+    <meta name="description" content="EvoluSer - Aliado estratégico líder en Talento Humano, Seguridad y Salud Ocupacional, Matrices de Riesgos, Gestión de EPPs, Planes de Emergencia, Ingeniería Agroindustrial y Ambiental en Ecuador.">
     <meta name="theme-color" content="#13293D">
     
     <!-- Librerías -->
@@ -332,6 +332,61 @@
             transform: translateY(-1px);
             box-shadow: 0 4px 12px rgba(62, 142, 142, 0.25);
         }
+
+        /* SELLO / LOGO EVOLUSER INTEGRADO ORGÁNICAMENTE EN TODAS LAS IMÁGENES */
+        .evoluser-integrated-logo {
+            position: absolute;
+            z-index: 15;
+            pointer-events: none;
+            user-select: none;
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        /* Variante Blanca integrada sobre fotografías oscuras o con contraste */
+        .evoluser-logo-white {
+            bottom: 14px;
+            right: 16px;
+            height: 28px;
+            width: auto;
+            filter: brightness(0) invert(1) drop-shadow(0 2px 8px rgba(19, 41, 61, 0.65));
+            opacity: 0.78;
+            mix-blend-mode: screen;
+        }
+        /* Variante Color Original integrada con cápsula traslúcida orgánica */
+        .evoluser-logo-normal {
+            top: 14px;
+            right: 14px;
+            height: 30px;
+            width: auto;
+            padding: 4px 10px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.82);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            box-shadow: 0 4px 15px rgba(19, 41, 61, 0.18);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            opacity: 0.92;
+        }
+        /* Variante para el Carrusel Principal */
+        .evoluser-logo-hero {
+            bottom: 28px;
+            right: 36px;
+            height: 46px;
+            width: auto;
+            filter: brightness(0) invert(1) drop-shadow(0 4px 14px rgba(0, 0, 0, 0.6));
+            opacity: 0.65;
+        }
+        @media (max-width: 768px) {
+            .evoluser-logo-hero {
+                top: 18px;
+                right: 18px;
+                bottom: auto;
+                height: 32px;
+            }
+        }
+        .group:hover .evoluser-integrated-logo {
+            opacity: 1;
+            transform: scale(1.06);
+        }
     </style>
 </head>
 <body class="flex flex-col min-h-screen font-sans">
@@ -433,16 +488,16 @@
                         </div>
                     </div>
                     <!-- Slide 2: Seguridad -->
-                    <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=1920&q=85');">
+                    <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=1920&q=85');">
                         <div class="absolute inset-0 bg-gradient-to-r from-brandBlue/95 via-brandBlue/70 to-brandBlue/10"></div>
                         <div class="absolute inset-0 flex items-center container mx-auto px-6 md:px-16">
                             <div class="max-w-2xl carousel-text-content">
-                                <span class="text-brandGreen font-extrabold tracking-[0.4em] text-xs uppercase mb-4 block drop-shadow-md">Blindaje Técnico</span>
+                                <span class="text-brandGreen font-extrabold tracking-[0.4em] text-xs uppercase mb-4 block drop-shadow-md">Blindaje Técnico y Preventivo</span>
                                 <h2 class="text-4xl md:text-6xl font-extrabold text-white mb-6 leading-tight drop-shadow-lg font-heading">Seguridad y Salud <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-white to-brandGreen">Ocupacional</span></h2>
-                                <p class="text-white/95 text-lg font-light border-l-4 border-brandGreen pl-6 drop-shadow-md mb-8">Cumplimiento ISO 45001 y protección integral para salvaguardar el activo más valioso: la vida.</p>
+                                <p class="text-white/95 text-lg font-light border-l-4 border-brandGreen pl-6 drop-shadow-md mb-8">Planes de emergencia, diseño de matriz de riesgos, sistema práctico de inventario y gestión integral de EPPs por colaborador y área, y cumplimiento del Decreto 2025-006.</p>
                                 <div class="flex flex-wrap gap-4">
                                     <button onclick="openModal('seguro')" class="btn-brand-gradient">Blindar mi Empresa <i class="fas fa-shield-alt ml-2"></i></button>
-                                    <button onclick="askEvFromPage('Necesito asesoría en Seguridad y Salud Ocupacional ISO 45001')" class="more-info-brand !mt-0"><i class="fas fa-robot mr-2"></i> Consultar a Ev</button>
+                                    <button onclick="askEvFromPage('Necesito asesoría en Seguridad y Salud Ocupacional, Matriz de Riesgos, EPPs y Decreto 2025-006')" class="more-info-brand !mt-0"><i class="fas fa-robot mr-2"></i> Consultar a Ev</button>
                                 </div>
                             </div>
                         </div>
@@ -525,12 +580,12 @@
             <div class="container mx-auto px-4 mt-16">
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
                     <div onclick="openModal('humano')" class="image-card group cursor-pointer">
-                        <div class="h-64 overflow-hidden relative"><img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=1000&q=85" alt="Talento Humano" loading="lazy" class="w-full h-full object-cover image-zoom"><span class="card-tag bg-brandBlue">Gestión Humana</span></div>
-                        <div class="p-8 flex flex-col flex-1"><h4 class="text-2xl font-extrabold text-brandBlue mb-3 group-hover:text-brandGreen transition uppercase tracking-tighter">Talento Humano</h4><p class="text-gray-500 text-sm mb-6 leading-relaxed">Equipos de alto rendimiento y mejora del clima laboral.</p><span class="text-brandBlue font-extrabold text-xs uppercase mt-auto group-hover:text-brandGreen transition flex items-center">Ver más <i class="fas fa-arrow-right ml-2 transform group-hover:translate-x-1 transition"></i></span></div>
+                        <div class="h-64 overflow-hidden relative"><img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=1000&q=85" onerror="this.src='https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=1000&q=85'" alt="Talento Humano" loading="lazy" class="w-full h-full object-cover image-zoom"><span class="card-tag bg-brandBlue">Gestión Humana</span></div>
+                        <div class="p-8 flex flex-col flex-1"><h4 class="text-2xl font-extrabold text-brandBlue mb-3 group-hover:text-brandGreen transition uppercase tracking-tighter">Talento Humano</h4><p class="text-gray-500 text-sm mb-6 leading-relaxed">Equipos de alto rendimiento, clima laboral y capacitación avalada con Certificación Formador de Formadores.</p><span class="text-brandBlue font-extrabold text-xs uppercase mt-auto group-hover:text-brandGreen transition flex items-center">Ver más <i class="fas fa-arrow-right ml-2 transform group-hover:translate-x-1 transition"></i></span></div>
                     </div>
                     <div onclick="openModal('seguro')" class="image-card group cursor-pointer">
-                        <div class="h-64 overflow-hidden relative"><img src="https://images.unsplash.com/photo-1581092335397-9583fe92d232?auto=format&fit=crop&w=1000&q=85" alt="Seguridad Industrial" loading="lazy" class="w-full h-full object-cover image-zoom"><span class="card-tag bg-brandBlueDark">Seguridad Industrial</span></div>
-                        <div class="p-8 flex flex-col flex-1"><h4 class="text-2xl font-extrabold text-brandBlue mb-3 group-hover:text-brandGreen transition uppercase tracking-tighter">Seguridad y Salud Ocupacional</h4><p class="text-gray-500 text-sm mb-6 leading-relaxed">Cumplimiento ISO 45001 y blindaje normativo legal.</p><span class="text-brandBlue font-extrabold text-xs uppercase mt-auto group-hover:text-brandGreen transition flex items-center">Ver más <i class="fas fa-arrow-right ml-2 transform group-hover:translate-x-1 transition"></i></span></div>
+                        <div class="h-64 overflow-hidden relative"><img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=1000&q=85" onerror="this.src='https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=1000&q=85'" alt="Seguridad y Salud Ocupacional" loading="lazy" class="w-full h-full object-cover image-zoom"><span class="card-tag bg-brandBlueDark">Seguridad Industrial</span></div>
+                        <div class="p-8 flex flex-col flex-1"><h4 class="text-2xl font-extrabold text-brandBlue mb-3 group-hover:text-brandGreen transition uppercase tracking-tighter">Seguridad y Salud Ocupacional</h4><p class="text-gray-500 text-sm mb-6 leading-relaxed">Planes de emergencia, diseño de matriz de riesgos, gestión e inventario de EPPs por colaborador y área, y cumplimiento normativo (Decreto 2025-006).</p><span class="text-brandBlue font-extrabold text-xs uppercase mt-auto group-hover:text-brandGreen transition flex items-center">Ver más <i class="fas fa-arrow-right ml-2 transform group-hover:translate-x-1 transition"></i></span></div>
                     </div>
                     <!-- CARD ACTUALIZADA: INGENIERÍA AGROINDUSTRIAL -->
                     <div onclick="openModal('agro')" class="image-card group cursor-pointer">
@@ -542,8 +597,8 @@
                         <div class="p-8 flex flex-col flex-1"><h4 class="text-xl font-bold text-gray-800 mb-3 group-hover:text-brandGreen transition">Clima Laboral 2026</h4><p class="text-gray-500 text-sm mb-6 leading-relaxed">Tendencias de bienestar en la era digital.</p><span class="text-brandBlue font-extrabold text-xs uppercase mt-auto group-hover:text-brandGreen transition flex items-center">Leer Más <i class="fas fa-arrow-right ml-2 transform group-hover:translate-x-1 transition"></i></span></div>
                     </div>
                     <div onclick="openModal('iso_ventaja')" class="image-card group cursor-pointer">
-                        <div class="h-64 overflow-hidden relative"><img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=1000&q=85" alt="ISO 45001: Ventaja Real" loading="lazy" class="w-full h-full object-cover image-zoom"><span class="card-tag bg-brandBlue">Cumplimiento</span></div>
-                        <div class="p-8 flex flex-col flex-1"><h4 class="text-xl font-bold text-gray-800 mb-3 group-hover:text-brandGreen transition">ISO 45001: Ventaja Real</h4><p class="text-gray-500 text-sm mb-6 leading-relaxed">El escudo legal de tu organización.</p><span class="text-brandBlue font-extrabold text-xs uppercase mt-auto group-hover:text-brandGreen transition flex items-center">Leer Más <i class="fas fa-arrow-right ml-2 transform group-hover:translate-x-1 transition"></i></span></div>
+                        <div class="h-64 overflow-hidden relative"><img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=1000&q=85" alt="Gestión Integral de EPPs y Riesgos" loading="lazy" class="w-full h-full object-cover image-zoom"><span class="card-tag bg-brandBlue">Cumplimiento</span></div>
+                        <div class="p-8 flex flex-col flex-1"><h4 class="text-xl font-bold text-gray-800 mb-3 group-hover:text-brandGreen transition">Gestión de EPPs y Riesgos</h4><p class="text-gray-500 text-sm mb-6 leading-relaxed">Sistema práctico de inventario por colaborador, áreas y encargados, matrices de riesgos y certificaciones.</p><span class="text-brandBlue font-extrabold text-xs uppercase mt-auto group-hover:text-brandGreen transition flex items-center">Leer Más <i class="fas fa-arrow-right ml-2 transform group-hover:translate-x-1 transition"></i></span></div>
                     </div>
                     <!-- CARD ACTUALIZADA: INGENIERÍA AMBIENTAL -->
                     <div onclick="openModal('sostenible')" class="image-card group cursor-pointer">
@@ -558,15 +613,15 @@
                 <h3 class="text-3xl font-extrabold text-gray-900 mb-12 text-center uppercase tracking-widest font-heading">NUESTRO COMPROMISO</h3>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
                     <div class="validation-card group cursor-pointer" onclick="openModal('filosofia_premium')">
-                        <div class="overflow-hidden h-56"><img src="https://images.unsplash.com/photo-1560179707-f14e90ef3623?auto=format&fit=crop&w=1000&q=85" alt="Aliado" loading="lazy"></div>
+                        <div class="overflow-hidden h-56 relative"><img src="https://images.unsplash.com/photo-1560179707-f14e90ef3623?auto=format&fit=crop&w=1000&q=85" alt="Aliado" loading="lazy"></div>
                         <div class="p-10 flex-1 flex flex-col"><h4 class="text-xl font-bold text-brandBlue mb-4 group-hover:text-brandGreen transition">Aliado Estratégico</h4><p class="text-gray-500 text-sm mb-6 leading-relaxed text-justify">Delegar su cumplimiento legal es la inversión más rentable para su patrimonio.</p><span class="link-elegant mt-auto !text-brandBlue font-bold underline">Leer más <i class="fas fa-arrow-right ml-2"></i></span></div>
                     </div>
                     <div class="validation-card group cursor-pointer" onclick="openModal('seguro')">
-                        <div class="overflow-hidden h-56"><img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1000&q=85" alt="Bienestar" loading="lazy"></div>
+                        <div class="overflow-hidden h-56 relative"><img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=1000&q=85" onerror="this.src='https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=1000&q=85'" alt="Bienestar" loading="lazy"></div>
                         <div class="p-10 flex-1 flex flex-col"><h4 class="text-xl font-bold text-brandBlue mb-4 group-hover:text-brandGreen transition">Tranquilidad Total</h4><p class="text-gray-500 text-sm mb-6 leading-relaxed text-justify">Protección activa de su equipo humano ante cualquier riesgo operacional.</p><span class="link-elegant mt-auto !text-brandBlue font-bold underline">Explorar <i class="fas fa-arrow-right ml-2"></i></span></div>
                     </div>
                     <div class="validation-card group cursor-pointer" onclick="openModal('sostenible')">
-                        <div class="overflow-hidden h-56"><img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1000&q=85" alt="Auditoría" loading="lazy"></div>
+                        <div class="overflow-hidden h-56 relative"><img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1000&q=85" alt="Auditoría" loading="lazy"></div>
                         <div class="p-10 flex-1 flex flex-col"><h4 class="text-xl font-bold text-brandBlue mb-4 group-hover:text-brandGreen transition">Avance Seguro</h4><p class="text-gray-500 text-sm mb-6 leading-relaxed text-justify">Validación técnica ante autoridades regionales. Avance sobre bases firmes.</p><span class="link-elegant mt-auto !text-brandBlue font-bold underline">Validar <i class="fas fa-arrow-right ml-2"></i></span></div>
                     </div>
                 </div>
@@ -599,9 +654,9 @@
                 <h3 class="text-3xl font-extrabold text-gray-900 mb-12 border-l-8 border-brandGreen pl-6 uppercase tracking-tighter font-heading">DIVISIONES EMPRESARIALES</h3>
                 <div class="grid grid-cols-1 md:grid-cols-12 gap-8 h-full">
                     <div class="md:col-span-8">
-                        <div class="impact-card group cursor-pointer" onclick="openModal('agro')">
-                            <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1200&q=85" alt="Industria" loading="lazy">
-                            <div class="impact-content"><h3 class="text-5xl font-extrabold text-white mb-3 uppercase tracking-tighter">Industria</h3><p class="text-white/80 text-xl max-w-lg font-light text-justify">Seguridad industrial y cumplimiento técnico de alta complejidad.</p><span class="more-info-brand">Más información</span></div>
+                        <div class="impact-card group cursor-pointer" onclick="openModal('seguro')">
+                            <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=1200&q=85" alt="Industria" loading="lazy">
+                            <div class="impact-content"><h3 class="text-5xl font-extrabold text-white mb-3 uppercase tracking-tighter">Industria</h3><p class="text-white/80 text-xl max-w-lg font-light text-justify">Planes de emergencia, matrices de riesgos, gestión de EPPs y cumplimiento técnico de alta complejidad.</p><span class="more-info-brand">Más información</span></div>
                         </div>
                     </div>
                     <div class="md:col-span-4 flex flex-col gap-8">
@@ -619,8 +674,8 @@
                 <div class="container mx-auto px-4">
                     <!-- GRID A 4 COLUMNAS -->
                     <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8">
-                        <div class="mapfre-list-card"><div><h4 class="text-2xl font-extrabold text-brandBlue mb-8 uppercase tracking-tighter">Seguridad SSO</h4><ul class="check-list"><li><i class="fas fa-check-circle text-brandGreen"></i> Auditorías ISO 45001</li><li><i class="fas fa-check-circle text-brandGreen"></i> Planes de Emergencia</li><li><i class="fas fa-check-circle text-brandGreen"></i> Vigilancia Médica</li></ul></div><span class="link-elegant" onclick="openModal('seguro')">Saber más <i class="fas fa-chevron-right text-xs"></i></span></div>
-                        <div class="mapfre-list-card"><div><h4 class="text-2xl font-extrabold text-brandBlue mb-8 uppercase tracking-tighter">Gestión Humana</h4><ul class="check-list"><li><i class="fas fa-check-circle text-brandBlue"></i> Clima y Cultura Laboral</li><li><i class="fas fa-check-circle text-brandBlue"></i> Headhunting Senior</li><li><i class="fas fa-check-circle text-brandBlue"></i> Talleres Directivos</li></ul></div><span class="link-elegant" onclick="openModal('humano')">Saber más <i class="fas fa-chevron-right text-xs"></i></span></div>
+                        <div class="mapfre-list-card"><div><h4 class="text-2xl font-extrabold text-brandBlue mb-8 uppercase tracking-tighter">Seguridad SSO</h4><ul class="check-list"><li><i class="fas fa-check-circle text-brandGreen"></i> Planes de Emergencia</li><li><i class="fas fa-check-circle text-brandGreen"></i> Diseño de Matriz e Identificación de Riesgos</li><li><i class="fas fa-check-circle text-brandGreen"></i> Inventario y Gestión Integral de EPPs (por colaborador y área)</li><li><i class="fas fa-check-circle text-brandGreen"></i> Cumplimiento Normativo (Decreto 2025-006) y Certificaciones</li></ul></div><span class="link-elegant" onclick="openModal('seguro')">Saber más <i class="fas fa-chevron-right text-xs"></i></span></div>
+                        <div class="mapfre-list-card"><div><h4 class="text-2xl font-extrabold text-brandBlue mb-8 uppercase tracking-tighter">Gestión Humana</h4><ul class="check-list"><li><i class="fas fa-check-circle text-brandBlue"></i> Formador de Formadores (Certificada)</li><li><i class="fas fa-check-circle text-brandBlue"></i> Clima y Cultura Laboral</li><li><i class="fas fa-check-circle text-brandBlue"></i> Headhunting Senior</li><li><i class="fas fa-check-circle text-brandBlue"></i> Talleres Directivos</li></ul></div><span class="link-elegant" onclick="openModal('humano')">Saber más <i class="fas fa-chevron-right text-xs"></i></span></div>
                         <div class="mapfre-list-card"><div><h4 class="text-2xl font-extrabold text-brandBlue mb-8 uppercase tracking-tighter text-nowrap">Ing. Ambiental</h4><ul class="check-list"><li><i class="fas fa-check-circle text-brandGreen"></i> Licencias Ambientales</li><li><i class="fas fa-check-circle text-brandGreen"></i> Huella de Carbono</li><li><i class="fas fa-check-circle text-brandGreen"></i> Manejo de Desechos</li></ul></div><span class="link-elegant" onclick="openModal('sostenible')">Saber más <i class="fas fa-chevron-right text-xs"></i></span></div>
                         <div class="mapfre-list-card"><div><h4 class="text-2xl font-extrabold text-brandBlue mb-8 uppercase tracking-tighter">Ing. Agroindustrial</h4><ul class="check-list"><li><i class="fas fa-check-circle text-brandGreen"></i> Diseño de Plantas</li><li><i class="fas fa-check-circle text-brandGreen"></i> Procesos Productivos</li><li><i class="fas fa-check-circle text-brandGreen"></i> Certificaciones BPM</li></ul></div><span class="link-elegant" onclick="openModal('agro')">Saber más <i class="fas fa-chevron-right text-xs"></i></span></div>
                     </div>
@@ -632,15 +687,15 @@
                 <h3 class="text-3xl font-extrabold text-gray-900 mb-12 text-center uppercase tracking-widest font-heading">NUESTRO COMPROMISO</h3>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
                     <div class="validation-card group cursor-pointer" onclick="openModal('filosofia_premium')">
-                        <div class="overflow-hidden h-56"><img src="https://images.unsplash.com/photo-1560179707-f14e90ef3623?auto=format&fit=crop&w=1000&q=85" alt="Aliado" loading="lazy"></div>
+                        <div class="overflow-hidden h-56 relative"><img src="https://images.unsplash.com/photo-1560179707-f14e90ef3623?auto=format&fit=crop&w=1000&q=85" alt="Aliado" loading="lazy"></div>
                         <div class="p-10 flex-1 flex flex-col"><h4 class="text-xl font-bold text-brandBlue mb-4 group-hover:text-brandGreen transition">Aliado Estratégico</h4><p class="text-gray-500 text-sm mb-6 leading-relaxed text-justify">Delegar su cumplimiento legal es la inversión más rentable para su patrimonio.</p><span class="link-elegant mt-auto !text-brandBlue font-bold underline">Leer más <i class="fas fa-arrow-right ml-2"></i></span></div>
                     </div>
                     <div class="validation-card group cursor-pointer" onclick="openModal('seguro')">
-                        <div class="overflow-hidden h-56"><img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1000&q=85" alt="Bienestar" loading="lazy"></div>
+                        <div class="overflow-hidden h-56 relative"><img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=1000&q=85" onerror="this.src='https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=1000&q=85'" alt="Bienestar" loading="lazy"></div>
                         <div class="p-10 flex-1 flex flex-col"><h4 class="text-xl font-bold text-brandBlue mb-4 group-hover:text-brandGreen transition">Tranquilidad Total</h4><p class="text-gray-500 text-sm mb-6 leading-relaxed text-justify">Protección activa de su equipo humano ante cualquier riesgo operacional.</p><span class="link-elegant mt-auto !text-brandBlue font-bold underline">Explorar <i class="fas fa-arrow-right ml-2"></i></span></div>
                     </div>
                     <div class="validation-card group cursor-pointer" onclick="openModal('sostenible')">
-                        <div class="overflow-hidden h-56"><img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1000&q=85" alt="Auditoría" loading="lazy"></div>
+                        <div class="overflow-hidden h-56 relative"><img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1000&q=85" alt="Auditoría" loading="lazy"></div>
                         <div class="p-10 flex-1 flex flex-col"><h4 class="text-xl font-bold text-brandBlue mb-4 group-hover:text-brandGreen transition">Avance Seguro</h4><p class="text-gray-500 text-sm mb-6 leading-relaxed text-justify">Validación técnica ante autoridades regionales. Avance sobre bases firmes.</p><span class="link-elegant mt-auto !text-brandBlue font-bold underline">Validar <i class="fas fa-arrow-right ml-2"></i></span></div>
                     </div>
                 </div>
@@ -723,15 +778,15 @@
                 <h3 class="text-3xl font-extrabold text-gray-900 mb-12 text-center uppercase tracking-widest font-heading">ÉXITO GARANTIZADO</h3>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
                     <div class="validation-card group cursor-pointer" onclick="openModal('emprendedores_info')">
-                        <div class="overflow-hidden h-56"><img src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=900&q=85" alt="Ahorro" loading="lazy"></div>
+                        <div class="overflow-hidden h-56 relative"><img src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=900&q=85" alt="Ahorro" loading="lazy"></div>
                         <div class="p-10 flex-1 flex flex-col"><h4 class="text-xl font-bold text-brandBlue mb-4 group-hover:text-brandGreen transition italic">Empezar bien es ahorrar</h4><p class="text-gray-500 text-sm mb-6 leading-relaxed text-justify">Evita multas futuras con blindaje legal desde el día 1.</p><span class="link-elegant mt-auto !text-brandBlue font-bold underline">Leer más <i class="fas fa-arrow-right ml-2"></i></span></div>
                     </div>
                     <div class="validation-card group cursor-pointer" onclick="openModal('emprendedores_info')">
-                        <div class="overflow-hidden h-56"><img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=900&q=85" alt="Delegación" loading="lazy"></div>
+                        <div class="overflow-hidden h-56 relative"><img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=900&q=85" alt="Delegación" loading="lazy"></div>
                         <div class="p-10 flex-1 flex flex-col"><h4 class="text-xl font-bold text-brandBlue mb-4 group-hover:text-brandGreen transition italic text-nowrap">Enfócate en vender</h4><p class="text-gray-500 text-sm mb-6 leading-relaxed text-justify">Gestionamos tu back-office legal mientras tú escalas tu negocio.</p><span class="link-elegant mt-auto !text-brandBlue font-bold underline">Explorar <i class="fas fa-arrow-right ml-2"></i></span></div>
                     </div>
                     <div class="validation-card group cursor-pointer" onclick="openModal('equipo')">
-                        <div class="overflow-hidden h-56"><img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=900&q=85" alt="Socio" loading="lazy"></div>
+                        <div class="overflow-hidden h-56 relative"><img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=900&q=85" alt="Socio" loading="lazy"></div>
                         <div class="p-10 flex-1 flex flex-col"><h4 class="text-xl font-bold text-brandBlue mb-4 group-hover:text-brandGreen transition italic text-nowrap">Tu socio en el tiempo</h4><p class="text-gray-500 text-sm mb-6 leading-relaxed text-justify">Evolucionamos contigo desde tu primera factura hasta tu consolidación.</p><span class="link-elegant mt-auto !text-brandBlue font-bold underline">Validar <i class="fas fa-arrow-right ml-2"></i></span></div>
                     </div>
                 </div>
@@ -884,7 +939,7 @@
         <!-- Barra de Sugerencias Rápidas Persistentes -->
         <div class="px-4 py-2 bg-gray-50 border-t border-gray-100 flex gap-2 overflow-x-auto scrollbar-hide">
             <button onclick="triggerQuickIntent('talento')" class="ev-chip whitespace-nowrap"><i class="fas fa-users text-brandGreen"></i> Talento Humano</button>
-            <button onclick="triggerQuickIntent('seguridad')" class="ev-chip whitespace-nowrap"><i class="fas fa-hard-hat text-brandGreen"></i> SSO / ISO 45001</button>
+            <button onclick="triggerQuickIntent('seguridad')" class="ev-chip whitespace-nowrap"><i class="fas fa-hard-hat text-brandGreen"></i> SSO / EPPs / Matriz Riesgos</button>
             <button onclick="triggerQuickIntent('agro')" class="ev-chip whitespace-nowrap"><i class="fas fa-seedling text-brandGreen"></i> Agroindustria</button>
             <button onclick="triggerQuickIntent('ambiental')" class="ev-chip whitespace-nowrap"><i class="fas fa-leaf text-brandGreen"></i> Ing. Ambiental</button>
             <button onclick="triggerQuickIntent('emprendedor')" class="ev-chip whitespace-nowrap"><i class="fas fa-rocket text-brandGreen"></i> Emprendedores</button>
@@ -1054,16 +1109,18 @@
                     </div>
                 `
             },
-            humano: { title: "Gestión de Talento", image: "https://raw.githubusercontent.com/direccioncomercial/evoluser-web/1b862973e8003850daadd6a47bffd5b6cf04b2f6/imagen2.png", leader: "Nury Echeverria", role: "Directora de Talento", desc: "Potenciamos el capital humano con diagnósticos precisos.", list: ["Reclutamiento Senior", "Cultura de Éxito", "Evaluación 360°"] },
-            seguro: { title: "Seguridad Industrial", image: "https://raw.githubusercontent.com/direccioncomercial/evoluser-web/1b862973e8003850daadd6a47bffd5b6cf04b2f6/imagen3.png", leader: "Christian Ortega", role: "Director Técnico", desc: "Garantizamos el cumplimiento normativo integral.", list: ["ISO 45001", "Vigilancia Médica", "Riesgos Técnicos"] },
+            humano: { title: "Gestión de Talento", image: "https://raw.githubusercontent.com/direccioncomercial/evoluser-web/1b862973e8003850daadd6a47bffd5b6cf04b2f6/imagen2.png", leader: "Nury Echeverria", role: "Directora de Talento | Certificada Formador de Formadores", desc: "Potenciamos el capital humano con diagnósticos precisos y programas de formación avalados por nuestra Certificación de Formador de Formadores para respaldar su gestión.", list: ["Certificación Formador de Formadores", "Reclutamiento Senior", "Cultura de Éxito", "Evaluación 360°"] },
+            seguro: { title: "Seguridad y Salud Ocupacional", image: "https://raw.githubusercontent.com/direccioncomercial/evoluser-web/1b862973e8003850daadd6a47bffd5b6cf04b2f6/imagen3.png", leader: "Christian Ortega", role: "Director Técnico", desc: "Garantizamos el blindaje técnico y preventivo de su organización mediante identificación y evaluación de riesgos, planes de emergencia, gestión e inventario práctico de EPPs por colaborador y área, y todo el cumplimiento normativo legal.", list: ["Planes de Emergencia y Contingencia", "Diseño de Matriz, Identificación y Evaluación de Riesgos", "Sistema Práctico de Inventario y Gestión Integral de EPPs por Colaborador, Áreas y Encargados", "Cumplimiento Normativo (Decreto 2025-006) y Certificaciones Adicionales"] },
             agro: { title: "Ingeniería Agroindustrial", image: "https://raw.githubusercontent.com/direccioncomercial/evoluser-web/1b862973e8003850daadd6a47bffd5b6cf04b2f6/imagen5.png", leader: "Lilian Eras", role: "Directora Agro", desc: "Optimizamos la cadena de valor alimentaria.", list: ["Certificación BPA", "HACCP", "Diseño Industrial"] },
             sostenible: { title: "Ingeniería Ambiental", image: "https://raw.githubusercontent.com/direccioncomercial/evoluser-web/1b862973e8003850daadd6a47bffd5b6cf04b2f6/imagen3.png", leader: "Christian Ortega", role: "Director Sostenibilidad", desc: "Convertimos la responsabilidad ambiental en rentabilidad real.", list: ["Licencias Verdes", "Huella de Carbono", "Manejo de Desechos"] },
-            empresas_info: { title: "Consultoría 360°", image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1000&q=85", desc: "Soluciones corporativas de alto impacto estratégico.", list: ["Outsourcing RRHH", "Auditorías ISO", "Plan Estratégico"] },
+            empresas_info: { title: "Consultoría 360°", image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1000&q=85", desc: "Soluciones corporativas de alto impacto estratégico.", list: ["Outsourcing RRHH y Formación Certificada", "Planes de Emergencia, Matrices de Riesgos y Gestión de EPPs", "Cumplimiento Normativo (Decreto 2025-006) y Certificaciones"] },
             emprendedores_info: { title: "Pack Startup", image: "https://raw.githubusercontent.com/direccioncomercial/evoluser-web/1b862973e8003850daadd6a47bffd5b6cf04b2f6/imagen6.png", desc: "Formalización ágil de tu idea de negocio en tiempo récord.", list: ["Constitución Empresa", "Permisos ARCSA", "Imagen Inicial"] },
             equipo: { title: "Directorio", image: "https://raw.githubusercontent.com/direccioncomercial/evoluser-web/1b862973e8003850daadd6a47bffd5b6cf04b2f6/imagen7.jpeg", desc: "Liderazgo multidisciplinario comprometido con la excelencia.", list: ["Dirección Estratégica", "Calidad", "Innovación"] },
-            clima_2026: { title: "Clima Laboral 2026", image: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=1000&q=85", leader: "Nury Echeverria", role: "Directora de Talento", desc: "Tendencias de bienestar en la era digital: medimos y transformamos el compromiso de tus equipos para reducir la rotación y elevar la productividad.", list: ["Diagnóstico de Clima y Cultura", "Liderazgo Consciente y Empático", "Programas de Bienestar Integral"] },
-            iso_ventaja: { title: "ISO 45001: Ventaja Real", image: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=1000&q=85", leader: "Christian Ortega", role: "Director Técnico", desc: "El escudo legal de tu organización: implementar ISO 45001 protege la vida de tus colaboradores, evita sanciones legales y abre puertas a licitaciones corporativas.", list: ["Matrices de Riesgos Laborales", "Auditorías de Cumplimiento Legal", "Prevención de Accidentes y Enfermedades"] }
+            clima_2026: { title: "Clima Laboral 2026", image: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=1000&q=85", leader: "Nury Echeverria", role: "Directora de Talento | Certificada Formador de Formadores", desc: "Tendencias de bienestar en la era digital: medimos y transformamos el compromiso de tus equipos con respaldo certificado de Formador de Formadores.", list: ["Capacitación Certificada (Formador de Formadores)", "Diagnóstico de Clima y Cultura", "Liderazgo Consciente y Empático", "Programas de Bienestar Integral"] },
+            iso_ventaja: { title: "Gestión Integral de EPPs y Riesgos", image: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=1000&q=85", leader: "Christian Ortega", role: "Director Técnico", desc: "El escudo técnico y legal de tu organización: implementamos un sistema práctico de manejo de inventario y gestión integral de EPPs por colaborador, áreas y encargados, junto con matrices de riesgos y cumplimiento normativo total.", list: ["Sistema Práctico de Inventario de EPPs por Colaborador, Áreas y Encargados", "Diseño de Matriz, Identificación y Evaluación de Riesgos", "Planes de Emergencia y Contingencia", "Cumplimiento Normativo (Decreto 2025-006) y Certificaciones Adicionales"] }
         };
+
+        const EVOLUSER_LOGO_URL = "https://raw.githubusercontent.com/direccioncomercial/evoluser-web/1b862973e8003850daadd6a47bffd5b6cf04b2f6/logo.png";
 
         function openModal(type) {
             const data = contentData[type];
@@ -1075,19 +1132,24 @@
                 container.innerHTML = `
                     <div class="absolute inset-0 bg-cover bg-center opacity-20" style="background-image: url('${data.image}');"></div>
                     <div class="relative z-10 flex items-center justify-center h-full w-full">
-                        <img src="https://raw.githubusercontent.com/direccioncomercial/evoluser-web/1b862973e8003850daadd6a47bffd5b6cf04b2f6/logo.png" 
+                        <img src="${EVOLUSER_LOGO_URL}" 
                              alt="EvoluSer Vertical" 
                              class="h-4/5 w-auto object-contain transform -rotate-90 filter drop-shadow-xl"
                              style="max-width: 80%;">
                     </div>
                 `;
             } else {
-                // Lógica Estándar para el resto
+                // Lógica Estándar para el resto con el Logo de EvoluSer integrado en la imagen
                 let imgClass = "w-full h-full object-cover object-top";
+                let watermarkVariant = "evoluser-logo-white";
                 if (['equipo', 'emprendedores_info', 'humano', 'seguro', 'sostenible', 'agro'].includes(type)) { 
-                    imgClass = "w-full h-full object-contain bg-gray-50"; 
+                    imgClass = "w-full h-full object-contain bg-gray-50";
+                    watermarkVariant = "evoluser-logo-normal";
                 }
-                container.innerHTML = `<img id="modal-image" src="${data.image}" alt="${data.title}" class="${imgClass}">`;
+                container.innerHTML = `
+                    <img id="modal-image" src="${data.image}" alt="${data.title}" class="${imgClass}">
+                    <img src="${EVOLUSER_LOGO_URL}" alt="Sello EvoluSer" class="evoluser-integrated-logo ${watermarkVariant}">
+                `;
             }
 
             let html = `<h3 class="text-2xl md:text-3xl font-extrabold text-brandBlue mb-4 uppercase tracking-tighter">${data.title}</h3>`;
@@ -1125,8 +1187,8 @@
             welcome: {
                 text: `"¡Bienvenido Evonauta! Soy <strong>Ev</strong>, tu consultora estratégica en <strong>EvoluSer</strong>. Potenciamos el Ser y protegemos la vida en tu organización.<br><br>¿En qué área estratégica deseas que te asesore hoy?"`,
                 actions: [
-                    { label: "👥 Talento Humano", intent: "talento" },
-                    { label: "🦺 Seguridad SSO / ISO 45001", intent: "seguridad" },
+                    { label: "👥 Talento Humano (Formador Certificado)", intent: "talento" },
+                    { label: "🦺 SSO: Matrices, EPPs y Planes de Emergencia", intent: "seguridad" },
                     { label: "🌾 Ing. Agroindustrial", intent: "agro" },
                     { label: "🌿 Ing. Ambiental", intent: "ambiental" },
                     { label: "🚀 Soy Emprendedor / Startup", intent: "emprendedor" },
@@ -1134,19 +1196,19 @@
                 ]
             },
             talento: {
-                text: `"Excelente elección. En nuestra división de <strong>Gestión de Talento Humano</strong>, liderada por <strong>Nury Echeverría</strong>, transformamos grupos de trabajo en equipos de alto rendimiento:<br><br>• <strong>Headhunting Senior</strong> y selección especializada.<br>• Diagnóstico y mejora de <strong>Clima y Cultura Laboral</strong>.<br>• <strong>Evaluación 360°</strong> y talleres directivos.<br>• RRHH inicial (Contratos y afiliación IESS).<br><br>¿Cómo te gustaría avanzar?"`,
+                text: `"Excelente elección. En nuestra división de <strong>Gestión de Talento Humano</strong>, liderada por <strong>Nury Echeverría</strong> —quien cuenta con la <strong>Certificación de Formador de Formadores</strong> para respaldar y avalar toda la gestión—, impulsamos equipos de alto rendimiento:<br><br>• <strong>Formación Certificada:</strong> Capacitación corporativa y talleres directivos con aval de Formador de Formadores.<br>• <strong>Headhunting Senior</strong> y selección especializada.<br>• Diagnóstico y mejora de <strong>Clima y Cultura Laboral</strong>.<br>• <strong>Evaluación 360°</strong> y RRHH inicial (Contratos y afiliación IESS).<br><br>¿Cómo te gustaría avanzar?"`,
                 actions: [
                     { label: "🔍 Ver Ficha de Talento Humano", action: "openModal('humano')" },
-                    { label: "📲 Hablar con Nury por WhatsApp", url: "https://wa.me/593983900050?text=Hola%20EvoluSer,%20vengo%20del%20chat%20con%20Ev%20y%20deseo%20asesor%C3%ADa%20en%20Talento%20Humano" },
+                    { label: "📲 Hablar con Nury por WhatsApp", url: "https://wa.me/593983900050?text=Hola%20EvoluSer,%20vengo%20del%20chat%20con%20Ev%20y%20deseo%20asesor%C3%ADa%20en%20Talento%20Humano%20y%20Capacitaci%C3%B3n%20Certificada" },
                     { label: "💰 Solicitar Cotización", intent: "cotizar" }
                 ]
             },
             seguridad: {
-                text: `"El blindaje normativo protege la vida de tu equipo y el patrimonio de tu empresa. Con nuestro Director Técnico <strong>Christian Ortega</strong> en <strong>Seguridad y Salud Ocupacional (SSO)</strong>, cubrimos:<br><br>• Implementación y Auditorías <strong>ISO 45001</strong>.<br>• <strong>Planes de Emergencia</strong> y matrices de riesgos técnicos.<br>• <strong>Vigilancia Médica</strong> ocupacional y cumplimiento ante el MDT/IESS.<br><br>¿Deseas evaluar el nivel de cumplimiento de tu empresa?"`,
+                text: `"El blindaje preventivo y técnico protege la vida de tu equipo y el patrimonio de tu organización. Con nuestro Director Técnico <strong>Christian Ortega</strong> en <strong>Seguridad y Salud Ocupacional (SSO)</strong>, implementamos:<br><br>• <strong>Planes de Emergencia</strong> y contingencia.<br>• <strong>Diseño de Matriz de Riesgos</strong>, identificación y evaluación técnica de riesgos.<br>• <strong>Gestión Integral de EPPs:</strong> Sistema práctico de manejo de inventario por colaborador, áreas y encargados.<br>• <strong>Cumplimiento Normativo Integral</strong> (incluyendo el <strong>Decreto 2025-006</strong>) y certificaciones adicionales.<br><br>¿Deseas evaluar la gestión de riesgos, EPPs o planes de emergencia en tu empresa?"`,
                 actions: [
-                    { label: "🛡️ Ver Ficha de Seguridad SSO", action: "openModal('seguro')" },
-                    { label: "📲 Agendar Diagnóstico SSO", url: "https://wa.me/593983900050?text=Hola%20EvoluSer,%20habl%C3%A9%20con%20Ev%20y%20necesito%20un%20diagn%C3%B3stico%20en%20Seguridad%20y%20Salud%20Ocupacional%20/%20ISO%2045001" },
-                    { label: "🏢 Ir a Sección Empresas", action: "setSegment('empresas')" }
+                    { label: "🛡️ Ver Ficha Completa de SSO", action: "openModal('seguro')" },
+                    { label: "🦺 Ver Sistema de EPPs y Matrices", action: "openModal('iso_ventaja')" },
+                    { label: "📲 Diagnóstico SSO en WhatsApp", url: "https://wa.me/593983900050?text=Hola%20EvoluSer,%20habl%C3%A9%20con%20Ev%20y%20necesito%20asesor%C3%ADa%20en%20Planes%20de%20Emergencia,%20Matriz%20de%20Riesgos,%20Sistema%20de%20EPPs%20y%20Cumplimiento%20Normativo" }
                 ]
             },
             agro: {
@@ -1200,11 +1262,11 @@
         function detectEvIntent(rawText) {
             const text = rawText.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 
-            if (/(talento|rrhh|recursos humanos|clima|cultura|headhunting|seleccion|personal|nury|evaluacion 360|liderazgo|equipo)/.test(text)) {
-                return evKnowledgeBase.talento;
-            }
-            if (/(seguridad|sso|iso 45001|iso|riesgo|salud ocupacional|emergencia|vigilancia medica|accidente|ministerio de trabajo|christian|industrial)/.test(text)) {
+            if (/(decreto|2025-006|2025|006|seguridad|sso|riesgo|matriz|matrices|epp|epps|inventario|proteccion personal|salud ocupacional|emergencia|vigilancia medica|accidente|ministerio de trabajo|christian|industrial|certificacion|normativ)/.test(text)) {
                 return evKnowledgeBase.seguridad;
+            }
+            if (/(talento|rrhh|recursos humanos|clima|cultura|headhunting|seleccion|personal|nury|evaluacion 360|liderazgo|equipo|formador|formadores|capacitacion)/.test(text)) {
+                return evKnowledgeBase.talento;
             }
             if (/(agro|alimento|planta|bpa|bpm|haccp|inocuidad|nutricional|vida util|sanitaria|arcsa|lilian|exportacion)/.test(text)) {
                 return evKnowledgeBase.agro;
@@ -1226,7 +1288,7 @@
             }
             if (/(hola|buenos dias|buenas tardes|buenas noches|saludos|hey|que tal|quien eres)/.test(text)) {
                 return {
-                    text: `"¡Hola! Qué gusto saludarte. Soy <strong>Ev</strong>, tu consultora virtual de <strong>EvoluSer</strong>. Estoy entrenada para guiarte en <strong>Talento Humano, Seguridad Industrial (ISO 45001), Ingeniería Agroindustrial, Ingeniería Ambiental</strong> y nuestro <strong>Pack Startup</strong>.<br><br>Cuéntame, ¿buscas soluciones para una <strong>Empresa consolidada</strong> o para un <strong>Emprendimiento</strong>?"`,
+                    text: `"¡Hola! Qué gusto saludarte. Soy <strong>Ev</strong>, tu consultora virtual de <strong>EvoluSer</strong>. Estoy entrenada para guiarte en <strong>Talento Humano (Formador de Formadores), Seguridad y Salud Ocupacional (Planes de Emergencia, Matrices de Riesgos, Gestión de EPPs y Decreto 2025-006), Ingeniería Agroindustrial, Ingeniería Ambiental</strong> y nuestro <strong>Pack Startup</strong>.<br><br>Cuéntame, ¿buscas soluciones para una <strong>Empresa consolidada</strong> o para un <strong>Emprendimiento</strong>?"`,
                     actions: [
                         { label: "🏢 Tengo una Empresa / Corporación", intent: "seguridad" },
                         { label: "🚀 Soy Emprendedor / Pyme", intent: "emprendedor" },
@@ -1326,8 +1388,8 @@
         function triggerQuickIntent(intentKey) {
             const labels = {
                 welcome: "Ver menú principal de soluciones",
-                talento: "Quiero información sobre Talento Humano",
-                seguridad: "Me interesa Seguridad y Salud Ocupacional (ISO 45001)",
+                talento: "Quiero información sobre Talento Humano y Formador de Formadores",
+                seguridad: "Me interesa Planes de Emergencia, Matriz de Riesgos, Sistema de EPPs y Cumplimiento Normativo",
                 agro: "Deseo asesoría en Ingeniería Agroindustrial",
                 ambiental: "Consultoría en Ingeniería Ambiental",
                 emprendedor: "Soy emprendedor, quiero conocer el Pack Startup",
@@ -1447,7 +1509,71 @@
             x: "https://x.com/evoluserec"
         };
 
+        // Función para integrar el logo oficial de EvoluSer en todas las imágenes existentes de la web
+        function injectIntegratedBrandLogos() {
+            // 1. Slides del Carrusel Hero (Logo blanco integrado en esquina inferior derecha)
+            document.querySelectorAll('.carousel-slide').forEach(slide => {
+                if (!slide.querySelector('.evoluser-integrated-logo')) {
+                    const seal = document.createElement('img');
+                    seal.src = EVOLUSER_LOGO_URL;
+                    seal.alt = "EvoluSer";
+                    seal.className = "evoluser-integrated-logo evoluser-logo-hero";
+                    slide.appendChild(seal);
+                }
+            });
+
+            // 2. Tarjetas de Soluciones e Insights (.image-card) -> alterna armónicamente sello blanco en base y sello normal en esquina
+            document.querySelectorAll('.image-card > .relative').forEach((imgBox, idx) => {
+                if (!imgBox.querySelector('.evoluser-integrated-logo')) {
+                    const seal = document.createElement('img');
+                    seal.src = EVOLUSER_LOGO_URL;
+                    seal.alt = "EvoluSer";
+                    seal.className = idx % 2 === 0
+                        ? "evoluser-integrated-logo evoluser-logo-white"
+                        : "evoluser-integrated-logo evoluser-logo-normal";
+                    imgBox.appendChild(seal);
+                }
+            });
+
+            // 3. Tarjetas de Compromiso / Validación (.validation-card)
+            document.querySelectorAll('.validation-card > .overflow-hidden').forEach(imgBox => {
+                imgBox.classList.add('relative');
+                if (!imgBox.querySelector('.evoluser-integrated-logo')) {
+                    const seal = document.createElement('img');
+                    seal.src = EVOLUSER_LOGO_URL;
+                    seal.alt = "EvoluSer";
+                    seal.className = "evoluser-integrated-logo evoluser-logo-normal";
+                    imgBox.appendChild(seal);
+                }
+            });
+
+            // 4. Tarjetas de Alto Impacto en Empresas y Emprendedores (.impact-card)
+            document.querySelectorAll('.impact-card').forEach(card => {
+                if (!card.querySelector('.evoluser-integrated-logo')) {
+                    const seal = document.createElement('img');
+                    seal.src = EVOLUSER_LOGO_URL;
+                    seal.alt = "EvoluSer";
+                    seal.className = "evoluser-integrated-logo evoluser-logo-normal";
+                    card.appendChild(seal);
+                }
+            });
+
+            // 5. Contenedor de Ev en Emprendedores y Banner de Oficina Virtual
+            document.querySelectorAll('#segment-emprendedores .group.cursor-pointer, #segment-oficina > .bg-cover').forEach(box => {
+                if (!box.querySelector('.evoluser-integrated-logo')) {
+                    const seal = document.createElement('img');
+                    seal.src = EVOLUSER_LOGO_URL;
+                    seal.alt = "EvoluSer";
+                    seal.className = "evoluser-integrated-logo evoluser-logo-normal";
+                    box.appendChild(seal);
+                }
+            });
+        }
+
         document.addEventListener('DOMContentLoaded', () => {
+            // Integrar el logo de EvoluSer en todas las imágenes existentes de la página
+            injectIntegratedBrandLogos();
+
             // Sincronizar todos los enlaces de redes sociales (Top Bar y Footer)
             document.querySelectorAll('[data-social]').forEach(anchor => {
                 const net = anchor.getAttribute('data-social');
