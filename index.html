@@ -475,10 +475,11 @@
                      alt="EvoluSer" 
                      class="h-16 md:h-20 w-auto object-contain drop-shadow-md transition-all duration-500 hover:scale-105 hover:drop-shadow-xl filter" loading="lazy" decoding="async">
             </div>
-            <div class="hidden md:flex gap-10 h-full items-center">
+            <div class="hidden md:flex gap-8 lg:gap-10 h-full items-center">
                 <button onclick="setSegment('soluciones')" id="nav-soluciones" class="nav-link active h-full flex items-center">Soluciones</button>
                 <button onclick="setSegment('empresas')" id="nav-empresas" class="nav-link h-full flex items-center">Empresas</button>
                 <button onclick="setSegment('emprendedores')" id="nav-emprendedores" class="nav-link h-full flex items-center">Emprendedores</button>
+                <button onclick="setSegment('revista')" id="nav-revista" class="nav-link h-full flex items-center text-nowrap"><i class="fas fa-book-open text-brandGreen mr-1.5 text-xs"></i> Revista</button>
                 <button onclick="openModal('filosofia_premium')" class="nav-link h-full flex items-center text-nowrap">Filosofía</button>
             </div>
             <div class="flex items-center gap-3 md:gap-4">
@@ -499,7 +500,8 @@
                 <button onclick="setSegment('soluciones'); toggleMobileMenu();" class="text-left px-4 py-3 rounded-xl bg-brandGray font-extrabold text-xs uppercase text-brandBlue hover:bg-brandGreen hover:text-white transition"><i class="fas fa-layer-group mr-2 text-brandGreen"></i> Soluciones</button>
                 <button onclick="setSegment('empresas'); toggleMobileMenu();" class="text-left px-4 py-3 rounded-xl bg-brandGray font-extrabold text-xs uppercase text-brandBlue hover:bg-brandGreen hover:text-white transition"><i class="fas fa-building mr-2 text-brandGreen"></i> Empresas</button>
                 <button onclick="setSegment('emprendedores'); toggleMobileMenu();" class="text-left px-4 py-3 rounded-xl bg-brandGray font-extrabold text-xs uppercase text-brandBlue hover:bg-brandGreen hover:text-white transition"><i class="fas fa-rocket mr-2 text-brandGreen"></i> Emprendedores</button>
-                <button onclick="openModal('filosofia_premium'); toggleMobileMenu();" class="text-left px-4 py-3 rounded-xl bg-brandGray font-extrabold text-xs uppercase text-brandBlue hover:bg-brandGreen hover:text-white transition"><i class="fas fa-compass mr-2 text-brandGreen"></i> Filosofía</button>
+                <button onclick="setSegment('revista'); toggleMobileMenu();" class="text-left px-4 py-3 rounded-xl bg-brandGray font-extrabold text-xs uppercase text-brandBlue hover:bg-brandGreen hover:text-white transition"><i class="fas fa-book-open mr-2 text-brandGreen"></i> Revista PDF</button>
+                <button onclick="openModal('filosofia_premium'); toggleMobileMenu();" class="col-span-2 text-left px-4 py-3 rounded-xl bg-brandGray font-extrabold text-xs uppercase text-brandBlue hover:bg-brandGreen hover:text-white transition"><i class="fas fa-compass mr-2 text-brandGreen"></i> Filosofía</button>
             </div>
             <div class="pt-2 flex gap-2">
                 <button onclick="setSegment('oficina'); toggleMobileMenu();" class="flex-1 py-3 rounded-xl border border-brandBlue text-brandBlue font-extrabold text-xs uppercase text-center">Oficina Virtual</button>
@@ -655,6 +657,29 @@
                 </div>
             </div>
 
+            <!-- DESTACADO REVISTA OFICIAL EVOLUSER EN HOME -->
+            <div class="container mx-auto px-4 mt-20">
+                <div class="bg-gradient-to-br from-brandBlue via-[#18354E] to-[#1e4a5f] rounded-3xl p-8 md:p-14 shadow-2xl border border-brandGreen/30 flex flex-col lg:flex-row items-center gap-10 relative overflow-hidden">
+                    <div class="w-full lg:w-1/3 flex justify-center">
+                        <a href="https://raw.githubusercontent.com/direccioncomercial/evoluser-web/main/revista_evoluser.pdf" target="_blank" rel="noopener noreferrer" class="block w-60 md:w-64 aspect-[3/4] rounded-2xl overflow-hidden shadow-2xl border-4 border-white/20 transform hover:scale-105 transition duration-500 relative group">
+                            <img src="https://raw.githubusercontent.com/direccioncomercial/evoluser-web/main/portada_revista.png" onerror="this.src='portada_revista.png'" alt="Portada EvoluSer Magazine" loading="lazy" decoding="async" class="w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-brandBlue/60 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+                                <span class="bg-brandGreen text-white px-5 py-2.5 rounded-full font-extrabold text-xs uppercase tracking-widest shadow-lg"><i class="fas fa-file-pdf mr-2"></i>Abrir PDF</span>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="w-full lg:w-2/3 text-white space-y-5">
+                        <span class="inline-block bg-brandGreen/20 border border-brandGreen text-brandGreen px-4 py-1.5 rounded-full text-[10px] font-extrabold uppercase tracking-[0.25em]">Publicación Oficial • Edición Ejecutiva 2026</span>
+                        <h3 class="text-3xl md:text-5xl font-extrabold font-heading leading-tight">EVOLUSER <span class="text-brandGreen">MAGAZINE</span></h3>
+                        <p class="text-white/85 text-base md:text-lg font-light leading-relaxed border-l-4 border-brandGreen pl-5">Descubre nuestra revista corporativa en formato PDF interactivo con los perfiles y fotografías de nuestros representantes (<strong>Ing. Christian Ortega, Nury Echeverría e Ing. Lilian Eras</strong>), nuestro propósito, soluciones en SSO, Talento Humano, Agroindustria, Ambiente y diálogo directivo.</p>
+                        <div class="flex flex-wrap gap-4 pt-2">
+                            <a href="https://raw.githubusercontent.com/direccioncomercial/evoluser-web/main/revista_evoluser.pdf" target="_blank" rel="noopener noreferrer" class="btn-brand-gradient shadow-neon-light text-xs uppercase tracking-widest font-extrabold inline-flex items-center gap-2"><i class="fas fa-file-pdf text-base"></i> Leer Revista Completa (PDF)</a>
+                            <button onclick="setSegment('revista')" class="px-7 py-3.5 rounded-full border-2 border-white/40 hover:border-white text-white font-extrabold text-xs uppercase tracking-widest transition inline-flex items-center gap-2"><i class="fas fa-book-open"></i> Ver Sección Revista</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <!-- Validación Final -->
             <div class="container mx-auto px-4 py-24">
                 <h3 class="text-3xl font-extrabold text-gray-900 mb-12 text-center uppercase tracking-widest font-heading">NUESTRO COMPROMISO</h3>
@@ -725,6 +750,29 @@
                         <div class="mapfre-list-card"><div><h4 class="text-2xl font-extrabold text-brandBlue mb-8 uppercase tracking-tighter">Gestión Humana</h4><ul class="check-list"><li><i class="fas fa-check-circle text-brandBlue"></i> Formador de Formadores (Certificada)</li><li><i class="fas fa-check-circle text-brandBlue"></i> Clima y Cultura Laboral</li><li><i class="fas fa-check-circle text-brandBlue"></i> Headhunting Senior</li><li><i class="fas fa-check-circle text-brandBlue"></i> Talleres Directivos</li></ul></div><span class="link-elegant" onclick="openModal('humano')">Saber más <i class="fas fa-chevron-right text-xs"></i></span></div>
                         <div class="mapfre-list-card"><div><h4 class="text-2xl font-extrabold text-brandBlue mb-8 uppercase tracking-tighter text-nowrap">Ing. Ambiental</h4><ul class="check-list"><li><i class="fas fa-check-circle text-brandGreen"></i> Licencias Ambientales</li><li><i class="fas fa-check-circle text-brandGreen"></i> Huella de Carbono</li><li><i class="fas fa-check-circle text-brandGreen"></i> Manejo de Desechos</li></ul></div><span class="link-elegant" onclick="openModal('sostenible')">Saber más <i class="fas fa-chevron-right text-xs"></i></span></div>
                         <div class="mapfre-list-card"><div><h4 class="text-2xl font-extrabold text-brandBlue mb-8 uppercase tracking-tighter">Ing. Agroindustrial</h4><ul class="check-list"><li><i class="fas fa-check-circle text-brandGreen"></i> Diseño de Plantas</li><li><i class="fas fa-check-circle text-brandGreen"></i> Procesos Productivos</li><li><i class="fas fa-check-circle text-brandGreen"></i> Certificaciones BPM</li></ul></div><span class="link-elegant" onclick="openModal('agro')">Saber más <i class="fas fa-chevron-right text-xs"></i></span></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DESTACADO REVISTA OFICIAL EVOLUSER EN HOME -->
+            <div class="container mx-auto px-4 mt-20">
+                <div class="bg-gradient-to-br from-brandBlue via-[#18354E] to-[#1e4a5f] rounded-3xl p-8 md:p-14 shadow-2xl border border-brandGreen/30 flex flex-col lg:flex-row items-center gap-10 relative overflow-hidden">
+                    <div class="w-full lg:w-1/3 flex justify-center">
+                        <a href="https://raw.githubusercontent.com/direccioncomercial/evoluser-web/main/revista_evoluser.pdf" target="_blank" rel="noopener noreferrer" class="block w-60 md:w-64 aspect-[3/4] rounded-2xl overflow-hidden shadow-2xl border-4 border-white/20 transform hover:scale-105 transition duration-500 relative group">
+                            <img src="https://raw.githubusercontent.com/direccioncomercial/evoluser-web/main/portada_revista.png" onerror="this.src='portada_revista.png'" alt="Portada EvoluSer Magazine" loading="lazy" decoding="async" class="w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-brandBlue/60 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+                                <span class="bg-brandGreen text-white px-5 py-2.5 rounded-full font-extrabold text-xs uppercase tracking-widest shadow-lg"><i class="fas fa-file-pdf mr-2"></i>Abrir PDF</span>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="w-full lg:w-2/3 text-white space-y-5">
+                        <span class="inline-block bg-brandGreen/20 border border-brandGreen text-brandGreen px-4 py-1.5 rounded-full text-[10px] font-extrabold uppercase tracking-[0.25em]">Publicación Oficial • Edición Ejecutiva 2026</span>
+                        <h3 class="text-3xl md:text-5xl font-extrabold font-heading leading-tight">EVOLUSER <span class="text-brandGreen">MAGAZINE</span></h3>
+                        <p class="text-white/85 text-base md:text-lg font-light leading-relaxed border-l-4 border-brandGreen pl-5">Descubre nuestra revista corporativa en formato PDF interactivo con los perfiles y fotografías de nuestros representantes (<strong>Ing. Christian Ortega, Nury Echeverría e Ing. Lilian Eras</strong>), nuestro propósito, soluciones en SSO, Talento Humano, Agroindustria, Ambiente y diálogo directivo.</p>
+                        <div class="flex flex-wrap gap-4 pt-2">
+                            <a href="https://raw.githubusercontent.com/direccioncomercial/evoluser-web/main/revista_evoluser.pdf" target="_blank" rel="noopener noreferrer" class="btn-brand-gradient shadow-neon-light text-xs uppercase tracking-widest font-extrabold inline-flex items-center gap-2"><i class="fas fa-file-pdf text-base"></i> Leer Revista Completa (PDF)</a>
+                            <button onclick="setSegment('revista')" class="px-7 py-3.5 rounded-full border-2 border-white/40 hover:border-white text-white font-extrabold text-xs uppercase tracking-widest transition inline-flex items-center gap-2"><i class="fas fa-book-open"></i> Ver Sección Revista</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -877,6 +925,116 @@
                 </div>
             </div>
         </div>
+
+        <!-- SECCIÓN 5: REVISTA OFICIAL EVOLUSER (ESTILO EDITORIAL EJECUTIVO) -->
+        <div id="segment-revista" class="hidden fade-in py-16 md:py-24 bg-gradient-to-b from-[#F0F4F8] to-white">
+            <div class="container mx-auto px-4 max-w-6xl">
+                <div class="text-center mb-14">
+                    <span class="text-brandGreen font-extrabold tracking-[0.3em] text-xs uppercase block mb-3">Publicación Corporativa Oficial</span>
+                    <h1 class="text-4xl md:text-6xl font-extrabold text-brandBlue mb-4 font-heading">Revista <span class="text-brandGreen">EvoluSer</span></h1>
+                    <p class="text-gray-500 text-lg max-w-2xl mx-auto">Edición Ejecutiva 2026: Conoce nuestra filosofía, visión y el liderazgo de cada uno de nuestros Directores.</p>
+                </div>
+
+                <!-- Visor Principal Estilo CIMAJ (Portada + Resumen + Descarga PDF) -->
+                <div class="bg-brandBlue rounded-3xl overflow-hidden shadow-2xl border border-brandGreen/30 mb-20">
+                    <div class="grid grid-cols-1 lg:grid-cols-12 items-center">
+                        <!-- Columna Portada (5 cols) -->
+                        <div class="lg:col-span-5 p-8 md:p-12 bg-gradient-to-br from-[#0A1929] to-brandBlue flex flex-col items-center justify-center border-b lg:border-b-0 lg:border-r border-white/10">
+                            <a href="https://raw.githubusercontent.com/direccioncomercial/evoluser-web/main/revista_evoluser.pdf" target="_blank" rel="noopener noreferrer" class="relative w-full max-w-[320px] aspect-[3/4] rounded-2xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.6)] border-2 border-white/20 group cursor-pointer block">
+                                <img src="https://raw.githubusercontent.com/direccioncomercial/evoluser-web/main/portada_revista.png" onerror="this.src='portada_revista.png'" alt="Portada Revista EvoluSer" loading="lazy" decoding="async" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition duration-500 flex items-end justify-center p-6">
+                                    <span class="bg-brandGreen text-white px-5 py-2.5 rounded-full font-extrabold text-xs uppercase tracking-widest shadow-lg"><i class="fas fa-book-reader mr-2"></i>Clic para abrir PDF (10 Págs.)</span>
+                                </div>
+                            </a>
+                            <span class="text-white/60 text-[11px] uppercase tracking-widest mt-4 font-bold"><i class="fas fa-check-circle text-brandGreen mr-1"></i> Formato A4 Editorial • 10 Páginas</span>
+                        </div>
+
+                        <!-- Columna Contenido de la Edición (7 cols) -->
+                        <div class="lg:col-span-7 p-8 md:p-14 text-white space-y-6">
+                            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brandGreen/20 border border-brandGreen text-brandGreen text-xs font-extrabold uppercase tracking-widest">
+                                <i class="fas fa-star"></i> Edición Destacada: Liderazgo & Evolución
+                            </div>
+                            <h2 class="text-3xl md:text-4xl font-extrabold font-heading leading-tight">El liderazgo de nuestros Directores: Potenciamos el Ser, Protegemos la Vida</h2>
+                            <p class="text-white/80 text-base leading-relaxed text-justify font-light">
+                                En esta edición especial de <strong>EVOLUSER MAGAZINE</strong> presentamos nuestra carta de compromiso con el sector empresarial y emprendedor del Ecuador, nuestra Visión y Misión, y los perfiles detallados con fotografía de cada uno de nuestros representantes directivos:
+                            </p>
+
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+                                <div class="bg-white/5 border border-white/10 rounded-xl p-4 hover:border-brandGreen transition">
+                                    <h4 class="text-brandGreen font-extrabold text-xs uppercase tracking-wider mb-1"><i class="fas fa-hard-hat mr-1.5"></i>Pág. 5 • Ing. Christian Ortega</h4>
+                                    <p class="text-white/75 text-xs leading-relaxed">Director Técnico SSO y Ambiental: Decreto 2025-006, Matrices de Riesgos, Sistema Práctico de Inventario de EPPs y Licencias Ambientales.</p>
+                                </div>
+                                <div class="bg-white/5 border border-white/10 rounded-xl p-4 hover:border-brandGreen transition">
+                                    <h4 class="text-brandGreen font-extrabold text-xs uppercase tracking-wider mb-1"><i class="fas fa-users mr-1.5"></i>Pág. 6 • Nury Echeverría</h4>
+                                    <p class="text-white/75 text-xs leading-relaxed">Directora de Talento Humano (Certificada Formador de Formadores): Clima Laboral 2026, Evaluación 360° y Headhunting Senior.</p>
+                                </div>
+                                <div class="bg-white/5 border border-white/10 rounded-xl p-4 hover:border-brandGreen transition">
+                                    <h4 class="text-brandGreen font-extrabold text-xs uppercase tracking-wider mb-1"><i class="fas fa-seedling mr-1.5"></i>Pág. 7 • Ing. Lilian Eras</h4>
+                                    <p class="text-white/75 text-xs leading-relaxed">Directora de Ingeniería Agroindustrial: Certificaciones BPM, BPA, sistemas HACCP, Notificación Sanitaria ARCSA y diseño de plantas.</p>
+                                </div>
+                                <div class="bg-white/5 border border-white/10 rounded-xl p-4 hover:border-brandGreen transition">
+                                    <h4 class="text-brandGreen font-extrabold text-xs uppercase tracking-wider mb-1"><i class="fas fa-comments mr-1.5"></i>Págs. 8-10 • Soluciones & Diálogo</h4>
+                                    <p class="text-white/75 text-xs leading-relaxed">Portafolio 360°, Pack Startup para Emprendedores, consultora IA "Ev" y entrevista exclusiva con nuestro Directorio.</p>
+                                </div>
+                            </div>
+
+                            <div class="pt-4 flex flex-wrap gap-4">
+                                <a href="https://raw.githubusercontent.com/direccioncomercial/evoluser-web/main/revista_evoluser.pdf" target="_blank" rel="noopener noreferrer" class="btn-brand-gradient shadow-neon-light text-xs uppercase tracking-widest font-extrabold inline-flex items-center gap-3 px-8 py-4">
+                                    <i class="fas fa-file-pdf text-lg"></i> Leer Revista Completa (PDF)
+                                </a>
+                                <a href="https://raw.githubusercontent.com/direccioncomercial/evoluser-web/main/revista_evoluser.pdf" download="Revista_Oficial_EvoluSer.pdf" target="_blank" rel="noopener noreferrer" class="px-6 py-4 rounded-full bg-white/10 hover:bg-white hover:text-brandBlue text-white font-extrabold text-xs uppercase tracking-widest transition inline-flex items-center gap-2 border border-white/25">
+                                    <i class="fas fa-download"></i> Descargar PDF
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tarjetas de Representantes en la Revista -->
+                <div class="text-center mb-10">
+                    <h3 class="text-2xl md:text-3xl font-extrabold text-brandBlue uppercase tracking-wider font-heading">Nuestros Representantes en esta Edición</h3>
+                    <p class="text-gray-500 text-sm mt-2">Perfiles ejecutivos incluidos en las páginas 5, 6 y 7 de la Revista Oficial EvoluSer</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden group hover:shadow-2xl transition flex flex-col">
+                        <div class="h-80 overflow-hidden bg-gray-100 relative">
+                            <img src="https://raw.githubusercontent.com/direccioncomercial/evoluser-web/1b862973e8003850daadd6a47bffd5b6cf04b2f6/imagen3.png" alt="Ing. Christian Ortega" loading="lazy" decoding="async" class="w-full h-full object-cover object-top group-hover:scale-105 transition duration-500">
+                            <span class="absolute bottom-3 left-3 bg-brandBlue/90 text-white text-[10px] font-extrabold uppercase px-3 py-1 rounded-full">Página 5 • Revista</span>
+                        </div>
+                        <div class="p-6 flex-1 flex flex-col">
+                            <h4 class="text-xl font-extrabold text-brandBlue">Ing. Christian Ortega</h4>
+                            <p class="text-brandGreen text-xs font-extrabold uppercase tracking-wider mb-3">Director Técnico SSO & Ingeniería Ambiental</p>
+                            <p class="text-gray-600 text-xs leading-relaxed mb-4 flex-1">Especialista en Planes de Emergencia, Matrices de Riesgos, Sistema Práctico de Inventario de EPPs por colaborador y área, Decreto 2025-006 y Licencias Ambientales.</p>
+                            <a href="https://raw.githubusercontent.com/direccioncomercial/evoluser-web/main/revista_evoluser.pdf#page=5" target="_blank" rel="noopener noreferrer" class="text-brandBlue font-extrabold text-xs uppercase hover:text-brandGreen transition inline-flex items-center">Ver perfil en el PDF <i class="fas fa-arrow-right ml-2"></i></a>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden group hover:shadow-2xl transition flex flex-col">
+                        <div class="h-80 overflow-hidden bg-gray-100 relative">
+                            <img src="https://raw.githubusercontent.com/direccioncomercial/evoluser-web/1b862973e8003850daadd6a47bffd5b6cf04b2f6/imagen2.png" alt="Nury Echeverría" loading="lazy" decoding="async" class="w-full h-full object-cover object-top group-hover:scale-105 transition duration-500">
+                            <span class="absolute bottom-3 left-3 bg-brandBlue/90 text-white text-[10px] font-extrabold uppercase px-3 py-1 rounded-full">Página 6 • Revista</span>
+                        </div>
+                        <div class="p-6 flex-1 flex flex-col">
+                            <h4 class="text-xl font-extrabold text-brandBlue">Nury Echeverría</h4>
+                            <p class="text-brandGreen text-xs font-extrabold uppercase tracking-wider mb-3">Directora de Talento Humano | Formador de Formadores</p>
+                            <p class="text-gray-600 text-xs leading-relaxed mb-4 flex-1">Estratega en cultura corporativa con Certificación Oficial de Formador de Formadores, Clima Laboral 2026, Evaluación 360° y Headhunting Senior.</p>
+                            <a href="https://raw.githubusercontent.com/direccioncomercial/evoluser-web/main/revista_evoluser.pdf#page=6" target="_blank" rel="noopener noreferrer" class="text-brandBlue font-extrabold text-xs uppercase hover:text-brandGreen transition inline-flex items-center">Ver perfil en el PDF <i class="fas fa-arrow-right ml-2"></i></a>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden group hover:shadow-2xl transition flex flex-col">
+                        <div class="h-80 overflow-hidden bg-gray-100 relative">
+                            <img src="https://raw.githubusercontent.com/direccioncomercial/evoluser-web/1b862973e8003850daadd6a47bffd5b6cf04b2f6/imagen5.png" alt="Ing. Lilian Eras" loading="lazy" decoding="async" class="w-full h-full object-cover object-top group-hover:scale-105 transition duration-500">
+                            <span class="absolute bottom-3 left-3 bg-brandBlue/90 text-white text-[10px] font-extrabold uppercase px-3 py-1 rounded-full">Página 7 • Revista</span>
+                        </div>
+                        <div class="p-6 flex-1 flex flex-col">
+                            <h4 class="text-xl font-extrabold text-brandBlue">Ing. Lilian Eras</h4>
+                            <p class="text-brandGreen text-xs font-extrabold uppercase tracking-wider mb-3">Directora de Ingeniería Agroindustrial & Calidad</p>
+                            <p class="text-gray-600 text-xs leading-relaxed mb-4 flex-1">Especialista en diseño de plantas industriales, inocuidad alimentaria, certificaciones BPM, BPA, HACCP y Notificaciones Sanitarias ARCSA.</p>
+                            <a href="https://raw.githubusercontent.com/direccioncomercial/evoluser-web/main/revista_evoluser.pdf#page=7" target="_blank" rel="noopener noreferrer" class="text-brandBlue font-extrabold text-xs uppercase hover:text-brandGreen transition inline-flex items-center">Ver perfil en el PDF <i class="fas fa-arrow-right ml-2"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
 
     <!-- FOOTER PREMIUM (MODIFICADO SIN PADDING EXCESIVO) -->
@@ -927,6 +1085,7 @@
                     <li><button onclick="setSegment('soluciones')" class="hover:text-brandGreen transition flex items-center w-full text-left"><i class="fas fa-chevron-right text-xs mr-2 text-brandGreen/50"></i> Soluciones</button></li>
                     <li><button onclick="setSegment('empresas')" class="hover:text-brandGreen transition flex items-center w-full text-left"><i class="fas fa-chevron-right text-xs mr-2 text-brandGreen/50"></i> Empresas</button></li>
                     <li><button onclick="setSegment('emprendedores')" class="hover:text-brandGreen transition flex items-center w-full text-left"><i class="fas fa-chevron-right text-xs mr-2 text-brandGreen/50"></i> Emprendedores</button></li>
+                    <li><button onclick="setSegment('revista')" class="hover:text-brandGreen transition flex items-center w-full text-left"><i class="fas fa-chevron-right text-xs mr-2 text-brandGreen/50"></i> Revista PDF</button></li>
                     <li><button onclick="setSegment('oficina')" class="hover:text-brandGreen transition flex items-center w-full text-left"><i class="fas fa-chevron-right text-xs mr-2 text-brandGreen/50"></i> Oficina Virtual</button></li>
                 </ul>
             </div>
@@ -1130,7 +1289,7 @@
             if (document.getElementById('nav-' + segment)) {
                 document.getElementById('nav-' + segment).classList.add('active');
             }
-            ['soluciones', 'empresas', 'emprendedores', 'oficina'].forEach(s => {
+            ['soluciones', 'empresas', 'emprendedores', 'oficina', 'revista'].forEach(s => {
                 const el = document.getElementById('segment-' + s);
                 if (el) el.classList.add('hidden');
             });
@@ -1144,6 +1303,7 @@
                     soluciones: '¡Hola! Soy Ev. ¿Hablamos?',
                     empresas: '¿Blindamos tu empresa hoy?',
                     emprendedores: '¿Despegamos tu Startup?',
+                    revista: '📖 ¿Leemos la Revista EvoluSer?',
                     oficina: '¿Te ayudo con tu solicitud?'
                 };
                 bubbleText.innerText = sectionPrompts[segment] || '¡Hola! Soy Ev. ¿Hablamos?';
@@ -1282,6 +1442,7 @@
                     { label: "🌾 Ing. Agroindustrial", intent: "agro" },
                     { label: "🌿 Ing. Ambiental", intent: "ambiental" },
                     { label: "🚀 Soy Emprendedor / Startup", intent: "emprendedor" },
+                    { label: "📖 Leer Revista EvoluSer (PDF)", action: "setSegment('revista'); toggleChat();" },
                     { label: "📋 Ver Directorio de Expertos", action: "openModal('equipo')" }
                 ]
             },
